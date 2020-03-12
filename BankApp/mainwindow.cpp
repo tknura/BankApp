@@ -16,5 +16,5 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::on_pushButton_clicked() {
-    QDesktopServices::openUrl(QUrl("http://https://twoja-stara.pl/", QUrl::TolerantMode));
+    QDesktopServices::openUrl(QUrl("http://twoja-stara.pl/", QUrl::TolerantMode));
 }

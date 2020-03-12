@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(170, 255, 127);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -28,6 +31,9 @@
       <family>Open Sans</family>
       <pointsize>48</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 85, 0);</string>
     </property>
     <property name="text">
      <string>Hello World</string>
@@ -54,6 +60,12 @@
       <width>80</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	color: rgb(255, 170, 0);
+	background-color: rgb(0, 170, 255);
+}</string>
     </property>
     <property name="text">
      <string>twojastara</string>
@@ -113,6 +125,14 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar {
+	color: rgb(85, 0, 0);
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 0, 0, 255), stop:0.33 rgba(0, 0, 0, 255), stop:0.34 rgba(255, 30, 30, 255), stop:0.66 rgba(255, 0, 0, 255), stop:0.67 rgba(255, 255, 0, 255), stop:1 rgba(255, 255, 0, 255));
+	
+	border-color: rgb(255, 0, 255);
+}</string>
+    </property>
     <property name="value">
      <number>24</number>
     </property>
@@ -135,6 +155,10 @@
       <width>110</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(170, 85, 127);
+border-width: 5px;</string>
     </property>
    </widget>
   </widget>
