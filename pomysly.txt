@@ -1,3 +1,3 @@
 1. Możemy umieścić w klasie User statyczną metodę która na podstawie danych logowania oraz danych dostarczonych przez MainManager będzie tworzyc obiket klasy User, na którym bedziemy potem operować w trakcie działania programu. Metoda będzie zwracała obiekt klasy User.
 2. Klasa User powinna zawierac metode Save(), ponieważ tylko ona ma dostęp do swoich prywatnych składowych, chyba, że załatwiamy problem geterami.
-3.Każda klasa powinna mieć swoją wersje metody Save(). Te metody bedą wywoływane w momencie kiedy będzeimy chcieli zamknąć program i zapisać wszystko do plików. 
+3. Każda klasa powinna mieć swoją wersje metody Save(). Te metody bedą wywoływane w momencie kiedy będzeimy chcieli zamknąć program i zapisać wszystko do plików. 
