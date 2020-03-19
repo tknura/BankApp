@@ -5,8 +5,7 @@
 #### Grupa 5 Sekcja 2</br>
 
 ## Szkic interfejsu wykonany w AdobeXD:
-![Dashboard](https://user-images.githubusercontent.com/43812114/76738858-ad9b0200-676b-11ea-957c-ae48f08547ef.png) </br>
-![Payments](https://user-images.githubusercontent.com/43812114/76738878-b55aa680-676b-11ea-8232-6dcd5c1fe019.png)</br>
+![Ui_conspect](https://user-images.githubusercontent.com/43812114/77059095-b04d5f80-69d6-11ea-90c3-da04596518ec.png)
 
 ## Diagram klas:
 ![Main](https://user-images.githubusercontent.com/43812114/76738993-e4711800-676b-11ea-8c51-cc78d090ceda.jpg)</br>
@@ -63,3 +62,15 @@ Na rzecz *User* wywołana jest metoda MakePayment(), która tworzy obiekt klasy 
 Klasa *History* zwraca listę obiektów payment posortowaną według podanego klucza. </br>
 * **Wylogowanie** </br>
 Przy wylogowywaniu mapa kont z klasy *Bank* zostaje przekazana do klasy *JsonManager*, która nadpisuje plik AccountData.json. </br>
+
+## Zagadnienia z zajęć laboratoryjnych
+1. Regex
+2. Inteligentne wskaźniki
+3. RTTI
+4. Kontenery STL
+5. Algorytmy i iteratory STL
+6. Mechanizm wyjątków
+
+## Zewnętrzne biblioteki
+1. nlohmann JSON
+2. Biblioteki QT
