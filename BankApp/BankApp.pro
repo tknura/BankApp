@@ -21,6 +21,7 @@ SOURCES += \
     Authorization.cpp \
     Bank.cpp \
     Fund.cpp \
+    JsonManager.cpp \
     LogInData.cpp \
     Payment.cpp \
     PaymentRetriever.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     Fund.h \
     IUser.h \
     IValidator.h \
+    JsonManager.h \
     LogInData.h \
     Payment.h \
     PaymentRetriever.h \
