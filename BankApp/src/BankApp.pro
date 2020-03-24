@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+<<<<<<< HEAD:BankApp/BankApp.pro
     Account.cpp \
     Admin.cpp \
     Authorization.cpp \
@@ -27,10 +28,24 @@ SOURCES += \
     Payment.cpp \
     PaymentRetriever.cpp \
     User.cpp \
+=======
+    controller/MainWindow.cpp \
+>>>>>>> 61c719dcdaa1a8d55f88597da010f3dca956e01f:BankApp/src/BankApp.pro
     main.cpp \
-    mainwindow.cpp
+    model/Account.cpp \
+    model/Admin.cpp \
+    model/Authorization.cpp \
+    model/Bank.cpp \
+    model/Fund.cpp \
+    model/IUser.cpp \
+    model/JsonManager.cpp \
+    model/LogInData.cpp \
+    model/Payment.cpp \
+    model/PaymentRetriever.cpp \
+    model/User.cpp \
 
 HEADERS += \
+<<<<<<< HEAD:BankApp/BankApp.pro
     Account.h \
     Admin.h \
     Authorization.h \
@@ -45,9 +60,24 @@ HEADERS += \
     PaymentRetriever.h \
     User.h \
     mainwindow.h
+=======
+    controller/MainWindow.h \
+    model/Account.h \
+    model/Admin.h \
+    model/Authorization.h \
+    model/Bank.h \
+    model/Fund.h \
+    model/IUser.h \
+    model/IValidator.h \
+    model/JsonManager.h \
+    model/LogInData.h \
+    model/Payment.h \
+    model/PaymentRetriever.h \
+    model/User.h \
+>>>>>>> 61c719dcdaa1a8d55f88597da010f3dca956e01f:BankApp/src/BankApp.pro
 
 FORMS += \
-    mainwindow.ui
+    view/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -55,4 +85,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+<<<<<<< HEAD:BankApp/BankApp.pro
     config.txt
+=======
+    model/BankApp.pro.user
+>>>>>>> 61c719dcdaa1a8d55f88597da010f3dca956e01f:BankApp/src/BankApp.pro
