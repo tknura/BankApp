@@ -24,6 +24,7 @@ SOURCES += \
     model/Bank.cpp \
     model/Fund.cpp \
     model/IUser.cpp \
+    model/JsonManager.cpp \
     model/LogInData.cpp \
     model/Payment.cpp \
     model/PaymentRetriever.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     model/Fund.h \
     model/IUser.h \
     model/IValidator.h \
+    model/JsonManager.h \
     model/LogInData.h \
     model/Payment.h \
     model/PaymentRetriever.h \
