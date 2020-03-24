@@ -16,36 +16,40 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Account.cpp \
-    Admin.cpp \
-    Authorization.cpp \
-    Bank.cpp \
-    Fund.cpp \
-    LogInData.cpp \
-    Payment.cpp \
-    PaymentRetriever.cpp \
-    User.cpp \
+    controller/MainWindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    model/Account.cpp \
+    model/Admin.cpp \
+    model/Authorization.cpp \
+    model/Bank.cpp \
+    model/Fund.cpp \
+    model/IUser.cpp \
+    model/LogInData.cpp \
+    model/Payment.cpp \
+    model/PaymentRetriever.cpp \
+    model/User.cpp \
 
 HEADERS += \
-    Account.h \
-    Admin.h \
-    Authorization.h \
-    Bank.h \
-    Fund.h \
-    IUser.h \
-    IValidator.h \
-    LogInData.h \
-    Payment.h \
-    PaymentRetriever.h \
-    User.h \
-    mainwindow.h
+    controller/MainWindow.h \
+    model/Account.h \
+    model/Admin.h \
+    model/Authorization.h \
+    model/Bank.h \
+    model/Fund.h \
+    model/IUser.h \
+    model/IValidator.h \
+    model/LogInData.h \
+    model/Payment.h \
+    model/PaymentRetriever.h \
+    model/User.h \
 
 FORMS += \
-    mainwindow.ui
+    view/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    model/BankApp.pro.user
