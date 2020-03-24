@@ -1,0 +1,24 @@
+{
+	"FundsList":
+	[
+		{
+			"type":"savings",
+			"minAmount":300,
+			"maxRate":3,
+			"fee":0.1,
+			"balance":12521.52,
+			"ownerID":[1],
+			"startDate":"2019-05-04",
+			"endDate":"2020-05-04"
+		},
+		{
+			"type":"retirement",
+			"minAmount":200,
+			"maxRate":3.7,
+			"fee":0.1,
+			"balance":20000,
+			"ownerID":[2],
+			"isRetired":false,
+			"monthlyTransferIN":400,
+		}
+}
