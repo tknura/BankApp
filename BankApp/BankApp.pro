@@ -20,6 +20,7 @@ SOURCES += \
     Admin.cpp \
     Authorization.cpp \
     Bank.cpp \
+    Config.cpp \
     Fund.cpp \
     JsonManager.cpp \
     LogInData.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     Admin.h \
     Authorization.h \
     Bank.h \
+    Config.h \
     Fund.h \
     IUser.h \
     IValidator.h \
@@ -51,3 +53,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    config.txt

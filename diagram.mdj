@@ -12804,30 +12804,13 @@
 											"height": 13,
 											"text": "+fundJSONFileName: String",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFwzsmJHmZaQ+k=",
-											"_parent": {
-												"$ref": "AAAAAAFwzsjzY2FlASg="
-											},
-											"model": {
-												"$ref": "AAAAAAFwzsmI+WYwwZw="
-											},
-											"font": "Arial;13;0",
-											"left": 1029,
-											"top": 307,
-											"width": 184.6025390625,
-											"height": 13,
-											"text": "+fundValues: Map",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1024,
 									"top": 257,
 									"width": 194.6025390625,
-									"height": 68
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -12838,11 +12821,30 @@
 									"model": {
 										"$ref": "AAAAAAFwzsjzYWFdK4E="
 									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFxDUwGTKywPCg=",
+											"_parent": {
+												"$ref": "AAAAAAFwzsjzY2Fm+sM="
+											},
+											"model": {
+												"$ref": "AAAAAAFxDUwGA6yGLMs="
+											},
+											"font": "Arial;13;0",
+											"left": 1029,
+											"top": 315,
+											"width": 184.6025390625,
+											"height": 13,
+											"text": "+Operation1()",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
 									"left": 1024,
-									"top": 325,
+									"top": 310,
 									"width": 194.6025390625,
-									"height": 10
+									"height": 23
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -16628,15 +16630,16 @@
 							},
 							"name": "fundJSONFileName",
 							"type": "String"
-						},
+						}
+					],
+					"operations": [
 						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFwzsmI+WYwwZw=",
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFxDUwGA6yGLMs=",
 							"_parent": {
 								"$ref": "AAAAAAFwzsjzYWFdK4E="
 							},
-							"name": "fundValues",
-							"type": "Map"
+							"name": "Operation1"
 						}
 					]
 				},
