@@ -1,6 +1,6 @@
-#include "controller\MainWindow.h"
+#include "controller/MainWindow.h"
 
-#include "model\Bank.h"
+#include "model/Bank.h"
 
 #include <QApplication>
 
