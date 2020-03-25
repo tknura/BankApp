@@ -1,4 +1,4 @@
-#include "controller\MainWindow.h"
+#include "controller/MainWindow.h"
 #include "ui_mainwindow.h"
 #include <QDesktopServices>
 
