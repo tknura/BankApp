@@ -13,7 +13,7 @@ class Bank
 public:
     static map<std::string, Account> accountMap;
     static IUser *currentlyLoggedUser;
-    void LogIn(LogInData &data);
+    static void LogIn(const LogInData &data);
 };
 
 #endif // BANK_H

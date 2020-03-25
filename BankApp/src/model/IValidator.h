@@ -1,7 +1,7 @@
 #ifndef IVALIDATOR_H
 #define IVALIDATOR_H
 
-#endif // IVALIDATOR_H
+#include <regex>
 
 class IValidator {
 public:
@@ -9,3 +9,5 @@ public:
     virtual ~IValidator() {}
     virtual bool IsValid() = 0;
 };
+
+#endif // IVALIDATOR_H
