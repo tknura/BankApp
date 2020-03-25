@@ -1,6 +1,5 @@
 #include "Fund.h"
 
-Fund::Fund()
-{
+Fund::Fund() {
 
 }

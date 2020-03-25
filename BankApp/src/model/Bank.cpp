@@ -1,6 +1,3 @@
 #include "Bank.h"
 
-Bank::Bank()
-{
-
-}
+IUser* Bank::currentlyLoggedUser = nullptr;

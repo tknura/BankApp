@@ -11,8 +11,9 @@ using std::map;
 class Bank
 {
 public:
-    Bank();
-    map<std::string, Account> accountMap;
+    static map<std::string, Account> accountMap;
+    static IUser *currentlyLoggedUser;
+    void LogIn(LogInData &data);
 };
 
 #endif // BANK_H

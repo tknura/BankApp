@@ -7,8 +7,8 @@ class Authorization
 {
 public:
     Authorization();
-    bool VerifyUser(LogInData);
-    bool LogInAttempt(LogInData);
+    bool VerifyUser(LogInData data);
+    bool LogInAttempt(LogInData data);
 };
 
 #endif // AUTHORIZATION_H
