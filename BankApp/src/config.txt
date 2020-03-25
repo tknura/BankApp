@@ -1,4 +1,4 @@
-login:logInData.json
+login:logInData.txt
 account:accountData.json
 friends:friendsData.json
 funds:fundData.json

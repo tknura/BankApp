@@ -13,7 +13,12 @@
 
 using reg = std::regex;
 
-Config::Config()
+str Config::accountJSONPath = "";
+str Config::fundJSONPath = "";
+str Config::friendsJSONPath = "";
+str Config::logInDataPath = "";
+
+void Config::Initialize()
 {
     auto path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);//ścieżka do ~/ , :C/Users/<user>
     std::string fullPath = path.toStdString() + "/BankApp/";
@@ -70,5 +75,4 @@ Config::Config()
     {
         throw std::runtime_error("Could not open the config.txt file");
     }
-
 }

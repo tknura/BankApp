@@ -1,9 +1,11 @@
 #include "Authorization.h"
 
+
+
 //TODO get LogInData.txt filename from Config class
 bool Authorization::VerifyUser(const LogInData &data) {
     std::fstream file;
-    file.open("LogInData.txt", std::ios::in);
+    file.open(Config::logInDataPath, std::ios::in);
     if(file.is_open()){
         file.exceptions( std::fstream::badbit );
         try {

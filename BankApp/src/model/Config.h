@@ -10,16 +10,12 @@ using str = std::string;
 
 class Config
 {
-private:
-    str accountJSONPath;
-    str fundJSONPath;
-    str friendsJSONPath;
-    str logInDataPath;
-
 public:
-    Config();
-
-
+    static str accountJSONPath;
+    static str fundJSONPath;
+    static str friendsJSONPath;
+    static str logInDataPath;
+    static void Initialize();
 };
 
 #endif // CONFIG_H
