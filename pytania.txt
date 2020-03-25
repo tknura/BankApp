@@ -1,2 +1,3 @@
 1.Dlaczego w klasie Config jest składowa fundValues:Map?
 2.Zobacz czy ci się podoba taki fundusz emerytalny ->plik .json.Jeżeli zmieni się składowa isRetired na true zostanie obliczona miesięczna emerytura delikwenta. Założymy sobie, że np pożyje do 90 lat i to co mu zostało bedzie mu wypłacane w miesięcznych ratach na jego konto osobiste.
+3.Plik nazywa się BankApp a nie .BankApp, ponieważ na macOS i linux foldery poprzedzone kropką są domyślnie ukryte tj. można je zobaczyć tylko przez termianal.

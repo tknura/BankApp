@@ -29,6 +29,7 @@ SOURCES += \
     model/Payment.cpp \
     model/PaymentRetriever.cpp \
     model/User.cpp \
+    model/Config.cpp\
 
 HEADERS += \
     controller/MainWindow.h \
@@ -44,6 +45,7 @@ HEADERS += \
     model/Payment.h \
     model/PaymentRetriever.h \
     model/User.h \
+    model/Config.h\
 
 FORMS += \
     view/mainwindow.ui
@@ -55,3 +57,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     model/BankApp.pro.user
+
+RESOURCES += \
+    myResources.qrc
+
+

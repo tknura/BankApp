@@ -1,0 +1,4 @@
+login:logInData.json
+account:accountData.json
+friends:friendsData.json
+funds:fundData.json
