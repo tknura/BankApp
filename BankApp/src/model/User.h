@@ -12,17 +12,17 @@ using std::string;
 
 class User : public IUser, public LogInData
 {
-public:
-    User();
-    ~User();
-    void MakePayment();
-    void AddFriend(PaymentRetriever);
-
 private:
     int id;
     list<string> accountList;
     list<PaymentRetriever> friendsList;
     list<string> fundList;
+
+public:
+    User(int p_id);
+    ~User();
+    void MakePayment();
+    void AddFriend(PaymentRetriever);
 };
 
 #endif // USER_H

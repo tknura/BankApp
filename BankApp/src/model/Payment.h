@@ -11,7 +11,7 @@ class Payment : IValidator
 {
 public:
     Payment();
-    ~Payment();
+    ~Payment() override;
     float amount;
     string title;
     PaymentRetriever retriever;

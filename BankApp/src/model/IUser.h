@@ -5,7 +5,8 @@
 class IUser
 {
 public:
-    virtual ~IUser();
+    IUser() {}
+    virtual ~IUser() {}
 };
 
 #endif // IUSER_H

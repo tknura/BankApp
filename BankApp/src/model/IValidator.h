@@ -5,6 +5,7 @@
 
 class IValidator {
 public:
+    IValidator() {}
+    virtual ~IValidator() {}
     virtual bool IsValid() = 0;
-    virtual ~IValidator();
 };

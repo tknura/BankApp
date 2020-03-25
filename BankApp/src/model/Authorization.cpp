@@ -1,6 +1,6 @@
 #include "Authorization.h"
 
-Authorization::Authorization()
-{
+Authorization::Authorization() {
 
 }
+

@@ -12,6 +12,8 @@ public:
     ~Admin();
     void CreateUser();
     void AddAccount(User);
+    void AddCard(Account);
+    void AddFund(User);
 };
 
 #endif // ADMIN_H
