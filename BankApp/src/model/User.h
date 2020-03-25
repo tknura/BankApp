@@ -14,6 +14,7 @@ class User : public IUser, public LogInData
 {
 private:
     int id;
+    string email;
     list<string> accountList;
     list<PaymentRetriever> friendsList;
     list<string> fundList;
