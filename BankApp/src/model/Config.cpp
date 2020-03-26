@@ -28,7 +28,7 @@ void Config::Initialize()
     {
         if(QDir(path).mkdir("BankApp"))
         {
-            std::cout<<"SUKCES\n";
+            std::cerr<<"Directory created succesfully\n";
         }
     }
 
@@ -41,7 +41,7 @@ void Config::Initialize()
     std::ifstream fin(fullPath + "config.txt");//próba otwarcia pliku  //trzeba zrobić tak, żeby otwierało config.txt z resourcefiles
     if(fin.is_open())
     {
-        std::cout<<"SUKCES2\n";
+        std::cerr<<"config.txt opend succesfully\n";
         std::string line;
 
         while(std::getline(fin, line))//Inicjalizuje składowe obiektu pełnymi ścieżkami
@@ -49,24 +49,24 @@ void Config::Initialize()
             if(std::regex_search(line, account))
             {
                 accountJSONPath = fullPath + line.substr(8,line.length());
-                std::cout<<accountJSONPath<<'\n';
+                std::cerr<<accountJSONPath<<'\n';
 
             }
             else if(std::regex_search(line, fund))
             {
                 fundJSONPath = fullPath + line.substr(6,line.length());
-                std::cout<<fundJSONPath<<'\n';
+                std::cerr<<fundJSONPath<<'\n';
 
             }
             else if(std::regex_search(line, friends))
             {
                 friendsJSONPath = fullPath + line.substr(8,line.length());
-                std::cout<<friendsJSONPath<<'\n';
+                std::cerr<<friendsJSONPath<<'\n';
             }
             else if(std::regex_search(line, logIn))
             {
                 logInDataPath = fullPath + line.substr(6,line.length());
-                std::cout<<logInDataPath<<'\n';
+                std::cerr<<logInDataPath<<'\n';
             }
         }
         fin.close();
