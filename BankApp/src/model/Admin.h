@@ -3,15 +3,18 @@
 
 #include "LogInData.h"
 #include "Account.h"
+#include "Bank.h"
 #include "User.h"
+#include <fstream>
 
-class Admin : public LogInData
+class Admin : public LogInData, public IUser
 {
 private:
-    int currentId;
+    static int currentId;
 
 public:
-    Admin();
+    Admin(std::string p_login, std::string p_password);
+    Admin(const LogInData &data);
     ~Admin();
     void CreateUser(LogInData &data, string email);
     //TODO end when account class is finished

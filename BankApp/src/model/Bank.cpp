@@ -2,10 +2,20 @@
 
 IUser* Bank::currentlyLoggedUser = nullptr;
 
-void Bank::LogIn(const LogInData &data) {
-    std::cerr << "User logged" << std::endl;
+/*
+ * Method which create user object from passed data
+ */
+void Bank::LogIn(IUser* data) {
+    if(!data){
+        currentlyLoggedUser = data;
+
+    }
+
 }
 
+/*
+ * Method which is executed when the app starts
+ */
 void Bank::Start() {
     try {
         Config::Initialize();

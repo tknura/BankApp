@@ -3,6 +3,9 @@
 
 #include <regex>
 
+/*
+ * Validation interface
+ */
 class IValidator {
 public:
     IValidator() {}

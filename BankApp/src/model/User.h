@@ -10,6 +10,9 @@
 using std::list;
 using std::string;
 
+/*
+ * Class which about the user
+ */
 class User : public IUser, public LogInData
 {
 private:
@@ -20,7 +23,7 @@ private:
     list<string> fundList;
 
 public:
-    User(int p_id);
+    User(const LogInData& data);
     ~User();
     void MakePayment();
     void AddFriend(PaymentRetriever);

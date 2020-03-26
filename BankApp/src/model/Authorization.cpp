@@ -1,8 +1,10 @@
 #include "Authorization.h"
 
 
-
-//TODO get LogInData.txt filename from Config class
+/*
+ * Method which return true if LogInData passed as an argument
+ * match existing LogInData in proper file
+ */
 bool Authorization::VerifyUser(const LogInData &data) {
     std::fstream file;
     file.open(Config::logInDataPath, std::ios::in);
@@ -26,9 +28,17 @@ bool Authorization::VerifyUser(const LogInData &data) {
     return false;
 }
 
+/*
+ * Method which call VerifyUser and depending on its results call
+ * LogIn function in Bank class
+ */
 bool Authorization::LogInAttempt(const LogInData &data) {
-    if(VerifyUser(data)){
-        Bank::LogIn(data);
+    if(data.GetLogin() == "admin" && data.GetPassword() == "admin"){
+        Bank::LogIn(new Admin(data));
+        return true;
+    }
+    else if(VerifyUser(data)){
+        Bank::LogIn(new User(data));
         return true;
     }
     else {
@@ -36,6 +46,11 @@ bool Authorization::LogInAttempt(const LogInData &data) {
     }
 }
 
+/*
+ * Method which gets LogInData from passed string which is a line from
+ * logInData file with following format:
+ * <id> <login> <password> <email>
+ */
 LogInData Authorization::proccesedData(const std::string &line) {
     std::istringstream iss(line);
     std::vector<std::string> tokens;
