@@ -22,7 +22,9 @@ SOURCES += \
     model/Admin.cpp \
     model/Authorization.cpp \
     model/Bank.cpp \
+    model/Card.cpp \
     model/Fund.cpp \
+    model/History.cpp \
     model/JsonManager.cpp \
     model/LogInData.cpp \
     model/Payment.cpp \
@@ -36,7 +38,9 @@ HEADERS += \
     model/Admin.h \
     model/Authorization.h \
     model/Bank.h \
+    model/Card.h \
     model/Fund.h \
+    model/History.h \
     model/IUser.h \
     model/IValidator.h \
     model/JsonManager.h \
@@ -44,7 +48,8 @@ HEADERS += \
     model/Payment.h \
     model/PaymentRetriever.h \
     model/User.h \
-    model/Config.h\
+    model/Config.h\ \
+    model/json.hpp
 
 FORMS += \
     view/mainwindow.ui
