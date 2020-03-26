@@ -23,6 +23,7 @@ SOURCES += \
     model/Authorization.cpp \
     model/Bank.cpp \
     model/Fund.cpp \
+    model/IUser.cpp \
     model/JsonManager.cpp \
     model/LogInData.cpp \
     model/Payment.cpp \

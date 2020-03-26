@@ -30,9 +30,8 @@ public:
     string GetPassword() const;
     void SetPassword(const string &value);
 
-    bool IsValid() override;
+    virtual bool IsValid() override;
     bool operator==(const LogInData& data) const;
-
 };
 
 #endif // LOGINDATA_H

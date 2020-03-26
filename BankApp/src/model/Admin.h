@@ -13,9 +13,8 @@ private:
     static int currentId;
 
 public:
-    Admin(std::string p_login, std::string p_password);
     Admin(const LogInData &data);
-    ~Admin();
+    ~Admin() override;
     void CreateUser(LogInData &data, string email);
     //TODO end when account class is finished
     void AddAccount(User &user);
@@ -23,6 +22,8 @@ public:
     void AddCard(Account &account);
     //TODO end when fund class is finished
     void AddFund(User &fund);
+
+    bool IsValid() override;
 };
 
 #endif // ADMIN_H

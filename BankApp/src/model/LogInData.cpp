@@ -3,6 +3,8 @@
 const std::regex LogInData::loginReg = std::regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
 const std::regex LogInData::passwordReg = std::regex("^[a-zA-Z0-9]+$");
 
+LogInData::LogInData(std::string p_login, std::string p_password) : login(p_login), password(p_password) {}
+
 LogInData::LogInData(const LogInData &data) : login(data.GetLogin()), password(data.GetPassword()) {}
 
 LogInData::~LogInData() {}
