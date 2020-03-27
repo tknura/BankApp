@@ -1,36 +1,75 @@
-{"friendsList":
-	[
-		{
-			"userID":1,
-			"friendsID":
-			[
-				2,
-				5
-			]
-		},
-		{
-			"userID":2,
-			"friendsID":
-			[
-				5,
-				6
-			]
-		},
-		{
-			"userID":5,
-			"friendsID":
-			[
-				1,
-				2
-			]
-		},
-		{
-			"userID":6,
-			"friendsID":
-			[
-				1,
-				5
-			]
-		}
-	]
-}
+
+[
+	{
+		"userID":1,
+		"friendsList":
+		[
+			{
+				"name":"Patryk Lipka",
+				"accNumber":"445556677",
+				"address":"Orzesze, 43-170, ul.zadupcka 69"
+			},
+			{
+				"name":"Błażej Wylęgły",
+				"accNumber":"445551111",
+				"address":"Orzesze, 43-170, ul.zapizdowcka 420"
+			},
+			{
+				"name":"Adam Rower",
+				"accNumber":"442226677",
+				"address":"Mikołówek, 43-190, ul. im.Adama Małysza 2115"
+			},
+			
+		]
+	},
+	{
+		"userID":2,
+		"friendsList":
+		[
+			{
+				"name":"Patryk Lipka",
+				"accNumber":"445556677",
+				"address":"Orzesze, 43-170, ul.zadupcka 69"
+			},
+			{
+				"name":"Błażej Wylęgły",
+				"accNumber":"445551111",
+				"address":"Orzesze, 43-170, ul.zapizdowcka 420"
+			},
+			{
+				"name":"Adam Rower",
+				"accNumber":"442226677",
+				"address":"Mikołówek, 43-190, ul. im.Adama Małysza 2115"
+			},
+			
+		]
+	},
+	{
+		"userID":3,
+		"friendsList":
+		[
+			{
+				"name":"Błażej Wylęgły",
+				"accNumber":"445551111",
+				"address":"Orzesze, 43-170, ul.zapizdowcka 420"
+			},
+			{
+				"name":"Adam Rower",
+				"accNumber":"442226677",
+				"address":"Mikołówek, 43-190, ul. im.Adama Małysza 2115"
+			},
+			
+		]
+	},
+	{
+		"userID":4,
+		"friendsList":
+		[
+			{
+				"name":"Patryk Lipka",
+				"accNumber":"445556677",
+				"address":"Orzesze, 43-170, ul.zadupcka 69"
+			}
+		]
+	}
+]

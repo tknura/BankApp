@@ -2,6 +2,7 @@
 
 #include "model/Bank.h"
 #include "model/Authorization.h"
+#include "model/JsonManager.h"
 
 #include <QApplication>
 
