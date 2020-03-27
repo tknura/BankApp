@@ -41,6 +41,7 @@ HEADERS += \
     model/Card.h \
     model/Fund.h \
     model/History.h \
+    model/IAccount.h \
     model/IUser.h \
     model/IValidator.h \
     model/JsonManager.h \
@@ -48,7 +49,7 @@ HEADERS += \
     model/Payment.h \
     model/PaymentRetriever.h \
     model/User.h \
-    model/Config.h\ \
+    model/Config.h\
     model/json.hpp
 
 FORMS += \
