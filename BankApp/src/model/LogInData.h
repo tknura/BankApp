@@ -26,7 +26,6 @@ private:
     static const std::regex emailReg;
 
 public:
-    LogInData(int p_id, string p_login, string p_password);
     LogInData(int p_id, string p_login, string p_password, string p_email);
     LogInData(const LogInData& data);
     ~LogInData() override;

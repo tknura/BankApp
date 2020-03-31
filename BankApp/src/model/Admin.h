@@ -3,25 +3,25 @@
 
 #include "LogInData.h"
 #include "Account.h"
-#include "Bank.h"
-#include "User.h"
+#include "Authorization.h"
 #include <fstream>
 
 class Admin : public IUser, public LogInData
 {
 private:
     static int idProvider;
+    bool SaveUser(User& user);
 
 public:
     Admin(const LogInData &data);
     ~Admin() override;
-    void CreateUser(LogInData &data, string email);
+    bool CreateUser(string p_login, string p_password, string p_email);
     //TODO end when account class is finished
-    void AddAccount(User &user);
+    bool AddAccount(User &user);
     //TODO end when card class is finished
-    void AddCard(Account &account);
+    bool AddCard(Account &account);
     //TODO end when fund class is finished
-    void AddFund(User &fund);
+    bool AddFund(User &fund);
 
     void OnLogIn() override;
     bool IsValid() override;

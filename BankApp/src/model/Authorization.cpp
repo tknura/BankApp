@@ -14,6 +14,7 @@ bool Authorization::VerifyUser(const LogInData &data) {
             std::string line;
             while(std::getline(file, line)){
                 if(proccesedData(line) == data){
+                    file.close();
                     return true;
                 }
             }
@@ -25,6 +26,7 @@ bool Authorization::VerifyUser(const LogInData &data) {
     else {
         std::cerr << "Could not open file with log in data" << std::endl;
     }
+    file.close();
     return false;
 }
 

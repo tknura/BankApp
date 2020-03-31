@@ -6,6 +6,23 @@ Admin::Admin(const LogInData &data) : LogInData(data) {}
 
 Admin::~Admin() {}
 
+bool Admin::CreateUser(std::string p_login, std::string p_password, std::string p_email) {
+    LogInData data(idProvider++, p_login, p_password, p_email);
+    if(data.IsValid()) {
+        if(!Authorization::VerifyUser(data)){
+            User newUser(data);
+            return SaveUser(newUser);
+        }
+        else{
+            std::cerr << "User already exist" << std::endl;
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+}
+
 void Admin::OnLogIn() {
 }
 
@@ -13,6 +30,22 @@ bool Admin::IsValid() {
     return LogInData::IsValid();
 }
 
-//void Admin::CreateUser(LogInData &data, std::string email) {
-
-//}
+bool Admin::SaveUser(User& user) {
+    std::fstream file;
+    file.open(Config::logInDataPath, std::ios::out | std::ios::app);
+    if(file.is_open()){
+        file.exceptions( std::fstream::badbit );
+        try {
+            file << user.GetID() << " " << user.GetLogin() << " "
+                 << user.GetPassword() << " " << user.GetEmail() << std::endl;
+        }
+        catch (std::fstream::failure & ex) {
+            std::cerr << "Log in data parsing failure: "<< ex.what() << std::endl;
+        }
+    }
+    else{
+        std::cerr << "Could not open file with log in data" << std::endl;
+    }
+    file.close();
+    return true;
+}

@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
     Bank::Start();
-    //Test::Run();
+    Test::Run();
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

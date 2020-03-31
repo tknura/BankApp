@@ -2,6 +2,7 @@
 #define BANK_H
 
 #include "User.h"
+#include "Admin.h"
 #include "Config.h"
 #include "Account.h"
 #include "Fund.h"

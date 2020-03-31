@@ -6,11 +6,16 @@ IUser* Bank::currentlyLoggedUser = nullptr;
  * Method which create user object from passed data
  */
 void Bank::LogIn(IUser* data) {
-    if(!data){
-        currentlyLoggedUser = data;
-
+    if(data){
+        if(dynamic_cast<Admin*>(data)) {
+            currentlyLoggedUser = dynamic_cast<Admin*>(data);
+            currentlyLoggedUser->OnLogIn();
+        }
+        else if(dynamic_cast<User*>(data)) {
+            currentlyLoggedUser = dynamic_cast<User*>(data);
+            currentlyLoggedUser->OnLogIn();
+        }
     }
-
 }
 
 /*
