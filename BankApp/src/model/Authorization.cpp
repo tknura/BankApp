@@ -56,6 +56,6 @@ LogInData Authorization::proccesedData(const std::string &line) {
     std::vector<std::string> tokens;
     std::copy(std::istream_iterator<string>(iss), std::istream_iterator<string>(),
               std::back_inserter(tokens));
-    LogInData result(tokens[1], tokens[2]);
+    LogInData result(std::stoi(tokens[0]), tokens[1], tokens[2], tokens[3]);
     return result;
 }

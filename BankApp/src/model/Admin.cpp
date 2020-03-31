@@ -6,7 +6,12 @@ Admin::Admin(const LogInData &data) : LogInData(data) {}
 
 Admin::~Admin() {}
 
-bool Admin::IsValid() {}
+void Admin::OnLogIn() {
+}
+
+bool Admin::IsValid() {
+    return LogInData::IsValid();
+}
 
 //void Admin::CreateUser(LogInData &data, std::string email) {
 

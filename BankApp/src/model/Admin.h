@@ -7,10 +7,10 @@
 #include "User.h"
 #include <fstream>
 
-class Admin : public LogInData, public IUser
+class Admin : public IUser, public LogInData
 {
 private:
-    static int currentId;
+    static int idProvider;
 
 public:
     Admin(const LogInData &data);
@@ -23,6 +23,7 @@ public:
     //TODO end when fund class is finished
     void AddFund(User &fund);
 
+    void OnLogIn() override;
     bool IsValid() override;
 };
 

@@ -1,5 +1,10 @@
 #include "User.h"
 
-User::User(const LogInData &data) : LogInData(data), id(-1), email("") {}
+User::User(const LogInData &data) : LogInData(data) {}
 
 User::~User() {}
+
+void User::OnLogIn() {
+}
+
+//User::~User() {}

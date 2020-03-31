@@ -16,17 +16,16 @@ using std::string;
 class User : public IUser, public LogInData
 {
 private:
-    int id;
-    string email;
     list<string> accountList;
     list<PaymentRetriever> friendsList;
     list<string> fundList;
 
 public:
     User(const LogInData& data);
-    ~User();
+    ~User() override;
     void MakePayment();
     void AddFriend(PaymentRetriever);
+    void OnLogIn() override;
 };
 
 #endif // USER_H
