@@ -1,6 +1,6 @@
 #include "Admin.h"
 
-int Admin::currentId = 0;
+int Admin::idProvider = 0;
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}
 
