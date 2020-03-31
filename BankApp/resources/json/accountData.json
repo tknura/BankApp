@@ -1,5 +1,4 @@
- {"account":
- 	[
+[{"lista":[
  		{
 	 		"type":"personal",
 	 		"number":"1234567890",
@@ -19,7 +18,7 @@
 	 					"type":"prePaid",
 		 				"number":"77777777",
 		 				"ccv":720,
-		 				"transactionLimit":500.40,
+		 				"transactionLimit":500.40         
 	 				}
 	 			]
 	 	},
@@ -37,9 +36,9 @@
 		 				"number":"6060606060",
 		 				"ccv":725,
 		 				"transactionLimit":50,
+                        "maxCredit":1500.80
 	 				}
 	 			]
-	 	}
+	 	}]}
 
- 	]
- }
+]

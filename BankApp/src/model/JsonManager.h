@@ -11,7 +11,7 @@
 
 using json = nlohmann::json;
 using listP = std::list<PaymentRetriever>;
-using mapAcc = std::map<std::string,Account>;
+using listAcc = std::list<Account>;
 using mapFund = std::map<std::string,Fund>;
 
 
@@ -29,10 +29,16 @@ private:
 public:
     JsonManager(int p_userID)
         :userID(p_userID), friendsFile(0), accountFile(0), fundsFile(0){}
-    mapAcc ParseAccountData();
+    JsonManager() = delete;
+    JsonManager(const JsonManager&) = delete;
+    JsonManager& operator=(const JsonManager&) = delete;
+    JsonManager(JsonManager&&) = delete;
+    Account& operator=(JsonManager&&) = delete;
+    ~JsonManager() = default;
+    listAcc ParseAccountData();
     mapFund ParseFundData();
     listP ParseFriendsData();
-    mapAcc SerializeAccountData();
+  //  listAcc SerializeAccountData();
     mapFund SerializeFundData();
     listP SerializeFriendsData();
 
