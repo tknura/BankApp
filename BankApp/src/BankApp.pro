@@ -29,6 +29,8 @@ SOURCES += \
     model/LogInData.cpp \
     model/Payment.cpp \
     model/PaymentRetriever.cpp \
+    model/RetirementFund.cpp \
+    model/SavingsFund.cpp \
     model/User.cpp \
     model/Config.cpp\
 
@@ -48,6 +50,8 @@ HEADERS += \
     model/LogInData.h \
     model/Payment.h \
     model/PaymentRetriever.h \
+    model/RetirementFund.h \
+    model/SavingsFund.h \
     model/User.h \
     model/Config.h\
     model/json.hpp

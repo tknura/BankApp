@@ -1,5 +1,7 @@
 #include "JsonManager.h"
 #include "Config.h"
+#include "SavingsFund.h"
+#include "RetirementFund.h"
 #include <fstream>
 
 listP JsonManager::ParseFriendsData()
@@ -33,7 +35,7 @@ listP JsonManager::ParseFriendsData()
 
     return friends;
 }
-listAcc JsonManager::ParseAccountData()
+listAcc JsonManager::ParseAccountData()//na razie działa tylko dla jednego rodzaju konta
 {
     listAcc accounts{};
     std::list<int> ownerIDlist{};
@@ -46,7 +48,7 @@ listAcc JsonManager::ParseAccountData()
         f>>accountFile;
         f.close();
 
-        for(const auto& account: accountFile[0]["lista"])//tutaj coś nie działa
+        for(const auto& account: accountFile[0]["lista"])
         {
             using str = std::string;
 
@@ -74,4 +76,46 @@ listAcc JsonManager::ParseAccountData()
         throw std::runtime_error("Could not open the accountsData.json file");
     }
     return accounts;
+}
+void JsonManager::ParseFundData(multiMapFund &p_map)
+{
+    std::ifstream f(Config::fundJSONPath);
+
+    if(f.is_open())
+    {
+        f>>fundsFile;
+        f.close();
+
+        for(const auto & fund:fundsFile[0]["fundsList"])
+        {
+           // std::cerr<<fund["ownerID"];
+
+            using str = std::string;
+            str type {fund["type"]};
+            double minAmount {fund["minAmount"]};
+            double maxRate {fund["maxRate"]};
+            double fee {fund["fee"]};
+            double balance {fund["balance"]};
+            if(type == "retirement")
+            {
+                bool isRetired {fund["isRetired"]};
+                double monthlyTransferIn {fund["monthlyTransferIn"]};
+                Fund* p = new RetirementFund {minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn};
+                p_map.insert({fund["ownerID"],p});
+
+            }
+            else if(type == "savings")
+            {
+                str startDate {fund["startDate"]};
+                str endDate {fund["endDate"]};
+                Fund* p = new SavingsFund {minAmount,maxRate,fee,balance,startDate,endDate};
+                p_map.insert({fund["ownerID"],p});
+            }
+
+        }
+    }
+    else
+    {
+        throw std::runtime_error("Could not open the fundData.json file");
+    }
 }

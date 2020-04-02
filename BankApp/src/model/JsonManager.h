@@ -12,8 +12,8 @@
 using json = nlohmann::json;
 using listP = std::list<PaymentRetriever>;
 using listAcc = std::list<Account>;
-using mapFund = std::map<std::string,Fund>;
-
+using listFund = std::list<Fund>;
+using multiMapFund = std::multimap<int,Fund*>;
 
 //class responsible for reading json files,
 //createating data structures
@@ -36,10 +36,10 @@ public:
     Account& operator=(JsonManager&&) = delete;
     ~JsonManager() = default;
     listAcc ParseAccountData();
-    mapFund ParseFundData();
+    void ParseFundData(multiMapFund &p_map);
     listP ParseFriendsData();
   //  listAcc SerializeAccountData();
-    mapFund SerializeFundData();
+    listFund SerializeFundData();
     listP SerializeFriendsData();
 
 };
