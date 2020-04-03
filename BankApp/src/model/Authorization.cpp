@@ -1,11 +1,10 @@
 #include "Authorization.h"
 
-
 /*
  * Method which return true if LogInData passed as an argument
  * match existing LogInData in proper file
  */
-bool Authorization::VerifyUser(const LogInData &data) {
+bool Authorization::FindData(const LogInData &data) {
     std::fstream file;
     file.open(Config::logInDataPath, std::ios::in);
     if(file.is_open()){
@@ -13,9 +12,23 @@ bool Authorization::VerifyUser(const LogInData &data) {
         try {
             std::string line;
             while(std::getline(file, line)){
-                if(proccesedData(line) == data){
-                    file.close();
-                    return true;
+                LogInData logInDataFromLine = proccesedData(line);
+                //case if its called from login screen
+                //the id isn't pased so its -1
+                if(data.GetID() < 0) {
+                    if(logInDataFromLine.GetPassword() == data.GetPassword() &&
+                        (logInDataFromLine.GetEmail() == data.GetEmail()
+                         || logInDataFromLine.GetLogin() == data.GetLogin())) {
+                            file.close();
+                            return true;
+                    }
+                }
+                //case if its called from creating user in admins panel
+                else {
+                    if(logInDataFromLine == data){
+                        file.close();
+                        return true;
+                    }
                 }
             }
         }
@@ -31,7 +44,7 @@ bool Authorization::VerifyUser(const LogInData &data) {
 }
 
 /*
- * Method which call VerifyUser and depending on its results call
+ * Method which call FindData and depending on its results call
  * LogIn function in Bank class
  */
 bool Authorization::LogInAttempt(const LogInData &data) {
@@ -39,7 +52,7 @@ bool Authorization::LogInAttempt(const LogInData &data) {
         Bank::LogIn(new Admin(data));
         return true;
     }
-    else if(VerifyUser(data)){
+    else if(FindData(data)){
         Bank::LogIn(new User(data));
         return true;
     }

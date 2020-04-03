@@ -3,6 +3,7 @@
 
 #include "IValidator.h"
 #include <string>
+#include <iostream>
 
 using std::string;
 
@@ -15,18 +16,19 @@ protected:
     int id;
     string login;
     string password;
-    string email = "";
+    string email;
 
 private:
     //Non empty character, letters and numbers only
     static const std::regex loginReg;
-    //Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
+    //Minimum eight characters, at least one uppercase letter, one lowercase letter and one number/special character
     static const std::regex passwordReg;
     //RFC 5322 Standard
     static const std::regex emailReg;
 
 public:
     LogInData(int p_id, string p_login, string p_password, string p_email);
+    LogInData(string p_login, string p_password, string p_email);
     LogInData(const LogInData& data);
     ~LogInData() override;
 
@@ -41,7 +43,7 @@ public:
     void SetEmail(const string &value);
     //---------------------------------------
 
-    virtual bool IsValid() override;
+    bool IsValid() override;
     bool operator==(const LogInData& data) const;
 
 };

@@ -7,14 +7,15 @@ Admin::Admin(const LogInData &data) : LogInData(data) {}
 Admin::~Admin() {}
 
 bool Admin::CreateUser(std::string p_login, std::string p_password, std::string p_email) {
+
     LogInData data(idProvider++, p_login, p_password, p_email);
     if(data.IsValid()) {
-        if(!Authorization::VerifyUser(data)){
+        if(!Authorization::FindData(data)){
             User newUser(data);
             return SaveUser(newUser);
         }
         else{
-            std::cerr << "User already exist" << std::endl;
+            std::cerr << "User " << data.GetLogin() << " already exist" << std::endl;
             return false;
         }
     }
@@ -24,11 +25,12 @@ bool Admin::CreateUser(std::string p_login, std::string p_password, std::string 
 }
 
 void Admin::OnLogIn() {
+    std::cerr << "Admin logged" << std::endl;
 }
 
-bool Admin::IsValid() {
-    return LogInData::IsValid();
-}
+//bool Admin::IsValid() {
+//    return LogInData::IsValid();
+//}
 
 bool Admin::SaveUser(User& user) {
     std::fstream file;
@@ -36,8 +38,8 @@ bool Admin::SaveUser(User& user) {
     if(file.is_open()){
         file.exceptions( std::fstream::badbit );
         try {
-            file << user.GetID() << " " << user.GetLogin() << " "
-                 << user.GetPassword() << " " << user.GetEmail() << std::endl;
+            file  << user.GetID() << " " << user.GetLogin()
+                 << " " << user.GetPassword() << " " << user.GetEmail() << std::endl ;
         }
         catch (std::fstream::failure & ex) {
             std::cerr << "Log in data parsing failure: "<< ex.what() << std::endl;

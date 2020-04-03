@@ -1,14 +1,17 @@
 #include "LogInData.h"
 
-const std::regex LogInData::loginReg = std::regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
-const std::regex LogInData::passwordReg = std::regex("");
-const std::regex LogInData::emailReg = std::regex("\\A[a-z0-9!#$%&'*+/=?^_‘{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_‘{|}~-]+)*@ (?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
+const std::regex LogInData::loginReg = std::regex(".*");//work in progress
+const std::regex LogInData::passwordReg = std::regex("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+const std::regex LogInData::emailReg = std::regex("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
 
 LogInData::LogInData(int p_id, std::string p_login, std::string p_password, std::string p_email)
     : id(p_id), login(p_login), password(p_password), email(p_email) {}
 
+LogInData::LogInData(std::string p_login, std::string p_password, std::string p_email)
+    : id(-1), login(p_login), password(p_password), email(p_email) {}
+
 LogInData::LogInData(const LogInData &data)
-    : id(data.GetID()), login(data.GetLogin()), password(data.GetPassword()) {}
+    : id(data.GetID()), login(data.GetLogin()), password(data.GetPassword()), email(data.GetEmail()) {}
 
 LogInData::~LogInData() {}
 int LogInData::GetID() const {
@@ -53,10 +56,12 @@ bool LogInData::IsValid() {
     if (id >= 0
         && std::regex_match(login, loginReg)
         && std::regex_match(password, passwordReg)
-        && std::regex_match(email, emailReg)){
+        && std::regex_match(email, emailReg)) {
         return true;
     }
-    return false;
+    else {
+        return false;
+    }
 }
 
 bool LogInData::operator==(const LogInData &data) const {

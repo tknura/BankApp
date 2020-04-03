@@ -24,7 +24,7 @@ public:
     bool AddFund(User &fund);
 
     void OnLogIn() override;
-    bool IsValid() override;
+//    bool IsValid() override;
 };
 
 #endif // ADMIN_H

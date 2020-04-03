@@ -5,6 +5,7 @@ User::User(const LogInData &data) : LogInData(data) {}
 User::~User() {}
 
 void User::OnLogIn() {
+    std::cerr << "User logged" << std::endl;
 }
 
 //User::~User() {}
