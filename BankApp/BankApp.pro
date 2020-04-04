@@ -22,12 +22,19 @@ SOURCES += \
         model/Bank.cpp \
         model/Card.cpp \
         model/Config.cpp \
+        model/ChildAccount.cpp \
+        model/CreditCard.cpp \
+        model/DebitCard.cpp \
+        model/FamillyAccount.cpp \
         model/Fund.cpp \
         model/History.cpp \
         model/JsonManager.cpp \
         model/LogInData.cpp \
         model/Payment.cpp \
         model/PaymentRetriever.cpp \
+        model/RetirementFund.cpp \
+        model/SavingsAccount.cpp \
+        model/SavingsFund.cpp \
         model/Test.cpp \
         model/User.cpp
 
@@ -44,6 +51,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+
+
+
+
+
+
 HEADERS += \
     controller/LogInSceneController.h \
     model/Account.h \
@@ -52,6 +65,10 @@ HEADERS += \
     model/Bank.h \
     model/Card.h \
     model/Config.h \
+    model/ChildAccount.h \
+    model/CreditCard.h \
+    model/DebitCard.h \
+    model/FamillyAccount.h \
     model/Fund.h \
     model/History.h \
     model/IAccount.h \
@@ -62,5 +79,8 @@ HEADERS += \
     model/Payment.h \
     model/PaymentRetriever.h \
     model/Test.h \
+    model/RetirementFund.h \
+    model/SavingsAccount.h \
+    model/SavingsFund.h \
     model/User.h \
     model/json.hpp

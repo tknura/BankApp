@@ -15,9 +15,9 @@ class Account// public IAccount
 private:
     std::string number;
     double balance;
-    std::list<int> memberIDlist;
+    int supervisorId;
  //   History history;
-    std::list<Card> cardList;
+  //  std::list<Card> cardList;
 public:
     //CONSTRUCTORS
 //    Account()
@@ -26,8 +26,8 @@ public:
 //        history = {};
 //        cardList = {};
 //    }
-    Account(std::string p_number, double p_balance, std::list<int> &p_memberIDlist, std::list<Card> & p_cardList)
-        :number(p_number), balance(p_balance), memberIDlist(p_memberIDlist), cardList(p_cardList){std::cerr<<"utworzono obiekt account\n";}
+    Account(std::string p_number, double p_balance, int p_supervisorId)
+        :number(p_number), balance(p_balance), supervisorId(p_supervisorId) {std::cerr<<"utworzono obiekt account\n";}
 //    Account(const Account&);
 //    Account& operator=(const Account&);
 //    Account(Account&&);

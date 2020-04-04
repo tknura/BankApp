@@ -13,10 +13,11 @@
 
 using reg = std::regex;
 
-str Config::accountJSONPath = "";
-str Config::fundJSONPath = "";
-str Config::friendsJSONPath = "";
-str Config::logInDataPath = "";
+str Config::accountJSONPath {};
+str Config::fundJSONPath {};
+str Config::friendsJSONPath {};
+str Config::logInDataPath {};
+str Config::cardJSONPath {};
 
 void Config::Initialize()
 {
@@ -36,6 +37,7 @@ void Config::Initialize()
     reg fund("funds:.+");
     reg friends("friends:.+");
     reg logIn("login:.+");
+    reg card("cards:.+");
 
 
     std::ifstream fin(fullPath + "config.txt");//próba otwarcia pliku  //trzeba zrobić tak, żeby otwierało config.txt z resourcefiles
@@ -67,6 +69,11 @@ void Config::Initialize()
             {
                 logInDataPath = fullPath + line.substr(6,line.length());
                 std::cerr<<logInDataPath<<'\n';
+            }
+            else if(std::regex_search(line,card))
+            {
+                cardJSONPath = fullPath + line.substr(6,line.length());
+                std::cerr<<cardJSONPath<<'\n';
             }
         }
         fin.close();

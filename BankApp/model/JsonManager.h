@@ -3,6 +3,7 @@
 
 #include <list>
 #include <map>
+#include <unordered_map>
 
 #include "PaymentRetriever.h"
 #include "Account.h"
@@ -11,9 +12,11 @@
 
 using json = nlohmann::json;
 using listP = std::list<PaymentRetriever>;
-using listAcc = std::list<Account>;
-using mapFund = std::map<std::string,Fund>;
-
+using listAcc = std::list<std::string>;
+using listFund = std::list<Fund>;
+using unorderedMapAcc = std::unordered_map<std::string,Account*>;
+using multiMapFund = std::multimap<int,Fund*>;
+using multiMapCard = std::multimap<std::string,Card*>;
 
 //class responsible for reading json files,
 //createating data structures
@@ -26,6 +29,7 @@ private:
     json friendsFile;//objects holding pre-parsed json files
     json accountFile;
     json fundsFile;
+    json cardFile;
 public:
     JsonManager(int p_userID)
         :userID(p_userID), friendsFile(0), accountFile(0), fundsFile(0){}
@@ -35,12 +39,15 @@ public:
     JsonManager(JsonManager&&) = delete;
     Account& operator=(JsonManager&&) = delete;
     ~JsonManager() = default;
-    listAcc ParseAccountData();
-    mapFund ParseFundData();
+    void ParseAccountData(listAcc& p_list, unorderedMapAcc& p_map);
+    void ParseFundData(multiMapFund &p_map);
+    void ParseCardData(multiMapCard &p_map);
     listP ParseFriendsData();
-  //  listAcc SerializeAccountData();
-    mapFund SerializeFundData();
-    listP SerializeFriendsData();
+
+    void SerializeAccountData();
+    void SerializeFundData();
+    void SerializeFriendsData();
+    void SerializeCardData();
 
 };
 

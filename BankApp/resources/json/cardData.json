@@ -1,0 +1,30 @@
+[
+	{"cards":
+		[
+			{
+ 				"type":"credit",
+ 				"accNumber":"123456789",
+ 				"number":"98765432",
+ 				"ccv":128,
+ 				"transactionLimit":80000.99,
+ 				"maxCredit":1500.80,
+ 				"billingDate":"27-04"	
+			},
+			{
+				"type":"prePaid",
+				"accNumber":"987654321",
+ 				"number":"77777777",		
+ 				"ccv":720,
+ 				"transactionLimit":500.40         
+			},
+			{
+				"type":"debit",
+				"accNumber":"98761234",
+ 				"number":"6060606060",
+ 				"ccv":725,
+ 				"transactionLimit":50,
+                "maxDebt":1500.80
+			}
+		]
+	}
+]	

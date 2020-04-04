@@ -14,6 +14,8 @@ public:
     static str accountJSONPath;
     static str fundJSONPath;
     static str friendsJSONPath;
+    static str cardJSONPath;
+
     static str logInDataPath;
     static void Initialize();
 };
