@@ -23,6 +23,10 @@ SOURCES += \
     model/Authorization.cpp \
     model/Bank.cpp \
     model/Card.cpp \
+    model/ChildAccount.cpp \
+    model/CreditCard.cpp \
+    model/DebitCard.cpp \
+    model/FamillyAccount.cpp \
     model/Fund.cpp \
     model/History.cpp \
     model/JsonManager.cpp \
@@ -30,6 +34,7 @@ SOURCES += \
     model/Payment.cpp \
     model/PaymentRetriever.cpp \
     model/RetirementFund.cpp \
+    model/SavingsAccount.cpp \
     model/SavingsFund.cpp \
     model/User.cpp \
     model/Config.cpp\
@@ -41,6 +46,10 @@ HEADERS += \
     model/Authorization.h \
     model/Bank.h \
     model/Card.h \
+    model/ChildAccount.h \
+    model/CreditCard.h \
+    model/DebitCard.h \
+    model/FamillyAccount.h \
     model/Fund.h \
     model/History.h \
     model/IAccount.h \
@@ -51,6 +60,7 @@ HEADERS += \
     model/Payment.h \
     model/PaymentRetriever.h \
     model/RetirementFund.h \
+    model/SavingsAccount.h \
     model/SavingsFund.h \
     model/User.h \
     model/Config.h\
