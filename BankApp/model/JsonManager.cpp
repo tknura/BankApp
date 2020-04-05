@@ -8,6 +8,8 @@
 #include "CreditCard.h"
 #include "DebitCard.h"
 
+#include <memory>
+
 #include <fstream>
 
 listP JsonManager::ParseFriendsData()
@@ -50,7 +52,7 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
         f>>accountFile;
         f.close();
 
-        Account * p {nullptr};
+        std::shared_ptr<Account> p {nullptr};
 
         for(const auto& account: accountFile[0]["accounts"])
         {
@@ -63,20 +65,19 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
             double balance  {account["balance"]};
             if(type == "personal")
             {
-                p = new Account{number,balance,supervisorId};
+                p = std::make_shared<Account>(number,balance,supervisorId);
             }
             else if(type == "child")
             {
                 int childId {account["childId"]};
                 double dailyTransactionLimit {account["dailyTransactionLimit"]};
-                p = new ChildAccount{number,balance,supervisorId,dailyTransactionLimit,childId};
+                p = std::make_shared<ChildAccount>(number,balance,supervisorId,dailyTransactionLimit,childId);
             }
             else if(type == "savings")
             {
 
                 double interest {account["interest"]};
-                p = new SavingsAccount{number,balance,supervisorId,interest};
-                p_accountMap.insert({number,p});
+                p = std::make_shared<SavingsAccount>(number,balance,supervisorId,interest);
             }
             else if(type == "familly")
             {
@@ -85,7 +86,7 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
                 {
                     memberIdList.push_back((int)id);
                 }
-                p = new FamillyAccount{number,balance,supervisorId,memberIdList};
+                p = std::make_shared<FamillyAccount>(number,balance,supervisorId,memberIdList);
             }
             p_accountList.push_back(number);//list with keys to the hash table
             p_accountMap.insert({number,p});
@@ -105,7 +106,7 @@ void JsonManager::ParseCardData(multiMapCard &p_map)
         f>>cardFile;
         f.close();
 
-        Card* p {nullptr};
+        std::shared_ptr<Card> p {nullptr};
 
         for(const auto& card :cardFile[0]["cards"])
         {
@@ -117,18 +118,18 @@ void JsonManager::ParseCardData(multiMapCard &p_map)
 
             if(type == "prePaid")
             {
-                p = new Card{accNumber,number,ccv,transactionLimit};
+                p = std::make_shared<Card>(accNumber,number,ccv,transactionLimit);
             }
             else if(type == "credit")
             {
                 double maxCredit {card["maxCredit"]};
                 str billingDate {card["billingDate"]};
-                p = new CreditCard{accNumber,number,ccv,transactionLimit,maxCredit,billingDate};
+                p = std::make_shared<CreditCard>(accNumber,number,ccv,transactionLimit,maxCredit,billingDate);
             }
             else if(type == "debit")
             {
                 double maxDebit {card["maxDebt"]};
-                p = new DebitCard{accNumber,number,ccv,transactionLimit,maxDebit};
+                p = std::make_shared<DebitCard>(accNumber,number,ccv,transactionLimit,maxDebit);
             }
             p_map.insert({accNumber,p});
         }
@@ -153,7 +154,7 @@ void JsonManager::ParseFundData(multiMapFund &p_map)
         f>>fundsFile;
         f.close();
 
-        Fund* p {nullptr};
+        std::shared_ptr<Fund> p {nullptr};
 
         for(const auto & fund:fundsFile[0]["fundsList"])
         {
@@ -167,13 +168,13 @@ void JsonManager::ParseFundData(multiMapFund &p_map)
             {
                 bool isRetired {fund["isRetired"]};
                 double monthlyTransferIn {fund["monthlyTransferIn"]};
-                p = new RetirementFund {minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn};
+                p = std::make_shared<RetirementFund>(minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn);
             }
             else if(type == "savings")
             {
                 str startDate {fund["startDate"]};
                 str endDate {fund["endDate"]};
-                p = new SavingsFund {minAmount,maxRate,fee,balance,startDate,endDate};
+                p = std::make_shared<SavingsFund>(minAmount,maxRate,fee,balance,startDate,endDate);
             }
             p_map.insert({fund["ownerID"],p});
         }
