@@ -27,6 +27,7 @@ private:
     static const std::regex emailReg;
 
 public:
+    LogInData();
     LogInData(int p_id, string p_login, string p_password, string p_email);
     LogInData(string p_login, string p_password, string p_email);
     LogInData(const LogInData& data);

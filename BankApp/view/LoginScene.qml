@@ -11,19 +11,22 @@ Window {
     height: 700
     color: "#eeeeee"
     title: "Login"
+     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
+     FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+     FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
 
     Text {
         id: title
         height: 190
         color: "#393e46"
-        text: qsTr("BankApp")
+        text: qsTr("Bank App")
+        font.family: "Rubik"
         anchors.right: parent.right
         anchors.rightMargin: 291
         anchors.left: parent.left
-        anchors.leftMargin: 292
+        anchors.leftMargin: 293
         anchors.top: parent.top
         anchors.topMargin: 142
-        font.family: "Arial"
         font.weight: Font.Bold
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -34,18 +37,15 @@ Window {
 
     Button {
         id: proceedButton
+        objectName: "proceedButton"
         x: 651
         width: 136
         height: 40
         anchors.right: parent.right
         anchors.rightMargin: 213
-        autoRepeat: false
-        flat: false
-        highlighted: false
         anchors.top: parent.top
         anchors.topMargin: 530
-        font.family: "Arial"
-        checkable: false
+        font.family: "Rubik"
         display: AbstractButton.TextOnly
         text: qsTr("Proceed")
         contentItem: Text {
@@ -85,13 +85,17 @@ Window {
             height: 25
             color: "#393e46"
             text: qsTr("Login")
-            font.family: "Arial"
+            font.family: "Rubik"
+            font.weight: Font.Medium
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: 20
         }
 
         TextField {
             id: loginField
+            objectName: "loginInput"
+            font.family: "Rubik"
+            placeholderText: "login"
             leftPadding: 25
             padding: 6
             font.letterSpacing: 0
@@ -104,8 +108,6 @@ Window {
             anchors.leftMargin: -12
             anchors.right: parent.right
             anchors.rightMargin: -12
-            font.family: "Arial"
-            placeholderText: "login"
             horizontalAlignment: Text.AlignLeft
             background: Rectangle {
                         color: "#F7F7F7"
@@ -141,16 +143,18 @@ Window {
             height: 25
             color: "#393e46"
             text: qsTr("Password")
-            font.family: "Arial"
+            font.weight: Font.Medium
+            font.family: "Rubik"
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: 20
         }
 
         TextField {
             id: passwordField
+            objectName: "passwordInput"
+            echoMode: TextInput.Password
             leftPadding: 25
             anchors.bottomMargin: -12
-            font.family: "Arial"
             anchors.topMargin: 19
             anchors.bottom: parent.bottom
             anchors.rightMargin: -12
@@ -160,6 +164,7 @@ Window {
             anchors.leftMargin: -12
             anchors.right: parent.right
             placeholderText: "password"
+            font.family: "Rubik"
             background: Rectangle {
                         color: "#F7F7F7"
                         border.color: "#F7F7F7"
@@ -170,11 +175,3 @@ Window {
     }
 
 }
-
-/*##^##
-Designer {
-    D{i:1;anchors_height:190;anchors_width:417;anchors_x:292;anchors_y:134}D{i:8;anchors_height:48;anchors_width:566;anchors_x:-14;anchors_y:19}
-D{i:5;anchors_width:564;anchors_x:223;anchors_y:338}D{i:13;anchors_height:48;anchors_width:566;anchors_x:"-14";anchors_y:19}
-D{i:10;anchors_width:564;anchors_x:223;anchors_y:338}
-}
-##^##*/
