@@ -14,9 +14,9 @@ using json = nlohmann::json;
 using listP = std::list<PaymentRetriever>;
 using listAcc = std::list<std::string>;
 using listFund = std::list<Fund>;
-using unorderedMapAcc = std::unordered_map<std::string,Account*>;
-using multiMapFund = std::multimap<int,Fund*>;
-using multiMapCard = std::multimap<std::string,Card*>;
+using unorderedMapAcc = std::unordered_map<std::string,std::shared_ptr<Account>>;
+using multiMapFund = std::multimap<int,std::shared_ptr<Fund>>;
+using multiMapCard = std::multimap<std::string,std::shared_ptr<Card>>;
 
 //class responsible for reading json files,
 //createating data structures
