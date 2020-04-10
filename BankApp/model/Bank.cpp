@@ -1,18 +1,19 @@
 #include "Bank.h"
 
-IUser* Bank::currentlyLoggedUser = nullptr;
-
+std::shared_ptr<IUser> Bank::currentlyLoggedUser = nullptr;
+std::random_device Bank::rd;
+std::mt19937 Bank::mt = std::mt19937(rd());
 /*
  * Method which create user object from passed data
  */
-void Bank::LogIn(IUser* data) {
+void Bank::LogIn(std::shared_ptr<IUser> data) {
     if(data){
-        if(dynamic_cast<Admin*>(data)) {
-            currentlyLoggedUser = dynamic_cast<Admin*>(data);
+        if(currentlyLoggedUser = std::dynamic_pointer_cast<Admin>(data)) {
+            //currentlyLoggedUser = std::dynamic_pointer_cast<Admin>(data);
             currentlyLoggedUser->OnLogIn();
         }
-        else if(dynamic_cast<User*>(data)) {
-            currentlyLoggedUser = dynamic_cast<User*>(data);
+        else if(currentlyLoggedUser = std::dynamic_pointer_cast<User>(data)) {
+           // currentlyLoggedUser = dynamic_cast<User*>(data);
             currentlyLoggedUser->OnLogIn();
         }
     }

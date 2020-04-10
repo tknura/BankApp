@@ -49,11 +49,11 @@ bool Authorization::FindData(const LogInData &data) {
  */
 bool Authorization::LogInAttempt(const LogInData &data) {
     if(data.GetLogin() == "admin" && data.GetPassword() == "admin"){
-        Bank::LogIn(new Admin(data));
+        Bank::LogIn(std::shared_ptr<Admin>(new Admin(data)));
         return true;
     }
     else if(FindData(data)){
-        Bank::LogIn(new User(data));
+        Bank::LogIn(std::shared_ptr<User>(new User(data)));
         return true;
     }
     else {

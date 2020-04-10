@@ -8,6 +8,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <memory>
 
 class Authorization
 {
