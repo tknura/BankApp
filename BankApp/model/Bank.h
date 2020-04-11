@@ -4,7 +4,6 @@
 #include "User.h"
 #include "Admin.h"
 #include "Config.h"
-#include "Account.h"
 #include "Fund.h"
 #include <iostream>
 #include <map>
@@ -18,10 +17,10 @@ using std::list;
 class Bank
 {
 public:
-    static map<std::string, Account> accountMap;
     static list<std::string> accountNumList;
-    static map<std::string,Fund> fundMap;
     static list<std::string> fundNumList;
+    static map<std::string,Fund> fundMap;
+    static map<std::string, Account> accountMap;
     static std::shared_ptr<IUser> currentlyLoggedUser;
 
     //variables used for generating random numbers
@@ -29,7 +28,9 @@ public:
     static std::mt19937 mt;
 
     static void LogIn(std::shared_ptr<IUser> data);
+    static void LogOut();
     static void Start();
+    static void Stop();
 };
 
 #endif // BANK_H

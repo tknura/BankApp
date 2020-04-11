@@ -4,11 +4,11 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <random>
 
 #include "History.h"
 #include "Card.h"
 #include "IAccount.h"
-
 
 class Account// public IAccount
 {
@@ -26,8 +26,12 @@ public:
 //        history = {};
 //        cardList = {};
 //    }
-    Account(std::string p_number, double p_balance, int p_supervisorId)
-        :number(p_number), balance(p_balance), supervisorId(p_supervisorId) {std::cerr<<"utworzono obiekt account\n";}
+
+    Account(std::string p_number, double p_balance, int p_supervisorId);
+    Account(std::string p_number, int p_supervisorId);
+    Account(int p_supervisorId);
+    static std::string GenerateNumber();
+
 //    Account(const Account&);
 //    Account& operator=(const Account&);
 //    Account(Account&&);
@@ -38,6 +42,12 @@ public:
 //    void UpdateHistory() override;
 //    void UpdateBallance(int) override;
 //    void AddCard(const Card &) override;
+    std::string GetNumber() const;
+    void SetNumber(const std::string &value);
+    double GetBalance() const;
+    void SetBalance(double value);
+    int GetSupervisorId() const;
+    void SetSupervisorId(int value);
 };
 
 #endif // ACCOUNT_H

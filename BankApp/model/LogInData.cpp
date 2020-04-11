@@ -74,3 +74,9 @@ bool LogInData::operator==(const LogInData &data) const {
     }
     return false;
 }
+
+std::ostream& operator<<(std::ostream &output, const LogInData &data) {
+    output  << data.GetID() << " " << data.GetLogin()
+         << " " << data.GetPassword() << " " << data.GetEmail() << std::endl ;
+    return output;
+}

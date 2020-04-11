@@ -46,6 +46,7 @@ public:
 
     bool IsValid() override;
     bool operator==(const LogInData& data) const;
+    friend std::ostream &operator<<(std::ostream &output, const LogInData &data);
 
 };
 
