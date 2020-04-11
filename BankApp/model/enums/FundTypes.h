@@ -4,7 +4,7 @@
 #include "model/RetirementFund.h"
 #include "model/SavingsFund.h"
 
-enum class AccountTypes
+enum class FundTypes
 {
     SAVINGS,
     RETIREMENT,
