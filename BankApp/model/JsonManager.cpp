@@ -65,19 +65,19 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
             double balance  {account["balance"]};
             if(type == "personal")
             {
-                p = std::make_shared<Account>(number,balance,supervisorId);
+                p = std::make_shared<Account>(number,balance,supervisorId,type);
             }
             else if(type == "child")
             {
                 int childId {account["childId"]};
                 double dailyTransactionLimit {account["dailyTransactionLimit"]};
-                p = std::make_shared<ChildAccount>(number,balance,supervisorId,dailyTransactionLimit,childId);
+                p = std::make_shared<ChildAccount>(number,balance,supervisorId,dailyTransactionLimit,childId,type);
             }
             else if(type == "savings")
             {
 
                 double interest {account["interest"]};
-                p = std::make_shared<SavingsAccount>(number,balance,supervisorId,interest);
+                p = std::make_shared<SavingsAccount>(number,balance,supervisorId,interest,type);
             }
             else if(type == "familly")
             {
@@ -86,7 +86,7 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
                 {
                     memberIdList.push_back((int)id);
                 }
-                p = std::make_shared<FamillyAccount>(number,balance,supervisorId,memberIdList);
+                p = std::make_shared<FamillyAccount>(number,balance,supervisorId,memberIdList,type);
             }
             p_accountList.push_back(number);//list with keys to the hash table
             p_accountMap.insert({number,p});
@@ -100,6 +100,7 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
 void JsonManager::ParseCardData(multiMapCard &p_map)
 {
     std::ifstream f(Config::cardJSONPath);
+    std::cerr<<Config::cardJSONPath<<"sranie";
 
     if(f.is_open())
     {
@@ -118,18 +119,18 @@ void JsonManager::ParseCardData(multiMapCard &p_map)
 
             if(type == "prePaid")
             {
-                p = std::make_shared<Card>(accNumber,number,ccv,transactionLimit);
+                p = std::make_shared<Card>(accNumber,number,ccv,transactionLimit,type);
             }
             else if(type == "credit")
             {
                 double maxCredit {card["maxCredit"]};
                 str billingDate {card["billingDate"]};
-                p = std::make_shared<CreditCard>(accNumber,number,ccv,transactionLimit,maxCredit,billingDate);
+                p = std::make_shared<CreditCard>(accNumber,number,ccv,transactionLimit,maxCredit,billingDate,type);
             }
             else if(type == "debit")
             {
                 double maxDebit {card["maxDebt"]};
-                p = std::make_shared<DebitCard>(accNumber,number,ccv,transactionLimit,maxDebit);
+                p = std::make_shared<DebitCard>(accNumber,number,ccv,transactionLimit,maxDebit,type);
             }
             p_map.insert({accNumber,p});
         }
@@ -164,19 +165,20 @@ void JsonManager::ParseFundData(multiMapFund &p_map)
             double maxRate {fund["maxRate"]};
             double fee {fund["fee"]};
             double balance {fund["balance"]};
+            int ownerId {fund["ownerID"]};
             if(type == "retirement")
             {
                 bool isRetired {fund["isRetired"]};
                 double monthlyTransferIn {fund["monthlyTransferIn"]};
-                p = std::make_shared<RetirementFund>(minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn);
+                p = std::make_shared<RetirementFund>(minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn,type,ownerId);
             }
             else if(type == "savings")
             {
                 str startDate {fund["startDate"]};
                 str endDate {fund["endDate"]};
-                p = std::make_shared<SavingsFund>(minAmount,maxRate,fee,balance,startDate,endDate);
+                p = std::make_shared<SavingsFund>(minAmount,maxRate,fee,balance,startDate,endDate,type,ownerId);
             }
-            p_map.insert({fund["ownerID"],p});
+            p_map.insert({ownerId,p});
         }
     }
     else
@@ -184,3 +186,76 @@ void JsonManager::ParseFundData(multiMapFund &p_map)
         throw std::runtime_error("Could not open the fundData.json file");
     }
 }
+
+
+void JsonManager::SerializeCardData(multiMapCard &p_map)
+{
+    std::string s{"[{\"cards\":["};
+    for(auto it = p_map.begin(); it != p_map.end(); ++it)
+    {
+         s += (it->second)->SerializeToJson().dump();
+         s += ",";
+    }
+    s.pop_back();
+    s += "]}]";
+
+    std::ofstream f(Config::cardJSONPath);
+    if(f.is_open())
+    {
+        f<<s;
+    }
+    else
+    {
+        throw std::runtime_error("Could not open the cardData.json file");
+    }
+
+}
+
+
+void JsonManager::SerializeAccountData(unorderedMapAcc& p_map)
+{
+    std::string s{"[{\"accounts\":["};
+    for(auto it = p_map.begin(); it!=p_map.end(); ++it)
+    {
+        s += (it->second)->SerializeToJson().dump();
+        s += ",";
+    }
+    s.pop_back();
+    s += "]}]";
+
+    std::ofstream f(Config::accountJSONPath);
+    if(f.is_open())
+    {
+        f<<s;
+    }
+    else
+    {
+        throw std::runtime_error("Could not open the accountData.json file");
+    }
+
+}
+
+void JsonManager::SerializeFundData(multiMapFund &p_map)
+{
+    std::string s{"[{\"fundsList\":["};
+    for(auto it = p_map.begin(); it!=p_map.end(); ++it)
+    {
+        s += (it->second)->SerializeToJson().dump();
+        s += ",";
+    }
+    s.pop_back();
+    s += "]}]";
+
+    std::ofstream f(Config::fundJSONPath);
+    if(f.is_open())
+    {
+        f<<s;
+    }
+    else
+    {
+        throw std::runtime_error("Could not open the fundData.json file");
+    }
+
+}
+
+

@@ -14,3 +14,17 @@ std::ostream& operator<<(std::ostream&ss, const Fund&p_fund)
     p_fund.serialize(ss);
     return ss;
 }
+
+json Fund::SerializeToJson()
+{
+    json j{};
+
+    j["type"] = type;
+    j["minAmount"] = minAmount;
+    j["maxRate"] = maxRate;
+    j["fee"] = fee;
+    j["balance"] = balance;
+    j["ownerID"] = ownerId;
+
+    return j;
+}

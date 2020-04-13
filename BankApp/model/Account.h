@@ -9,6 +9,9 @@
 #include "History.h"
 #include "Card.h"
 #include "IAccount.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class Account// public IAccount
 {
@@ -16,6 +19,7 @@ private:
     std::string number;
     double balance;
     int supervisorId;
+    std::string type;
  //   History history;
   //  std::list<Card> cardList;
 public:
@@ -27,7 +31,7 @@ public:
 //        cardList = {};
 //    }
 
-    Account(std::string p_number, double p_balance, int p_supervisorId);
+    Account(std::string p_number, double p_balance, int p_supervisorId,std::string p_type);
     Account(std::string p_number, int p_supervisorId);
     Account(int p_supervisorId);
     static std::string GenerateNumber();
@@ -36,7 +40,6 @@ public:
 //    Account& operator=(const Account&);
 //    Account(Account&&);
 //    Account& operator=(Account&&);
-//    ~Account();
 //    //OTHER METHODS
 //    void AddMember(int) override;
 //    void UpdateHistory() override;
@@ -48,6 +51,7 @@ public:
     void SetBalance(double value);
     int GetSupervisorId() const;
     void SetSupervisorId(int value);
+    virtual json SerializeToJson();
 };
 
 #endif // ACCOUNT_H

@@ -22,8 +22,8 @@
 
 //}
 
-Account::Account(std::string p_number, double p_balance, int p_supervisorId)
-    :number(p_number), balance(p_balance), supervisorId(p_supervisorId)
+Account::Account(std::string p_number, double p_balance, int p_supervisorId,std::string p_type)
+    :number(p_number), balance(p_balance), supervisorId(p_supervisorId), type(p_type)
 {
     std::cerr<<"utworzono obiekt account\n";
 }
@@ -72,4 +72,16 @@ int Account::GetSupervisorId() const
 void Account::SetSupervisorId(int value)
 {
     supervisorId = value;
+}
+
+json Account::SerializeToJson()
+{
+    json j{};
+
+    j["type"] = type;
+    j["number"] = number;
+    j["supervisorId"] = supervisorId;
+    j["balance"] = balance;
+
+    return j;
 }

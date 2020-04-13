@@ -151,6 +151,7 @@ Window {
 
         TextField {
             id: passwordField
+            visible: true
             objectName: "passwordInput"
             echoMode: TextInput.Password
             leftPadding: 25
