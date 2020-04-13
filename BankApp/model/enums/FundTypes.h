@@ -1,7 +1,10 @@
 #ifndef FUNDTYPES_H
 #define FUNDTYPES_H
 
-enum class AccountTypes
+#include "model/RetirementFund.h"
+#include "model/SavingsFund.h"
+
+enum class FundTypes
 {
     SAVINGS,
     RETIREMENT,

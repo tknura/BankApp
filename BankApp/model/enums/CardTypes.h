@@ -1,10 +1,14 @@
 #ifndef CARDTYPES_H
 #define CARDTYPES_H
 
+#include "model/CreditCard.h"
+#include "model/DebitCard.h"
+
 enum class CardTypes
 {
     DEBIT,
-    CREDIT
+    CREDIT,
+    PRE_PAID
 };
 
 

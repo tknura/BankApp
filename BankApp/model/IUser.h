@@ -10,6 +10,7 @@ public:
     IUser() {}
     virtual ~IUser() {}
     virtual void OnLogIn() = 0;
+    virtual void OnLogOut() = 0;
 };
 
 #endif // IUSER_H

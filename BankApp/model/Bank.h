@@ -19,8 +19,11 @@ class Bank
 public:
     static list<std::string> accountNumList;
     static list<std::string> fundNumList;
-    static map<std::string,Fund> fundMap;
+
+    static map<int, Fund> fundMap;
     static map<std::string, Account> accountMap;
+    static map<std::string, Card> cardMap;
+
     static std::shared_ptr<IUser> currentlyLoggedUser;
 
     //variables used for generating random numbers

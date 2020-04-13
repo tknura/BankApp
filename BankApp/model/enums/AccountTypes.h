@@ -1,6 +1,10 @@
 #ifndef ACCOUNTTYPES_H
 #define ACCOUNTTYPES_H
 
+#include "model/ChildAccount.h"
+#include "model/FamillyAccount.h"
+#include "model/SavingsAccount.h"
+
 enum class AccountTypes
 {
     PERSONAL,

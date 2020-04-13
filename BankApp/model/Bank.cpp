@@ -3,7 +3,7 @@
 list<std::string> Bank::accountNumList = list<std::string>();
 list<std::string> Bank::fundNumList = list<std::string>();
 map<std::string, Account> Bank::accountMap = map<std::string, Account>();
-map<std::string,Fund> Bank::fundMap = map<std::string, Fund>();
+map<int, Fund> Bank::fundMap = map<int, Fund>();
 
 std::shared_ptr<IUser> Bank::currentlyLoggedUser = nullptr;
 std::random_device Bank::rd;
@@ -23,6 +23,7 @@ void Bank::LogIn(std::shared_ptr<IUser> data) {
 }
 
 void Bank::LogOut() {
+    currentlyLoggedUser->OnLogOut();
 }
 
 
@@ -38,4 +39,5 @@ void Bank::Start() {
 }
 
 void Bank::Stop() {
+    LogOut();
 }
