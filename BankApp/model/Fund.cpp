@@ -19,7 +19,6 @@ json Fund::SerializeToJson()
 {
     json j{};
 
-    j["type"] = type;
     j["minAmount"] = minAmount;
     j["maxRate"] = maxRate;
     j["fee"] = fee;

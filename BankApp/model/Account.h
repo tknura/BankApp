@@ -19,7 +19,6 @@ private:
     std::string number;
     double balance;
     int supervisorId;
-    std::string type;
  //   History history;
   //  std::list<Card> cardList;
 public:
@@ -31,7 +30,6 @@ public:
 //        cardList = {};
 //    }
 
-    Account(std::string p_number, double p_balance, int p_supervisorId,std::string p_type);
     Account(std::string p_number, double p_balance, int p_supervisorId);
     Account(std::string p_number, int p_supervisorId);
     Account(int p_supervisorId);
@@ -53,6 +51,8 @@ public:
     int GetSupervisorId() const;
     void SetSupervisorId(int value);
     virtual json SerializeToJson();
+
+    virtual int GetType(){return 0;}
 };
 
 #endif // ACCOUNT_H
