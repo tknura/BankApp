@@ -32,6 +32,7 @@ public:
 //    }
 
     Account(std::string p_number, double p_balance, int p_supervisorId,std::string p_type);
+    Account(std::string p_number, double p_balance, int p_supervisorId);
     Account(std::string p_number, int p_supervisorId);
     Account(int p_supervisorId);
     static std::string GenerateNumber();

@@ -193,8 +193,9 @@ void JsonManager::SerializeCardData(multiMapCard &p_map)
     std::string s{"[{\"cards\":["};
     for(auto it = p_map.begin(); it != p_map.end(); ++it)
     {
+        std::cerr<<typeid (it).name();
          s += (it->second)->SerializeToJson().dump();
-         s += ",";
+         s += ",";       
     }
     s.pop_back();
     s += "]}]";

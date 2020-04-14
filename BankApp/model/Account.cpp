@@ -27,6 +27,11 @@ Account::Account(std::string p_number, double p_balance, int p_supervisorId,std:
 {
     std::cerr<<"utworzono obiekt account\n";
 }
+Account::Account(std::string p_number, double p_balance, int p_supervisorId)
+    :number(p_number), balance(p_balance), supervisorId(p_supervisorId)
+{
+    std::cerr<<"utworzono obiekt account\n";
+}
 
 Account::Account(std::string p_number, int p_supervisorId)
     : number(p_number), balance(0), supervisorId(p_supervisorId) {}
