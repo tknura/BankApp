@@ -26,6 +26,7 @@ public:
     void MakePayment();
     void AddFriend(PaymentRetriever);
     void OnLogIn() override;
+    void OnLogOut() override;
 };
 
 #endif // USER_H

@@ -61,8 +61,8 @@ bool Admin::CreateAccount(int ownerID, std::string number, double balance, doubl
 }
 
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance) {
-    Fund fund(minAmount, maxRate, fee, balance);
-    return AddFundToMap(ownerID, std::make_unique<Fund>(fund));
+    //Fund fund(minAmount, maxRate, fee, balance);
+    //return AddFundToMap(ownerID, std::make_unique<Fund>(fund));
 }
 
 void Admin::OnLogIn() {
