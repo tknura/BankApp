@@ -5,6 +5,7 @@
 #include <map>
 #include <unordered_map>
 
+#include "Config.h"
 #include "PaymentRetriever.h"
 #include "Account.h"
 #include "Fund.h"
@@ -39,17 +40,40 @@ public:
     JsonManager(JsonManager&&) = delete;
     Account& operator=(JsonManager&&) = delete;
     ~JsonManager() = default;
-    void ParseAccountData(listAcc& p_list, unorderedMapAcc& p_map);
-    void ParseFundData(multiMapFund &p_map);
-    void ParseCardData(multiMapCard &p_map);
-    listP ParseFriendsData();
+    void ParseData(listAcc& p_list, unorderedMapAcc& p_map);
+    void ParseData(multiMapFund &p_map);
+    void ParseData(multiMapCard &p_map);
+    listP ParseData();
     std::string GetCardFile(){return cardFile.dump();}
 
-    void SerializeAccountData(unorderedMapAcc& p_map);
-    void SerializeFundData(multiMapFund &p_map);
-    void SerializeFriendsData(listP &p_list);
-    void SerializeCardData(multiMapCard &p_map);
+    template <class T>
+    void SerializeData(T &p_map,std::string p_dir);
 
 };
+template <class T>
+void JsonManager::SerializeData(T &p_map, std::string p_dir)
+{
+    std::string s{"[{\"items\":["};
+    for(auto it = p_map.begin(); it != p_map.end(); ++it)
+    {
+         json j =(*(it->second)).SerializeToJson();
+         j["type"] =it->second->GetType();
+         s += j.dump();
+         s += ",";
+    }
+    s.pop_back();
+    s += "]}]";
+
+    std::ofstream f(p_dir);
+    if(f.is_open())
+    {
+        f<<s;
+    }
+    else
+    {
+        throw std::runtime_error("Could not open file");
+    }
+}
+
 
 #endif // JSONMANAGER_H

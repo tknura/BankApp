@@ -12,7 +12,7 @@
 
 #include <fstream>
 
-listP JsonManager::ParseFriendsData()
+listP JsonManager::ParseData()
 {
     listP friends{};
     std::ifstream f(Config::friendsJSONPath);
@@ -22,7 +22,7 @@ listP JsonManager::ParseFriendsData()
         f>>friendsFile;
         f.close();
 
-        for (const auto& person: friendsFile[userID]["friendsList"])
+        for (const auto& person: friendsFile[userID]["items"])//tu jest błąd powinno być friends data
         {
             using str = std::string;
 
@@ -43,7 +43,7 @@ listP JsonManager::ParseFriendsData()
 
     return friends;
 }
-void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_accountMap)
+void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMap)
 {
     std::ifstream f(Config::accountJSONPath);
 
@@ -54,39 +54,39 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
 
         std::shared_ptr<Account> p {nullptr};
 
-        for(const auto& account: accountFile[0]["accounts"])
+        for(const auto& account: accountFile[0]["items"])
         {
             using str = std::string;
 
 
-            str type {account["type"]};
+            int type {account["type"]};
             str number {account["number"]};
             int supervisorId {account["supervisorId"]};
             double balance  {account["balance"]};
-            if(type == "personal")
+            if(type == 0)
             {
-                p = std::make_shared<Account>(number,balance,supervisorId,type);
+                p = std::make_shared<Account>(number,balance,supervisorId);
             }
-            else if(type == "child")
+            else if(type == 2)
             {
                 int childId {account["childId"]};
                 double dailyTransactionLimit {account["dailyTransactionLimit"]};
-                p = std::make_shared<ChildAccount>(number,balance,supervisorId,dailyTransactionLimit,childId,type);
+                p = std::make_shared<ChildAccount>(number,balance,supervisorId,dailyTransactionLimit,childId);
             }
-            else if(type == "savings")
+            else if(type == 1)
             {
 
                 double interest {account["interest"]};
-                p = std::make_shared<SavingsAccount>(number,balance,supervisorId,interest,type);
+                p = std::make_shared<SavingsAccount>(number,balance,supervisorId,interest);
             }
-            else if(type == "familly")
+            else if(type == 4)
             {
                 std::list<int> memberIdList {};
                 for(const auto & id :account["memberIdList"])
                 {
                     memberIdList.push_back((int)id);
                 }
-                p = std::make_shared<FamillyAccount>(number,balance,supervisorId,memberIdList,type);
+                p = std::make_shared<FamillyAccount>(number,balance,supervisorId,memberIdList);
             }
             p_accountList.push_back(number);//list with keys to the hash table
             p_accountMap.insert({number,p});
@@ -97,7 +97,7 @@ void JsonManager::ParseAccountData(listAcc& p_accountList, unorderedMapAcc& p_ac
         throw std::runtime_error("Could not open the accountsData.json file");
     }
 }
-void JsonManager::ParseCardData(multiMapCard &p_map)
+void JsonManager::ParseData(multiMapCard &p_map)
 {
     std::ifstream f(Config::cardJSONPath);
     std::cerr<<Config::cardJSONPath<<"sranie";
@@ -109,28 +109,28 @@ void JsonManager::ParseCardData(multiMapCard &p_map)
 
         std::shared_ptr<Card> p {nullptr};
 
-        for(const auto& card :cardFile[0]["cards"])
+        for(const auto& card :cardFile[0]["items"])
         {
-            str type {card["type"]};
+            int type {card["type"]};
             str accNumber {card["accNumber"]};
             str number {card["number"]};
             int ccv {card["ccv"]};
             double transactionLimit {card["transactionLimit"]};
 
-            if(type == "prePaid")
+            if(type == 2)
             {
-                p = std::make_shared<Card>(accNumber,number,ccv,transactionLimit,type);
+                p = std::make_shared<Card>(accNumber,number,ccv,transactionLimit);
             }
-            else if(type == "credit")
+            else if(type == 1)
             {
                 double maxCredit {card["maxCredit"]};
                 str billingDate {card["billingDate"]};
-                p = std::make_shared<CreditCard>(accNumber,number,ccv,transactionLimit,maxCredit,billingDate,type);
+                p = std::make_shared<CreditCard>(accNumber,number,ccv,transactionLimit,maxCredit,billingDate);
             }
-            else if(type == "debit")
+            else if(type == 0)
             {
                 double maxDebit {card["maxDebt"]};
-                p = std::make_shared<DebitCard>(accNumber,number,ccv,transactionLimit,maxDebit,type);
+                p = std::make_shared<DebitCard>(accNumber,number,ccv,transactionLimit,maxDebit);
             }
             p_map.insert({accNumber,p});
         }
@@ -146,7 +146,7 @@ void JsonManager::ParseCardData(multiMapCard &p_map)
 
 
 
-void JsonManager::ParseFundData(multiMapFund &p_map)
+void JsonManager::ParseData(multiMapFund &p_map)
 {
     std::ifstream f(Config::fundJSONPath);
 
@@ -157,26 +157,26 @@ void JsonManager::ParseFundData(multiMapFund &p_map)
 
         std::shared_ptr<Fund> p {nullptr};
 
-        for(const auto & fund:fundsFile[0]["fundsList"])
+        for(const auto & fund:fundsFile[0]["items"])
         {
             using str = std::string;
-            str type {fund["type"]};
+            int type {fund["type"]};
             double minAmount {fund["minAmount"]};
             double maxRate {fund["maxRate"]};
             double fee {fund["fee"]};
             double balance {fund["balance"]};
             int ownerId {fund["ownerID"]};
-            if(type == "retirement")
+            if(type == 1)
             {
                 bool isRetired {fund["isRetired"]};
                 double monthlyTransferIn {fund["monthlyTransferIn"]};
-                p = std::make_shared<RetirementFund>(minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn,type,ownerId);
+                p = std::make_shared<RetirementFund>(minAmount,maxRate,fee,balance,isRetired,monthlyTransferIn,ownerId);
             }
-            else if(type == "savings")
+            else if(type == 0)
             {
                 str startDate {fund["startDate"]};
                 str endDate {fund["endDate"]};
-                p = std::make_shared<SavingsFund>(minAmount,maxRate,fee,balance,startDate,endDate,type,ownerId);
+                p = std::make_shared<SavingsFund>(minAmount,maxRate,fee,balance,startDate,endDate,ownerId);
             }
             p_map.insert({ownerId,p});
         }
@@ -186,77 +186,4 @@ void JsonManager::ParseFundData(multiMapFund &p_map)
         throw std::runtime_error("Could not open the fundData.json file");
     }
 }
-
-
-void JsonManager::SerializeCardData(multiMapCard &p_map)
-{
-    std::string s{"[{\"cards\":["};
-    for(auto it = p_map.begin(); it != p_map.end(); ++it)
-    {
-        std::cerr<<typeid (it).name();
-         s += (it->second)->SerializeToJson().dump();
-         s += ",";       
-    }
-    s.pop_back();
-    s += "]}]";
-
-    std::ofstream f(Config::cardJSONPath);
-    if(f.is_open())
-    {
-        f<<s;
-    }
-    else
-    {
-        throw std::runtime_error("Could not open the cardData.json file");
-    }
-
-}
-
-
-void JsonManager::SerializeAccountData(unorderedMapAcc& p_map)
-{
-    std::string s{"[{\"accounts\":["};
-    for(auto it = p_map.begin(); it!=p_map.end(); ++it)
-    {
-        s += (it->second)->SerializeToJson().dump();
-        s += ",";
-    }
-    s.pop_back();
-    s += "]}]";
-
-    std::ofstream f(Config::accountJSONPath);
-    if(f.is_open())
-    {
-        f<<s;
-    }
-    else
-    {
-        throw std::runtime_error("Could not open the accountData.json file");
-    }
-
-}
-
-void JsonManager::SerializeFundData(multiMapFund &p_map)
-{
-    std::string s{"[{\"fundsList\":["};
-    for(auto it = p_map.begin(); it!=p_map.end(); ++it)
-    {
-        s += (it->second)->SerializeToJson().dump();
-        s += ",";
-    }
-    s.pop_back();
-    s += "]}]";
-
-    std::ofstream f(Config::fundJSONPath);
-    if(f.is_open())
-    {
-        f<<s;
-    }
-    else
-    {
-        throw std::runtime_error("Could not open the fundData.json file");
-    }
-
-}
-
 
