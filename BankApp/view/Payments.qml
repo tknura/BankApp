@@ -2,11 +2,14 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 
 Item {
-    state: Dashboard
-    id: dashboard
+    id: payments
     visible: true
     width: 700
     height: 700
+
+    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
+    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
 
     Rectangle {
         id: background
@@ -23,23 +26,32 @@ Item {
         anchors.bottomMargin: 0
 
         Text {
-            id: element1
-            x: 294
-            y: 313
-            width: 113
+            id: title
+            x: 70
+            y: 50
+            width: 328
             height: 75
+            color: "#26282a"
             text: qsTr("Payments")
+            font.weight: Font.Bold
             verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 12
+            horizontalAlignment: Text.AlignLeft
+            font.pixelSize: 60
+            font.family: "Rubik"
+        }
+
+        Text {
+            id: desc
+            x: 70
+            y: 123
+            width: 309
+            height: 25
+            color: "#4c26282a"
+            text: qsTr("Make a new payment")
+            font.pixelSize: 18
+            font.family: "Rubik"
         }
     }
-
-
 }
 
-/*##^##
-Designer {
-    D{i:1;anchors_height:200;anchors_width:200}
-}
-##^##*/
+
