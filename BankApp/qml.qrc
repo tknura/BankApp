@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>view/LoginScene.qml</file>
         <file>view/main.qml</file>
+        <file>view/Dashboard.qml</file>
+        <file>view/Funds.qml</file>
+        <file>view/History.qml</file>
+        <file>view/Payments.qml</file>
     </qresource>
 </RCC>

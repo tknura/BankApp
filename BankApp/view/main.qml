@@ -3,176 +3,242 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 
 Window {
-    id: window
+    id: main
     minimumWidth: 700
-    minimumHeight: 650
+    minimumHeight: 400
     visible: true
     width: 1000
     height: 700
     color: "#eeeeee"
-    title: "Login"
-     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
-     FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
-     FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
+    title: "main"
 
-    Text {
-        id: title
-        height: 190
-        color: "#393e46"
-        text: qsTr("Bank App")
-        font.family: "Rubik"
-        anchors.right: parent.right
-        anchors.rightMargin: 291
-        anchors.left: parent.left
-        anchors.leftMargin: 293
-        anchors.top: parent.top
-        anchors.topMargin: 142
-        font.weight: Font.Bold
-        font.bold: false
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        wrapMode: Text.NoWrap
-        font.pixelSize: 60
-    }
-
-    Button {
-        id: proceedButton
-        objectName: "proceedButton"
-        x: 651
-        width: 136
-        height: 40
-        anchors.right: parent.right
-        anchors.rightMargin: 213
-        anchors.top: parent.top
-        anchors.topMargin: 530
-        font.family: "Rubik"
-        display: AbstractButton.TextOnly
-        text: qsTr("Proceed")
-        contentItem: Text {
-            text: proceedButton.text
-            font: proceedButton.font
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            color: "#259FC4"
-        }
-        background: Rectangle {
-                    color: "#A3E7FC"
-                    border.color: "#A3E7FC"
-                    border.width: 1
-                    radius: 25
-                }
-    }
+    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
+    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
 
     GroupBox {
-        id: loginBox
-        height: 79
-        anchors.top: parent.top
-        anchors.topMargin: 338
-        anchors.left: parent.left
-        anchors.leftMargin: 223
-        anchors.right: parent.right
-        anchors.rightMargin: 213
         background: Rectangle {
-                color: "transparent"
-                border.color: "transparent"
-            }
-
-        Text {
-            id: login
-            x: -12
-            y: -12
-            width: 99
-            height: 25
-            color: "#393e46"
-            text: qsTr("Login")
-            font.family: "Rubik"
-            font.weight: Font.Medium
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 20
+            color: "transparent"
+            border.color: "transparent"
         }
-
-        TextField {
-            id: loginField
-            objectName: "loginInput"
-            font.family: "Rubik"
-            placeholderText: "login"
-            leftPadding: 25
-            padding: 6
-            font.letterSpacing: 0
-            font.wordSpacing: 0
-            anchors.top: parent.top
-            anchors.topMargin: 19
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: -12
-            anchors.left: parent.left
-            anchors.leftMargin: -12
-            anchors.right: parent.right
-            anchors.rightMargin: -12
-            horizontalAlignment: Text.AlignLeft
-            background: Rectangle {
-                        color: "#F7F7F7"
-                        border.color: "#F7F7F7"
-                        border.width: 1
-                        radius: 25
-                    }
-        }
-
-    }
-
-    GroupBox {
-        id: passwordBox
-        x: -9
-        y: -8
-        height: 79
-        anchors.topMargin: 433
-        anchors.rightMargin: 213
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.leftMargin: 223
+        id: tabs
         anchors.right: parent.right
-        background: Rectangle {
-                color: "transparent"
-                border.color: "transparent"
-            }
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 250
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
 
-        Text {
-            id: password
-            x: -12
-            y: -12
-            width: 99
-            height: 25
-            color: "#393e46"
-            text: qsTr("Password")
-            font.weight: Font.Medium
-            font.family: "Rubik"
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 20
-        }
-
-        TextField {
-            id: passwordField
+        Loader {
+            id: dashboard
             visible: true
-            objectName: "passwordInput"
-            echoMode: TextInput.Password
-            leftPadding: 25
-            anchors.bottomMargin: -12
-            anchors.topMargin: 19
-            anchors.bottom: parent.bottom
-            anchors.rightMargin: -12
-            anchors.left: parent.left
-            anchors.top: parent.top
-            horizontalAlignment: Text.AlignLeft
-            anchors.leftMargin: -12
-            anchors.right: parent.right
-            placeholderText: "password"
-            font.family: "Rubik"
-            background: Rectangle {
-                        color: "#F7F7F7"
-                        border.color: "#F7F7F7"
-                        border.width: 1
-                        radius: 25
-                    }
+            anchors.fill: parent
+            source: "Dashboard.qml"
+        }
+
+        Loader {
+            id: payments
+            visible: false
+            anchors.fill: parent
+            source: "Payments.qml"
+        }
+
+        Loader {
+            id: funds
+            visible: false
+            anchors.fill: parent
+            source: "Funds.qml"
+        }
+
+        Loader {
+            id: history
+            visible: false
+            anchors.fill: parent
+            source: "History.qml"
         }
     }
+
+    Rectangle {
+        id: rectangle
+        width: 250
+        color: "#ffffff"
+        border.width: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+
+
+
+        Text {
+            id: title
+            x: 0
+            y: 0
+            width: 250
+            height: 119
+            color: "#26282a"
+            text: qsTr("Bank App")
+            font.weight: Font.Bold
+            font.family: "Rubik"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 30
+        }
+
+        Column {
+            id: menuButtons
+            x: 0
+            y: 123
+            anchors.top: parent.top
+            anchors.topMargin: 123
+
+            RadioButton {
+                id: dashboardButton
+                x: 0
+                y: 125
+                width: 250
+                height: 59
+                ButtonGroup.group: menu
+                text: qsTr("Dashboard")
+                icon.source: "../resources/icons/wallet-solid.png"
+                display: AbstractButton.TextBesideIcon
+                contentItem: Text {
+                    font.weight: Font.Medium
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "#26282a"
+                    text: dashboardButton.text
+                    font.pointSize: 10
+                    font.family: "Rubik"
+                }
+                checked: true
+                onCheckedChanged: {
+                    dashboard.visible = true
+                    payments.visible = false
+                    history.visible = false
+                    funds.visible = false
+                }
+            }
+
+            RadioButton {
+                id: paymentsButton
+                x: 0
+                y: 190
+                width: 250
+                height: 59
+                text: qsTr("Payments")
+                font.pointSize: 10
+                ButtonGroup.group: menu
+                contentItem: Text {
+                    font.weight: Font.Medium
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "#26282a"
+                    text: paymentsButton.text
+                    font.pointSize: 10
+                    font.family: "Rubik"
+                }
+                onCheckedChanged: {
+                    dashboard.visible = false
+                    payments.visible = true
+                    history.visible = false
+                    funds.visible = false
+                }
+            }
+
+            RadioButton {
+                id: fundsButton
+                x: 0
+                y: 255
+                width: 250
+                height: 59
+                text: qsTr("Funds")
+                ButtonGroup.group: menu
+                contentItem: Text {
+                    font.pointSize: 10
+                    font.weight: Font.Medium
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "#26282a"
+                    text: fundsButton.text
+                    font.family: "Rubik"
+                }
+                onCheckedChanged: {
+                    dashboard.visible = false
+                    payments.visible = false
+                    history.visible = false
+                    funds.visible = true
+                }
+            }
+
+            RadioButton {
+                id: historyButton
+                x: 0
+                y: 320
+                width: 250
+                height: 59
+                text: qsTr("History")
+                font.pointSize: 10
+                ButtonGroup.group: menu
+                contentItem: Text {
+                    text: historyButton.text
+                    font.pointSize: 10
+                    font.weight: Font.Medium
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "#26282a"
+                    font.family: "Rubik"
+                }
+                onCheckedChanged: {
+                    dashboard.visible = false
+                    payments.visible = false
+                    history.visible = true
+                    funds.visible = false
+                }
+            }
+        }
+
+        Button {
+            id: logOutButton
+            y: 652
+            width: 234
+            height: 40
+            text: qsTr("Log Out")
+            anchors.left: parent.left
+            anchors.leftMargin: 8
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            font.weight: Font.Medium
+            display: AbstractButton.TextOnly
+            background: Rectangle {
+                color: "transparent"
+            }
+            contentItem: Text {
+                color: "#4c26282a"
+                text: logOutButton.text
+                font.pointSize: 10
+                font.weight: Font.Medium
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.family: "Rubik"
+            }
+        }
+    }
+    ButtonGroup {
+        id: menu
+    }
+
 
 }
+
+
+
+/*##^##
+Designer {
+    D{i:5;invisible:true}D{i:4;invisible:true}D{i:21;anchors_x:8}
+}
+##^##*/
