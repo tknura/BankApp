@@ -1,4 +1,4 @@
-QT += quick
+ QT += quick
 
 CONFIG += c++17
 
@@ -39,7 +39,8 @@ SOURCES += \
         model/User.cpp
 
 RESOURCES += qml.qrc \
-    fonts.qrc
+    fonts.qrc \
+    icons.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH = view/

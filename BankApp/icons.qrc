@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/icons/chart-line-solid.svg</file>
+        <file>resources/icons/credit-card-solid.svg</file>
+        <file>resources/icons/history-solid.svg</file>
+        <file>resources/icons/landmark-solid.svg</file>
+        <file>resources/icons/money-check-alt-solid.svg</file>
+        <file>resources/icons/money-check-solid.svg</file>
+        <file>resources/icons/paper-plane-solid.svg</file>
+        <file>resources/icons/piggy-bank-solid.svg</file>
+        <file>resources/icons/wallet-solid.svg</file>
+        <file>resources/icons/chart-line-solid.png</file>
+        <file>resources/icons/credit-card-solid.png</file>
+        <file>resources/icons/history-solid.png</file>
+        <file>resources/icons/landmark-solid.png</file>
+        <file>resources/icons/money-check-alt-solid.png</file>
+        <file>resources/icons/money-check-solid.png</file>
+        <file>resources/icons/paper-plane-solid.png</file>
+        <file>resources/icons/piggy-bank-solid.png</file>
+        <file>resources/icons/wallet-solid.png</file>
+    </qresource>
+</RCC>
