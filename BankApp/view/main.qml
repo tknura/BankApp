@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
+import QtQuick.Controls.Styles 1.4
 
 Window {
     id: main
@@ -72,21 +73,19 @@ Window {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
 
-
-
         Text {
             id: title
-            x: 0
+            x: 114
             y: 0
-            width: 250
+            width: 136
             height: 119
             color: "#26282a"
-            text: qsTr("Bank App")
+            text: qsTr("Bank\nApp")
             font.weight: Font.Bold
             font.family: "Rubik"
             verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 30
+            horizontalAlignment: Text.AlignLeft
+            font.pixelSize: 35
         }
 
         Column {
@@ -104,16 +103,45 @@ Window {
                 height: 59
                 ButtonGroup.group: menu
                 text: qsTr("Dashboard")
+                leftPadding: 20
+                padding: 6
                 icon.source: "../resources/icons/wallet-solid.png"
                 display: AbstractButton.TextBesideIcon
                 contentItem: Text {
                     font.weight: Font.Medium
-                    horizontalAlignment: Text.AlignHCenter
+                    horizontalAlignment: Text.AlignHRight
                     verticalAlignment: Text.AlignVCenter
                     color: "#26282a"
-                    text: dashboardButton.text
+                    text: "Dashboard"
                     font.pointSize: 10
                     font.family: "Rubik"
+                }
+                indicator: Rectangle {
+                    anchors.fill: parent
+                    visible: dashboardButton.checked
+                    color: "#26a3e7fc"
+                    border.color: "transparent"
+                    Rectangle {
+                        id: rectangle5
+                        width: 4
+                        height: 59
+                        color: "#259fc4"
+                        radius: 0
+                        border.width: 0
+                    }
+
+                    Rectangle {
+                        id: rectangle4
+                        width: 10
+                        color: "#259fc4"
+                        radius: 5
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 0
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                    }
                 }
                 checked: true
                 onCheckedChanged: {
@@ -131,16 +159,43 @@ Window {
                 width: 250
                 height: 59
                 text: qsTr("Payments")
+                leftPadding: 20
                 font.pointSize: 10
                 ButtonGroup.group: menu
                 contentItem: Text {
                     font.weight: Font.Medium
-                    horizontalAlignment: Text.AlignHCenter
+                    horizontalAlignment: Text.AlignHRight
                     verticalAlignment: Text.AlignVCenter
                     color: "#26282a"
                     text: paymentsButton.text
                     font.pointSize: 10
                     font.family: "Rubik"
+                }
+                indicator: Rectangle {
+                    anchors.fill: parent
+                    visible: paymentsButton.checked
+                    color: "#26a3e7fc"
+                    border.color: "transparent"
+
+                    Rectangle {
+                        width: 4
+                        height: 59
+                        color: "#259fc4"
+                        radius: 0
+                        border.width: 0
+                    }
+
+                    Rectangle {
+                        width: 10
+                        color: "#259fc4"
+                        radius: 5
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 0
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                    }
                 }
                 onCheckedChanged: {
                     dashboard.visible = false
@@ -157,15 +212,41 @@ Window {
                 width: 250
                 height: 59
                 text: qsTr("Funds")
+                leftPadding: 20
                 ButtonGroup.group: menu
                 contentItem: Text {
                     font.pointSize: 10
                     font.weight: Font.Medium
-                    horizontalAlignment: Text.AlignHCenter
+                    horizontalAlignment: Text.AlignHRight
                     verticalAlignment: Text.AlignVCenter
                     color: "#26282a"
                     text: fundsButton.text
                     font.family: "Rubik"
+                }
+                indicator: Rectangle {
+                    anchors.fill: parent
+                    visible: fundsButton.checked
+                    color: "#26a3e7fc"
+                    border.color: "transparent"
+                    Rectangle {
+                        width: 4
+                        height: 59
+                        color: "#259fc4"
+                        radius: 0
+                        border.width: 0
+                    }
+
+                    Rectangle {
+                        width: 10
+                        color: "#259fc4"
+                        radius: 5
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 0
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                    }
                 }
                 onCheckedChanged: {
                     dashboard.visible = false
@@ -182,16 +263,42 @@ Window {
                 width: 250
                 height: 59
                 text: qsTr("History")
+                leftPadding: 20
                 font.pointSize: 10
                 ButtonGroup.group: menu
                 contentItem: Text {
                     text: historyButton.text
                     font.pointSize: 10
                     font.weight: Font.Medium
-                    horizontalAlignment: Text.AlignHCenter
+                    horizontalAlignment: Text.AlignHRight
                     verticalAlignment: Text.AlignVCenter
                     color: "#26282a"
                     font.family: "Rubik"
+                }
+                indicator: Rectangle {
+                    anchors.fill: parent
+                    visible: historyButton.checked
+                    color: "#26a3e7fc"
+                    border.color: "transparent"
+                    Rectangle {
+                        width: 4
+                        height: 59
+                        color: "#259fc4"
+                        radius: 0
+                        border.width: 0
+                    }
+
+                    Rectangle {
+                        width: 10
+                        color: "#259fc4"
+                        radius: 5
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 0
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                    }
                 }
                 onCheckedChanged: {
                     dashboard.visible = false
@@ -227,18 +334,28 @@ Window {
                 font.family: "Rubik"
             }
         }
+
+        Image {
+            id: image
+            x: 29
+            y: 29
+            width: 62
+            height: 62
+            source: "../resources/icons/landmark-solid.svg"
+            fillMode: Image.Stretch
+        }
+
     }
     ButtonGroup {
         id: menu
     }
 
 
+
+
+
 }
 
 
 
-/*##^##
-Designer {
-    D{i:5;invisible:true}D{i:4;invisible:true}D{i:21;anchors_x:8}
-}
-##^##*/
+
