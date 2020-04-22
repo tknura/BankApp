@@ -14,53 +14,6 @@ Window {
     title: "main"
 
     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
-    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
-
-    GroupBox {
-        background: Rectangle {
-            color: "transparent"
-            border.color: "transparent"
-        }
-        id: tabs
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 250
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-
-        Loader {
-            id: dashboard
-            visible: true
-            anchors.fill: parent
-            source: "Dashboard.qml"
-        }
-
-        Loader {
-            id: payments
-            visible: false
-            anchors.fill: parent
-            source: "Payments.qml"
-        }
-
-        Loader {
-            id: funds
-            visible: false
-            anchors.fill: parent
-            source: "Funds.qml"
-        }
-
-        Loader {
-            id: history
-            visible: false
-            anchors.fill: parent
-            source: "History.qml"
-        }
-    }
-
     Rectangle {
         id: rectangle
         width: 250
@@ -145,10 +98,7 @@ Window {
                 }
                 checked: true
                 onCheckedChanged: {
-                    dashboard.visible = true
-                    payments.visible = false
-                    history.visible = false
-                    funds.visible = false
+                    contentStack.replace(dashboard)
                 }
             }
 
@@ -198,10 +148,7 @@ Window {
                     }
                 }
                 onCheckedChanged: {
-                    dashboard.visible = false
-                    payments.visible = true
-                    history.visible = false
-                    funds.visible = false
+                    contentStack.replace(payments)
                 }
             }
 
@@ -249,10 +196,7 @@ Window {
                     }
                 }
                 onCheckedChanged: {
-                    dashboard.visible = false
-                    payments.visible = false
-                    history.visible = false
-                    funds.visible = true
+                    contentStack.replace(funds)
                 }
             }
 
@@ -301,10 +245,7 @@ Window {
                     }
                 }
                 onCheckedChanged: {
-                    dashboard.visible = false
-                    payments.visible = false
-                    history.visible = true
-                    funds.visible = false
+                    contentStack.replace(history)
                 }
             }
         }
@@ -337,18 +278,89 @@ Window {
 
         Image {
             id: image
-            x: 29
-            y: 29
-            width: 62
-            height: 62
-            source: "../resources/icons/landmark-solid.svg"
+            x: 30
+            y: 30
+            width: 60
+            height: 60
+            source: "qrc:/resources/icons/landmark-solid.svg"
+            sourceSize.width: 60
+            sourceSize.height: 60
             fillMode: Image.Stretch
         }
 
     }
+
+    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+    StackView {
+        id: contentStack
+        y: 0
+        width: 744
+        height: 700
+        anchors.left: parent.left
+        anchors.leftMargin: 250
+        replaceEnter: Transition {
+                PropertyAnimation {
+                    property: "opacity"
+                    from: 0
+                    to:1
+                    duration: 200
+                }
+            }
+        replaceExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
+
+        Loader {
+            id: history
+            x: 250
+            y: 0
+            visible: false
+            anchors.fill: parent
+            source: "History.qml"
+        }
+
+        Loader {
+            id: funds
+            x: 250
+            y: 0
+            visible: false
+            anchors.fill: parent
+            source: "Funds.qml"
+        }
+
+        Loader {
+            id: payments
+            x: 250
+            y: 0
+            visible: false
+            anchors.fill: parent
+            source: "Payments.qml"
+        }
+
+        Loader {
+            id: dashboard
+            x: 250
+            y: 0
+            visible: true
+            anchors.fill: parent
+            source: "Dashboard.qml"
+        }
+
+
+
+    }
+
+    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
     ButtonGroup {
         id: menu
     }
+
+
 
 
 
@@ -359,3 +371,9 @@ Window {
 
 
 
+
+/*##^##
+Designer {
+    D{i:30;anchors_x:256}
+}
+##^##*/
