@@ -321,7 +321,7 @@ Window {
             y: 0
             visible: false
             anchors.fill: parent
-            source: "History.qml"
+            source: "qrc:/view/Tabs/Dashboard.qml"
         }
 
         Loader {
@@ -330,7 +330,7 @@ Window {
             y: 0
             visible: false
             anchors.fill: parent
-            source: "Funds.qml"
+            source: "qrc:/view/Tabs/Funds.qml"
         }
 
         Loader {
@@ -339,7 +339,7 @@ Window {
             y: 0
             visible: false
             anchors.fill: parent
-            source: "Payments.qml"
+            source: "qrc:/view/Tabs/Payments.qml"
         }
 
         Loader {
@@ -348,7 +348,7 @@ Window {
             y: 0
             visible: true
             anchors.fill: parent
-            source: "Dashboard.qml"
+            source: "qrc:/view/Tabs/Dashboard.qml"
         }
 
 
@@ -372,8 +372,4 @@ Window {
 
 
 
-/*##^##
-Designer {
-    D{i:30;anchors_x:256}
-}
-##^##*/
+

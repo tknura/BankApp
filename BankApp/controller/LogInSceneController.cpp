@@ -12,12 +12,19 @@ LogInSceneController::LogInSceneController(QQmlApplicationEngine *p_engine)
 }
 
 void LogInSceneController::HandleProceedButton() {
+    std::cerr << loginInput << " " << passwordInput << std::endl;
     if(loginInput && passwordInput){
         //TODO handling email creation
         LogInData attempt;
-        attempt.SetLogin(loginInput->property("text").toString().toStdString());
-        attempt.SetPassword(passwordInput->property("text").toString().toStdString());
-        Authorization::LogInAttempt(attempt);
-        //TODO handle changing qml scenes
+        attempt.SetLogin(QQmlProperty::read(loginInput, "text").toString().toStdString());
+        attempt.SetPassword(QQmlProperty::read(passwordInput, "text").toString().toStdString());
+        std::cerr << attempt.GetLogin() << " " << attempt.GetPassword() << std::endl;
+        if(Authorization::LogInAttempt(attempt)) {
+            QMetaObject::invokeMethod(rootObject, "loggingPassed");
+        }
+        else {
+            QMetaObject::invokeMethod(rootObject, "loggingFailed");
+            std::cerr << "failed!" << std::endl;
+        }
     }
 }

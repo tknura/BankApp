@@ -2,6 +2,7 @@
 #define LOGINSCENECONTROLLER_H
 
 #include <QObject>
+#include <QQmlProperty>
 #include <QQuickItem>
 #include <QQmlApplicationEngine>
 #include "model/Authorization.h"
