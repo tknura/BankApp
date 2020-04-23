@@ -1,10 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>view/LoginScene.qml</file>
-        <file>view/main.qml</file>
-        <file>view/Dashboard.qml</file>
-        <file>view/Funds.qml</file>
-        <file>view/History.qml</file>
-        <file>view/Payments.qml</file>
+        <file>view/Components/StyledInput.qml</file>
+        <file>view/Screens/LoginScene.qml</file>
+        <file>view/Screens/main.qml</file>
+        <file>view/Tabs/Dashboard.qml</file>
+        <file>view/Tabs/Funds.qml</file>
+        <file>view/Tabs/History.qml</file>
+        <file>view/Tabs/Payments.qml</file>
     </qresource>
 </RCC>
