@@ -76,12 +76,13 @@ Item {
         placeholderText: "placeholder"
         font.family: "Rubik"
         background: Rectangle {
+            id: background
             states: [
                 State {
                     name: "FAILED"
                     PropertyChanges {
-                        target: border;
-                        color: "#ED2939"
+                        target: background;
+                        border.color: "#ED2939"
                     }
                 }
             ]
@@ -97,8 +98,4 @@ Item {
 
 
 
-/*##^##
-Designer {
-    D{i:5;anchors_x:0;anchors_y:0}
-}
-##^##*/
+

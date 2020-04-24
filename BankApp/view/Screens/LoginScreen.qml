@@ -2,16 +2,13 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import "qrc:/view/Components/"
-Window {
-    id: window
 
-    minimumWidth: 700
-    minimumHeight: 650
-    visible: true
+Rectangle {
+    id: loginScreen
+    objectName: "loginScreen"
     width: 1000
     height: 700
     color: "#eeeeee"
-    title: "Login"
     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
     FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
     FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
@@ -23,6 +20,8 @@ Window {
     function loggingFailed() {
         loginDataBoxes.state = "FAILED"
     }
+
+    signal inputValues(string login, string password)
 
     GroupBox {
         id: loginDataBoxes
@@ -43,6 +42,7 @@ Window {
                 name: "FAILED"
                 PropertyChanges { target: passwordInput; state: "FAILED" }
                 PropertyChanges { target: loginInput; state: "FAILED" }
+                PropertyChanges { target: failedText; visible: true}
             }
         ]
 
@@ -75,6 +75,18 @@ Window {
                 loginInput.setPlaceholderText("login")
                 loginInput.setTitle("Login/E-mail")
             }
+        }
+
+        Text {
+            id: failedText
+            visible: false
+            x: 23
+            y: 174
+            width: 124
+            height: 15
+            color: "#ed2939"
+            text: qsTr("Invalid login/password")
+            font.pixelSize: 12
         }
 
         }
@@ -123,10 +135,10 @@ Window {
             color: proceedButton.pressed ? "#75b4c5" : proceedButton.hovered ? "#7cd2ed" : "#A3E7FC"
             radius: 25
         }
+        onClicked: {
+            inputValues(loginInput.getText(), passwordInput.getText())
+        }
     }
-
-
-
 }
 
 

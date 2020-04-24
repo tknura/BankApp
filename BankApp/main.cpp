@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "controller/LogInSceneController.h"
+#include "controller/LogInScreenController.h"
 #include "model/Bank.h"
 #include "model/Test.h"
 
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/view/LoginScene.qml"));
+    const QUrl url(QStringLiteral("qrc:/view/Screens/main.qml"));
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
     engine.load(url);
-    LogInSceneController lsc(&engine);
+    LogInScreenController lsc(&engine);
 
     return app.exec();
 }

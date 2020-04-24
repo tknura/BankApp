@@ -8,20 +8,21 @@
 #include "model/Authorization.h"
 #include "model/LogInData.h"
 
-class LogInSceneController : public QObject
+class LogInScreenController : public QObject
 {
     Q_OBJECT
 private:
     QObject *rootObject;
+    QObject *loginDataBoxes;
     QObject *proceedButton;
-    QObject *loginInput;
-    QObject *passwordInput;
+    LogInData attempt;
 public:
-    LogInSceneController(QQmlApplicationEngine* p_engine);
+    LogInScreenController(QQmlApplicationEngine* p_engine);
     QQmlApplicationEngine* engine;
 
 public slots:
     void HandleProceedButton();
+    void LoadAttemt(QString, QString);
 };
 
 #endif // LOGINSCENECONTROLLER_H

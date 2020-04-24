@@ -1,11 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>view/Components/StyledInput.qml</file>
-        <file>view/Screens/LoginScene.qml</file>
+        <file>view/Screens/LoginScreen.qml</file>
         <file>view/Screens/main.qml</file>
         <file>view/Tabs/Dashboard.qml</file>
         <file>view/Tabs/Funds.qml</file>
         <file>view/Tabs/History.qml</file>
         <file>view/Tabs/Payments.qml</file>
+        <file>view/Screens/UserScreen.qml</file>
     </qresource>
 </RCC>
