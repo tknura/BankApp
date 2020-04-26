@@ -60,9 +60,38 @@ bool Admin::CreateAccount(int ownerID, std::string number, double balance, doubl
     return AddAccountToMap(std::make_unique<Account>(newAcc));
 }
 
+/*
+ * Savings account with interest multiplying balance in detailed amount of time
+ */
+bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit) {
+    Card newCard(accountNumber, number, ccv, transactionLimit);
+    return AddCardToMap(std::make_unique<Card>(newCard));
+}
+
+/*
+ * Basic fund with ownerID, minimal amount, maximal rate, fee and balance
+ */
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance) {
-    //Fund fund(minAmount, maxRate, fee, balance);
-    //return AddFundToMap(ownerID, std::make_unique<Fund>(fund));
+    Fund newFund(minAmount, maxRate, fee, balance, ownerID);
+    return AddFundToMap(std::make_unique<Fund>(newFund));
+}
+
+/*
+ * Retirement fund with monthly in amount and is person retired informations
+ */
+bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
+                    bool isRetired, double monthlyIn) {
+    RetirementFund newFund(minAmount, maxRate, fee, balance, isRetired, monthlyIn, ownerID);
+    return AddFundToMap(std::make_unique<Fund>(newFund));
+}
+
+/*
+ * Savings fund with starting and ending date
+ */
+bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
+                    std::string startDate, std::string endDate) {
+    SavingsFund newFund(minAmount, maxRate, fee, balance, startDate, endDate, ownerID);
+    return AddFundToMap(std::make_unique<Fund>(newFund));
 }
 
 void Admin::OnLogIn() {
@@ -134,9 +163,17 @@ bool Admin::AddAccountToMap(std::unique_ptr<Account> acc) {
     return false;
 }
 
-bool Admin::AddFundToMap(int key, std::unique_ptr<Fund> fund) {
-    if(Bank::fundMap.find(key) == Bank::fundMap.end()){
-        Bank::fundMap.insert(std::make_pair(key, *fund.get()));
+bool Admin::AddCardToMap(std::unique_ptr<Card> card) {
+    if(Bank::cardMap.find(card->GetAccountNumber()) == Bank::cardMap.end()){
+        Bank::cardMap.insert(std::make_pair(card->GetAccountNumber(), *card.get()));
+        return true;
+    }
+    return false;
+}
+
+bool Admin::AddFundToMap(std::unique_ptr<Fund> fund) {
+    if(Bank::fundMap.find(fund->GetOwnerId()) == Bank::fundMap.end()){
+        Bank::fundMap.insert(std::make_pair(fund->GetOwnerId(), *fund.get()));
         return true;
     }
     return false;

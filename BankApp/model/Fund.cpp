@@ -1,10 +1,18 @@
 #include "Fund.h"
 
 
+int Fund::GetOwnerId() const {
+    return ownerId;
+}
+
+void Fund::SetOwnerId(int value) {
+    ownerId = value;
+}
+
 std::ostream& Fund::serialize(std::ostream&ss) const
 {
     ss<<"minimum Amount:"<<minAmount<<"\n"
-            <<"maximum Rate:"<<maxRate<<"\n"
+     <<"maximum Rate:"<<maxRate<<"\n"
            <<"fee:"<<fee<<"\n"
           <<"balance:"<<balance<<"\n";
     return ss;

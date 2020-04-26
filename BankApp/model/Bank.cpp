@@ -4,10 +4,12 @@ list<std::string> Bank::accountNumList = list<std::string>();
 list<std::string> Bank::fundNumList = list<std::string>();
 map<std::string, Account> Bank::accountMap = map<std::string, Account>();
 map<int, Fund> Bank::fundMap = map<int, Fund>();
+map<std::string, Card> Bank::cardMap = map<std::string, Card>();
 
 std::shared_ptr<IUser> Bank::currentlyLoggedUser = nullptr;
 std::random_device Bank::rd;
 std::mt19937 Bank::mt = std::mt19937(rd());
+
 /*
  * Method which create user object from passed data
  */
@@ -40,4 +42,22 @@ void Bank::Start() {
 
 void Bank::Stop() {
     LogOut();
+}
+
+bool Bank::isAdminLogged() {
+    if(std::dynamic_pointer_cast<Admin>(currentlyLoggedUser)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool Bank::isUserLogged() {
+    if(std::dynamic_pointer_cast<User>(currentlyLoggedUser)) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }

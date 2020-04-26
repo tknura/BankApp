@@ -30,6 +30,8 @@ public:
     static std::random_device rd;
     static std::mt19937 mt;
 
+    static bool isAdminLogged();
+    static bool isUserLogged();
     static void LogIn(std::shared_ptr<IUser> data);
     static void LogOut();
     static void Start();

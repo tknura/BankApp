@@ -21,6 +21,8 @@ public:
     virtual json SerializeToJson();
     virtual int GetType(){return 2;}
 
+    std::string GetAccountNumber() const;
+    void SetAccountNumber(const std::string &value);
 };
 
 #endif // CARD_H

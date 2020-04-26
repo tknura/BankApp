@@ -21,8 +21,6 @@ public:
 
     json SerializeToJson() override;
     int GetType()override{return 1;}
-
-
 };
 
 

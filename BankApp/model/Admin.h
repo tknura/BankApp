@@ -19,7 +19,8 @@ private:
     bool SaveUser(User& user);
     bool FindExistingUser(LogInData& data);
     bool AddAccountToMap(std::unique_ptr<Account> acc);
-    bool AddFundToMap(int key, std::unique_ptr<Fund> fund);
+    bool AddCardToMap(std::unique_ptr<Card> card);
+    bool AddFundToMap(std::unique_ptr<Fund> fund);
 public:
     Admin(const LogInData &data);
     ~Admin() override;
@@ -31,11 +32,15 @@ public:
     bool CreateAccount(int supervisorID, std::string number, double balance, std::list<int> memberIdList);
     bool CreateAccount(int ownerID, std::string number, double balance, double interest);
 
-    bool AddCard();
+    bool AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit);
+    bool AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
+                 double maxCredit, std::string billingDate);
+    bool AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
+                 double maxDebt);
 
     bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance);
     bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
-                 bool isRetired, double monthlyIn, double monthlyOut);
+                 bool isRetired, double monthlyIn);
     bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
                  std::string startDate, std::string endDate);
 

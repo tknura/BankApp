@@ -24,6 +24,9 @@ public:
     virtual json SerializeToJson();
 
     virtual int GetType(){return 2;}
+
+    int GetOwnerId() const;
+    void SetOwnerId(int value);
 };
 
 
