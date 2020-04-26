@@ -5,6 +5,7 @@
 #include <QQmlProperty>
 #include <QQuickItem>
 #include <QQmlApplicationEngine>
+#include "MainController.h"
 #include "model/Authorization.h"
 #include "model/LogInData.h"
 
@@ -18,7 +19,7 @@ private:
     LogInData attempt;
 public:
     LogInScreenController(QQmlApplicationEngine* p_engine);
-    QQmlApplicationEngine* engine;
+//    QQmlApplicationEngine* engine;
 
 public slots:
     void HandleProceedButton();

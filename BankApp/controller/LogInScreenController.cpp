@@ -1,8 +1,7 @@
 #include "LogInScreenController.h"
 
-LogInScreenController::LogInScreenController(QQmlApplicationEngine *p_engine)
-    : engine(p_engine) {
-    rootObject = engine->rootObjects().first()->findChild<QObject*>("loginScreen");
+LogInScreenController::LogInScreenController(QQmlApplicationEngine *p_engine) {
+    rootObject = p_engine->rootObjects().first()->findChild<QObject*>("loginScreen");
 
     proceedButton = rootObject->findChild<QObject*>("proceedButton");
 
@@ -15,6 +14,12 @@ void LogInScreenController::HandleProceedButton() {
         //TODO handling email creation
         if(Authorization::LogInAttempt(attempt)) {
             QMetaObject::invokeMethod(rootObject, "loggingPassed");
+            if(Bank::isUserLogged()){
+                MainController::LoadUserScreen();
+            }
+            else if(Bank::isAdminLogged()) {
+                MainController::LoadAdminScreen();
+            }
         }
         else {
             QMetaObject::invokeMethod(rootObject, "loggingFailed");

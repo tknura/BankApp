@@ -8,5 +8,6 @@
         <file>view/Tabs/History.qml</file>
         <file>view/Tabs/Payments.qml</file>
         <file>view/Screens/UserScreen.qml</file>
+        <file>view/Screens/AdminScreen.qml</file>
     </qresource>
 </RCC>

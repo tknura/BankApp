@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 
 #include "controller/LogInScreenController.h"
+#include "controller/MainController.h"
 #include "model/Bank.h"
 #include "model/Test.h"
 
@@ -22,7 +23,8 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
     engine.load(url);
-    LogInScreenController lsc(&engine);
 
+    MainController mc(&engine);
+    LogInScreenController lsc(&engine);
     return app.exec();
 }

@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         controller/LogInScreenController.cpp \
+        controller/MainController.cpp \
         main.cpp \
         model/Account.cpp \
         model/Admin.cpp \
@@ -55,6 +56,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     controller/LogInScreenController.h \
+    controller/MainController.h \
     model/Account.h \
     model/Admin.h \
     model/Authorization.h \

@@ -14,11 +14,48 @@ Window {
     color: "#eeeeee"
     title: "BankApp"
 
-    LoginScreen{
+    function loadUserScreen() {
+        stackView.replace(userScreen)
     }
 
-    UserScreen{
-        visible: false
+    function loadAdminScreen() {
+        stackView.replace(adminScreen)
+    }
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        replaceEnter: Transition {
+                PropertyAnimation {
+                    property: "opacity"
+                    from: 0
+                    to:1
+                    duration: 200
+                }
+            }
+        replaceExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
+
+        LoginScreen{
+            id: loginScreen
+        }
+
+        UserScreen{
+            visible: false
+            id: userScreen
+        }
+
+        AdminScreen {
+            visible: false
+            id: adminScreen
+        }
+
     }
 }
 
@@ -27,3 +64,9 @@ Window {
 
 
 
+
+/*##^##
+Designer {
+    D{i:1;anchors_height:700;anchors_width:1000}
+}
+##^##*/

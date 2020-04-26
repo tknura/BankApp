@@ -11,6 +11,9 @@ Rectangle {
     color: "#eeeeee"
 
     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
+    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
+    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+
     Rectangle {
         id: rectangle
         width: 250
@@ -287,7 +290,6 @@ Rectangle {
 
     }
 
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
     StackView {
         id: contentStack
         y: 0
@@ -311,58 +313,11 @@ Rectangle {
                 duration: 200
             }
         }
-
-        Loader {
-            id: history
-            x: 250
-            y: 0
-            visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Dashboard.qml"
-        }
-
-        Loader {
-            id: funds
-            x: 250
-            y: 0
-            visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Funds.qml"
-        }
-
-        Loader {
-            id: payments
-            x: 250
-            y: 0
-            visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Payments.qml"
-        }
-
-        Loader {
-            id: dashboard
-            x: 250
-            y: 0
-            visible: true
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Dashboard.qml"
-        }
-
-
-
     }
 
-    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
     ButtonGroup {
         id: menu
     }
-
-
-
-
-
-
-
 }
 
 
