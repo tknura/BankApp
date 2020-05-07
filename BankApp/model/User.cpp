@@ -1,4 +1,5 @@
 #include "User.h"
+#include "Bank.h"
 
 User::User(const LogInData &data) : LogInData(data) {}
 
@@ -10,6 +11,19 @@ void User::OnLogIn() {
 
 void User::OnLogOut() {
 
+}
+void User::MakePayment(string p_accNum, Payment &p_payment)
+{
+    auto amount = p_payment.GetAmount();
+    if(Bank::UpdateOutputAccount(p_accNum,amount))
+    {
+        auto accNumber = p_payment.GetAccNumber();
+        Bank::UpdateInputAccount(accNumber,amount);
+    }
+    else
+    {
+        throw std::runtime_error("Insufficient funds");
+    }
 }
 
 //User::~User() {}

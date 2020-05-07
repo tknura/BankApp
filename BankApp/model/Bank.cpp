@@ -2,7 +2,8 @@
 
 list<std::string> Bank::accountNumList = list<std::string>();
 list<std::string> Bank::fundNumList = list<std::string>();
-map<std::string, Account> Bank::accountMap = map<std::string, Account>();
+//map<std::string, Account> Bank::accountMap = map<std::string, Account>();
+std::unordered_map<std::string,std::shared_ptr<Account>> Bank::accountMap {};
 map<int, Fund> Bank::fundMap = map<int, Fund>();
 map<std::string, Card> Bank::cardMap = map<std::string, Card>();
 
@@ -60,4 +61,31 @@ bool Bank::isUserLogged() {
     else {
         return false;
     }
+}
+bool Bank::UpdateOutputAccount(std::string &p_accNum,double p_amount)
+{
+    auto accountBalance = accountMap[p_accNum]->GetBalance();
+    if(accountBalance >=p_amount)
+    {
+        accountMap[p_accNum]->SetBalance(accountBalance-p_amount);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+void Bank::UpdateInputAccount(std::string &p_accNum, double p_amount)
+{
+    if(accountMap[p_accNum])//transfer to an account in the same bank
+    {
+        accountMap[p_accNum]->AddFunds(p_amount);
+        std::cerr<<"internal transfer";
+    }
+    else//transfer to an account located in diffrent bank
+    {
+        std::cerr<<"external transfer";
+    }
+
+
 }

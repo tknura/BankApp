@@ -50,6 +50,7 @@ public:
     void SetBalance(double value);
     int GetSupervisorId() const;
     void SetSupervisorId(int value);
+    void AddFunds(double p_amount){balance+=p_amount;}
     virtual json SerializeToJson();
 
     virtual int GetType(){return 0;}
