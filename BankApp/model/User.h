@@ -24,6 +24,10 @@ private:
 public:
     User(const LogInData& data);
     ~User() override;
+    /*
+     Metoda zakłada, że w gui upewniono się, że przelew miedzy danymi kontami jest dozwolony.
+     Metoda nierozróznia przelewu własnego od normalnego.
+     */
     void MakePayment(string p_accNum, Payment &p_payment);//Throws an exepction when funds are insufficient
     void AddFriend(PaymentRetriever);
     void OnLogIn() override;
