@@ -157,7 +157,7 @@ bool Admin::FindExistingUser(LogInData& data) {
 
 bool Admin::AddAccountToMap(std::unique_ptr<Account> acc) {
     if(Bank::accountMap.find(acc->GetNumber()) == Bank::accountMap.end()){
-        Bank::accountMap.insert(std::make_pair(acc->GetNumber(), *acc.get()));
+        Bank::accountMap.insert(std::make_pair(acc->GetNumber(), acc.get()));//
         return true;
     }
     return false;

@@ -2,6 +2,7 @@
 #define USER_H
 
 #include "PaymentRetriever.h"
+#include "Payment.h"
 #include "IUser.h"
 #include "LogInData.h"
 #include <list>
@@ -23,7 +24,11 @@ private:
 public:
     User(const LogInData& data);
     ~User() override;
-    void MakePayment();
+    /*
+     Metoda zakłada, że w gui upewniono się, że przelew miedzy danymi kontami jest dozwolony.
+     Metoda nierozróznia przelewu własnego od normalnego.
+     */
+    void MakePayment(string p_accNum, Payment &p_payment);//Throws an exepction when funds are insufficient
     void AddFriend(PaymentRetriever);
     void OnLogIn() override;
     void OnLogOut() override;

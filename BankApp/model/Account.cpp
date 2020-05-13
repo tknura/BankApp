@@ -74,7 +74,6 @@ void Account::SetSupervisorId(int value)
 {
     supervisorId = value;
 }
-
 json Account::SerializeToJson()
 {
     json j{};

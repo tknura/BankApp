@@ -14,6 +14,7 @@ public:
     string name;
     string accNumber;
     string address;
+    string GetAccNumer(){return accNumber;}
 };
 
 #endif // PAYMENTRETRIEVER_H
