@@ -1,8 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "controller/LogInScreenController.h"
 #include "controller/MainController.h"
+#include "controller/LogInScreenController.h"
+#include "controller/UserScreenController.h"
+#include "controller/AdminScreenController.h"
 #include "model/Bank.h"
 #include "model/Test.h"
 
@@ -23,8 +25,6 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
     engine.load(url);
-
-    MainController mc(&engine);
-    LogInScreenController lsc(&engine);
+    MainController::instance().initialize(&engine);
     return app.exec();
 }

@@ -11,5 +11,10 @@
         <file>view/Screens/AdminScreen.qml</file>
         <file>view/Components/AccountButton.qml</file>
         <file>view/Components/AccountButtonList.qml</file>
+        <file>view/Components/BankMenu.qml</file>
+        <file>view/Tabs/AccountAddition.qml</file>
+        <file>view/Tabs/FundAddition.qml</file>
+        <file>view/Tabs/UserAddition.qml</file>
+        <file>view/Components/InfoPopup.qml</file>
     </qresource>
 </RCC>

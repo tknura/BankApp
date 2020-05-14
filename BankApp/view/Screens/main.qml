@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.3
 
 Window {
     id: main
+    objectName: "main"
     minimumWidth: 700
     minimumHeight: 400
     visible: true
@@ -14,59 +15,43 @@ Window {
     color: "#eeeeee"
     title: "BankApp"
 
+    LoginScreen{
+        id: loginScreen
+        anchors.fill: parent
+    }
+
+    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
+    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
+
     function loadUserScreen() {
-        stackView.replace(userScreen)
+        stackView.replace(["qrc:/view/Screens/UserScreen.qml"])
     }
 
     function loadAdminScreen() {
-        stackView.replace(adminScreen)
+        stackView.replace(["qrc:/view/Screens/AdminScreen.qml"])
     }
 
     StackView {
         id: stackView
         anchors.fill: parent
+        initialItem: loginScreen
         replaceEnter: Transition {
-                PropertyAnimation {
-                    property: "opacity"
-                    from: 0
-                    to:1
-                    duration: 200
-                }
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 300
             }
+        }
         replaceExit: Transition {
             PropertyAnimation {
                 property: "opacity"
                 from: 1
                 to:0
-                duration: 200
+                duration: 300
             }
         }
-
-        LoginScreen{
-            id: loginScreen
-        }
-
-        UserScreen{
-            visible: false
-            id: userScreen
-        }
-
-        AdminScreen {
-            visible: false
-            id: adminScreen
-        }
-
     }
+
 }
-
-
-
-
-
-
-
-/*##^##
-Designer {
-    D{i:1;anchors_height:700;anchors_width:1000}
-}
-##^##*/

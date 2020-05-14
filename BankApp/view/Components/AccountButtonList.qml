@@ -3,7 +3,6 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import "qrc:/componentCreation.js" as CreateScript
 Item {
-    id: root
     height: 180
 
     function addButton(p_accTypText, p_accNumberText, p_accAmountText, p_accCurencyText,
@@ -32,8 +31,6 @@ Item {
             spacing: 10
             layoutDirection: Qt.LeftToRight
         }
-
-
     }
 
     ButtonGroup { id: accountButtons }

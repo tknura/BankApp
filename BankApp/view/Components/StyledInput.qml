@@ -8,9 +8,12 @@ Item {
     width: 640
     height: 80
     property alias inputText: textField.text
-
-    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+    property string titleText: "Title"
+    property string placeholder: "placeholder"
+    property bool isHashed: false
+    property alias validator: textField.validator
+    property alias inputMask: textField.inputMask
+    property alias inputMethodHints: textField.inputMethodHints
 
     function setHashed(bool) {
         if(bool){
@@ -21,16 +24,17 @@ Item {
         }
     }
 
-    function setTitle(text) {
-        title.text = qsTr(text);
+    function clear() {
+        textField.clear();
     }
 
-    function setPlaceholderText(text) {
-        textField.placeholderText = qsTr(text);
-    }
-
-    function getText() {
-        return textField.text;
+    Component.onCompleted: {
+        if(isHashed) {
+            setHashed(true);
+        }
+        else {
+            setHashed(false);
+        }
     }
 
     states: [
@@ -48,11 +52,11 @@ Item {
         width: 99
         height: 25
         color: "#393e46"
-        text: qsTr("Title")
+        text: titleText
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.left: parent.left
-        anchors.leftMargin: 0
+        anchors.leftMargin: 22
         font.weight: Font.Medium
         font.family: "Rubik"
         verticalAlignment: Text.AlignVCenter
@@ -73,8 +77,13 @@ Item {
         horizontalAlignment: Text.AlignLeft
         anchors.leftMargin: 0
         anchors.right: parent.right
-        placeholderText: "placeholder"
+        placeholderText: placeholder
         font.family: "Rubik"
+        color: "#259fc4"
+        placeholderTextColor: "#d2def5"
+        selectionColor: "#a3e7fc"
+        selectByMouse: true
+        font.weight: Font.Medium
         background: Rectangle {
             id: background
             states: [
