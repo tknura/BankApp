@@ -17,9 +17,16 @@ private:
     QObject *loginDataBoxes;
     QObject *proceedButton;
     LogInData attempt;
+    LogInScreenController() {}
+    LogInScreenController(const LogInScreenController &) : QObject() {}
+    ~LogInScreenController() {}
+
 public:
-    LogInScreenController(QQmlApplicationEngine* p_engine);
-//    QQmlApplicationEngine* engine;
+    static LogInScreenController &instance() {
+        static LogInScreenController instance;
+        return instance;
+    }
+     void initialize(QQmlApplicationEngine* p_engine);
 
 public slots:
     void HandleProceedButton();

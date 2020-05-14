@@ -2,9 +2,11 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Styles 1.4
+import "qrc:/view/Components/"
 
 Rectangle {
     id: root
+    objectName: "adminScreen"
     visible: true
     width: 1000
     height: 700
@@ -15,9 +17,9 @@ Rectangle {
     FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
 
     Rectangle {
-        id: rectangle
-        width: 250
         color: "#ffffff"
+        anchors.right: parent.right
+        anchors.rightMargin: 750
         border.width: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
@@ -292,19 +294,22 @@ Rectangle {
 
     StackView {
         id: contentStack
-        y: 0
-        width: 744
-        height: 700
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 250
         replaceEnter: Transition {
-                PropertyAnimation {
-                    property: "opacity"
-                    from: 0
-                    to:1
-                    duration: 200
-                }
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
             }
+        }
         replaceExit: Transition {
             PropertyAnimation {
                 property: "opacity"
@@ -313,12 +318,53 @@ Rectangle {
                 duration: 200
             }
         }
+
+        Loader {
+            id: dashboard
+            x: 250
+            y: 0
+            visible: true
+            anchors.fill: parent
+            source: "qrc:/view/Tabs/UserAddition.qml"
+        }
+
+        Loader {
+            id: payments
+            x: 250
+            y: 0
+            visible: false
+            anchors.fill: parent
+            source: "qrc:/view/Tabs/Payments.qml"
+        }
+
+        Loader {
+            id: funds
+            x: 250
+            y: 0
+            visible: false
+            anchors.fill: parent
+            source: "qrc:/view/Tabs/Funds.qml"
+        }
+
+        Loader {
+            id: history
+            x: 250
+            y: 0
+            visible: false
+            anchors.fill: parent
+            source: "qrc:/view/Tabs/Dashboard.qml"
+        }
+
+
+
     }
 
     ButtonGroup {
         id: menu
     }
 }
+
+
 
 
 
