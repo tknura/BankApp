@@ -2,26 +2,28 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Styles 1.4
+import "qrc:/view/Tabs/"
 
 Rectangle {
     id: root
+    objectName: "userScreen"
     visible: true
     width: 1000
     height: 700
     color: "#eeeeee"
 
-    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
     Rectangle {
         id: rectangle
-        width: 250
         color: "#ffffff"
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 750
         border.width: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.top: parent.top
         anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
 
         Text {
             id: title
@@ -40,8 +42,11 @@ Rectangle {
 
         Column {
             id: menuButtons
-            x: 0
             y: 123
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
             anchors.top: parent.top
             anchors.topMargin: 123
 
@@ -249,10 +254,11 @@ Rectangle {
 
         Button {
             id: logOutButton
-            y: 652
-            width: 234
-            height: 40
             text: qsTr("Log Out")
+            anchors.top: parent.top
+            anchors.topMargin: 652
+            anchors.right: parent.right
+            anchors.rightMargin: 8
             anchors.left: parent.left
             anchors.leftMargin: 8
             anchors.bottom: parent.bottom
@@ -287,14 +293,17 @@ Rectangle {
 
     }
 
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
     StackView {
         id: contentStack
-        y: 0
-        width: 744
-        height: 700
+        initialItem: dashboard
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
         anchors.left: parent.left
-        anchors.leftMargin: 250
+        anchors.leftMargin: rectangle.width
         replaceEnter: Transition {
                 PropertyAnimation {
                     property: "opacity"
@@ -312,61 +321,47 @@ Rectangle {
             }
         }
 
-        Loader {
-            id: history
-            x: 250
-            y: 0
-            visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Dashboard.qml"
-        }
-
-        Loader {
-            id: funds
-            x: 250
-            y: 0
-            visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Funds.qml"
-        }
-
-        Loader {
-            id: payments
-            x: 250
-            y: 0
-            visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Payments.qml"
-        }
-
-        Loader {
+        Dashboard {
             id: dashboard
-            x: 250
-            y: 0
-            visible: true
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Dashboard.qml"
+            height: contentStack.height
+            visible: false
+            width: contentStack.width
         }
 
+        Funds {
+            id: funds
+            height: contentStack.height
+            visible: false
+            width: contentStack.width
+        }
 
+        Payments {
+            id: payments
+            height: contentStack.height
+            visible: false
+            width: contentStack.width
+        }
 
+        History {
+            id: history
+
+            height: contentStack.height
+            visible: false
+            width: contentStack.width
+        }
     }
 
-    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
+
+
     ButtonGroup {
         id: menu
     }
-
-
-
-
-
-
-
 }
 
 
 
-
-
-
+/*##^##
+Designer {
+    D{i:3;anchors_x:0}D{i:24;anchors_height:40;anchors_width:234;anchors_y:652}
+}
+##^##*/

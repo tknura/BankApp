@@ -9,9 +9,6 @@ Rectangle {
     width: 1000
     height: 700
     color: "#eeeeee"
-    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
-    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
 
     function loggingPassed() {
         loginDataBoxes.state = "NORMAL"
@@ -55,11 +52,9 @@ Rectangle {
             anchors.leftMargin: 4
             anchors.right: parent.right
             anchors.rightMargin: 4
-            Component.onCompleted: {
-                passwordInput.setHashed(true)
-                passwordInput.setPlaceholderText("password")
-                passwordInput.setTitle("Password")
-            }
+            isHashed: true
+            titleText: "Password"
+            placeholder: "password"
         }
 
         StyledInput {
@@ -71,12 +66,9 @@ Rectangle {
             anchors.leftMargin: 4
             anchors.right: parent.right
             anchors.rightMargin: 4
-            Component.onCompleted: {
-                loginInput.setPlaceholderText("login")
-                loginInput.setTitle("Login/E-mail")
-            }
+            titleText: "Login/E-mail"
+            placeholder: "login"
         }
-
         Text {
             id: failedText
             visible: false
@@ -136,7 +128,7 @@ Rectangle {
             radius: 25
         }
         onClicked: {
-            inputValues(loginInput.getText(), passwordInput.getText())
+            inputValues(loginInput.inputText, passwordInput.inputText)
         }
     }
 }
