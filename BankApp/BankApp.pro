@@ -85,7 +85,7 @@ HEADERS += \
     model/SavingsAccount.h \
     model/SavingsFund.h \
     model/User.h \
-    model/enums/AccountTypes.h \
+    model/enums/AccountType.h \
     model/enums/CardTypes.h \
     model/enums/FundTypes.h \
     model/json.hpp
