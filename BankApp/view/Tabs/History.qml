@@ -7,10 +7,6 @@ Item {
     width: 700
     height: 700
 
-    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
-    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
-
     Rectangle {
         id: background
         color: "#eeeeee"
