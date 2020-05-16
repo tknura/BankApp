@@ -26,11 +26,10 @@ public:
         static LogInScreenController instance;
         return instance;
     }
-     void initialize(QQmlApplicationEngine* p_engine);
+    void initialize(QQmlApplicationEngine* p_engine);
 
 public slots:
     void HandleProceedButton();
     void LoadAttemt(QString, QString);
 };
-
 #endif // LOGINSCENECONTROLLER_H
