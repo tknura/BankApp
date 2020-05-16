@@ -2,8 +2,8 @@
 #define ADMIN_H
 
 #include "LogInData.h"
-#include "enums/AccountTypes.h"
-#include "enums/FundTypes.h"
+#include "enums/AccountType.h"
+#include "enums/FundType.h"
 #include "Authorization.h"
 #include <fstream>
 
@@ -25,7 +25,6 @@ public:
     Admin(const LogInData &data);
     ~Admin() override;
     bool CreateUser(string p_login, string p_password, string p_email);
-    bool CreateAccount();
     bool CreateAccount(int ownerID, string number, double balance);
     bool CreateAccount(int supervisorID, int childID, std::string number, double balance,
                     double dailyTransactionLimit);

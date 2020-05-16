@@ -5,7 +5,9 @@ std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}
 
-Admin::~Admin() {}
+Admin::~Admin() {
+    OnLogOut();
+}
 
 /*
  *  Method which creates user and adds him to user map
@@ -14,6 +16,7 @@ bool Admin::CreateUser(std::string p_login, std::string p_password, std::string 
     LogInData data(idProvider++, p_login, p_password, p_email);
     if(data.IsValid()) {
         if(!FindExistingUser(data)){
+            std::cerr << "User " << data.GetLogin() << " created" << std::endl;
             usersMap.insert(std::make_pair(data.GetID(), data));
         }
         else{
