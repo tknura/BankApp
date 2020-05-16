@@ -6,6 +6,7 @@
 #include "model/SavingsAccount.h"
 
 using std::string;
+using std::list;
 
 class AccountType
 {
@@ -34,6 +35,19 @@ public:
             case CURRENCY: return "currency";
             case FIRM: return "firm";
         }
+    }
+
+    static list<AccountType> GetAllTypesList() {
+        return { AccountType::PERSONAL, AccountType::SAVINGS, AccountType::CHILD,
+                 AccountType::CURRENCY, AccountType::FAMILY, AccountType::FIRM };
+    }
+
+    static list<string> GetAllTypesStringList() {
+        list<string> result;
+        for(auto e : GetAllTypesList()){
+            result.push_back(e.ToString());
+        }
+        return result;
     }
 
 private:
