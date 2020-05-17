@@ -7,10 +7,10 @@
 
 void Test::Run() {
 
-    std::unordered_map<std::string,std::shared_ptr<Account>> test{};
-    std::list<std::string> numery{};
-    JsonManager p {1};
-    p.ParseData(numery,test);
-    p.SerializeData(test,Config::accountJSONPath);
+//    std::unordered_map<std::string,std::shared_ptr<Account>> test{};
+//    std::list<std::string> numery{};
+//    JsonManager p {1};
+//    p.ParseData(numery,test);
+//    p.SerializeData(test,Config::accountJSONPath);
 
 }
