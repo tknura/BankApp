@@ -11,7 +11,8 @@ private:
     std::list<int> memberIdList;
 public:
     FamillyAccount() = delete;
-
+    FamillyAccount(History p_history,std::string p_number, double p_balance, int p_supervisorId, std::list<int> &p_memberIdList)
+        :Account(p_history, p_number, p_balance, p_supervisorId), memberIdList(p_memberIdList){std::cerr<<"utworzono obiekt FamillyAccount\n";}
     FamillyAccount(std::string p_number, double p_balance, int p_supervisorId, std::list<int> &p_memberIdList)
         :Account(p_number, p_balance, p_supervisorId), memberIdList(p_memberIdList){std::cerr<<"utworzono obiekt FamillyAccount\n";}
     json SerializeToJson() override;

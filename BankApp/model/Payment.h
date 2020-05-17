@@ -4,6 +4,7 @@
 #include <string>
 #include "PaymentRetriever.h"
 #include "IValidator.h"
+#include "json.hpp"
 
 using str = std::string;
 
@@ -23,6 +24,8 @@ public:
 
     str GetAccNumber(){return retriever.GetAccNumer();}
     double GetAmount(){return amount;}
+
+    json SerializeToJson();
 
 };
 

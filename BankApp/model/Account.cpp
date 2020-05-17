@@ -21,7 +21,11 @@
 //{
 
 //}
-
+Account::Account(History p_history, std::string p_number, double p_balance, int p_supervisorId)
+    :history(p_history),number(p_number), balance(p_balance), supervisorId(p_supervisorId)
+{
+    std::cerr<<"utworzono obiekt account\n";
+}
 
 Account::Account(std::string p_number, double p_balance, int p_supervisorId)
     :number(p_number), balance(p_balance), supervisorId(p_supervisorId)
@@ -77,7 +81,7 @@ void Account::SetSupervisorId(int value)
 json Account::SerializeToJson()
 {
     json j{};
-
+    j["history"] = history.SerializeToJson();
     j["number"] = number;
     j["supervisorId"] = supervisorId;
     j["balance"] = balance;

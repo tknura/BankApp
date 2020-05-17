@@ -53,6 +53,8 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
         f.close();
 
         std::shared_ptr<Account> p {nullptr};
+        std::shared_ptr<Payment> t {nullptr};
+
 
         for(const auto& account: accountFile[0]["items"])
         {
@@ -63,21 +65,43 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
             str number {account["number"]};
             int supervisorId {account["supervisorId"]};
             double balance  {account["balance"]};
+            //--------loading history--------
+            double h_amount{};
+            str h_title{};
+            str h_date{};
+            //===payment retriever===
+            str hp_name{};
+            str hp_accNumber{};
+            str hp_address{};
+            //=======================
+            History tmpHistory {};
+             for(const auto & history:account["history"])
+            {
+                h_amount = history["amount"];
+                h_title = history["title"];
+                h_date = history["date"];
+                hp_name = history["name"];
+                hp_accNumber = history["accNumber"];
+                hp_address = history["address"];
+                t = std::make_shared<Payment>(h_amount,h_title, h_date, hp_name, hp_accNumber, hp_address);
+                tmpHistory.AddNode(t);
+            }
+            //-------------------------------
             if(type == 0)
             {
-                p = std::make_shared<Account>(number,balance,supervisorId);
+                p = std::make_shared<Account>(tmpHistory,number,balance,supervisorId);
             }
             else if(type == 2)
             {
                 int childId {account["childId"]};
                 double dailyTransactionLimit {account["dailyTransactionLimit"]};
-                p = std::make_shared<ChildAccount>(number,balance,supervisorId,dailyTransactionLimit,childId);
+                p = std::make_shared<ChildAccount>(tmpHistory,number,balance,supervisorId,dailyTransactionLimit,childId);
             }
             else if(type == 1)
             {
 
                 double interest {account["interest"]};
-                p = std::make_shared<SavingsAccount>(number,balance,supervisorId,interest);
+                p = std::make_shared<SavingsAccount>(tmpHistory,number,balance,supervisorId,interest);
             }
             else if(type == 4)
             {
@@ -86,7 +110,7 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
                 {
                     memberIdList.push_back((int)id);
                 }
-                p = std::make_shared<FamillyAccount>(number,balance,supervisorId,memberIdList);
+                p = std::make_shared<FamillyAccount>(tmpHistory,number,balance,supervisorId,memberIdList);
             }
             p_accountList.push_back(number);//list with keys to the hash table
             p_accountMap.insert({number,p});

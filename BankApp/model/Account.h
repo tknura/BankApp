@@ -19,7 +19,7 @@ private:
     std::string number;
     double balance;
     int supervisorId;
- //   History history;
+    History history;
   //  std::list<Card> cardList;
 public:
     //CONSTRUCTORS
@@ -29,7 +29,7 @@ public:
 //        history = {};
 //        cardList = {};
 //    }
-
+    Account(History p_history, std::string p_number, double p_balance, int p_supervisorId);
     Account(std::string p_number, double p_balance, int p_supervisorId);
     Account(std::string p_number, int p_supervisorId);
     Account(int p_supervisorId);
