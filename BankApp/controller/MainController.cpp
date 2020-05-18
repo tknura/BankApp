@@ -1,19 +1,15 @@
 #include "MainController.h"
 
-void MainController::initialize(QQmlApplicationEngine *p_engine) {
+void MainController::Initialize(QQmlApplicationEngine *p_engine) {
     this->rootObject = p_engine->rootObjects().first();
     this->engine = p_engine;
-    LogInScreenController::instance().initialize(p_engine);
+    this->lsc = new LogInScreenController(p_engine);
 }
 
-void MainController::LoadUserScreen() {
-    //TO DO load data to user screen here
-    QMetaObject::invokeMethod(rootObject, "loadUserScreen");
-    UserScreenController::instance().initialize(engine);
+MainController::MainController(QQmlApplicationEngine *p_engine) {
+    Initialize(p_engine);
 }
 
-void MainController::LoadAdminScreen() {
-    //TO DO load data to admin screen here
-    QMetaObject::invokeMethod(rootObject, "loadAdminScreen");
-    AdminScreenController::instance().initialize(engine);
+MainController::~MainController() {
+    delete this->lsc;
 }

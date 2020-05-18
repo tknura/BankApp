@@ -16,5 +16,6 @@
         <file>view/Tabs/FundAddition.qml</file>
         <file>view/Tabs/UserAddition.qml</file>
         <file>view/Components/InfoPopup.qml</file>
+        <file>view/Components/StyledCombo.qml</file>
     </qresource>
 </RCC>

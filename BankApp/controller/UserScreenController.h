@@ -2,25 +2,20 @@
 #define USERSCREENCONTROLLER_H
 
 #include <QObject>
-#include <QQmlApplicationEngine>
+#include "IController.h"
 #include "model/Admin.h"
-class UserScreenController : QObject
+
+class UserScreenController : QObject, IController
 {
     Q_OBJECT
 
 private:
     QObject *rootObject;
 
-    UserScreenController() {}
-    UserScreenController(const UserScreenController &) : QObject() {}
-    ~UserScreenController() {}
-
 public:
-    static UserScreenController &instance() {
-        static UserScreenController instance;
-        return instance;
-    }
-    void initialize(QQmlApplicationEngine* p_engine);
+    void Initialize(QQmlApplicationEngine* p_engine) override;
+    UserScreenController(QQmlApplicationEngine* p_engine);
+    ~UserScreenController() override {}
 
 public slots:
 

@@ -1,9 +1,9 @@
 #include "LogInScreenController.h"
 
-void LogInScreenController::initialize(QQmlApplicationEngine *p_engine) {
-    rootObject = p_engine->rootObjects().first()->findChild<QObject*>("loginScreen");
-
-    proceedButton = rootObject->findChild<QObject*>("proceedButton");
+void LogInScreenController::Initialize(QQmlApplicationEngine *p_engine) {
+    this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("loginScreen");
+    this->engine = p_engine;
+    this->proceedButton = rootObject->findChild<QObject*>("proceedButton");
 
     QObject::connect(proceedButton, SIGNAL(clicked()), this, SLOT(HandleProceedButton()));
     QObject::connect(rootObject, SIGNAL(inputValues(QString, QString)),
@@ -16,10 +16,10 @@ void LogInScreenController::HandleProceedButton() {
         if(Authorization::LogInAttempt(attempt)) {
             QMetaObject::invokeMethod(rootObject, "loggingPassed");
             if(Bank::isUserLogged()){
-                MainController::instance().LoadUserScreen();
+                LoadUserScreen();
             }
             else if(Bank::isAdminLogged()) {
-                MainController::instance().LoadAdminScreen();
+                LoadAdminScreen();
             }
         }
         else {
@@ -31,4 +31,27 @@ void LogInScreenController::HandleProceedButton() {
 void LogInScreenController::LoadAttemt(QString login, QString password) {
     attempt.SetLogin(login.toStdString());
     attempt.SetPassword(password.toStdString());
+}
+
+void LogInScreenController::LoadUserScreen() {
+    QMetaObject::invokeMethod(rootObject, "loadUserScreen");
+    this->usc = new UserScreenController(engine);
+}
+
+void LogInScreenController::LoadAdminScreen() {
+    QMetaObject::invokeMethod(rootObject, "loadAdminScreen");
+    this->asc = new AdminScreenController(engine);
+}
+
+LogInScreenController::LogInScreenController(QQmlApplicationEngine *p_engine) {
+    Initialize(p_engine);
+}
+
+LogInScreenController::~LogInScreenController() {
+    if(usc) {
+        delete usc;
+    }
+    if(asc) {
+        delete asc;
+    }
 }

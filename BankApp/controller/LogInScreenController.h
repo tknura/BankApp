@@ -5,28 +5,30 @@
 #include <QQmlProperty>
 #include <QQuickItem>
 #include <QQmlApplicationEngine>
-#include "MainController.h"
+#include "UserScreenController.h"
+#include "AdminScreenController.h"
 #include "model/Authorization.h"
 #include "model/LogInData.h"
 
 class LogInScreenController : public QObject
 {
     Q_OBJECT
+
 private:
     QObject *rootObject;
     QObject *loginDataBoxes;
     QObject *proceedButton;
+    QQmlApplicationEngine* engine;
+    UserScreenController* usc;
+    AdminScreenController* asc;
     LogInData attempt;
-    LogInScreenController() {}
-    LogInScreenController(const LogInScreenController &) : QObject() {}
-    ~LogInScreenController() {}
+    void LoadUserScreen();
+    void LoadAdminScreen();
 
 public:
-    static LogInScreenController &instance() {
-        static LogInScreenController instance;
-        return instance;
-    }
-    void initialize(QQmlApplicationEngine* p_engine);
+    LogInScreenController(QQmlApplicationEngine* p_engine);
+    ~LogInScreenController();
+    void Initialize(QQmlApplicationEngine* p_engine);
 
 public slots:
     void HandleProceedButton();

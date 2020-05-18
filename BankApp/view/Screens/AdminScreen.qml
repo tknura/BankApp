@@ -303,6 +303,7 @@ Rectangle {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 250
+        initialItem: dashboard
         replaceEnter: Transition {
             PropertyAnimation {
                 property: "opacity"
@@ -320,30 +321,28 @@ Rectangle {
             }
         }
 
-        Loader {
+
+        UserAddition {
             id: dashboard
-            x: 250
-            y: 0
-            visible: true
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/UserAddition.qml"
+            height: contentStack.height
+            visible: false
+            width: contentStack.width
         }
 
-        Loader {
+        AccountAddition {
             id: payments
-            x: 250
-            y: 0
+            height: contentStack.height
             visible: false
-            anchors.fill: parent
-            source: "qrc:/view/Tabs/Payments.qml"
+            width: contentStack.width
         }
 
         Loader {
             id: funds
             x: 250
             y: 0
+            height: contentStack.height
             visible: false
-            anchors.fill: parent
+            width: contentStack.width
             source: "qrc:/view/Tabs/Funds.qml"
         }
 
@@ -351,8 +350,9 @@ Rectangle {
             id: history
             x: 250
             y: 0
+            height: contentStack.height
             visible: false
-            anchors.fill: parent
+            width: contentStack.width
             source: "qrc:/view/Tabs/Dashboard.qml"
         }
 

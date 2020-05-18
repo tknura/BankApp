@@ -1,11 +1,25 @@
 #include "AdminScreenController.h"
 
-void AdminScreenController::initialize(QQmlApplicationEngine *p_engine) {
+void AdminScreenController::Initialize(QQmlApplicationEngine *p_engine) {
     rootObject = p_engine->rootObjects().first()->findChild<QObject*>("adminScreen");
-
     QObject *userAdditionTab = rootObject->findChild<QObject*>("userAddition");
     QObject::connect(userAdditionTab, SIGNAL(userAddition(QString, QString, QString)),
                      this, SLOT(HandleUserAddition(QString, QString, QString)));
+
+    QObject *accountAdditionTab = rootObject->findChild<QObject*>("accountAddition");
+
+//    QStringList str;
+//    for(auto& s : AccountType::GetAllTypesStringList()){
+//        str.push_back(QString::fromStdString(s));
+//    }
+//    QObject *accTypeCombo = accountAdditionTab->findChild<QObject*>("accTypeCombo");
+//    QQmlContext *context =  QQmlEngine::contextForObject(accTypeCombo);
+//    std::cerr << "accAdd: " << accountAdditionTab << " accTypeCombo: " << accTypeCombo << " context:" << context->nameForObject(accTypeCombo).toStdString();
+    //    context->setContextProperty("typesList", QVariant::fromValue(str));
+}
+
+AdminScreenController::AdminScreenController(QQmlApplicationEngine *p_engine) {
+    Initialize(p_engine);
 }
 
 void AdminScreenController::HandleUserAddition(QString login, QString password,

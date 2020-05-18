@@ -2,31 +2,22 @@
 #define MAINCONTROLLER_H
 
 #include "LogInScreenController.h"
-#include "AdminScreenController.h"
-#include "UserScreenController.h"
+#include "IController.h"
 #include <QObject>
-#include <QQmlApplicationEngine>
 
-class MainController : public QObject
+class MainController : public QObject, IController
 {
     Q_OBJECT
 
 private:
     QObject *rootObject;
     QQmlApplicationEngine* engine;
-    MainController() {}
-    MainController(const MainController &) : QObject() {}
-    ~MainController() {}
+    LogInScreenController* lsc;
 
 public:
-    static MainController &instance() {
-        static MainController instance;
-        return instance;
-    }
-
-    void initialize(QQmlApplicationEngine* p_engine);
-    void LoadUserScreen();
-    void LoadAdminScreen();
+    MainController(QQmlApplicationEngine* p_engine);
+    ~MainController();
+    void Initialize(QQmlApplicationEngine* p_engine);
     QObject* GetRootObject();
 };
 

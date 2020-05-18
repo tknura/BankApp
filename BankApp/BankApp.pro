@@ -58,6 +58,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     controller/AdminScreenController.h \
+    controller/IController.h \
     controller/LogInScreenController.h \
     controller/MainController.h \
     controller/UserScreenController.h \

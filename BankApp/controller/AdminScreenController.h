@@ -2,25 +2,24 @@
 #define ADMINSCREENCONTROLLER_H
 
 #include <QObject>
-#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QStringListModel>
+#include <iostream>
+#include "IController.h"
 #include "model/Admin.h"
+#include "model/enums/AccountType.h"
 
-class AdminScreenController : QObject
+class AdminScreenController : QObject, IController
 {
     Q_OBJECT
 
 private:
     QObject *rootObject;
-    AdminScreenController() {}
-    AdminScreenController(const AdminScreenController &) : QObject() {}
-    ~AdminScreenController() {}
 
 public:
-    static AdminScreenController &instance() {
-        static AdminScreenController instance;
-        return instance;
-    }
-    void initialize(QQmlApplicationEngine* p_engine);
+    void Initialize(QQmlApplicationEngine* p_engine) override;
+    AdminScreenController(QQmlApplicationEngine* p_engine);
+    ~AdminScreenController() override {}
 
 public slots:
     void HandleUserAddition(QString, QString, QString);

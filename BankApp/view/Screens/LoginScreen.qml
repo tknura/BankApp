@@ -10,12 +10,22 @@ Rectangle {
     height: 700
     color: "#eeeeee"
 
+    property var screenParent;
+
     function loggingPassed() {
         loginDataBoxes.state = "NORMAL"
     }
 
     function loggingFailed() {
         loginDataBoxes.state = "FAILED"
+    }
+
+    function loadUserScreen() {
+        screenParent.replace(["qrc:/view/Screens/UserScreen.qml"])
+    }
+
+    function loadAdminScreen() {
+        screenParent.replace(["qrc:/view/Screens/AdminScreen.qml"])
     }
 
     signal inputValues(string login, string password)
