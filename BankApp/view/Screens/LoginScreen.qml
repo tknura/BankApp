@@ -32,13 +32,12 @@ Rectangle {
 
     GroupBox {
         id: loginDataBoxes
+        width: 485
         height: 207
-        anchors.right: parent.right
-        anchors.rightMargin: 211
-        anchors.left: parent.left
-        anchors.leftMargin: 211
-        anchors.top: parent.top
-        anchors.topMargin: 299
+        anchors.verticalCenterOffset: 36
+        anchors.horizontalCenterOffset: 1
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         background: Rectangle {
             color: "transparent"
             border.color: "transparent"
@@ -95,16 +94,15 @@ Rectangle {
 
     Text {
         id: title
+        x: 373
+        y: 86
         height: 190
         color: "#393e46"
         text: qsTr("Bank App")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: loginDataBoxes.top
+        anchors.bottomMargin: 6
         font.family: "Rubik"
-        anchors.right: parent.right
-        anchors.rightMargin: 291
-        anchors.left: parent.left
-        anchors.leftMargin: 293
-        anchors.top: parent.top
-        anchors.topMargin: 142
         font.weight: Font.Bold
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -113,30 +111,19 @@ Rectangle {
         font.pixelSize: 60
     }
 
-    Button {
+    PushButton {
         id: proceedButton
         objectName: "proceedButton"
-        x: 651
+        text: "Proceed"
+        anchors.horizontalCenterOffset: 157
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: loginDataBoxes.bottom
+        anchors.bottomMargin: 111
+        anchors.leftMargin: 574
+        anchors.topMargin: 18
+        x: 636
         width: 136
         height: 40
-        anchors.right: parent.right
-        anchors.rightMargin: 213
-        anchors.top: parent.top
-        anchors.topMargin: 530
-        font.family: "Rubik"
-        display: AbstractButton.TextOnly
-        text: qsTr("Proceed")
-        contentItem: Text {
-            text: proceedButton.text
-            font: proceedButton.font
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            color: "#259FC4"
-        }
-        background: Rectangle {
-            color: proceedButton.pressed ? "#75b4c5" : proceedButton.hovered ? "#7cd2ed" : "#A3E7FC"
-            radius: 25
-        }
         onClicked: {
             inputValues(loginInput.inputText, passwordInput.inputText)
         }
@@ -146,3 +133,9 @@ Rectangle {
 
 
 
+
+/*##^##
+Designer {
+    D{i:11;anchors_y:525}
+}
+##^##*/

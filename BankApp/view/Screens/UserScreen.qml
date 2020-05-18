@@ -8,8 +8,8 @@ Rectangle {
     id: root
     objectName: "userScreen"
     visible: true
-    width: 1000
-    height: 700
+    width: parent.width
+    height: parent.height
     color: "#eeeeee"
 
     Rectangle {
@@ -17,8 +17,6 @@ Rectangle {
         color: "#ffffff"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 750
         border.width: 0
         anchors.left: parent.left
         anchors.leftMargin: 0

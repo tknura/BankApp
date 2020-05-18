@@ -17,5 +17,6 @@
         <file>view/Tabs/UserAddition.qml</file>
         <file>view/Components/InfoPopup.qml</file>
         <file>view/Components/StyledCombo.qml</file>
+        <file>view/Components/PushButton.qml</file>
     </qresource>
 </RCC>

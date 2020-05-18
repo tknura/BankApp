@@ -11,6 +11,9 @@ Item {
     property string titleText: "Title"
     property alias model: comboBox.model
 
+    function clear() {
+        comboBox.currentIndex = -1;
+    }
 
     Text {
         id: title
@@ -28,16 +31,6 @@ Item {
         font.pixelSize: 20
     }
 
-    Rectangle {
-        x: 0
-        y: 52
-        width: 640
-        height: 28
-        color: "#F7F7F7"
-        border.color: "#F7F7F7"
-        border.width: 2
-    }
-
     ComboBox {
         id: comboBox
         objectName: "comboBox"
@@ -51,14 +44,72 @@ Item {
         anchors.leftMargin: 0
         anchors.right: parent.right
         font.family: "Rubik"
-        font.weight: Font.Medium
+        contentItem: Text {
+            leftPadding: 0
+            text: comboBox.displayText
+            verticalAlignment: Text.AlignVCenter
+            color: "#259fc4"
+            font.weight: Font.Medium
+        }
+
         background: Rectangle {
             id: background
-            color: "#F7F7F7"
-            border.color: "#F7F7F7"
-            border.width: 2
+            color: comboBox.hovered ? "#FFFFFF" : "#F7F7F7"
+            border.color: "transparent"
             radius: 25
         }
+
+        delegate: ItemDelegate {
+                  id: itemDlgt
+                  width: parent.width
+
+                  contentItem: Text {
+                      id:textItem
+                      text: modelData
+                      color: hovered ? "white" : "#259fc4"
+                      font.weight: hovered ? Font.Medium : Font.Normal
+                      elide: Text.ElideRight
+                      verticalAlignment: Text.AlignVCenter
+                      horizontalAlignment: Text.AlignLeft
+                  }
+
+                  background: Rectangle {
+                    radius: 20
+                    color: itemDlgt.hovered ? "#a3e7fc" : "#F7F7F7";
+                    anchors.left: itemDlgt.left
+                    anchors.leftMargin: 0
+                    width: itemDlgt.width
+                  }
+
+        }
+
+        popup: Popup {
+            y: comboBox.height
+            width: comboBox.width
+
+            background: Rectangle {
+                color: "#F7F7F7"
+                border.color: background.border.color
+                radius: background.radius
+             }
+
+            contentItem: ListView {
+                implicitHeight: contentHeight
+                model: comboBox.delegateModel
+                currentIndex: comboBox.highlightedIndex
+                highlightMoveDuration: 0
+
+                Rectangle {
+                    width: parent.width
+                    height: parent.height
+                    color: "transparent"
+                    border.color: "transparent"
+                }
+
+                ScrollIndicator.vertical: ScrollIndicator { }
+            }
+        }
     }
+
 
 }

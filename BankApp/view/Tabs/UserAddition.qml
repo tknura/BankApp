@@ -28,47 +28,29 @@ Item {
     }
 
 
-    Popup {
+    InfoPopup {
         id: successPopup
         width: 420
         height: 180
         anchors.centerIn: parent
+        padding: 20
         modal: true
         focus: true
-        padding: 10
-        contentData:
-            InfoPopup {
-                title: "User added"
-                description: "User added successfully to an app"
-                buttonOnClicked: {
-                    successPopup.close();
-                }
-            }
+        title: "User added"
+        description: "User added successfully to an app"
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     }
 
-    Popup {
+    InfoPopup {
         id: failPopup
         width: 420
         height: 180
         anchors.centerIn: parent
         padding: 20
-        background:
-            Rectangle {
-            color: "transparent"
-            border.color: "transparent"
-        }
         modal: true
         focus: true
-        contentItem:
-            InfoPopup {
-                title: "User addition failed"
-                titleColor: "#ED2939"
-                description: "Incorect data passed, check information boxes for more info"
-                buttonOnClicked: {
-                    failPopup.close();
-                }
-            }
+        title: "User addition failed"
+        description: "Incorect data passed, check information boxes for more info"
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     }
 
@@ -189,7 +171,7 @@ Item {
         }
     }
 
-    Button {
+    PushButton {
         id: addButton
         objectName: "addButton"
         x: 491
@@ -203,6 +185,8 @@ Item {
         font.family: "Rubik"
         display: AbstractButton.TextOnly
         text: qsTr("Add User")
+        anchors.bottomMargin: 16
+        anchors.leftMargin: 496
         contentItem: Text {
             text: addButton.text
             font: addButton.font

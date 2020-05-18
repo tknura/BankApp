@@ -3,12 +3,12 @@ import QtQuick.Controls 2.3
 import "qrc:/view/Components/"
 
 Item {
-    objectName: "userAddition"
+    objectName: "accountAddition"
     visible: true
     width: 700
     height: 700
 
-    signal userAddition(string login, string password, string mail)
+    property alias model: accTypeCombo.model
 
     function clearInputs() {
         firstNameInput.clear();
@@ -76,6 +76,16 @@ Item {
         anchors.rightMargin: 73
         spacing: 15
 
+        StyledCombo {
+            id: accTypeCombo
+            objectName:  "accTypeCombo"
+            model: ["Personal", " Savings", "Child", "Currency", "Family", "Firm"]
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+        }
+
         StyledInput {
             id: firstNameInput
             height: 80
@@ -87,17 +97,9 @@ Item {
             titleText: "First Name"
 
         }
-
-        ComboBox {
-            id: comboBox
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-        }
     }
 
-    Button {
+    PushButton {
         id: addButton
         objectName: "addButton"
         x: 491
@@ -111,6 +113,8 @@ Item {
         font.family: "Rubik"
         display: AbstractButton.TextOnly
         text: qsTr("Add User")
+        anchors.bottomMargin: 19
+        anchors.leftMargin: 500
         contentItem: Text {
             font: addButton.font
             horizontalAlignment: Text.AlignHCenter

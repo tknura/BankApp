@@ -9,8 +9,8 @@ Rectangle {
     id: root
     objectName: "adminScreen"
     visible: true
-    width: 1000
-    height: 700
+    width: parent.width
+    height: parent.height
     color: "#eeeeee"
 
     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
@@ -19,8 +19,6 @@ Rectangle {
 
     Rectangle {
         color: "#ffffff"
-        anchors.right: parent.right
-        anchors.rightMargin: 750
         border.width: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
