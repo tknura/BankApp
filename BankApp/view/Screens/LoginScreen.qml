@@ -21,11 +21,13 @@ Rectangle {
     }
 
     function loadUserScreen() {
-        screenParent.replace(["qrc:/view/Screens/UserScreen.qml"])
+        screenParent.replace(["qrc:/view/Screens/UserScreen.qml",
+                              {width: loginScreen.width, height: loginScreen.height}])
     }
 
     function loadAdminScreen() {
-        screenParent.replace(["qrc:/view/Screens/AdminScreen.qml"])
+        screenParent.replace(["qrc:/view/Screens/AdminScreen.qml",
+                             {width: loginScreen.width, height: loginScreen.height}])
     }
 
     signal inputValues(string login, string password)
@@ -134,8 +136,4 @@ Rectangle {
 
 
 
-/*##^##
-Designer {
-    D{i:11;anchors_y:525}
-}
-##^##*/
+

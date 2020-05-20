@@ -17,7 +17,8 @@ Window {
     LoginScreen{
         id: loginScreen
         objectName: "loginScreen"
-        anchors.fill: parent
+        width: main.width
+        height: main.height
         screenParent: stackView
     }
 

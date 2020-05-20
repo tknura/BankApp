@@ -3,45 +3,96 @@ import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.14
 
 Item {
-    width: 250
 
-    property list<string> values;
+    // model should contain:
+    // string buttonText
+    // url buttonIcon
+    property alias model: listView.model
 
-    ListModel {
-        id: menuModel
-        ListElement {
-            buttonText: "Dashboard"
-            buttonIcon: "../resources/icons/wallet-solid.png"
-        }
-    }
+    // stack view where item should be replaced in
+    property var screenStack
+    // content which is replaced on stack on list item click (should match order
+    // in model to work properly)
+    property var contentArray
 
-    Component {
-        id: button
-        RadioButton {
-            id: dashboardButton
-            x: 0
-            y: 125
-            width: 250
-            height: 59
-            ButtonGroup.group: menu
-            leftPadding: 20
-            padding: 6
-            icon.source: buttonIcon
-            display: AbstractButton.TextBesideIcon
+    Rectangle {
+        id: background
+        color: "#ffffff"
+        width: parent.width
+        height: parent.height
 
-            contentItem: Text {
-                font.weight: Font.Medium
-                horizontalAlignment: Text.AlignHRight
-                verticalAlignment: Text.AlignVCenter
-                color: "#26282a"
-                text: buttonText
-                font.pointSize: 10
-                font.family: "Rubik"
+        ListView {
+            id: listView
+            anchors.top: parent.top
+            anchors.topMargin: 129
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 60
+            highlightRangeMode: ListView.NoHighlightRange
+            spacing: 0
+            boundsBehavior: Flickable.StopAtBounds
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            delegate:
+                Item {
+                id: button
+                width: parent.width
+                height: 60
+
+                GroupBox {
+                    width: parent.width
+                    height: parent.height
+                    leftPadding: 25
+                    background: Rectangle {
+                        color: "transparent"
+                        border.color: "transparent"
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            listView.currentIndex = index;
+                            screenStack.replace(contentArray[index]);
+                        }
+                    }
+
+                    Image {
+                        id: butIcon
+                        width: 20
+                        height: 20
+                        source: buttonIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        sourceSize.width: 20
+                        sourceSize.height: 20
+                        fillMode: Image.PreserveAspectFit
+                    }
+
+                    ColorOverlay {
+                        anchors.fill: butIcon
+                        source: butIcon
+                        color: "#393e46"
+                    }
+
+                    Text {
+                        font.weight: Font.Medium
+                        horizontalAlignment: Text.AlignLeft
+                        verticalAlignment: Text.AlignVCenter
+                        width: parent.width
+                        height: parent.height
+                        color: "#26282a"
+                        text: buttonText
+                        anchors.left: parent.left
+                        anchors.leftMargin: butIcon.width + 5
+                        font.pointSize: 12
+                        font.family: "Rubik"
+                    }
+                }
             }
-
-            indicator: Rectangle {
-                anchors.fill: parent
-                visible: dashboardButton.checked
+            model: menuModel
+            focus: true
+            highlight: Rectangle {
+                width: listView.width
                 color: "#26a3e7fc"
                 border.color: "transparent"
                 Rectangle {
@@ -64,26 +115,6 @@ Item {
                     anchors.topMargin: 0
                 }
             }
-            checked: true
-            onCheckedChanged: {
-                contentStack.replace(dashboard)
-            }
-        }
-    }
-
-    Rectangle {
-        id: background
-        color: "#ffffff"
-        anchors.fill: parent
-        border.width: 0
-
-
-        Column {
-            id: menuButtons
-            x: 0
-            y: 123
-            anchors.top: parent.top
-            anchors.topMargin: 123
         }
 
         GroupBox {
@@ -102,14 +133,13 @@ Item {
 
             Text {
                 id: title
-                y: -12
-                height: 123
-                color: "#26282a"
+                y: 9
+                width: 84
+                height: 81
+                color: "#393e46"
                 text: qsTr("Bank\nApp")
-                anchors.left: parent.left
-                anchors.leftMargin: 109
-                anchors.right: parent.right
-                anchors.rightMargin: -12
+                anchors.horizontalCenterOffset: 46
+                anchors.horizontalCenter: parent.horizontalCenter
                 font.weight: Font.Bold
                 font.family: "Rubik"
                 verticalAlignment: Text.AlignVCenter
@@ -119,12 +149,11 @@ Item {
 
             Image {
                 id: titleIcon
+                y: 7
                 width: 77
                 height: 83
-                anchors.top: parent.top
-                anchors.topMargin: 8
-                anchors.left: parent.left
-                anchors.leftMargin: 14
+                anchors.horizontalCenterOffset: -63
+                anchors.horizontalCenter: parent.horizontalCenter
                 source: "qrc:/resources/icons/landmark-solid.svg"
                 sourceSize.width: 60
                 sourceSize.height: 60
@@ -145,6 +174,7 @@ Item {
             width: 234
             height: 40
             text: qsTr("Log Out")
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.left: parent.left
             anchors.leftMargin: 8
             anchors.bottom: parent.bottom
@@ -164,11 +194,13 @@ Item {
                 font.family: "Rubik"
             }
         }
-
-
-
-
     }
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
