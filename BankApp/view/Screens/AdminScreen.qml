@@ -5,54 +5,15 @@ import QtQuick.Controls.Styles 1.4
 import "qrc:/view/Components/"
 import "qrc:/view/Tabs/"
 
-Rectangle {
+Item {
     id: root
     objectName: "adminScreen"
     visible: true
     width: parent.width
     height: parent.height
-    color: "#eeeeee"
 
-    FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
-    FontLoader { id: rubikRegular; source: "/resources/fonts/Rubik-Regular.ttf" }
-    FontLoader { id: rubikMedium; source: "/resources/fonts/Rubik-Medium.ttf" }
+    signal logOut()
 
-    ListModel{
-        id: menuModel
-        ListElement {
-            buttonText: "Users"
-            buttonIcon: "qrc:/resources/icons/wallet-solid.png"
-        }
-
-        ListElement {
-            buttonText: "Accounts"
-            buttonIcon: "qrc:/resources/icons/money-check-alt-solid.png"
-        }
-
-        ListElement {
-            buttonText: "Funds"
-            buttonIcon: "qrc:/resources/icons/piggy-bank-solid.png"
-         }
-
-        ListElement {
-            buttonText: "History"
-            buttonIcon: "qrc:/resources/icons/history-solid.png"
-        }
-    }
-
-    BankMenu {
-        id: menu
-        width: 300;
-        model: menuModel
-        anchors.left: parent.left;
-        anchors.leftMargin: 0;
-        anchors.top: parent.top;
-        anchors.topMargin: 0;
-        anchors.bottom: parent.bottom;
-        anchors.bottomMargin: 0
-        screenStack: contentStack
-        contentArray: [userAddition, accountAddition, funds, history]
-    }
     StackView {
         id: contentStack
         anchors.top: parent.top
@@ -61,9 +22,9 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 250
-        initialItem: dashboard
+        anchors.left: menu.right
+        anchors.leftMargin: 0
+        initialItem: userAddition
         replaceEnter: Transition {
             PropertyAnimation {
                 property: "opacity"
@@ -116,13 +77,49 @@ Rectangle {
             source: "qrc:/view/Tabs/Dashboard.qml"
         }
 
-
-
     }
 
-    ButtonGroup {
+    BankMenu {
         id: menu
+        width: 300;
+        model: menuModel
+        anchors.left: parent.left;
+        anchors.leftMargin: 0;
+        anchors.top: parent.top;
+        anchors.topMargin: 0;
+        anchors.bottom: parent.bottom;
+        anchors.bottomMargin: 0
+        screenStack: contentStack
+        contentArray: [userAddition, accountAddition, funds, history]
+        onLogOut: {
+            logOut();
+        }
     }
+
+    ListModel{
+        id: menuModel
+        ListElement {
+            buttonText: "Users"
+            buttonIcon: "qrc:/resources/icons/wallet-solid.png"
+        }
+
+        ListElement {
+            buttonText: "Accounts"
+            buttonIcon: "qrc:/resources/icons/money-check-alt-solid.png"
+        }
+
+        ListElement {
+            buttonText: "Funds"
+            buttonIcon: "qrc:/resources/icons/piggy-bank-solid.png"
+         }
+
+        ListElement {
+            buttonText: "History"
+            buttonIcon: "qrc:/resources/icons/history-solid.png"
+        }
+    }
+
+
 }
 
 

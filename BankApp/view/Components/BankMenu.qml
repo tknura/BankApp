@@ -15,6 +15,8 @@ Item {
     // in model to work properly)
     property var contentArray
 
+    signal logOut();
+
     Rectangle {
         id: background
         color: "#ffffff"
@@ -181,9 +183,11 @@ Item {
             anchors.bottomMargin: 8
             font.weight: Font.Medium
             display: AbstractButton.TextOnly
+
             background: Rectangle {
                 color: "transparent"
             }
+
             contentItem: Text {
                 color: "#4c26282a"
                 text: logOutButton.text
@@ -192,6 +196,10 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 font.family: "Rubik"
+            }
+
+            onClicked: {
+                logOut();
             }
         }
     }

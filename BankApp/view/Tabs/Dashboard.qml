@@ -8,6 +8,18 @@ Item {
     width: 700
     height: 700
 
+    signal refresh(string accNumber)
+
+    onRefresh: {
+        console.log(accNumber);
+    }
+
+    Component.onCompleted:  {
+        accountsList.addButton("Regular", "1234 1234 1234 1234", "999,99", "PLN", false);
+        accountsList.addButton("Family", "4321 4321 4321 4321", "999,99", "PLN", false);
+        accountsList.addButton("Currency", "1234 1234 1234 1234", "999,99", "PLN", true);
+    }
+
     Rectangle {
         id: background
         color: "#eeeeee"
@@ -21,6 +33,7 @@ Item {
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
+
 
         Text {
             id: title
@@ -41,12 +54,12 @@ Item {
 
         Text {
             id: desc
-            width: 309
+            width: 328
             height: 25
             color: "#4c26282a"
             text: qsTr("Welcome back, user")
-            anchors.top: parent.top
-            anchors.topMargin: 123
+            anchors.top: title.bottom
+            anchors.topMargin: 0
             anchors.left: parent.left
             anchors.leftMargin: 70
             font.pixelSize: 18
@@ -54,7 +67,7 @@ Item {
         }
 
         Text {
-            id: element
+            id: accounts
             width: 247
             height: 57
             text: qsTr("Accounts")
@@ -68,33 +81,32 @@ Item {
             font.family: "Rubik"
         }
 
-        Button {
-            id: makePaymentButton
+        AccountButtonList {
+            id: accountsList
+            objectName: "accountsList"
+            height: 160
+            anchors.right: parent.right
+            anchors.rightMargin: 48
+            anchors.left: parent.left
+            anchors.leftMargin: 70
+            anchors.top: accounts.bottom
+            anchors.topMargin: 6
+            itemToRefresh: dashboard
+        }
+
+        PushButton {
+            id: paymentButton
             width: 161
             height: 35
             text: qsTr("Make Payment")
             anchors.top: parent.top
-            anchors.topMargin: 396
+            anchors.topMargin: 406
             anchors.left: parent.left
-            anchors.leftMargin: 70
-            font.family: "Rubik"
-            contentItem: Text {
-                text: makePaymentButton.text
-                font: makePaymentButton.font
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                color: "#259FC4"
-            }
-            background: Rectangle {
-                color: "#A3E7FC"
-                border.color: "#A3E7FC"
-                border.width: 1
-                radius: 25
-            }
+            anchors.leftMargin: 70          
         }
 
         Text {
-            id: history
+            id: historyTitle
             width: 247
             height: 57
             text: qsTr("Today")
@@ -110,8 +122,4 @@ Item {
     }
 }
 
-/*##^##
-Designer {
-    D{i:1;anchors_height:200;anchors_width:200}
-}
-##^##*/
+

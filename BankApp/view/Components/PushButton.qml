@@ -17,7 +17,7 @@ Button {
         color: "#259FC4"
     }
     background: Rectangle {
-        color: pushButton.pressed ? "#75b4c5" : pushButton.hovered ? "#7cd2ed" : "#A3E7FC"
+        color: pushButton.pressed ? "#b9edfe" : pushButton.hovered ? "#b1ebfd" : "#A3E7FC"
         radius: 25
     }
 }

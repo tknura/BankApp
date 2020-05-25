@@ -1,9 +1,12 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
-import "qrc:/componentCreation.js" as CreateScript
+import QtGraphicalEffects 1.12
+
 Item {
+    id: element
     height: 180
+    property var itemToRefresh
 
     function addButton(p_accTypText, p_accNumberText, p_accAmountText, p_accCurencyText,
                        p_isDisabled) {
@@ -11,14 +14,15 @@ Item {
         var sprite;
         component = Qt.createComponent("AccountButton.qml");
         sprite = component.createObject(row,
-                                            {
-                                              accTypeText: p_accTypText,
-                                              accNumberText: p_accNumberText,
-                                              accAmountText: p_accAmountText,
-                                              accCurrencyText: p_accCurencyText,
-                                              isDisabled: p_isDisabled,
-                                              buttongroup: accountButtons
-                                            });
+                                        {
+                                            accTypeText: p_accTypText,
+                                            accNumberText: p_accNumberText,
+                                            accAmountText: p_accAmountText,
+                                            accCurrencyText: p_accCurencyText,
+                                            isDisabled: p_isDisabled,
+                                            buttongroup: accountButtons,
+                                            itemToRefresh: itemToRefresh
+                                        });
     }
 
     ScrollView {
@@ -34,6 +38,5 @@ Item {
     }
 
     ButtonGroup { id: accountButtons }
-
 }
 

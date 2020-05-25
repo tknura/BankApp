@@ -4,16 +4,18 @@ import QtQuick.Controls 2.3
 
 Item {
     id: styledCombo
+    objectName: "styledInput"
     visible: true
     width: 640
     height: 80
-
     property string titleText: "Title"
     property alias model: comboBox.model
 
     function clear() {
         comboBox.currentIndex = -1;
     }
+
+    signal optionChanged(string optName)
 
     Text {
         id: title
@@ -33,6 +35,7 @@ Item {
 
     ComboBox {
         id: comboBox
+        wheelEnabled: true
         objectName: "comboBox"
         leftPadding: 25
         anchors.bottomMargin: 0
@@ -44,6 +47,11 @@ Item {
         anchors.leftMargin: 0
         anchors.right: parent.right
         font.family: "Rubik"
+
+        onActivated:  {
+            optionChanged(displayText);
+        }
+
         contentItem: Text {
             leftPadding: 0
             text: comboBox.displayText
@@ -64,13 +72,13 @@ Item {
                   width: parent.width
 
                   contentItem: Text {
-                      id:textItem
-                      text: modelData
-                      color: hovered ? "white" : "#259fc4"
-                      font.weight: hovered ? Font.Medium : Font.Normal
-                      elide: Text.ElideRight
-                      verticalAlignment: Text.AlignVCenter
-                      horizontalAlignment: Text.AlignLeft
+                    id:textItem
+                    text: modelData
+                    color: hovered ? "white" : "#259fc4"
+                    font.weight: hovered ? Font.Medium : Font.Normal
+                    elide: Text.ElideRight
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
                   }
 
                   background: Rectangle {
@@ -80,9 +88,7 @@ Item {
                     anchors.leftMargin: 0
                     width: itemDlgt.width
                   }
-
         }
-
         popup: Popup {
             y: comboBox.height
             width: comboBox.width

@@ -24,10 +24,6 @@ Item {
         button.state = "disabled";
     }
 
-    function setButtonGroup (bg) {
-        button.setButtonGroup(bg);
-    }
-
     Component.onCompleted: {
         if(isDisabled){
             disable();
@@ -58,9 +54,8 @@ Item {
             anchors.fill: parent
         }
         indicator: null
-
-        function setButtonGroup (bg) {
-            ButtonGroup.group = bg;
+        onClicked: {
+            itemToRefresh.refresh(accNumberText);
         }
 
         states: [
@@ -119,10 +114,6 @@ Item {
                 font.pixelSize: accAmount.font.pixelSize
                 font.family: "Rubik"
             }
-
-
-
-
         }
 
         Text {
@@ -178,8 +169,6 @@ Item {
 
             Rectangle {
                 id: disabledShadow
-                x: -12
-                y: -12
                 color: "#ffffff"
                 anchors.fill: parent
                 radius: background.radius
@@ -187,8 +176,6 @@ Item {
 
             Text {
                 id: disabledText
-                x: -12
-                y: -12
                 font.family: "Rubik"
                 text: qsTr("Transactions\n disabled")
                 verticalAlignment: Text.AlignVCenter
@@ -226,8 +213,4 @@ Item {
 
 
 
-/*##^##
-Designer {
-    D{i:9;anchors_width:133;anchors_x:51;anchors_y:67}
-}
-##^##*/
+

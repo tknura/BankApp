@@ -11,11 +11,11 @@ Item {
     signal userAddition(string login, string password, string mail)
 
     function clearInputs() {
-        firstNameInput.clear();
-        lastNameInput.clear();
-        mailInput.clear();
-        loginInput.clear();
-        passwordInput.clear();
+        for(var i = 0; i < inputs.children.length; ++i) {
+                if(inputs.children[i].objectName === "styledInput") {
+                    inputs.children[i].clear();
+                }
+        }
     }
 
     function success() {
