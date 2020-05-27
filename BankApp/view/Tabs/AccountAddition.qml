@@ -1,8 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
-import "qrc:/view/Components/"
+import QtGraphicalEffects 1.14
+import components 1.0
 
 Item {
+    id: element
     objectName: "accountAddition"
     visible: true
     width: 700
@@ -11,11 +13,41 @@ Item {
     property alias model: accTypeCombo.model
 
     function clearInputs() {
-        firstNameInput.clear();
-        lastNameInput.clear();
-        mailInput.clear();
-        loginInput.clear();
-        passwordInput.clear();
+        for(var i = 0; i < inputs.children.length; ++i) {
+            if(inputs.children[i].objectName === "styledInput") {
+                inputs.children[i].clear();
+            }
+        }
+    }
+
+    function addInputs(type){
+        switch(type){
+        case "Personal":
+            console.log("personal!")
+            break;
+        case "Savings":
+            console.log("savings!")
+            break;
+        case "Child":
+            console.log("child!")
+            break;
+        case "Currency":
+            console.log("currency!")
+            break;
+        case "Family":
+            console.log("firm!")
+            break;
+        case "Firm":
+            console.log("firm!")
+            break;
+        }
+    }
+
+    function addPersonalInputs(){
+        var component;
+        var sprite;
+        component = Qt.createComponent("AccountButton.qml");
+        sprite = component.createObject
     }
 
     Rectangle {
@@ -65,38 +97,123 @@ Item {
     }
 
 
-    Column {
-        id: inputs
-        height: 462
-        anchors.left: parent.left
-        anchors.leftMargin: 61
+    Item {
+        id: element1
+        anchors.fill: scrollView
+
+        Column {
+            id: staticInputs
+            x: 0
+            y: 0
+            height: 650
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            spacing: 15
+
+
+            StyledCombo {
+                id: accTypeCombo
+                titleText: "Type"
+                objectName:  "accTypeCombo"
+                model: ["Personal", "Savings", "Child", "Currency", "Family", "Firm"]
+                height: 80
+                width: staticInputs.width
+                onOptionChanged: {
+                    addInputs(optName);
+                }
+            }
+
+            GroupBox {
+                id: accNumberGroup
+                height: 80
+                width: staticInputs.width
+                padding: 0
+
+                StyledInput {
+                    id: firstNameInput
+                    height: accNumberGroup.height
+                    inputMask: "9999 9999 9999 9999"
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    anchors.right: refreshButton.left
+                    anchors.rightMargin: 5
+                    placeholder: "generated account number"
+                    titleText: "Number"
+                }
+
+                PushButton {
+                    id: refreshButton
+                    x: 537
+                    y: 39
+                    width: 40
+                    height: width
+                    text: "Reroll"
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                }
+
+                background: Rectangle {
+                    color: "transparent"
+                    border.color: "transparent"
+                }
+            }
+
+            StyledCombo {
+                id: ownerCombo
+                titleText: "User"
+                objectName:  "accTypeCombo"
+                height: 80
+                width: staticInputs.width
+            }
+
+            StyledInput {
+                id: balanceInput
+                height: 80
+                width: staticInputs.width
+                placeholder: "starting account balance"
+                titleText: "Balance"
+            }
+
+            StyledInput {
+                height: 80
+                width: staticInputs.width
+                placeholder: "starting account balance"
+                titleText: "Balance"
+            }
+
+            StyledInput {
+                height: 80
+                width: staticInputs.width
+                placeholder: "starting account balance"
+                titleText: "Balance"
+            }
+
+            Column {
+                id: dynamicInputs
+                height: 80
+                width: staticInputs.width
+            }
+
+
+
+        }
+    }
+
+    ScrollView {
+        id: scrollView
+        rightPadding: 10
         anchors.top: parent.top
-        anchors.topMargin: 163
+        anchors.topMargin: 154
+        anchors.left: parent.left
+        anchors.leftMargin: 60
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 76
         anchors.right: parent.right
-        anchors.rightMargin: 73
-        spacing: 15
-
-        StyledCombo {
-            id: accTypeCombo
-            objectName:  "accTypeCombo"
-            model: ["Personal", " Savings", "Child", "Currency", "Family", "Firm"]
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-        }
-
-        StyledInput {
-            id: firstNameInput
-            height: 80
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            placeholder: "first name"
-            titleText: "First Name"
-
-        }
+        anchors.rightMargin: 66
     }
 
     PushButton {
@@ -127,11 +244,23 @@ Item {
             radius: 25
         }
         onClicked: {
-            userAddition(loginInput.inputText, passwordInput.inputText, mailInput.inputText);
             clearInputs();
         }
     }
+
+
+
 }
 
 
 
+
+
+
+
+
+/*##^##
+Designer {
+    D{i:1;invisible:true}
+}
+##^##*/

@@ -10,7 +10,7 @@
 #include "model/Authorization.h"
 #include "model/LogInData.h"
 
-class LogInScreenController : public QObject
+class LogInScreenController : public QObject, IController
 {
     Q_OBJECT
 

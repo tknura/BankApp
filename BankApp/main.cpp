@@ -17,7 +17,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/view/Screens/main.qml"));
+    engine.addImportPath("qrc:/");
+    const QUrl url(QStringLiteral("qrc:/screens/main.qml"));
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {

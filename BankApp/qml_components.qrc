@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/components">
+        <file alias="qmldir">view/Components/qmldir</file>
+        <file alias="StyledInput.qml">view/Components/StyledInput.qml</file>
+        <file alias="AccountButton.qml">view/Components/AccountButton.qml</file>
+        <file alias="AccountButtonList.qml">view/Components/AccountButtonList.qml</file>
+        <file alias="BankMenu.qml">view/Components/BankMenu.qml</file>
+        <file alias="InfoPopup.qml">view/Components/InfoPopup.qml</file>
+        <file alias="StyledCombo.qml">view/Components/StyledCombo.qml</file>
+        <file alias="PushButton.qml">view/Components/PushButton.qml</file>
+    </qresource>
+</RCC>

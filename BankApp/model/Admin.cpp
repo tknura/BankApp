@@ -5,9 +5,7 @@ std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}
 
-Admin::~Admin() {
-    OnLogOut();
-}
+Admin::~Admin() {}
 
 /*
  *  Method which creates user and adds him to user map

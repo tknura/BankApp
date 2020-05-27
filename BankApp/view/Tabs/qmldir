@@ -1,0 +1,8 @@
+module Tabs
+AccountAddition 1.0 AccountAddition.qml
+UserAddition 1.0 UserAddition.qml
+FundAddition 1.0 FundAddition.qml
+Dashboard 1.0 Dashboard.qml
+Funds 1.0 Funds.qml
+History 1.0 History.qml
+Payments 1.0 Payments.qml

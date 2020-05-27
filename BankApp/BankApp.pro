@@ -41,9 +41,12 @@ SOURCES += \
         model/Test.cpp \
         model/User.cpp
 
-RESOURCES += qml.qrc \
+RESOURCES += \
     fonts.qrc \
-    icons.qrc
+    icons.qrc \
+    qml_components.qrc \
+    qml_screens.qrc \
+    qml_tabs.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH = view/

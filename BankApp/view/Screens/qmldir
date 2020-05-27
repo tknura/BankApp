@@ -1,0 +1,4 @@
+module Screens
+AdminScreen 1.0 AdminScreen.qml
+LoginScreen 1.0 LoginScreen.qml
+UserScreen 1.0 UserScreen.qml

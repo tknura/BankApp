@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/screens">
+        <file alias="qmldir">view/Screens/qmldir</file>
+        <file alias="main.qml">view/Screens/main.qml</file>
+        <file alias="LoginScreen.qml">view/Screens/LoginScreen.qml</file>
+        <file alias="UserScreen.qml">view/Screens/UserScreen.qml</file>
+        <file alias="AdminScreen.qml">view/Screens/AdminScreen.qml</file>
+    </qresource>
+</RCC>

@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
-import "qrc:/view/Components/"
+import components 1.0
 
 Item {
     objectName: "userAddition"

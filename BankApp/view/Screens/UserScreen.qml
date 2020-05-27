@@ -3,7 +3,7 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Styles 1.4
 import "qrc:/view/Tabs/"
-import "qrc:/view/Components/"
+import components 1.0
 
 Item {
     id: root

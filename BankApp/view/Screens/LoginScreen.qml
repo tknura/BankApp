@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
-import "qrc:/view/Components/"
+import components 1.0
 
 Rectangle {
     id: loginScreen
@@ -21,12 +21,12 @@ Rectangle {
     }
 
     function loadUserScreen() {
-        screenParent.replace(["qrc:/view/Screens/UserScreen.qml",
+        screenParent.replace(["qrc:/screens/UserScreen.qml",
                               {width: loginScreen.width, height: loginScreen.height}])
     }
 
     function loadAdminScreen() {
-        screenParent.replace(["qrc:/view/Screens/AdminScreen.qml",
+        screenParent.replace(["qrc:/screens/AdminScreen.qml",
                              {width: loginScreen.width, height: loginScreen.height}])
     }
 
@@ -137,3 +137,9 @@ Rectangle {
 
 
 
+
+/*##^##
+Designer {
+    D{i:1;anchors_width:1000}
+}
+##^##*/

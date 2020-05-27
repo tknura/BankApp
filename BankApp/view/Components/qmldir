@@ -1,0 +1,8 @@
+module Components
+AccountButton 1.0 AccountButton.qml
+AccountButtonList 1.0 AccountButtonList.qml
+BankMenu 1.0 BankMenu.qml
+InfoPopup 1.0 InfoPopup.qml
+PushButton 1.0 PushButton.qml
+StyledCombo 1.0 StyledCombo.qml
+StyledInput 1.0 StyledInput.qml

@@ -1,0 +1,15 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/tabs">
+        <file alias="qmldir">view/Tabs/qmldir</file>
+        <file alias="Funds.qml">view/Tabs/Funds.qml</file>
+        <file alias="History.qml">view/Tabs/History.qml</file>
+        <file alias="Payments.qml">view/Tabs/Payments.qml</file>
+        <file alias="Payments.qml">view/Tabs/Payments.qml</file>
+        <file alias="Dashboard.qml">view/Tabs/Dashboard.qml</file>
+        <file alias="History.qml">view/Tabs/History.qml</file>
+        <file alias="AccountAddition.qml">view/Tabs/AccountAddition.qml</file>
+        <file alias="FundAddition.qml">view/Tabs/FundAddition.qml</file>
+        <file alias="UserAddition.qml">view/Tabs/UserAddition.qml</file>
+    </qresource>
+</RCC>
