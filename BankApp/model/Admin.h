@@ -3,6 +3,7 @@
 
 #include "LogInData.h"
 #include "enums/AccountType.h"
+#include "enums/CardType.h"
 #include "enums/FundType.h"
 #include "Authorization.h"
 #include <fstream>
@@ -16,11 +17,10 @@ private:
     static map<int, LogInData> usersMap;
     void FillUserMap();
     void SaveUserMap();
-    bool SaveUser(User& user);
     bool FindExistingUser(LogInData& data);
-    bool AddAccountToMap(std::unique_ptr<Account> acc);
-    bool AddCardToMap(std::unique_ptr<Card> card);
-    bool AddFundToMap(std::unique_ptr<Fund> fund);
+    bool AddAccountToMap(std::shared_ptr<Account> acc);
+    bool AddCardToMap(std::shared_ptr<Card> card);
+    bool AddFundToMap(std::shared_ptr<Fund> fund);
 public:
     Admin(const LogInData &data);
     ~Admin() override;
@@ -45,6 +45,7 @@ public:
 
     void OnLogIn() override;
     void OnLogOut() override;
+    static std::list<std::string> GetUsersStringList();
 //    bool IsValid() override;
 };
 

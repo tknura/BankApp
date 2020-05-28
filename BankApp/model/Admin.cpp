@@ -1,11 +1,14 @@
 #include "Admin.h"
 
-int Admin::idProvider = 0;
+int Admin::idProvider = 2;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}
 
-Admin::~Admin() {}
+Admin::~Admin() {
+    //to do delete
+    OnLogOut();
+}
 
 /*
  *  Method which creates user and adds him to user map
@@ -14,8 +17,8 @@ bool Admin::CreateUser(std::string p_login, std::string p_password, std::string 
     LogInData data(idProvider++, p_login, p_password, p_email);
     if(data.IsValid()) {
         if(!FindExistingUser(data)){
+            usersMap.insert({data.GetID(), data});
             std::cerr << "User " << data.GetLogin() << " created" << std::endl;
-            usersMap.insert(std::make_pair(data.GetID(), data));
         }
         else{
             std::cerr << "User " << data.GetLogin() << " already exist" << std::endl;
@@ -33,7 +36,7 @@ bool Admin::CreateUser(std::string p_login, std::string p_password, std::string 
 */
 bool Admin::CreateAccount(int ownerID, std::string number, double balance) {
     Account newAcc(number, balance, ownerID);
-    return AddAccountToMap(std::make_unique<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<Account>(newAcc));
 }
 
 /*
@@ -42,15 +45,16 @@ bool Admin::CreateAccount(int ownerID, std::string number, double balance) {
 bool Admin::CreateAccount(int supervisorID, int childID, std::string number, double balance,
                        double dailyTransactionLimit) {
     ChildAccount newAcc(number, balance, supervisorID, dailyTransactionLimit, childID);
-    return AddAccountToMap(std::make_unique<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<Account>(newAcc));
 }
 
 /*
  * Familly account with one supervisor and memebers of an account
 */
-bool Admin::CreateAccount(int supervisorID, std::string number, double balance, std::list<int> memberIdList) {
+bool Admin::CreateAccount(int supervisorID, std::string number, double balance,
+                          std::list<int> memberIdList) {
     FamillyAccount newAcc(number, balance, supervisorID, memberIdList);
-    return AddAccountToMap(std::make_unique<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<Account>(newAcc));
 }
 
 /*
@@ -58,15 +62,33 @@ bool Admin::CreateAccount(int supervisorID, std::string number, double balance, 
  */
 bool Admin::CreateAccount(int ownerID, std::string number, double balance, double interest) {
     SavingsAccount newAcc(number, balance, ownerID, interest);
-    return AddAccountToMap(std::make_unique<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<Account>(newAcc));
 }
 
 /*
- * Savings account with interest multiplying balance in detailed amount of time
+ * Normal card with connected acc number, card number, ccv and transaction limit
  */
 bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit) {
     Card newCard(accountNumber, number, ccv, transactionLimit);
-    return AddCardToMap(std::make_unique<Card>(newCard));
+    return AddCardToMap(std::make_shared<Card>(newCard));
+}
+
+/*
+ * Credit card with connected acc number, card number, ccv, transaction limit, max credit on card and billing date
+ */
+bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
+                    double maxCredit, std::string billingDate) {
+    CreditCard newCard(accountNumber, number, ccv, transactionLimit, maxCredit, billingDate);
+    return AddCardToMap(std::make_shared<Card>(newCard));
+}
+
+/*
+ * Debit card with connected acc number, card number, ccv, transaction limit and max debt on card
+ */
+bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
+                    double maxDebt) {
+    DebitCard newCard(accountNumber, number, ccv, transactionLimit, maxDebt);
+    return AddCardToMap(std::make_shared<Card>(newCard));
 }
 
 /*
@@ -74,7 +96,7 @@ bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, doub
  */
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance) {
     Fund newFund(minAmount, maxRate, fee, balance, ownerID);
-    return AddFundToMap(std::make_unique<Fund>(newFund));
+    return AddFundToMap(std::make_shared<Fund>(newFund));
 }
 
 /*
@@ -83,7 +105,7 @@ bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, d
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
                     bool isRetired, double monthlyIn) {
     RetirementFund newFund(minAmount, maxRate, fee, balance, isRetired, monthlyIn, ownerID);
-    return AddFundToMap(std::make_unique<Fund>(newFund));
+    return AddFundToMap(std::make_shared<Fund>(newFund));
 }
 
 /*
@@ -92,7 +114,7 @@ bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, d
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
                     std::string startDate, std::string endDate) {
     SavingsFund newFund(minAmount, maxRate, fee, balance, startDate, endDate, ownerID);
-    return AddFundToMap(std::make_unique<Fund>(newFund));
+    return AddFundToMap(std::make_shared<Fund>(newFund));
 }
 
 void Admin::OnLogIn() {
@@ -101,7 +123,18 @@ void Admin::OnLogIn() {
 }
 
 void Admin::OnLogOut() {
+    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it ){
+        std::cerr << (std::to_string(it->first) + "(" + it->second.GetLogin() + ")");
+    }
     SaveUserMap();
+}
+
+std::list<std::string> Admin::GetUsersStringList() {
+    std::list<std::string> result;
+    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it ){
+        result.push_back(std::to_string(it->first) + "(" + it->second.GetLogin() + ")");
+    }
+    return result;
 }
 
 void Admin::FillUserMap() {
@@ -114,7 +147,6 @@ void Admin::FillUserMap() {
             while(std::getline(file, line)){
                 LogInData logInDataFromLine = Authorization::proccesedData(line);
                 usersMap.insert(std::make_pair(logInDataFromLine.GetID(), logInDataFromLine));
-                std::cerr << usersMap[logInDataFromLine.GetID()];
             }
         }
         catch (std::fstream::failure & ex) {
@@ -156,25 +188,25 @@ bool Admin::FindExistingUser(LogInData& data) {
     return false;
 }
 
-bool Admin::AddAccountToMap(std::unique_ptr<Account> acc) {
+bool Admin::AddAccountToMap(std::shared_ptr<Account> acc) {
     if(Bank::accountMap.find(acc->GetNumber()) == Bank::accountMap.end()){
-        Bank::accountMap.insert(std::make_pair(acc->GetNumber(), acc.get()));//
+        Bank::accountMap.insert(std::make_pair(acc->GetNumber(), acc.get()));
         return true;
     }
     return false;
 }
 
-bool Admin::AddCardToMap(std::unique_ptr<Card> card) {
+bool Admin::AddCardToMap(std::shared_ptr<Card> card) {
     if(Bank::cardMap.find(card->GetAccountNumber()) == Bank::cardMap.end()){
-        Bank::cardMap.insert(std::make_pair(card->GetAccountNumber(), *card.get()));
+        Bank::cardMap.insert({card->GetAccountNumber(), *card.get()});
         return true;
     }
     return false;
 }
 
-bool Admin::AddFundToMap(std::unique_ptr<Fund> fund) {
+bool Admin::AddFundToMap(std::shared_ptr<Fund> fund) {
     if(Bank::fundMap.find(fund->GetOwnerId()) == Bank::fundMap.end()){
-        Bank::fundMap.insert(std::make_pair(fund->GetOwnerId(), *fund.get()));
+        Bank::fundMap.insert({fund->GetOwnerId(), *fund.get()});
         return true;
     }
     return false;
