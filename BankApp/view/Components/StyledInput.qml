@@ -15,6 +15,7 @@ Item {
     property alias validator: textField.validator
     property alias inputMask: textField.inputMask
     property alias inputMethodHints: textField.inputMethodHints
+    property alias readOnly: textField.readOnly
 
     function setHashed(bool) {
         if(bool){
@@ -85,6 +86,7 @@ Item {
         selectionColor: "#a3e7fc"
         selectByMouse: true
         font.weight: Font.Medium
+        readOnly: false
         background: Rectangle {
             id: background
             states: [
