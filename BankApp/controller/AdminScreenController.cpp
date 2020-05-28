@@ -5,9 +5,7 @@ void AdminScreenController::Initialize(QQmlApplicationEngine *p_engine) {
     QObject *userAdditionTab = rootObject->findChild<QObject*>("userAddition");
     QObject::connect(userAdditionTab, SIGNAL(userAddition(QString, QString, QString)),
                      this, SLOT(HandleUserAddition(QString, QString, QString)));
-
-    QObject *accountAdditionTab = rootObject->findChild<QObject*>("accountAddition");
-
+    accAddTabController = new AccountAdditionController(p_engine);
 //    QStringList str;
 //    for(auto& s : AccountType::GetAllTypesStringList()){
 //        str.push_back(QString::fromStdString(s));
@@ -20,6 +18,10 @@ void AdminScreenController::Initialize(QQmlApplicationEngine *p_engine) {
 
 AdminScreenController::AdminScreenController(QQmlApplicationEngine *p_engine) {
     Initialize(p_engine);
+}
+
+AdminScreenController::~AdminScreenController() {
+    delete accAddTabController;
 }
 
 void AdminScreenController::HandleUserAddition(QString login, QString password,
