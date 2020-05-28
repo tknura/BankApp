@@ -12,9 +12,9 @@
 
 #include <fstream>
 
-listP JsonManager::ParseData()
+void JsonManager::ParseData(listP & p_list)
 {
-    listP friends{};
+
     std::ifstream f(Config::friendsJSONPath);
 
     if(f.is_open())
@@ -22,26 +22,25 @@ listP JsonManager::ParseData()
         f>>friendsFile;
         f.close();
 
+        std::shared_ptr<PaymentRetriever> p {nullptr};
+
         for (const auto& person: friendsFile[userID]["items"])//tu jest błąd powinno być friends data
         {
             using str = std::string;
 
             str name = person["name"];
-
             str accNum = person["accNumber"];
-
             str address = person["address"];
 
-            PaymentRetriever m(name, accNum, address);
-            friends.push_back(m);
+            p = std::make_shared<PaymentRetriever>(name,accNum,address);
+
+            p_list.push_back(p);
         }
     }
     else
     {
         throw std::runtime_error("Could not open the friendsData.json file");
     }
-
-    return friends;
 }
 void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMap)
 {
@@ -208,6 +207,32 @@ void JsonManager::ParseData(multiMapFund &p_map)
     else
     {
         throw std::runtime_error("Could not open the fundData.json file");
+    }
+}
+void JsonManager::SerializeData(listP& p_list)
+{
+    std::string s{"["};
+    for(auto it = p_list.begin(); it!=p_list.end(); ++it)
+    {
+        json j = (*it)->SerializeToJson();
+        s+= j.dump();
+        s+= ",";
+    }
+    //std::cout<<s<<"\n";
+    s.pop_back();
+    s+= "]";
+    std::cout<<s<<"\n";
+    json j2 = json::parse(s);
+    friendsFile[userID]["items"] = j2;
+//    //dodać teraz w friendsFile to do pozycji [userID] items = s
+    std::ofstream f(Config::friendsJSONPath);
+    if(f.is_open())
+    {
+        f<<friendsFile;
+    }
+    else
+    {
+        throw std::runtime_error("Could not open file");
     }
 }
 

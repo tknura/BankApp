@@ -1,7 +1,7 @@
 [
 	{
 		"userID":0,
-		"friendsList":
+		"items":
 		[
 			{
 				"name":"Patryk Lipka",
@@ -23,7 +23,7 @@
 	},
     {
         "userID":1,
-        "friendsList":
+        "items":
         [
             {
                 "name":"Patryk Lipka",
@@ -44,7 +44,7 @@
     },
     {
         "userID":2,
-        "friendsList":
+        "items":
         [
             {
                 "name":"Błażej Wylęgły",
@@ -60,7 +60,7 @@
     },
     {
         "userID":3,
-        "friendsList":
+        "items":
         [
             {
                 "name":"Patryk Lipka",

@@ -21,6 +21,7 @@ public:
     string address;
     string GetAccNumer(){return accNumber;}
     json SerializeToJson();
+    std::string GetName(){return name;}
 };
 
 #endif // PAYMENTRETRIEVER_H

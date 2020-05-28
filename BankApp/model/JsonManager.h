@@ -12,7 +12,7 @@
 #include "model/json.hpp"
 
 using json = nlohmann::json;
-using listP = std::list<PaymentRetriever>;
+using listP = std::list<std::shared_ptr<PaymentRetriever>>;
 using listAcc = std::list<std::string>;
 using listFund = std::list<Fund>;
 using unorderedMapAcc = std::unordered_map<std::string,std::shared_ptr<Account>>;
@@ -43,7 +43,8 @@ public:
     void ParseData(listAcc& p_list, unorderedMapAcc& p_map);
     void ParseData(multiMapFund &p_map);
     void ParseData(multiMapCard &p_map);
-    listP ParseData();
+    void ParseData(listP &p_list);
+    void SerializeData(listP& p_list);
     std::string GetCardFile(){return cardFile.dump();}
 
     template <class T>
