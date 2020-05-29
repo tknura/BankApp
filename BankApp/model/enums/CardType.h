@@ -27,7 +27,7 @@ public:
         switch (value) {
         case DEBIT: return "debit";
         case CREDIT: return "credit";
-        case PRE_PAID: return "pre paid";
+        case PRE_PAID: return "pre-paid";
         }
     }
 

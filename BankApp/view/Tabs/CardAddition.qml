@@ -10,8 +10,8 @@ Item {
     width: 700
     height: 700
 
-    property var fundsModel
-    property var usersModel
+    property var cardsModel
+    property var accountsModel
 
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {
@@ -23,31 +23,31 @@ Item {
 
     function addInputs(type){
         switch(type){
-        case "savings":
+        case "pre-paid":
             addPrePaidInputs();
             break;
-        case "retirement":
+        case "debit":
             addDebitInputs();
-            //add toggle is retired
-            addCurrencyInput("Monthly in");
-            addCurrencyInput("Monthly out");
             break;
-        case "investment":
+        case "credit":
             addCreditInputs();
             break;
         }
     }
 
-    function addSavingsInputs() {
+    function addPrePaidInputs() {
         removeDynamicInputs();
     }
 
-    function addRetirementInputs() {
+    function addDebitInputs() {
         removeDynamicInputs();
+        addCurrencyInput("Max debt");
     }
 
-    function addInvestmentInputs() {
+    function addCreditInputs() {
         removeDynamicInputs();
+        addCurrencyInput("Max credit");
+        addTextInput("Billing date")
     }
 
     function addTextInput(title = "", placeholder = "", inputMask) {
@@ -127,9 +127,9 @@ Item {
             spacing: 15
 
             StyledCombo {
-                id: fundTypeCombo
+                id: cardTypeCombo
                 titleText: "Type"
-                objectName: "fundTypeCombo"
+                objectName: "cardTypeCombo"
                 height: 80
                 width: parent.width
                 onOptionChanged: {
@@ -137,41 +137,96 @@ Item {
                 }
             }
 
+            GroupBox {
+                id: cardNumberGroup
+                height: 80
+                width: inputs.width
+                padding: 0
+
+                StyledInput {
+                    id: cardNumberInput
+                    objectName: "cardNumberInput"
+                    height: cardNumberGroup.height
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    anchors.right: cardRerollButton.left
+                    anchors.rightMargin: 5
+                    titleText: "Number"
+                    readOnly: true
+                }
+
+                PushButton {
+                    id: cardRerollButton
+                    objectName: "cardRerollButton"
+                    x: 537
+                    y: 39
+                    width: 40
+                    height: width
+                    text: "Reroll"
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                }
+
+                background: Rectangle {
+                    color: "transparent"
+                    border.color: "transparent"
+                }
+            }
+
+            GroupBox {
+                id: ccvNumberGroup
+                height: 80
+                width: inputs.width
+                padding: 0
+
+                StyledInput {
+                    id: ccvNumberInput
+                    objectName: "ccvNumberInput"
+                    height: ccvNumberGroup.height
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    anchors.right: ccvRerollButton.left
+                    anchors.rightMargin: 5
+                    titleText: "CCV"
+                    readOnly: true
+                }
+
+                PushButton {
+                    id: ccvRerollButton
+                    objectName: "ccvRerollButton"
+                    x: 537
+                    y: 39
+                    width: 40
+                    height: width
+                    text: "Reroll"
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                }
+
+                background: Rectangle {
+                    color: "transparent"
+                    border.color: "transparent"
+                }
+            }
+
             StyledCombo {
-                id: ownerCombo
-                titleText: "User"
-                objectName:  "ownerCombo"
+                id: ownerAcc
+                titleText: "Account"
+                objectName:  "ownerAcc"
                 //model: usersModel
                 height: 80
                 width: parent.width
             }
 
             StyledCurrencyInput {
-                id: minAmountInput
-                objectName: "minAmountInput"
-                height: 80
+                id: limitInput
                 width: parent.width
-                titleText: "Minimal amount"
-            }
-
-            StyledInput {
-                id: maxRateInput
-                objectName: "maxRateInput"
                 height: 80
-                width: parent.width
-                titleText: "Maximal Rate"
-                placeholder: "000.00%"
-                inputMask: "999.99%;0"
-            }
-
-            StyledInput {
-                id: feeInput
-                objectName: "feeInput"
-                height: 80
-                width: parent.width
-                titleText: "Fee"
-                placeholder: "000.00%"
-                inputMask: "999.99%;0"
+                titleText: "Transaction limit"
             }
 
             Column {
@@ -218,7 +273,7 @@ Item {
         width: 328
         height: 75
         color: "#26282a"
-        text: qsTr("Funds")
+        text: qsTr("Cards")
         anchors.top: parent.top
         anchors.topMargin: 50
         anchors.left: parent.left
@@ -235,7 +290,7 @@ Item {
         width: 309
         height: 25
         color: "#4c26282a"
-        text: qsTr("Add a fund to specific user")
+        text: qsTr("Add a card to specific account")
         anchors.top: parent.top
         anchors.topMargin: 123
         anchors.left: parent.left

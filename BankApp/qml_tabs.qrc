@@ -8,5 +8,7 @@
         <file alias="AccountAddition.qml">view/Tabs/AccountAddition.qml</file>
         <file alias="FundAddition.qml">view/Tabs/FundAddition.qml</file>
         <file alias="UserAddition.qml">view/Tabs/UserAddition.qml</file>
+        <file alias="CardAddition.qml">view/Tabs/CardAddition.qml</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

@@ -6,14 +6,7 @@ void AdminScreenController::Initialize(QQmlApplicationEngine *p_engine) {
     QObject::connect(userAdditionTab, SIGNAL(userAddition(QString, QString, QString)),
                      this, SLOT(HandleUserAddition(QString, QString, QString)));
     accAddTabController = new AccountAdditionController(p_engine);
-//    QStringList str;
-//    for(auto& s : AccountType::GetAllTypesStringList()){
-//        str.push_back(QString::fromStdString(s));
-//    }
-//    QObject *accTypeCombo = accountAdditionTab->findChild<QObject*>("accTypeCombo");
-//    QQmlContext *context =  QQmlEngine::contextForObject(accTypeCombo);
-//    std::cerr << "accAdd: " << accountAdditionTab << " accTypeCombo: " << accTypeCombo << " context:" << context->nameForObject(accTypeCombo).toStdString();
-    //    context->setContextProperty("typesList", QVariant::fromValue(str));
+    cardAddTabController = new CardAdditionController(p_engine);
 }
 
 AdminScreenController::AdminScreenController(QQmlApplicationEngine *p_engine) {
@@ -22,6 +15,15 @@ AdminScreenController::AdminScreenController(QQmlApplicationEngine *p_engine) {
 
 AdminScreenController::~AdminScreenController() {
     delete accAddTabController;
+    delete cardAddTabController;
+}
+
+QStringList AdminScreenController::UserList() {
+    QStringList str;
+    for(auto& s : Admin::GetUsersStringList()){
+        str.append(QString::fromStdString(s));
+    }
+    return str;
 }
 
 void AdminScreenController::HandleUserAddition(QString login, QString password,

@@ -2,7 +2,6 @@
 #define ACCOUNTADDITIONCONTROLLER_H
 
 #include <QString>
-#include <QQuickView>
 #include "IController.h"
 #include "../model/enums/AccountType.h"
 #include "../model/Admin.h"
@@ -13,13 +12,15 @@ class AccountAdditionController : QObject, IController
 
 private:
     QObject* rootObject;
-
+    QObject* accNumberInput;
 public:
     void Initialize(QQmlApplicationEngine* p_engine) override;
     ~AccountAdditionController() override {}
     AccountAdditionController(QQmlApplicationEngine* p_engine);
-    QStringList accTypes();
-    QStringList userList();
+    QStringList AccTypes();
+
+public slots:
+    void HandleRerollButton();
 };
 
 #endif // ACCOUNTADDITIONCONTROLLER_H

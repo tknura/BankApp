@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -23,6 +22,8 @@ public:
 
     std::string GetAccountNumber() const;
     void SetAccountNumber(const std::string &value);
+    static std::string GenerateNumber();
+    static std::string GenerateCCV();
 };
 
 #endif // CARD_H

@@ -4,7 +4,6 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Styles 1.4
 import components 1.0
 import tabs 1.0
-
 Item {
     id: root
     objectName: "adminScreen"
@@ -57,26 +56,19 @@ Item {
             width: contentStack.width
         }
 
-        Loader {
-            id: funds
-            x: 250
-            y: 0
+        CardAddition {
+            id: cardAddition
             height: contentStack.height
             visible: false
             width: contentStack.width
-            source: "qrc:/view/Tabs/Funds.qml"
         }
 
-        Loader {
-            id: history
-            x: 250
-            y: 0
+        FundAddition {
+            id: fundAddition
             height: contentStack.height
             visible: false
             width: contentStack.width
-            source: "qrc:/view/Tabs/Dashboard.qml"
         }
-
     }
 
     BankMenu {
@@ -90,7 +82,7 @@ Item {
         anchors.bottom: parent.bottom;
         anchors.bottomMargin: 0
         screenStack: contentStack
-        contentArray: [userAddition, accountAddition, funds, history]
+        contentArray: [userAddition, accountAddition, cardAddition, fundAddition]
         onLogOut: {
             logOut();
         }
@@ -109,12 +101,12 @@ Item {
         }
 
         ListElement {
-            buttonText: "Funds"
+            buttonText: "Cards"
             buttonIcon: "qrc:/resources/icons/piggy-bank-solid.png"
          }
 
         ListElement {
-            buttonText: "History"
+            buttonText: "Funds"
             buttonIcon: "qrc:/resources/icons/history-solid.png"
         }
     }

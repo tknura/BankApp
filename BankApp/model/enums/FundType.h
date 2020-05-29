@@ -25,9 +25,9 @@ public:
     bool operator!=(FundType fT) const { return value != fT.value; }
     string ToString() {
         switch (value) {
-        case SAVINGS: return "debit";
-        case RETIREMENT: return "credit";
-        case INVESTMENT: return "pre paid";
+        case SAVINGS: return "savings";
+        case RETIREMENT: return "retirement";
+        case INVESTMENT: return "investment";
         }
     }
 

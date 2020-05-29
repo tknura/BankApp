@@ -123,9 +123,6 @@ void Admin::OnLogIn() {
 }
 
 void Admin::OnLogOut() {
-    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it ){
-        std::cerr << (std::to_string(it->first) + "(" + it->second.GetLogin() + ")");
-    }
     SaveUserMap();
 }
 

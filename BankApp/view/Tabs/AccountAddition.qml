@@ -10,7 +10,7 @@ Item {
     width: 700
     height: 700
 
-    property alias model: accTypeCombo.model
+    property var usersModel
 
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {
@@ -22,32 +22,95 @@ Item {
 
     function addInputs(type){
         switch(type){
-        case "Personal":
-            console.log("personal!")
+        case "personal":
+            addPersonalInputs();
             break;
-        case "Savings":
-            console.log("savings!")
+        case "savings":
+            addSavingsInputs();
             break;
-        case "Child":
-            console.log("child!")
+        case "child":
+            addChildInputs();
             break;
-        case "Currency":
-            console.log("currency!")
+        case "currency":
+            addCurrencyInputs();
             break;
-        case "Family":
-            console.log("firm!")
+        case "family":
+            addFamilyInputs();
             break;
-        case "Firm":
-            console.log("firm!")
+        case "firm":
+            addFirmInputs();
             break;
         }
     }
 
-    function addPersonalInputs(){
+    function addPersonalInputs() {
+        removeDynamicInputs();
+    }
+
+    function addSavingsInputs() {
+        removeDynamicInputs();
+        addTextInput("Interest", "000.00%", "999.99%;0");
+    }
+
+    function addChildInputs() {
+        removeDynamicInputs();
+        addCurrencyInput("Daily limit");
+        addCombo("Parent", "parentCombo");
+    }
+
+    function addCurrencyInputs() {
+        removeDynamicInputs();
+    }
+
+    function addFamilyInputs() {
+        removeDynamicInputs();
+    }
+
+    function addFirmInputs() {
+        removeDynamicInputs();
+    }
+
+    function addTextInput(title, placeholder, inputMask) {
         var component;
         var sprite;
-        component = Qt.createComponent("AccountButton.qml");
-        sprite = component.createObject
+        component = Qt.createComponent("qrc:/components/StyledInput.qml");
+        sprite = component.createObject(dynamicInputs,
+                                        {
+                                           width: dynamicInputs.width,
+                                           titleText: title,
+                                           placeholder: placeholder,
+                                           inputMask: inputMask
+                                        });
+    }
+
+    function addCurrencyInput(title) {
+        var component;
+        var sprite;
+        component = Qt.createComponent("qrc:/components/StyledCurrencyInput.qml");
+        sprite = component.createObject(dynamicInputs,
+                                        {
+                                           width: dynamicInputs.width,
+                                           titleText: title
+                                        });
+    }
+
+    function addCombo(title, objectName) {
+        var component;
+        var sprite;
+        component = Qt.createComponent("qrc:/components/StyledCombo.qml");
+        sprite = component.createObject(dynamicInputs,
+                                        {
+                                           width: dynamicInputs.width,
+                                           titleText: title,
+                                           objectName: objectName,
+                                           model: usersModel
+                                        });
+    }
+
+    function removeDynamicInputs() {
+        for(var i = 0; i < dynamicInputs.children.length; ++i) {
+            dynamicInputs.children[i].destroy(0);
+        }
     }
 
     Rectangle {
@@ -64,6 +127,128 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
     }
+
+    ScrollView {
+        id: scrollView
+        rightPadding: 10
+        anchors.top: parent.top
+        anchors.topMargin: 154
+        anchors.left: parent.left
+        anchors.leftMargin: 60
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 76
+        anchors.right: parent.right
+        anchors.rightMargin: 66
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+        Column {
+            id: inputs
+            width: scrollView.width
+            spacing: 15
+
+            StyledCombo {
+                id: accTypeCombo
+                titleText: "Type"
+                objectName: "accTypeCombo"
+                height: 80
+                width: parent.width
+                onOptionChanged: {
+                    addInputs(optName);
+                }
+            }
+
+            GroupBox {
+                id: accNumberGroup
+                height: 80
+                width: inputs.width
+                padding: 0
+
+                StyledInput {
+                    id: accNumberInput
+                    objectName: "accNumberInput"
+                    height: accNumberGroup.height
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    anchors.right: rerollButton.left
+                    anchors.rightMargin: 5
+                    titleText: "Number"
+                    readOnly: true
+                }
+
+                PushButton {
+                    id: rerollButton
+                    objectName: "rerollButton"
+                    x: 537
+                    y: 39
+                    width: 40
+                    height: width
+                    text: "Reroll"
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                }
+
+                background: Rectangle {
+                    color: "transparent"
+                    border.color: "transparent"
+                }
+            }
+
+            StyledCombo {
+                id: ownerCombo
+                titleText: "User"
+                objectName:  "ownerCombo"
+                model: usersModel
+                height: 80
+                width: parent.width
+            }
+
+            StyledCurrencyInput {
+                id: balanceInput
+                height: 80
+                width: parent.width
+                titleText: "Balance"
+            }
+
+            Column {
+                id: dynamicInputs
+                width: parent.width
+                spacing: parent.spacing
+            }
+        }
+    }
+
+    Rectangle {
+        id: scrollViewMaskTop
+        x: 4
+        y: -4
+        color: background.color
+        anchors.top: parent.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
+        anchors.bottom: scrollView.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 0
+    }
+
+    Rectangle {
+        id: scrollViewMaskBottom
+        x: 0
+        y: 624
+        color: background.color
+        anchors.top: scrollView.bottom
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+    }
+
 
     Text {
         id: title
@@ -96,126 +281,6 @@ Item {
         font.family: "Rubik"
     }
 
-
-    Item {
-        id: element1
-        anchors.fill: scrollView
-
-        Column {
-            id: staticInputs
-            x: 0
-            y: 0
-            height: 650
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            spacing: 15
-
-
-            StyledCombo {
-                id: accTypeCombo
-                titleText: "Type"
-                objectName:  "accTypeCombo"
-                model: ["Personal", "Savings", "Child", "Currency", "Family", "Firm"]
-                height: 80
-                width: staticInputs.width
-                onOptionChanged: {
-                    addInputs(optName);
-                }
-            }
-
-            GroupBox {
-                id: accNumberGroup
-                height: 80
-                width: staticInputs.width
-                padding: 0
-
-                StyledInput {
-                    id: firstNameInput
-                    height: accNumberGroup.height
-                    inputMask: "9999 9999 9999 9999"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 0
-                    anchors.right: refreshButton.left
-                    anchors.rightMargin: 5
-                    placeholder: "generated account number"
-                    titleText: "Number"
-                }
-
-                PushButton {
-                    id: refreshButton
-                    x: 537
-                    y: 39
-                    width: 40
-                    height: width
-                    text: "Reroll"
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
-                    anchors.right: parent.right
-                    anchors.rightMargin: 5
-                }
-
-                background: Rectangle {
-                    color: "transparent"
-                    border.color: "transparent"
-                }
-            }
-
-            StyledCombo {
-                id: ownerCombo
-                titleText: "User"
-                objectName:  "accTypeCombo"
-                height: 80
-                width: staticInputs.width
-            }
-
-            StyledInput {
-                id: balanceInput
-                height: 80
-                width: staticInputs.width
-                placeholder: "starting account balance"
-                titleText: "Balance"
-            }
-
-            StyledInput {
-                height: 80
-                width: staticInputs.width
-                placeholder: "starting account balance"
-                titleText: "Balance"
-            }
-
-            StyledInput {
-                height: 80
-                width: staticInputs.width
-                placeholder: "starting account balance"
-                titleText: "Balance"
-            }
-
-            Column {
-                id: dynamicInputs
-                height: 80
-                width: staticInputs.width
-            }
-
-
-
-        }
-    }
-
-    ScrollView {
-        id: scrollView
-        rightPadding: 10
-        anchors.top: parent.top
-        anchors.topMargin: 154
-        anchors.left: parent.left
-        anchors.leftMargin: 60
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 76
-        anchors.right: parent.right
-        anchors.rightMargin: 66
-    }
-
     PushButton {
         id: addButton
         objectName: "addButton"
@@ -225,12 +290,11 @@ Item {
         height: 40
         anchors.right: parent.right
         anchors.rightMargin: 73
-        anchors.top: parent.top
-        anchors.topMargin: 643
         font.family: "Rubik"
         display: AbstractButton.TextOnly
         text: qsTr("Add User")
-        anchors.bottomMargin: 19
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 18
         anchors.leftMargin: 500
         contentItem: Text {
             font: addButton.font
@@ -247,20 +311,4 @@ Item {
             clearInputs();
         }
     }
-
-
-
 }
-
-
-
-
-
-
-
-
-/*##^##
-Designer {
-    D{i:1;invisible:true}
-}
-##^##*/

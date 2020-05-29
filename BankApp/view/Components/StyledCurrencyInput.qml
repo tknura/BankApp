@@ -11,10 +11,6 @@ Item {
 
     property alias inputText: textField.text
     property string titleText: "Title"
-    property string placeholder: "placeholder"
-    property bool isHashed: false
-    property alias validator: textField.validator
-    property alias inputMask: textField.inputMask
     property alias inputMethodHints: textField.inputMethodHints
     property alias readOnly: textField.readOnly
     property alias displayText: textField.displayText
@@ -31,15 +27,6 @@ Item {
 
     function clear() {
         textField.clear();
-    }
-
-    Component.onCompleted: {
-        if(isHashed) {
-            setHashed(true);
-        }
-        else {
-            setHashed(false);
-        }
     }
 
     states: [
@@ -72,7 +59,7 @@ Item {
         id: textField
         objectName: "textInput"
         echoMode: TextInput.Normal
-        leftPadding: 25
+        leftPadding: 50
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -83,7 +70,7 @@ Item {
         anchors.leftMargin: 0
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
-        placeholderText: placeholder
+        placeholderText: "0.00"
         font.family: "Rubik"
         color: "#259fc4"
         placeholderTextColor: "#d2def5"
@@ -91,6 +78,9 @@ Item {
         selectByMouse: true
         font.weight: Font.Medium
         readOnly: false
+        validator: RegExpValidator {
+                regExp: /([+-]?[0-9]+(\.[0-9]{2})?)/
+            }
         background: Rectangle {
             id: background
             states: [
@@ -106,6 +96,17 @@ Item {
             border.color: "#ececec"
             border.width: 2
             radius: 25
+        }
+
+        Text {
+            id: currencyLabel
+            anchors {
+                top: parent.top; bottom: parent.bottom
+                left: parent.left; leftMargin: 25
+            }
+            verticalAlignment: Text.AlignVCenter
+            color: parent.color
+            text: qsTr("PLN")
         }
     }
 }
