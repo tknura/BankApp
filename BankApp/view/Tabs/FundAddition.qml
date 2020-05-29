@@ -5,12 +5,11 @@ import components 1.0
 
 Item {
     id: element
-    objectName: "cardAddition"
+    objectName: "fundAddition"
     visible: true
     width: 700
     height: 700
 
-    property var fundsModel
     property var usersModel
 
     function clearInputs() {
@@ -24,16 +23,16 @@ Item {
     function addInputs(type){
         switch(type){
         case "savings":
-            addPrePaidInputs();
+            addSavingsInputs();
             break;
         case "retirement":
-            addDebitInputs();
+            addRetirementInputs();
             //add toggle is retired
             addCurrencyInput("Monthly in");
             addCurrencyInput("Monthly out");
             break;
         case "investment":
-            addCreditInputs();
+            addInvestmentInputs();
             break;
         }
     }
@@ -141,7 +140,7 @@ Item {
                 id: ownerCombo
                 titleText: "User"
                 objectName:  "ownerCombo"
-                //model: usersModel
+                model: usersModel
                 height: 80
                 width: parent.width
             }

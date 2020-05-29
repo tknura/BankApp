@@ -17,8 +17,10 @@ SOURCES += \
         controller/AccountAdditionController.cpp \
         controller/AdminScreenController.cpp \
         controller/CardAdditionController.cpp \
+        controller/FundAdditionController.cpp \
         controller/LogInScreenController.cpp \
         controller/MainController.cpp \
+        controller/UserAdditionController.cpp \
         controller/UserScreenController.cpp \
         main.cpp \
         model/Account.cpp \
@@ -65,9 +67,11 @@ HEADERS += \
     controller/AccountAdditionController.h \
     controller/AdminScreenController.h \
     controller/CardAdditionController.h \
+    controller/FundAdditionController.h \
     controller/IController.h \
     controller/LogInScreenController.h \
     controller/MainController.h \
+    controller/UserAdditionController.h \
     controller/UserScreenController.h \
     model/Account.h \
     model/Admin.h \
