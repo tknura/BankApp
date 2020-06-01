@@ -2,9 +2,8 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Styles 1.4
-import "qrc:/view/Tabs/"
 import components 1.0
-
+import tabs 1.0
 Item {
     id: root
     objectName: "userScreen"

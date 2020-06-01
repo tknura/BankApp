@@ -2,16 +2,17 @@
 #define IACCOUNT_H
 
 #include "Card.h"
+#include "Payment.h"
 
 class IAccount
 {
 public:
     IAccount() = default;
-//    virtual ~IAccount() = default;
-//    void virtual UpdateBallance(int) = 0;
-//    void virtual UpdateHistory() = 0;
-//    void virtual AddMember(int) = 0;
-//    void virtual AddCard(const Card&) = 0;
+    void virtual AddFunds(double) = 0;
+    virtual void UpdateHistory(std::shared_ptr<Payment>) = 0;
+    virtual int GetType() = 0;
+    virtual double GetBalance() const = 0;
+    virtual void SetBalance(double ) = 0;
 };
 
 

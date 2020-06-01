@@ -51,7 +51,7 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
         f>>accountFile;
         f.close();
 
-        std::shared_ptr<Account> p {nullptr};
+        std::shared_ptr<IAccount> p {nullptr};
         std::shared_ptr<Payment> t {nullptr};
 
 
@@ -224,7 +224,6 @@ void JsonManager::SerializeData(listP& p_list)
     std::cout<<s<<"\n";
     json j2 = json::parse(s);
     friendsFile[userID]["items"] = j2;
-//    //dodać teraz w friendsFile to do pozycji [userID] items = s
     std::ofstream f(Config::friendsJSONPath);
     if(f.is_open())
     {

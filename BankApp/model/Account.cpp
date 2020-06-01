@@ -78,6 +78,10 @@ void Account::SetSupervisorId(int value)
 {
     supervisorId = value;
 }
+void Account::UpdateHistory(std::shared_ptr<Payment> p_payment)
+{
+    history.AddNode(p_payment);
+}
 json Account::SerializeToJson()
 {
     json j{};

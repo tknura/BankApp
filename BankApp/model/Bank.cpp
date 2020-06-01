@@ -2,10 +2,10 @@
 
 list<std::string> Bank::accountNumList = list<std::string>();
 list<std::string> Bank::fundNumList = list<std::string>();
-//map<std::string, Account> Bank::accountMap = map<std::string, Account>();
-std::unordered_map<std::string,std::shared_ptr<Account>> Bank::accountMap {};
-map<int, Fund> Bank::fundMap = map<int, Fund>();
-map<std::string, Card> Bank::cardMap = map<std::string, Card>();
+
+std::unordered_map<std::string,std::shared_ptr<IAccount>> Bank::accountMap {};
+std::multimap<int,std::shared_ptr<Fund>> Bank::fundMap {};
+std::multimap<std::string,std::shared_ptr<Card>> Bank::cardMap {};
 
 std::shared_ptr<IUser> Bank::currentlyLoggedUser = nullptr;
 std::random_device Bank::rd;
@@ -62,12 +62,14 @@ bool Bank::isUserLogged() {
         return false;
     }
 }
-bool Bank::UpdateOutputAccount(std::string &p_accNum,double p_amount)
+bool Bank::UpdateOutputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_payment)
 {
+
     auto accountBalance = accountMap[p_accNum]->GetBalance();
-    if(accountBalance >=p_amount)
+    if(accountBalance >=p_payment->GetAmount())
     {
-        accountMap[p_accNum]->SetBalance(accountBalance-p_amount);
+        accountMap[p_accNum]->SetBalance(accountBalance-p_payment->GetAmount());
+        accountMap[p_accNum]->UpdateHistory(p_payment);
         return true;
     }
     else

@@ -6,4 +6,6 @@ InfoPopup 1.0 InfoPopup.qml
 PushButton 1.0 PushButton.qml
 StyledCombo 1.0 StyledCombo.qml
 StyledInput 1.0 StyledInput.qml
+HistoryBar 1.0 HistoryBar.qml
+HistoryList 1.0 HistoryList.qml
 StyledCurrencyInput 1.0 StyledCurrencyInput.qml
