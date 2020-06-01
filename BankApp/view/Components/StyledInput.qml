@@ -104,7 +104,6 @@ Item {
                     }
                 }
             ]
-            color: textField.hovered ? "#FFFFFF" : "#F7F7F7"
             border.color: "#ececec"
             border.width: 2
             radius: 25

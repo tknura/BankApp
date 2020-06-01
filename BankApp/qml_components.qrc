@@ -9,5 +9,7 @@
         <file alias="InfoPopup.qml">view/Components/InfoPopup.qml</file>
         <file alias="StyledCombo.qml">view/Components/StyledCombo.qml</file>
         <file alias="PushButton.qml">view/Components/PushButton.qml</file>
+        <file alias="HistoryList.qml">view/Components/HistoryList.qml</file>
+        <file alias="HistoryBar.qml">view/Components/HistoryBar.qml</file>
     </qresource>
 </RCC>

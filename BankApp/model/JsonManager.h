@@ -15,10 +15,9 @@ using json = nlohmann::json;
 using listP = std::list<std::shared_ptr<PaymentRetriever>>;
 using listAcc = std::list<std::string>;
 using listFund = std::list<Fund>;
-using unorderedMapAcc = std::unordered_map<std::string,std::shared_ptr<Account>>;
+using unorderedMapAcc = std::unordered_map<std::string,std::shared_ptr<IAccount>>;
 using multiMapFund = std::multimap<int,std::shared_ptr<Fund>>;
-using multiMapCard = std::multimap<std::string,std::shared_ptr<Card>>;//nie wiem czy nie zmienić ich na unordered map
-
+using multiMapCard = std::multimap<std::string,std::shared_ptr<Card>>;
 //class responsible for reading json files,
 //createating data structures
 //and passing them to the bank class.

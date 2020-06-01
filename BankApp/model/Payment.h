@@ -16,7 +16,7 @@ public:
     double amount;
     str title;
     str date;
-    PaymentRetriever retriever;
+    PaymentRetriever retriever;//potrzebny konstruktor kopiujący i przenoszący
     //bool IsValid() override;
 
     Payment(double p_amount, str p_title, str p_date, str p_name, str p_accNum, str p_address)

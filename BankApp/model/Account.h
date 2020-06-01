@@ -13,47 +13,32 @@
 
 using json = nlohmann::json;
 
-class Account// public IAccount
+class Account: public IAccount
 {
 private:
     std::string number;
     double balance;
     int supervisorId;
     History history;
-  //  std::list<Card> cardList;
 public:
-    //CONSTRUCTORS
-//    Account()
-//        :number(""), balance(0), memberIDlist(0)
-//    {
-//        history = {};
-//        cardList = {};
-//    }
     Account(History p_history, std::string p_number, double p_balance, int p_supervisorId);
     Account(std::string p_number, double p_balance, int p_supervisorId);
     Account(std::string p_number, int p_supervisorId);
     Account(int p_supervisorId);
     static std::string GenerateNumber();
 
-//    Account(const Account&);
-//    Account& operator=(const Account&);
-//    Account(Account&&);
-//    Account& operator=(Account&&);
-//    //OTHER METHODS
-//    void AddMember(int) override;
-//    void UpdateHistory() override;
-//    void UpdateBallance(int) override;
-//    void AddCard(const Card &) override;
+
+    virtual void UpdateHistory(std::shared_ptr<Payment> p_payment)override;
     std::string GetNumber() const;
     void SetNumber(const std::string &value);
-    double GetBalance() const;
-    void SetBalance(double value);
+    virtual double GetBalance() const override;
+    virtual void SetBalance(double value) override;
     int GetSupervisorId() const;
     void SetSupervisorId(int value);
-    void AddFunds(double p_amount){balance+=p_amount;}
+    virtual void AddFunds(double p_amount)override{balance+=p_amount;}
     virtual json SerializeToJson();
 
-    virtual int GetType(){return 0;}
+    virtual int GetType()override{return 0;}
 };
 
 #endif // ACCOUNT_H

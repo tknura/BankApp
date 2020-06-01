@@ -1,6 +1,7 @@
 #include "User.h"
 #include "Bank.h"
 
+
 User::User(const LogInData &data) : LogInData(data) {}
 
 User::~User() {}
@@ -12,13 +13,13 @@ void User::OnLogIn() {
 void User::OnLogOut() {
 
 }
-void User::MakePayment(string p_accNum, Payment &p_payment)
+void User::MakePayment(str& p_OutAccNum, double p_amount, str& p_title, str& p_date, str& p_name, str& p_InAccNum, str& p_address)
 {
-    auto amount = p_payment.GetAmount();
-    if(Bank::UpdateOutputAccount(p_accNum,amount))
+    auto pPayment = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,p_InAccNum,p_address);
+    if(Bank::UpdateOutputAccount(p_OutAccNum,pPayment))//zmiana1
     {
-        auto accNumber = p_payment.GetAccNumber();
-        Bank::UpdateInputAccount(accNumber,amount);
+        Bank::UpdateInputAccount(p_InAccNum,p_amount);
+
     }
     else
     {

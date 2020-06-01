@@ -28,7 +28,7 @@ public:
      Metoda zakłada, że w gui upewniono się, że przelew miedzy danymi kontami jest dozwolony.
      Metoda nierozróznia przelewu własnego od normalnego.
      */
-    void MakePayment(string p_accNum, Payment &p_payment);//Throws an exepction when funds are insufficient
+    void MakePayment(str& p_OutAccNum, double p_amount, str& p_title, str& p_date, str& p_name, str& p_InAccNum, str& p_address);//Throws an exepction when funds are insufficient
     void AddFriend(PaymentRetriever);
     void OnLogIn() override;
     void OnLogOut() override;

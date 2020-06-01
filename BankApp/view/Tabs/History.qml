@@ -8,6 +8,18 @@ Item {
     width: 700
     height: 700
 
+    signal refresh(string accNumber)
+
+    onRefresh: {
+        console.log(accNumber);
+    }
+
+    Component.onCompleted:  {
+        accountsList.addButton("Regular", "1234 1234 1234 1234", "999,99", "PLN", false);
+        accountsList.addButton("Family", "4321 4321 4321 4321", "999,99", "PLN", false);
+        accountsList.addButton("Currency", "1234 1234 1234 1234", "999,99", "PLN", true);
+    }
+
     Rectangle {
         id: background
         color: "#eeeeee"
@@ -48,6 +60,23 @@ Item {
             font.pixelSize: 18
             font.family: "Rubik"
         }
+        AccountButtonList {
+            id: accountsList
+            objectName: "accountsList"
+            height: 160
+            anchors.right: parent.right
+            anchors.rightMargin: 48
+            anchors.left: parent.left
+            anchors.leftMargin: 70
+            anchors.top: desc.bottom
+            anchors.topMargin: 6
+            itemToRefresh: history
+
+         }
+
+
+
+
 
     }
 }

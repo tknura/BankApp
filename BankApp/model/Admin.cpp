@@ -187,7 +187,7 @@ bool Admin::FindExistingUser(LogInData& data) {
 
 bool Admin::AddAccountToMap(std::shared_ptr<Account> acc) {
     if(Bank::accountMap.find(acc->GetNumber()) == Bank::accountMap.end()){
-        Bank::accountMap.insert(std::make_pair(acc->GetNumber(), acc.get()));
+        Bank::accountMap.insert(std::make_pair(acc->GetNumber(), acc));
         return true;
     }
     return false;
@@ -195,7 +195,7 @@ bool Admin::AddAccountToMap(std::shared_ptr<Account> acc) {
 
 bool Admin::AddCardToMap(std::shared_ptr<Card> card) {
     if(Bank::cardMap.find(card->GetAccountNumber()) == Bank::cardMap.end()){
-        Bank::cardMap.insert({card->GetAccountNumber(), *card.get()});
+        Bank::cardMap.insert({card->GetAccountNumber(), card});
         return true;
     }
     return false;
@@ -203,7 +203,7 @@ bool Admin::AddCardToMap(std::shared_ptr<Card> card) {
 
 bool Admin::AddFundToMap(std::shared_ptr<Fund> fund) {
     if(Bank::fundMap.find(fund->GetOwnerId()) == Bank::fundMap.end()){
-        Bank::fundMap.insert({fund->GetOwnerId(), *fund.get()});
+        Bank::fundMap.insert({fund->GetOwnerId(), fund});
         return true;
     }
     return false;
