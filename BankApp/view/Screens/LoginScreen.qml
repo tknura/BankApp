@@ -131,15 +131,3 @@ Rectangle {
         }
     }
 }
-
-
-
-
-
-
-
-/*##^##
-Designer {
-    D{i:1;anchors_width:1000}
-}
-##^##*/

@@ -13,12 +13,14 @@ Item {
     property string titleText: "Title"
     property string placeholder: "placeholder"
     property bool isHashed: false
+    property alias color: textField.color
     property alias validator: textField.validator
     property alias inputMask: textField.inputMask
     property alias inputMethodHints: textField.inputMethodHints
     property alias readOnly: textField.readOnly
     property alias displayText: textField.displayText
     property alias activeFocusOnPress: textField.activeFocusOnPress
+    property alias inputLeftPadding: textField.leftPadding
 
     function setHashed(bool) {
         if(bool){
@@ -109,6 +111,8 @@ Item {
         }
     }
 }
+
+
 
 
 
