@@ -27,9 +27,6 @@ Item {
             break;
         case "retirement":
             addRetirementInputs();
-            //add toggle is retired
-            addCurrencyInput("Monthly in");
-            addCurrencyInput("Monthly out");
             break;
         case "investment":
             addInvestmentInputs();
@@ -43,6 +40,9 @@ Item {
 
     function addRetirementInputs() {
         removeDynamicInputs();
+        addCurrencyInput("Monthly in");
+        addCurrencyInput("Monthly out");
+       //addCheckbox("user retired");
     }
 
     function addInvestmentInputs() {
@@ -86,11 +86,24 @@ Item {
                                         });
     }
 
+    function addCheckbox(text) {
+        var component;
+        var sprite;
+        component = Qt.createComponent("qrc:/components/StyledCheckBox.qml");
+        sprite = component.createObject(dynamicInputs,
+                                        {
+                                           width: dynamicInputs.width,
+                                           text: text
+                                        });
+    }
+
     function removeDynamicInputs() {
         for(var i = 0; i < dynamicInputs.children.length; ++i) {
             dynamicInputs.children[i].destroy(0);
         }
     }
+
+
 
     Rectangle {
         id: background
@@ -172,6 +185,10 @@ Item {
                 placeholder: "000.00%"
                 inputMask: "999.99%;0"
             }
+
+//            StyledCheckBox {
+//                text: "is retired"
+//            }
 
             Column {
                 id: dynamicInputs
