@@ -13,9 +13,9 @@ class FundType
 public:
     enum Value : uint8_t
     {
+        INVESTMENT,
         SAVINGS,
-        RETIREMENT,
-        INVESTMENT
+        RETIREMENT
     };
     FundType() = default;
     FundType(Value p_value) : value(p_value) {}
@@ -32,7 +32,7 @@ public:
     }
 
     static list<FundType> GetAllTypesList() {
-        return { FundType::SAVINGS, FundType::RETIREMENT, FundType::INVESTMENT };
+        return { FundType::INVESTMENT, FundType::SAVINGS, FundType::RETIREMENT};
     }
 
     static list<string> GetAllTypesStringList() {

@@ -10,4 +10,4 @@ HistoryBar 1.0 HistoryBar.qml
 HistoryList 1.0 HistoryList.qml
 StyledCurrencyInput 1.0 StyledCurrencyInput.qml
 StyledDateInput 1.0 StyledDateInput.qml
-StyledCheckBox 1.0 StyledCheckBox.qml
+DynamicInputs 1.0 DynamicInputs.qml

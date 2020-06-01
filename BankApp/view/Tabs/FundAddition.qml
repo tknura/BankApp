@@ -22,88 +22,34 @@ Item {
 
     function addInputs(type){
         switch(type){
+        case "investment":
+            addInvestmentInputs();
+            break;
         case "savings":
             addSavingsInputs();
             break;
         case "retirement":
             addRetirementInputs();
             break;
-        case "investment":
-            addInvestmentInputs();
-            break;
         }
     }
 
     function addSavingsInputs() {
-        removeDynamicInputs();
+        dynamicInputs.removeDynamicInputs();
+        dynamicInputs.addDateInput("Start date");
+        dynamicInputs.addDateInput("End date");
     }
 
     function addRetirementInputs() {
-        removeDynamicInputs();
-        addCurrencyInput("Monthly in");
-        addCurrencyInput("Monthly out");
+        dynamicInputs.removeDynamicInputs();
+        dynamicInputs.addCurrencyInput("Monthly in");
+        dynamicInputs.addCurrencyInput("Monthly out");
        //addCheckbox("user retired");
     }
 
     function addInvestmentInputs() {
-        removeDynamicInputs();
+        dynamicInputs.removeDynamicInputs();
     }
-
-    function addTextInput(title = "", placeholder = "", inputMask) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledInput.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           titleText: title,
-                                           placeholder: placeholder,
-                                           inputMask: inputMask
-                                        });
-    }
-
-    function addCombo(title, objectName) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledCombo.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           titleText: title,
-                                           objectName: objectName,
-                                           model: usersModel
-                                        });
-    }
-
-    function addCurrencyInput(title) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledCurrencyInput.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           titleText: title
-                                        });
-    }
-
-    function addCheckbox(text) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledCheckBox.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           text: text
-                                        });
-    }
-
-    function removeDynamicInputs() {
-        for(var i = 0; i < dynamicInputs.children.length; ++i) {
-            dynamicInputs.children[i].destroy(0);
-        }
-    }
-
-
 
     Rectangle {
         id: background
@@ -186,11 +132,7 @@ Item {
                 inputMask: "999.99%;0"
             }
 
-//            StyledCheckBox {
-//                text: "is retired"
-//            }
-
-            Column {
+            DynamicInputs {
                 id: dynamicInputs
                 width: parent.width
                 spacing: parent.spacing
@@ -271,21 +213,10 @@ Item {
         anchors.rightMargin: 73
         font.family: "Rubik"
         display: AbstractButton.TextOnly
-        text: qsTr("Add User")
+        text: qsTr("Add Fund")
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 18
         anchors.leftMargin: 500
-        contentItem: Text {
-            font: addButton.font
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            color: "#259FC4"
-            text: "Add Account"
-        }
-        background: Rectangle {
-            color: addButton.pressed ? "#75b4c5" : addButton.hovered ? "#7cd2ed" : "#A3E7FC"
-            radius: 25
-        }
         onClicked: {
             clearInputs();
         }

@@ -45,73 +45,30 @@ Item {
     }
 
     function addPersonalInputs() {
-        removeDynamicInputs();
+        dynamicInputs.removeDynamicInputs();
     }
 
     function addSavingsInputs() {
-        removeDynamicInputs();
-        addTextInput("Interest", "000.00%", "999.99%;0");
+        dynamicInputs.removeDynamicInputs();
+        dynamicInputs.addTextInput("Interest", "000.00%", "999.99%;0");
     }
 
     function addChildInputs() {
-        removeDynamicInputs();
-        addCurrencyInput("Daily limit");
-        addCombo("Parent", "parentCombo");
+        dynamicInputs.removeDynamicInputs();
+        dynamicInputs.addCurrencyInput("Daily limit");
+        dynamicInputs.addCombo("Parent", "parentCombo", usersModel);
     }
 
     function addCurrencyInputs() {
-        removeDynamicInputs();
+        dynamicInputs.removeDynamicInputs();
     }
 
     function addFamilyInputs() {
-        removeDynamicInputs();
+        dynamicInputs.removeDynamicInputs();
     }
 
     function addFirmInputs() {
-        removeDynamicInputs();
-    }
-
-    function addTextInput(title, placeholder, inputMask) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledInput.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           titleText: title,
-                                           placeholder: placeholder,
-                                           inputMask: inputMask
-                                        });
-    }
-
-    function addCurrencyInput(title) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledCurrencyInput.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           titleText: title
-                                        });
-    }
-
-    function addCombo(title, objectName) {
-        var component;
-        var sprite;
-        component = Qt.createComponent("qrc:/components/StyledCombo.qml");
-        sprite = component.createObject(dynamicInputs,
-                                        {
-                                           width: dynamicInputs.width,
-                                           titleText: title,
-                                           objectName: objectName,
-                                           model: usersModel
-                                        });
-    }
-
-    function removeDynamicInputs() {
-        for(var i = 0; i < dynamicInputs.children.length; ++i) {
-            dynamicInputs.children[i].destroy(0);
-        }
+        dynamicInputs.removeDynamicInputs();
     }
 
     Rectangle {
@@ -212,7 +169,7 @@ Item {
                 titleText: "Balance"
             }
 
-            Column {
+            DynamicInputs {
                 id: dynamicInputs
                 width: parent.width
                 spacing: parent.spacing
@@ -293,21 +250,10 @@ Item {
         anchors.rightMargin: 73
         font.family: "Rubik"
         display: AbstractButton.TextOnly
-        text: qsTr("Add User")
+        text: "Add Account"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 18
         anchors.leftMargin: 500
-        contentItem: Text {
-            font: addButton.font
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            color: "#259FC4"
-            text: "Add Account"
-        }
-        background: Rectangle {
-            color: addButton.pressed ? "#75b4c5" : addButton.hovered ? "#7cd2ed" : "#A3E7FC"
-            radius: 25
-        }
         onClicked: {
             clearInputs();
         }

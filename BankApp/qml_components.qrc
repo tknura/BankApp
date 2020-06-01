@@ -3,7 +3,7 @@
         <file alias="qmldir">view/Components/qmldir</file>
         <file alias="StyledInput.qml">view/Components/StyledInput.qml</file>
         <file alias="StyledDateInput.qml">view/Components/StyledDateInput.qml</file>
-        <file alias="StyledCheckBox.qml">view/Components/StyledCheckBox.qml</file>
+        <file alias="DynamicInputs.qml">view/Components/DynamicInputs.qml</file>
         <file alias="StyledCurrencyInput.qml">view/Components/StyledCurrencyInput.qml</file>
         <file alias="AccountButton.qml">view/Components/AccountButton.qml</file>
         <file alias="AccountButtonList.qml">view/Components/AccountButtonList.qml</file>

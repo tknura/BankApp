@@ -5,6 +5,7 @@ import QtQuick.Controls 2.3
 Item {
     property alias titleText: input.titleText
     property alias readOnly: input.readOnly
+
     width: 640
     height: 80
 
@@ -12,7 +13,7 @@ Item {
         id: input
         width: parent.width
         height: parent.height
-        placeholder: "0.00"
-        inputMask: "Every 9 day of the month"
+        placeholder: "01.01.1990"
+        inputMask: "99.99.9999;0"
     }
 }
