@@ -34,6 +34,8 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
 
+         }
+
         Text {
             id: title
             x: 70

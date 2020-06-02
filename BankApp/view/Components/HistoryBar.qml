@@ -22,7 +22,7 @@ Item {
             width: 400
             height: 20
             color: "#393e46"
-            text: "Stanisław Czembor"
+
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.left: parent.left
@@ -37,7 +37,7 @@ Item {
             width: 400
             height: 20
             color: "#ABB2B9"
-            text: "Piwko"
+
             anchors.bottom : parent.bottom
             anchors.bottomMargin: 5
             anchors.left: parent.left
