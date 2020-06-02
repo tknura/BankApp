@@ -11,14 +11,16 @@ class UserScreenController : QObject, IController
 
 private:
     QObject *rootObject;
+    QObject *dashboardTab;
+    QObject *paymentsTab;
+    QObject *fundsTab;
+    QObject *historyTab;
 
 public:
-    void Initialize(QQmlApplicationEngine* p_engine) override;
+    void Initialize() override;
+    void Connections() override;
     UserScreenController(QQmlApplicationEngine* p_engine);
     ~UserScreenController() override {}
-
-public slots:
-
 };
 
 #endif // USERSCREENCONTROLLER_H

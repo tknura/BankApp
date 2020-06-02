@@ -1,6 +1,6 @@
 #include "Admin.h"
 
-int Admin::idProvider = 2;
+int Admin::idProvider = 0;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}
@@ -34,7 +34,7 @@ bool Admin::CreateUser(std::string p_login, std::string p_password, std::string 
 /*
  * Basic account adding method
 */
-bool Admin::CreateAccount(int ownerID, std::string number, double balance) {
+bool Admin::AddAccount(int ownerID, std::string number, double balance) {
     Account newAcc(number, balance, ownerID);
     return AddAccountToMap(std::make_shared<Account>(newAcc));
 }
@@ -42,7 +42,7 @@ bool Admin::CreateAccount(int ownerID, std::string number, double balance) {
 /*
  * Add Child Account with a supervisor and daily limit
 */
-bool Admin::CreateAccount(int supervisorID, int childID, std::string number, double balance,
+bool Admin::AddAccount(int supervisorID, int childID, std::string number, double balance,
                        double dailyTransactionLimit) {
     ChildAccount newAcc(number, balance, supervisorID, dailyTransactionLimit, childID);
     return AddAccountToMap(std::make_shared<Account>(newAcc));
@@ -51,7 +51,7 @@ bool Admin::CreateAccount(int supervisorID, int childID, std::string number, dou
 /*
  * Familly account with one supervisor and memebers of an account
 */
-bool Admin::CreateAccount(int supervisorID, std::string number, double balance,
+bool Admin::AddAccount(int supervisorID, std::string number, double balance,
                           std::list<int> memberIdList) {
     FamillyAccount newAcc(number, balance, supervisorID, memberIdList);
     return AddAccountToMap(std::make_shared<Account>(newAcc));
@@ -60,7 +60,7 @@ bool Admin::CreateAccount(int supervisorID, std::string number, double balance,
 /*
  * Savings account with interest multiplying balance in detailed amount of time
  */
-bool Admin::CreateAccount(int ownerID, std::string number, double balance, double interest) {
+bool Admin::AddAccount(int ownerID, std::string number, double balance, double interest) {
     SavingsAccount newAcc(number, balance, ownerID, interest);
     return AddAccountToMap(std::make_shared<Account>(newAcc));
 }
@@ -128,8 +128,16 @@ void Admin::OnLogOut() {
 
 std::list<std::string> Admin::GetUsersStringList() {
     std::list<std::string> result;
-    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it ){
-        result.push_back(std::to_string(it->first) + "(" + it->second.GetLogin() + ")");
+    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it){
+        result.push_back(std::to_string(it->first) + " (" + it->second.GetLogin() + ")");
+    }
+    return result;
+}
+
+std::list<std::string> Admin::GetAccStringList() {
+    std::list<std::string> result;
+    for(auto it = Bank::accountMap.begin(); it != Bank::accountMap.end(); ++it){
+        result.push_back(it->first);
     }
     return result;
 }
@@ -144,6 +152,7 @@ void Admin::FillUserMap() {
             while(std::getline(file, line)){
                 LogInData logInDataFromLine = Authorization::proccesedData(line);
                 usersMap.insert(std::make_pair(logInDataFromLine.GetID(), logInDataFromLine));
+                idProvider = logInDataFromLine.GetID();
             }
         }
         catch (std::fstream::failure & ex) {
@@ -162,7 +171,7 @@ void Admin::SaveUserMap() {
     if(file.is_open()){
         file.exceptions( std::fstream::badbit );
         try {
-            for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it ){
+            for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it){
                 file  << it->second;
             }
         }
@@ -177,8 +186,8 @@ void Admin::SaveUserMap() {
 }
 
 bool Admin::FindExistingUser(LogInData& data) {
-    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it ){
-        if(it->second == data){
+    for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it){
+        if(it->second.GetEmail() == data.GetEmail() && it->second.GetLogin() == data.GetLogin()){
             return true;
         }
     }

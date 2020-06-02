@@ -13,12 +13,56 @@ Item {
     property var cardsModel
     property var accountsModel
 
+    signal newCcvNumber();
+    signal newCardNumber();
+
+    signal addPrePaid(string number, string ccv, string accNum, string transLim);
+    signal addCredit(string number, string ccv, string accNum, string transLim,
+                     string maxCredit, string billingDate);
+    signal addDebit(string number, string ccv, string accNum, string transLim, string maxDebt);
+
+    function addCard(type) {
+        if(limitInput.inputText.length !== 0){
+            switch(type){
+            case "pre-paid":
+                addPrePaid(cardNumberInput.inputText, ccvNumberInput.inputText, ownerAcc.currentOption,
+                           limitInput.inputText);
+                break;
+            case "debit":
+                if(dynamicInputs.children[0].inputText.length !== 0){
+                    addDebit(cardNumberInput.inputText, ccvNumberInput.inputText, ownerAcc.currentOption,
+                             limitInput.inputText, inputs.children[0].inputText);
+                }
+                break;
+            case "credit":
+                if( dynamicInputs.children[0].inputText !== 0 && dynamicInputs.children[1].inputText !== 0){
+                    addCredit(cardNumberInput.inputText, ccvNumberInput.inputText, ownerAcc.currentOption,
+                              limitInput.inputText, dynamicInputs.children[0].inputText, dynamicInputs.children[1].inputText);
+                }
+                break;
+            }
+        }
+    }
+
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {
             if(inputs.children[i].objectName === "styledInput") {
                 inputs.children[i].clear();
             }
         }
+        newCcvNumber();
+        newCardNumber();
+    }
+
+    function success() {
+        popup.message = "Card added successfully to an account";
+        popup.open();
+        clearInputs();
+    }
+
+    function fail() {
+        popup.message = "Incorect data passed, can't add card to account";
+        popup.open();
     }
 
     function addInputs(type){
@@ -36,16 +80,13 @@ Item {
     }
 
     function addPrePaidInputs() {
-        dynamicInputs.removeDynamicInputs();
     }
 
     function addDebitInputs() {
-        dynamicInputs.removeDynamicInputs();
         dynamicInputs.addCurrencyInput("Max debt");
     }
 
     function addCreditInputs() {
-        dynamicInputs.removeDynamicInputs();
         dynamicInputs.addCurrencyInput("Max credit");
         dynamicInputs.addTextInput("Billing date")
     }
@@ -90,6 +131,7 @@ Item {
                 height: 80
                 width: parent.width
                 onOptionChanged: {
+                    dynamicInputs.remove();
                     addInputs(optName);
                 }
             }
@@ -124,6 +166,7 @@ Item {
                     anchors.bottomMargin: 5
                     anchors.right: parent.right
                     anchors.rightMargin: 5
+                    onClicked: newCardNumber();
                 }
 
                 background: Rectangle {
@@ -162,6 +205,7 @@ Item {
                     anchors.bottomMargin: 5
                     anchors.right: parent.right
                     anchors.rightMargin: 5
+                    onClicked: newCcvNumber();
                 }
 
                 background: Rectangle {
@@ -174,7 +218,7 @@ Item {
                 id: ownerAcc
                 titleText: "Account"
                 objectName:  "ownerAcc"
-                //model: usersModel
+                model: accountsModel
                 height: 80
                 width: parent.width
             }
@@ -224,6 +268,11 @@ Item {
         anchors.rightMargin: 0
     }
 
+    InfoPopup {
+        id: popup
+        anchors.centerIn: parent
+        message: "Card added successfully to an account"
+    }
 
     Text {
         id: title
@@ -272,7 +321,7 @@ Item {
         anchors.bottomMargin: 18
         anchors.leftMargin: 500
         onClicked: {
-            clearInputs();
+            addCard(cardTypeCombo.currentOption);
         }
     }
 }

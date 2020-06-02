@@ -4,61 +4,70 @@ import QtQuick.Controls 2.13
 Popup {
     id: root
     width: 400
-    height: 200
-    property alias title: title.text
-    property alias titleColor: title.color
-    property alias description: desc.text
+    height: 100
+    modal: true
+    focus: true
+    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+    property alias color: message.color
+    property alias message: message.text
 
-    Rectangle {
+    background: Rectangle {
         id: rectangle
-        color: "#ffffff"
+        color: "#7b7b7b"
         anchors.fill: parent
         radius: 25
         opacity: 0.8
-    }
-
-    background:
-        Rectangle {
-        color: "transparent"
         border.color: "transparent"
-        opacity: rectangle.opacity
+
+        Button {
+            id: button
+            x: 371
+            width: 23
+            height: 21
+            text: qsTr("X")
+            contentItem: Text {
+                text: button.text
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 12
+                font.family: "Rubik"
+                color: message.color
+            }
+            anchors.right: parent.right
+            anchors.rightMargin: 6
+            anchors.top: parent.top
+            anchors.topMargin: 4
+            background: Rectangle {
+                color: "transparent"
+            }
+            onClicked: root.close()
+        }
     }
 
-    Text {
-        id: desc
+    contentItem: Text {
+        id: message
         x: 24
         y: 47
-        height: 110
-        color: "#7b7b7b"
+        color: "#eeeeee"
         text: qsTr("Description")
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
         wrapMode: Text.WordWrap
         anchors.right: parent.right
-        anchors.rightMargin: 24
+        anchors.rightMargin: 20
         anchors.top: parent.top
-        anchors.topMargin: 47
+        anchors.topMargin: 20
         anchors.left: parent.left
-        anchors.leftMargin: 24
+        anchors.leftMargin: 20
         font.family: "Rubik"
         font.pixelSize: 16
     }
 
-    Text {
-        id: title
-        x: 19
-        y: 8
-        color: "#26282a"
-        text: qsTr("Title")
-        anchors.left: parent.left
-        anchors.leftMargin: 19
-        anchors.top: parent.top
-        anchors.topMargin: 8
-        font.family: "Rubik"
-        font.weight: Font.Bold
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignLeft
-        font.pixelSize: 35
-    }
 
 }
+
+
 
 

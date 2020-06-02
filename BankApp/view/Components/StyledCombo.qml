@@ -4,14 +4,16 @@ import QtQuick.Controls 2.3
 
 Item {
     id: styledCombo
+    objectName: "styledCombo"
     visible: true
     width: 640
     height: 80
     property string titleText: "Title"
     property alias model: comboBox.model
+    property string currentOption: comboBox.displayText
 
     function clear() {
-        comboBox.currentIndex = -1;
+        comboBox.currentIndex = 0;
     }
 
     signal optionChanged(string optName)
@@ -48,6 +50,7 @@ Item {
         font.family: "Rubik"
 
         onActivated:  {
+            currentOption = displayText;
             optionChanged(displayText);
         }
 

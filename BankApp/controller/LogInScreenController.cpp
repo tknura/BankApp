@@ -1,14 +1,6 @@
 #include "LogInScreenController.h"
 
-void LogInScreenController::Initialize(QQmlApplicationEngine *p_engine) {
-    this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("loginScreen");
-    this->engine = p_engine;
-    this->proceedButton = rootObject->findChild<QObject*>("proceedButton");
-
-    QObject::connect(proceedButton, SIGNAL(clicked()), this, SLOT(HandleProceedButton()));
-    QObject::connect(rootObject, SIGNAL(inputValues(QString, QString)),
-                     this, SLOT(LoadAttemt(QString, QString)));
-}
+void LogInScreenController::Initialize() { }
 
 void LogInScreenController::HandleProceedButton() {
     if(attempt.GetLogin() != "" && attempt.GetPassword() != ""){
@@ -44,7 +36,18 @@ void LogInScreenController::LoadAdminScreen() {
 }
 
 LogInScreenController::LogInScreenController(QQmlApplicationEngine *p_engine) {
-    Initialize(p_engine);
+    this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("loginScreen");
+    this->engine = p_engine;
+    this->proceedButton = rootObject->findChild<QObject*>("proceedButton");
+
+    Initialize();
+    Connections();
+}
+
+void LogInScreenController::Connections() {
+    QObject::connect(proceedButton, SIGNAL(clicked()), this, SLOT(HandleProceedButton()));
+    QObject::connect(rootObject, SIGNAL(inputValues(QString, QString)),
+                     this, SLOT(LoadAttemt(QString, QString)));
 }
 
 LogInScreenController::~LogInScreenController() {

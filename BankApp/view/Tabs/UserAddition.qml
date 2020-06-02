@@ -52,7 +52,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 73
         anchors.left: parent.left
-        anchors.leftMargin: 70
+        anchors.leftMargin: 60
         anchors.right: parent.right
         anchors.rightMargin: 73
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
@@ -124,28 +124,14 @@ Item {
 
     InfoPopup {
         id: successPopup
-        width: 420
-        height: 180
         anchors.centerIn: parent
-        padding: 20
-        modal: true
-        focus: true
-        title: "User added"
-        description: "User added successfully to an app"
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        message: "User added successfully to an app"
     }
 
     InfoPopup {
         id: failPopup
-        width: 420
-        height: 180
         anchors.centerIn: parent
-        padding: 20
-        modal: true
-        focus: true
-        title: "User addition failed"
-        description: "Incorect data passed, check information boxes for more info"
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        message: "Incorect data passed, can't add user to an app"
     }
 
     Rectangle {
@@ -161,8 +147,6 @@ Item {
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 0
-
-
     }
 
     Rectangle {
@@ -180,11 +164,6 @@ Item {
         anchors.bottomMargin: 0
     }
 
-
-
-
-
-
     PushButton {
         id: addButton
         objectName: "addButton"
@@ -200,17 +179,6 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 17
         anchors.leftMargin: 496
-        contentItem: Text {
-            text: addButton.text
-            font: addButton.font
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            color: "#259FC4"
-        }
-        background: Rectangle {
-            color: addButton.pressed ? "#75b4c5" : addButton.hovered ? "#7cd2ed" : "#A3E7FC"
-            radius: 25
-        }
         onClicked: {
             userAddition(loginInput.inputText, passwordInput.inputText, mailInput.inputText);
         }
@@ -250,15 +218,6 @@ Item {
         font.pixelSize: 60
         font.family: "Rubik"
     }
-
-
-
-
-
 }
 
-/*##^##
-Designer {
-    D{i:2;anchors_height:473;anchors_width:557;anchors_x:70;anchors_y:154}
-}
-##^##*/
+

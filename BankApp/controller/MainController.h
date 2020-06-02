@@ -16,8 +16,9 @@ private:
 
 public:
     MainController(QQmlApplicationEngine* p_engine);
-    ~MainController();
-    void Initialize(QQmlApplicationEngine* p_engine);
+    ~MainController() override;
+    void Initialize() override;
+    void Connections() override;
     QObject* GetRootObject();
 };
 

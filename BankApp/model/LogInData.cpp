@@ -68,8 +68,8 @@ bool LogInData::IsValid() {
 }
 
 bool LogInData::operator==(const LogInData &data) const {
-    if(password == data.password || (id == data.GetID()
-                                      && login == data.login && email == data.email)) {
+    if(password == data.password && id == data.GetID()
+        && login == data.login && email == data.email) {
         return true;
     }
     return false;

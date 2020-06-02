@@ -21,10 +21,17 @@ private:
     FundAdditionController* fundAddTabController;
 
 public:
-    void Initialize(QQmlApplicationEngine* p_engine) override;
+    void Initialize() override;
+    void Connections() override;
     AdminScreenController(QQmlApplicationEngine* p_engine);
     ~AdminScreenController() override;
     static QStringList UserList();
+    static QStringList AccList();
+    static int GetIDFromUserString(std::string str);
+    static double GetPercentageFromString(std::string str);
+    static double GetMoneyFromString(std::string str);
+
+    static std::shared_ptr<Admin> admin;
 };
 
 #endif // ADMINSCREENCONTROLLER_H

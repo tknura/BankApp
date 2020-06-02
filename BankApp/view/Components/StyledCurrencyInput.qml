@@ -5,8 +5,14 @@ import QtQuick.Controls 2.3
 Item {
     property alias titleText: input.titleText
     property alias readOnly: input.readOnly
+    property alias inputText: input.inputText
+    property alias objectName: input.objectName
     width: 640
     height: 80
+
+    function clear() {
+        input.clear();
+    }
 
     StyledInput{
         id: input
@@ -32,13 +38,6 @@ Item {
         anchors.topMargin: 29
     }
 }
-
-
-
-
-
-
-
 /*##^##
 Designer {
     D{i:1;anchors_height:480;anchors_width:640}

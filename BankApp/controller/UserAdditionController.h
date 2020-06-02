@@ -14,7 +14,8 @@ private:
     QObject* cardNumberInput;
 
 public:
-    void Initialize(QQmlApplicationEngine* p_engine) override;
+    void Initialize() override;
+    void Connections() override;
     ~UserAdditionController() override {}
     UserAdditionController(QQmlApplicationEngine* p_engine);
 

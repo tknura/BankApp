@@ -1,20 +1,31 @@
 #include "AccountAdditionController.h"
 #include "AdminScreenController.h"
 
-void AccountAdditionController::Initialize(QQmlApplicationEngine *p_engine) {
-    rootObject = p_engine->rootObjects().first()->findChild<QObject*>("accountAddition");
-    QObject* typeCombo = rootObject->findChild<QObject*>("accTypeCombo");
-    QObject* rerollButton = rootObject->findChild<QObject*>("rerollButton");
-    accNumberInput = rootObject->findChild<QObject*>("accNumberInput");
-
+void AccountAdditionController::Initialize() {
     typeCombo->setProperty("model", QVariant::fromValue(AccTypes()));
     rootObject->setProperty("usersModel", QVariant::fromValue(AdminScreenController::UserList()));
     accNumberInput->setProperty("inputText", QString::fromStdString(Account::GenerateNumber()));
-    QObject::connect(rerollButton, SIGNAL(clicked()), this, SLOT(HandleRerollButton()));
+}
+
+void AccountAdditionController::Connections() {
+    QObject::connect(rootObject, SIGNAL(newAccNumber()), this, SLOT(HandleReroll()));
+    QObject::connect(rootObject, SIGNAL(addPersonalAcc(QString, QString, QString)),
+                     this, SLOT(HandlePersonalAccAdd(QString, QString, QString)));
+    QObject::connect(rootObject, SIGNAL(addSavingsAcc(QString, QString, QString, QString)),
+                     this, SLOT(HandleSavingsAccAdd(QString, QString, QString, QString)));
+    QObject::connect(rootObject, SIGNAL(addChildAcc(QString, QString, QString, QString, QString)),
+                     this, SLOT(HandleChildAccAdd(QString, QString, QString, QString, QString)));
+//    QObject::connect(rootObject, SIGNAL(addFamilyAcc(QString, QString, QString)),
+//                     this, SLOT(HandleFamilyAccAdd(QString, QString, QString)));
 }
 
 AccountAdditionController::AccountAdditionController(QQmlApplicationEngine *p_engine) {
-    Initialize(p_engine);
+    this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("accountAddition");
+    this->typeCombo = rootObject->findChild<QObject*>("accTypeCombo");
+    this->accNumberInput = rootObject->findChild<QObject*>("accNumberInput");
+
+    Initialize();
+    Connections();
 }
 
 QStringList AccountAdditionController::AccTypes() {
@@ -25,6 +36,51 @@ QStringList AccountAdditionController::AccTypes() {
     return str;
 }
 
-void AccountAdditionController::HandleRerollButton() {
+void AccountAdditionController::HandlePersonalAccAdd(QString num, QString user, QString balance) {
+    int id = AdminScreenController::GetIDFromUserString(user.toStdString());
+    double dbalance = AdminScreenController::GetMoneyFromString(balance.toStdString());
+
+    if(AdminScreenController::admin->AddAccount(id, num.toStdString(), dbalance)){
+        QMetaObject::invokeMethod(rootObject, "success");
+    }
+    else {
+        QMetaObject::invokeMethod(rootObject, "fail");
+    }
+}
+
+void AccountAdditionController::HandleSavingsAccAdd(QString num, QString user, QString balance,
+                                                    QString interest) {
+    int id = AdminScreenController::GetIDFromUserString(user.toStdString());
+    double dinterest = AdminScreenController::GetPercentageFromString(interest.toStdString());
+    double dbalance = AdminScreenController::GetMoneyFromString(balance.toStdString());
+
+    if(AdminScreenController::admin->AddAccount(id, num.toStdString(), dbalance, dinterest)) {
+        QMetaObject::invokeMethod(rootObject, "success");
+    }
+    else {
+        QMetaObject::invokeMethod(rootObject, "fail");
+    }
+}
+void AccountAdditionController::HandleChildAccAdd(QString num, QString user, QString balance,
+                                                  QString dailyLim, QString parent) {
+    int userId = AdminScreenController::GetIDFromUserString(user.toStdString());
+    double dbalance = AdminScreenController::GetMoneyFromString(balance.toStdString());
+    double ddailyLim = AdminScreenController::GetMoneyFromString(dailyLim.toStdString());
+    int parentId = AdminScreenController::GetIDFromUserString(parent.toStdString());
+
+    if(AdminScreenController::admin->AddAccount(parentId, userId, num.toStdString(), dbalance, ddailyLim)) {
+        QMetaObject::invokeMethod(rootObject, "success");
+    }
+    else {
+        QMetaObject::invokeMethod(rootObject, "fail");
+    }
+
+}
+
+void AccountAdditionController::HandleFamilyAccAdd(QString num, QString user, QString balance) {
+    //todo
+}
+
+void AccountAdditionController::HandleReroll() {
     accNumberInput->setProperty("inputText", QString::fromStdString(Account::GenerateNumber()));
 }

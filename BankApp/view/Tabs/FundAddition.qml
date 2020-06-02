@@ -11,11 +11,38 @@ Item {
     height: 700
 
     property var usersModel
+    property var boolModel: ["Yes", "No"]
 
-    function clearInputs() {
-        for(var i = 0; i < inputs.children.length; ++i) {
-            if(inputs.children[i].objectName === "styledInput") {
-                inputs.children[i].clear();
+    signal addInvestment(string userId, string minAmount, string maxRate, string fee, string balance);
+    signal addSavings(string userId, string minAmount, string maxRate, string fee, string balance,
+                      string startDate, string endDate);
+    signal addRetirement(string userId, string minAmount, string maxRate, string fee, string balance,
+                         string monthlyIn, string monthlyOut, string isRetired);
+
+    function addFund(type){
+        if(minAmountInput.inputText.length !== 0 && maxRateInput.inputText.length !== 0
+                && maxRateInput.inputText.length !== 0 && feeInput.inputText.length !== 0) {
+            switch(type){
+            case "investment":
+                addInvestment(ownerCombo.currentOption, minAmountInput.inputText,
+                              maxRateInput.inputText, maxRateInput.inputText, feeInput.inputText);
+                break;
+            case "savings":
+                if(dynamicInputs.children[0].inputText.length !== 0 && dynamicInputs.children[1].inputText.length !== 0){
+                    addSavings(ownerCombo.currentOption, minAmountInput.inputText,
+                               maxRateInput.inputText, maxRateInput.inputText, feeInput.inputText,
+                               balanceInput.inputText, dynamicInputs.children[0].inputText,
+                               dynamicInputs.children[1].inputText);
+                }
+                break;
+            case "retirement":
+                if(dynamicInputs.children[0].inputText.length !== 0) {
+                    addRetirement(ownerCombo.currentOption, minAmountInput.inputText,
+                                  maxRateInput.inputText, maxRateInput.inputText, feeInput.inputText,
+                                  balanceInput.inputText, dynamicInputs.children[0].inputText,
+                                  dynamicInputs.children[1].currentOption);
+                }
+                break;
             }
         }
     }
@@ -35,22 +62,25 @@ Item {
     }
 
     function addSavingsInputs() {
-        dynamicInputs.removeDynamicInputs();
         dynamicInputs.addDateInput("Start date");
         dynamicInputs.addDateInput("End date");
     }
 
     function addRetirementInputs() {
-        dynamicInputs.removeDynamicInputs();
         dynamicInputs.addCurrencyInput("Monthly in");
-        dynamicInputs.addCurrencyInput("Monthly out");
-       //addCheckbox("user retired");
+        dynamicInputs.addCombo("Is owner retired?", boolModel);
     }
 
     function addInvestmentInputs() {
-        dynamicInputs.removeDynamicInputs();
     }
 
+    function clearInputs() {
+        for(var i = 0; i < inputs.children.length; ++i) {
+            if(inputs.children[i].objectName === "styledInput") {
+                inputs.children[i].clear();
+            }
+        }
+    }
     Rectangle {
         id: background
         color: "#eeeeee"
@@ -91,6 +121,7 @@ Item {
                 height: 80
                 width: parent.width
                 onOptionChanged: {
+                    dynamicInputs.remove();
                     addInputs(optName);
                 }
             }
@@ -130,6 +161,13 @@ Item {
                 titleText: "Fee"
                 placeholder: "000.00%"
                 inputMask: "999.99%;0"
+            }
+
+            StyledCurrencyInput {
+                id: balanceInput
+                height: 80
+                width: parent.width
+                titleText: "Balance"
             }
 
             DynamicInputs {

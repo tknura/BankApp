@@ -13,12 +13,67 @@ Item {
 
     property var usersModel
 
+    signal addPersonalAcc(string number, string user, string balance);
+    signal addSavingsAcc(string number, string user, string balance, string interest);
+    signal addChildAcc(string number, string user, string balance, string dailyLimit, string parent);
+    signal addCurrencyAcc(string number, string user, string balance);//todo
+    signal addFamilyAcc(string number, string user, string balance);//todo
+    signal addFirmAcc(string number, string user, string balance);//todo
+
+    signal newAccNumber();
+
+    function addAccount(type) {
+        if(accNumberInput.inputText.length !== 0 && balanceInput.inputText.length !== 0){
+            switch(type){
+            case "personal":
+                addPersonalAcc(accNumberInput.inputText, ownerCombo.currentOption,
+                               balanceInput.inputText);
+                break;
+            case "savings":
+                if(dynamicInputs.children[0].inputText.length !== 0){
+                    addSavingsAcc(accNumberInput.inputText, ownerCombo.currentOption,
+                                  balanceInput.inputText, dynamicInputs.children[0].inputText);
+                }
+                break;
+            case "child":
+                if(dynamicInputs.children[0].inputText.length !== 0){
+                    addChildAcc(accNumberInput.inputText, ownerCombo.currentOption,
+                                  balanceInput.inputText, dynamicInputs.children[0].inputText,
+                                  dynamicInputs.children[1].currentOption);
+                }
+                break;
+            case "currency":
+
+                break;
+            case "family":
+
+                break;
+            case "firm":
+
+                break;
+            }
+        }
+    }
+
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {
-            if(inputs.children[i].objectName === "styledInput") {
+            if(inputs.children[i].objectName === "styledInput"
+                    || inputs.children[i].objectName === "styledCombo") {
                 inputs.children[i].clear();
             }
         }
+        newAccNumber();
+    }
+
+    function success() {
+        popup.message = "Account added successfully to user";
+        popup.open();
+        clearInputs();
+    }
+
+    function fail() {
+        popup.message = "Incorect data passed, can't add account to user";
+        popup.open();
     }
 
     function addInputs(type){
@@ -45,30 +100,24 @@ Item {
     }
 
     function addPersonalInputs() {
-        dynamicInputs.removeDynamicInputs();
     }
 
     function addSavingsInputs() {
-        dynamicInputs.removeDynamicInputs();
-        dynamicInputs.addTextInput("Interest", "000.00%", "999.99%;0");
+        dynamicInputs.addTextInput("Interest", "000.000%", "999.999%;0");
     }
 
     function addChildInputs() {
-        dynamicInputs.removeDynamicInputs();
         dynamicInputs.addCurrencyInput("Daily limit");
-        dynamicInputs.addCombo("Parent", "parentCombo", usersModel);
+        dynamicInputs.addCombo("Parent", usersModel);
     }
 
     function addCurrencyInputs() {
-        dynamicInputs.removeDynamicInputs();
     }
 
     function addFamilyInputs() {
-        dynamicInputs.removeDynamicInputs();
     }
 
     function addFirmInputs() {
-        dynamicInputs.removeDynamicInputs();
     }
 
     Rectangle {
@@ -111,6 +160,7 @@ Item {
                 height: 80
                 width: parent.width
                 onOptionChanged: {
+                    dynamicInputs.remove();
                     addInputs(optName);
                 }
             }
@@ -145,6 +195,7 @@ Item {
                     anchors.bottomMargin: 5
                     anchors.right: parent.right
                     anchors.rightMargin: 5
+                    onClicked: newAccNumber();
                 }
 
                 background: Rectangle {
@@ -207,6 +258,11 @@ Item {
         anchors.rightMargin: 0
     }
 
+    InfoPopup {
+        id: popup
+        anchors.centerIn: parent
+        message: "Account added successfully to user"
+    }
 
     Text {
         id: title
@@ -255,7 +311,7 @@ Item {
         anchors.bottomMargin: 18
         anchors.leftMargin: 500
         onClicked: {
-            clearInputs();
+            addAccount(accTypeCombo.currentOption);
         }
     }
 }

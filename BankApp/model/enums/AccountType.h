@@ -39,7 +39,7 @@ public:
 
     static list<AccountType> GetAllTypesList() {
         return { AccountType::PERSONAL, AccountType::SAVINGS, AccountType::CHILD,
-                 AccountType::CURRENCY, AccountType::FAMILY, AccountType::FIRM };
+                 /*AccountType::CURRENCY,*/ AccountType::FAMILY/*, AccountType::FIRM*/ };
     }
 
     static list<string> GetAllTypesStringList() {

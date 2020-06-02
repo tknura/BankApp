@@ -31,7 +31,7 @@ Column {
                                         });
     }
 
-    function addCombo(title, objectName, model) {
+    function addCombo(title, model) {
         var component;
         var sprite;
         component = Qt.createComponent("qrc:/components/StyledCombo.qml");
@@ -39,7 +39,6 @@ Column {
                                         {
                                            width: root.width,
                                            titleText: title,
-                                           objectName: objectName,
                                            model: model
                                         });
     }
@@ -55,7 +54,7 @@ Column {
                                         });
     }
 
-    function removeDynamicInputs() {
+    function remove() {
         for(var i = 0; i < root.children.length; ++i) {
             root.children[i].destroy(0);
         }

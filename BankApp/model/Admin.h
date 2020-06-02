@@ -25,11 +25,11 @@ public:
     Admin(const LogInData &data);
     ~Admin() override;
     bool CreateUser(string p_login, string p_password, string p_email);
-    bool CreateAccount(int ownerID, string number, double balance);
-    bool CreateAccount(int supervisorID, int childID, std::string number, double balance,
+    bool AddAccount(int ownerID, string number, double balance);
+    bool AddAccount(int supervisorID, int childID, std::string number, double balance,
                     double dailyTransactionLimit);
-    bool CreateAccount(int supervisorID, std::string number, double balance, std::list<int> memberIdList);
-    bool CreateAccount(int ownerID, std::string number, double balance, double interest);
+    bool AddAccount(int supervisorID, std::string number, double balance, std::list<int> memberIdList);
+    bool AddAccount(int ownerID, std::string number, double balance, double interest);
 
     bool AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit);
     bool AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
@@ -46,6 +46,7 @@ public:
     void OnLogIn() override;
     void OnLogOut() override;
     static std::list<std::string> GetUsersStringList();
+    static std::list<std::string> GetAccStringList();
 //    bool IsValid() override;
 };
 

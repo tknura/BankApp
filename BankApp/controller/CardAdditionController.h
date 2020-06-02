@@ -13,18 +13,25 @@ class CardAdditionController : public QObject, IController
 
 private:
     QObject* rootObject;
+    QObject* typeCombo;
     QObject* cardNumberInput;
     QObject* ccvNumberInput;
 
 public:
-    void Initialize(QQmlApplicationEngine* p_engine) override;
+    void Initialize() override;
+    void Connections() override;
     ~CardAdditionController() override {}
     CardAdditionController(QQmlApplicationEngine* p_engine);
     QStringList CardTypes();
 
 public slots:
-    void HandleCardRerollButton();
-    void HandleCcvRerollButton();
+    void HandleCardReroll();
+    void HandleCcvReroll();
+    void HandlePrePaidAdd(QString p_num, QString p_ccv, QString p_accNum, QString p_transLim);
+    void HandleCreditAdd(QString p_num, QString p_ccv, QString p_accNum,
+                         QString p_transLim, QString p_maxCredit, QString p_billingDate);
+    void HandleDebitAdd(QString p_num, QString p_ccv, QString p_accNum,
+                        QString p_transLim, QString p_maxDebt);
 };
 
 #endif // CARDADDITIONCONTROLLER_H

@@ -16,12 +16,8 @@ std::mt19937 Bank::mt = std::mt19937(rd());
  */
 void Bank::LogIn(std::shared_ptr<IUser> data) {
     if(data){
-        if((currentlyLoggedUser = std::dynamic_pointer_cast<Admin>(data))) {
-            currentlyLoggedUser->OnLogIn();
-        }
-        else if((currentlyLoggedUser = std::dynamic_pointer_cast<User>(data))) {
-            currentlyLoggedUser->OnLogIn();
-        }
+        currentlyLoggedUser = data;
+        currentlyLoggedUser->OnLogIn();
     }
 }
 

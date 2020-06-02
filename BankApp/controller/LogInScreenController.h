@@ -27,8 +27,9 @@ private:
 
 public:
     LogInScreenController(QQmlApplicationEngine* p_engine);
-    ~LogInScreenController();
-    void Initialize(QQmlApplicationEngine* p_engine);
+    void Connections() override;
+    ~LogInScreenController() override;
+    void Initialize() override;
 
 public slots:
     void HandleProceedButton();
