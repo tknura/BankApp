@@ -3,6 +3,7 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
+import HistoryList 1.0
 
 Window {
     id: main
@@ -13,7 +14,7 @@ Window {
     height: 700
     color: "#eeeeee"
     title: "BankApp"
-
+    Component.onCompleted: historyList.appendItem();
     LoginScreen{
         id: loginScreen
         objectName: "loginScreen"

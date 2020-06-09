@@ -2,27 +2,41 @@ import QtQuick 2.0
 import QtQuick.Controls 2.13
 
 Item {
-    id: styledOutput
-    objectName: "styledInput"
+    id: historyBar
+    objectName: "historyBar"
     visible: true
     width: parent
-    height: 50
+    height: 60
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+    property alias nametext: name.text
+    property alias namegoods: goods.text
+    property alias nameamount: amount.text
+
     
  
     
     Rectangle {
-        anchors.fill: parent
-        color: "#ececec"
-        border.color: "#ececec"
+        id: kwadrat
+        height: 50
+        anchors.top: parent.top
+        anchors.topMargin: 5
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 5
+        anchors.right: parent.right
+        anchors.left: parent.left
+        color: "#ffffff"
+        border.color: "#ffffff"
         border.width: 2
         radius: 25
         
         Text {
             id: name
-            width: 400
+            width: 200
             height: 20
             color: "#393e46"
-            text: "Stanisław Czembor"
+            text: "Unknown"
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.left: parent.left
@@ -34,10 +48,10 @@ Item {
         }
         Text {
             id: goods
-            width: 400
+            width: 200
             height: 20
             color: "#ABB2B9"
-            text: "Piwko"
+            text: "Unknown"
             anchors.bottom : parent.bottom
             anchors.bottomMargin: 5
             anchors.left: parent.left
@@ -52,8 +66,8 @@ Item {
         Text {
             id: currencyLabel
             anchors {
-                top: parent.top; bottom: parent.bottom
-                right: parent.right; rightMargin: 25
+                top: kwadrat.top; bottom: kwadrat.bottom
+                right: kwadrat.right; rightMargin: 25
             }
             verticalAlignment: Text.AlignVCenter
             color: "#259fc4"
@@ -69,7 +83,7 @@ Item {
             }
             color: "#259fc4"
              
-            text: "+20,00"
+            text: "+00,00"
             font.pixelSize: 18
             verticalAlignment: Text.AlignVCenter
 
