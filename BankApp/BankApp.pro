@@ -19,7 +19,6 @@ SOURCES += \
         controller/CardAdditionController.cpp \
         controller/FundAdditionController.cpp \
         controller/HistoryListModel.cpp \
-        controller/HistoryList.cpp \
         controller/LogInScreenController.cpp \
         controller/MainController.cpp \
         controller/UserAdditionController.cpp \
@@ -71,7 +70,6 @@ HEADERS += \
     controller/CardAdditionController.h \
     controller/FundAdditionController.h \
     controller/HistoryListModel.h \
-    controller/HistoryList.h \
     controller/IController.h \
     controller/LogInScreenController.h \
     controller/MainController.h \

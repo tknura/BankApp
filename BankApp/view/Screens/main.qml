@@ -14,7 +14,6 @@ Window {
     height: 700
     color: "#eeeeee"
     title: "BankApp"
-    Component.onCompleted: historyList.appendItem();
     LoginScreen{
         id: loginScreen
         objectName: "loginScreen"

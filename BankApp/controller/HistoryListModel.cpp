@@ -1,12 +1,15 @@
 #include "HistoryListModel.h"
-#include "HistoryList.h"
 #include <iostream>
 
 HistoryListModel::HistoryListModel(QObject *parent)
-    : QAbstractListModel(parent),
-      mList(nullptr)
+    : QAbstractListModel(parent)
 {
     std::cerr<<"dupa1";
+    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
 }
 
 int HistoryListModel::rowCount(const QModelIndex &parent) const
@@ -14,20 +17,17 @@ int HistoryListModel::rowCount(const QModelIndex &parent) const
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
     std::cerr<<"dupa";
-    if (!mList)
-        return 0;
-
-    // FIXME: Implement me!
-    return mList->items().size();
+    return mList.count();
 }
 
 QVariant HistoryListModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() or !mList)
+    int row = index.row();
+    if (row < 0 || row >= mList.count())
         return QVariant();
 
     // FIXME: Implement me!
-    const HistoryItem item = mList->items().at(index.row());
+    const HistoryItem item = mList.at(row);
 
     switch (role)
     {
@@ -44,11 +44,10 @@ QVariant HistoryListModel::data(const QModelIndex &index, int role) const
 bool HistoryListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     std::cerr<<"danedane";
-    if(!mList)
+    if(mList.empty())
         return false;
 
-    HistoryItem item = mList->items().at(index.row());
-
+    HistoryItem item = mList.at(index.row());
 
     if (data(index, role) != value) {
         // FIXME: Implement me!
@@ -66,6 +65,14 @@ Qt::ItemFlags HistoryListModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEditable; // FIXME: Implement me!
 }
 
+bool HistoryListModel::AddItem(QString name, QString description, QString amount)
+{
+    emit preItemAppended();
+    mList.append({name, description, amount});
+    emit postItemAppended();
+    return true;
+}
+
 QHash<int, QByteArray> HistoryListModel::roleNames() const
 {
     QHash<int,QByteArray> names;
@@ -73,34 +80,4 @@ QHash<int, QByteArray> HistoryListModel::roleNames() const
     names[DescriptionRole] = "description";
     names[AmountRole] = "amount";
     return names;
-}
-
-HistoryList *HistoryListModel::list() const
-{
-    return mList;
-}
-
-void HistoryListModel::setList(HistoryList *list)
-{
-   std::cerr<<"ruchanie";
-   beginResetModel();
-
-    if(mList)
-        mList->disconnect(this);
-
-    mList = list;
-
-    if(mList)
-    {
-        connect(mList, &HistoryList::preItemAppended, this, [=]()
-        {
-            const int index = mList->items().size();
-            beginInsertRows(QModelIndex(),index,index);
-        });
-        connect(mList, &HistoryList::postItemAppended, this, [=]()
-        {
-            endInsertRows();
-        });
-    }
-    endResetModel();
 }

@@ -15,7 +15,6 @@ Item {
 
     onRefresh: {
         console.log(accNumber);
-        historyList.appendItem();
     }
 
     Component.onCompleted:  {
@@ -95,13 +94,7 @@ Item {
                 width: parent.width
                 anchors.fill: parent
 
-                model: HistoryListModel
-                {
-                   objectName: "listmodel"
-                   list: historyList.list
-
-
-                }
+                model: HistoryListModel {}
 
                 delegate: RowLayout {
                     width: parent.width
@@ -117,11 +110,6 @@ Item {
             }
 
         }
-
-
-
-
-
     }
 }
 

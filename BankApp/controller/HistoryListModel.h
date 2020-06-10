@@ -3,17 +3,21 @@
 
 #include <QAbstractListModel>
 
-#include "HistoryList.h"
+//#include "HistoryList.h"
 
-class HistoryList;
+struct HistoryItem
+{
+    QString name;
+    QString description;
+    QString amount;
+};
 
 class HistoryListModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(HistoryList *list READ list WRITE setList);
 
 public:
-    explicit HistoryListModel(QObject *parent = nullptr);
+    explicit HistoryListModel(QObject *parent = 0);
 
     enum
     {
@@ -36,14 +40,15 @@ public:
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
-    HistoryList *list() const;
-    void setList(HistoryList *list);
+    bool AddItem(QString name = "default", QString description = "default", QString amount = "+00,00");
 
-   // QString GetItem(){mList->GetItem();}
-
+signals:
+    void preItemAppended();
+    void postItemAppended();
 
 private:
-    HistoryList *mList;
+    QList<HistoryItem> mList;
+    int m_count;
 };
 
 #endif // HISTORYLISTMODEL_H
