@@ -1,13 +1,16 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
+import HistoryList 1.0
 import components 1.0
 
 Item {
+    property var historyList: HistoryList
+    objectName: "history"
     id: history
     visible: true
     width: 700
     height: 700
-
     signal refresh(string accNumber)
 
     onRefresh: {
@@ -23,6 +26,7 @@ Item {
     Rectangle {
         id: background
         color: "#eeeeee"
+        width: parent.width
         border.width: 0
         border.color: "#eeeeee"
         anchors.right: parent.right
@@ -75,11 +79,39 @@ Item {
             itemToRefresh: history
 
          }
+        Frame {
+            background: Rectangle{
+                color: "transparent"
+                border.color: "transparent"
+            }
+
+            width: parent.width
+            anchors.top: accountsList.bottom
+            anchors.left: accountsList.left
+            anchors.right: accountsList.right
+            anchors.bottom: background.bottom
+            ListView {
+                clip: true
+                implicitHeight: 300
+                width: parent.width
+                anchors.fill: parent
+
+                model: HistoryListModel {}
+
+                delegate: RowLayout {
+                    width: parent.width
+                    HistoryBar {
+                        nametext: model.name
+                        namegoods: model.description
+                        nameamount: model.amount
+                   }
 
 
+                }
 
+            }
 
-
+        }
     }
 }
 
