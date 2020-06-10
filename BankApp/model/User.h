@@ -18,12 +18,14 @@ class User : public IUser, public LogInData
 {
 private:
     list<string> accountList;
-    list<PaymentRetriever> friendsList;
-    list<string> fundList;
+    //list<PaymentRetriever> friendsList;
+    std::list<std::shared_ptr<PaymentRetriever>> friendsList;
+    //list<string> fundList;
 
 public:
     User(const LogInData& data);
     ~User() override;
+    list<string>* GetAccountList(){return &accountList;}
     /*
      Metoda zakłada, że w gui upewniono się, że przelew miedzy danymi kontami jest dozwolony.
      Metoda nierozróznia przelewu własnego od normalnego.

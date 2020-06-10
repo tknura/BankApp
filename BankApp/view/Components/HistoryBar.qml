@@ -13,6 +13,7 @@ Item {
     property alias nametext: name.text
     property alias namegoods: goods.text
     property alias nameamount: amount.text
+    property alias namedate: date.text
 
     
  
@@ -63,6 +64,15 @@ Item {
 
             
         }
+        Text {
+            id: date
+            anchors.centerIn: kwadrat
+            verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 18
+            text:"00/00/0000"
+            color: "#259fc4"
+        }
+
         Text {
             id: currencyLabel
             anchors {

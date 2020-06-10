@@ -35,6 +35,7 @@ void Bank::Start() {
     } catch (std::exception &ex) {
         std::cerr << ex.what() << std::endl;
     }
+
 }
 
 void Bank::Stop() {

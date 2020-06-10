@@ -104,6 +104,7 @@ Item {
                         nametext: model.name
                         namegoods: model.description
                         nameamount: model.amount
+                        namedate: model.date
                    }
 
 

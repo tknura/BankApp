@@ -1,13 +1,26 @@
 #include "HistoryListModel.h"
+#include "model/Account.h"
+#include "model/History.h"
 #include <iostream>
 
 HistoryListModel::HistoryListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     std::cerr<<"dupa1";
+
+    AddItem(QStringLiteral("sranie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("w banie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("koczkodanie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
     AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
     AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("sranie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("w banie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("koczkodanie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
     AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("sranie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("w banie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("koczkodanie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
     AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
     AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
 }
@@ -65,10 +78,10 @@ Qt::ItemFlags HistoryListModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEditable; // FIXME: Implement me!
 }
 
-bool HistoryListModel::AddItem(QString name, QString description, QString amount)
+bool HistoryListModel::AddItem(QString name, QString description, QString amount, QString date)
 {
     emit preItemAppended();
-    mList.append({name, description, amount});
+    mList.append({name, description, amount, date});
     emit postItemAppended();
     return true;
 }
@@ -79,5 +92,6 @@ QHash<int, QByteArray> HistoryListModel::roleNames() const
     names[NameRole] = "name";
     names[DescriptionRole] = "description";
     names[AmountRole] = "amount";
+    names[DateRole] = "date";
     return names;
 }

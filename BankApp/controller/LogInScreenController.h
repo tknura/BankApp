@@ -9,6 +9,7 @@
 #include "AdminScreenController.h"
 #include "model/Authorization.h"
 #include "model/LogInData.h"
+#include "model/JsonManager.h"
 
 class LogInScreenController : public QObject, IController
 {
