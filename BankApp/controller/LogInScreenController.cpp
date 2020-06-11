@@ -10,12 +10,6 @@ void LogInScreenController::HandleProceedButton() {
             if(Bank::isUserLogged()){
 
                 LoadUserScreen();
-                //Loading data from files
-                JsonManager manager(attempt.GetID());
-                //manager.ParseData(Bank::currentlyLoggedUser->GetAccountList()*,Bank::accountMap);
-                //
-                manager.ParseData(Bank::fundMap);
-                manager.ParseData(Bank::cardMap);
             }
             else if(Bank::isAdminLogged()) {
                 LoadAdminScreen();

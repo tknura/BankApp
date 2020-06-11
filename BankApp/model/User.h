@@ -18,9 +18,7 @@ class User : public IUser, public LogInData
 {
 private:
     list<string> accountList;
-    //list<PaymentRetriever> friendsList;
     std::list<std::shared_ptr<PaymentRetriever>> friendsList;
-    //list<string> fundList;
 
 public:
     User(const LogInData& data);

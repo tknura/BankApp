@@ -1,6 +1,8 @@
 #include "HistoryListModel.h"
 #include "model/Account.h"
 #include "model/History.h"
+
+
 #include <iostream>
 
 HistoryListModel::HistoryListModel(QObject *parent)
@@ -8,21 +10,22 @@ HistoryListModel::HistoryListModel(QObject *parent)
 {
     std::cerr<<"dupa1";
 
-    AddItem(QStringLiteral("sranie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("w banie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("koczkodanie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("sranie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("w banie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("koczkodanie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("sranie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("w banie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("koczkodanie"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
-    AddItem(QStringLiteral("Stanisław"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+    AddItem(QStringLiteral("Stanisław Czembor"),QStringLiteral("Lidl"),44.88,"05/03/2020");
+
+
+}
+
+void HistoryListModel::update(const QString &accNum)
+{
+
+    History tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
+    auto p = tmp.GetList();
+    for(const auto element : *p)
+    {
+        AddItem(element->GetName(),element->GetDescription(),20,element->GetDate());
+    }
+    std::cerr<<"jestem w update";
+    //AddItem(QStringLiteral("marlenka"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
 }
 
 int HistoryListModel::rowCount(const QModelIndex &parent) const
@@ -78,7 +81,7 @@ Qt::ItemFlags HistoryListModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEditable; // FIXME: Implement me!
 }
 
-bool HistoryListModel::AddItem(QString name, QString description, QString amount, QString date)
+bool HistoryListModel::AddItem(QString name, QString description, double amount, QString date)
 {
     emit preItemAppended();
     mList.append({name, description, amount, date});

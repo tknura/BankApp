@@ -16,7 +16,9 @@ int main(int argc, char *argv[])
 {
     Bank::Start();
     Test::Run();
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
 
     QGuiApplication app(argc, argv);
 

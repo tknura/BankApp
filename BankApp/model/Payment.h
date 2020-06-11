@@ -5,6 +5,7 @@
 #include "PaymentRetriever.h"
 #include "IValidator.h"
 #include "json.hpp"
+#include <QString>
 
 using str = std::string;
 
@@ -23,10 +24,12 @@ public:
         :amount(p_amount),title(p_title), date(p_date), retriever(p_name,p_accNum,p_address){std::cerr<<"Payment utworzony";}
 
     str GetAccNumber(){return retriever.GetAccNumer();}
-    double GetAmount(){return amount;}
+    double GetAmount(){return amount;} 
+    QString GetDescription(){return QString::fromStdString(title);}
+    QString GetDate(){return QString::fromStdString(date);}
+    QString GetName(){return QString::fromStdString(retriever.GetName());}
 
     json SerializeToJson();
-
 };
 
 #endif // PAYMENT_H

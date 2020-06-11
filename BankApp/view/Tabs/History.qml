@@ -15,6 +15,7 @@ Item {
 
     onRefresh: {
         console.log(accNumber);
+
     }
 
     Component.onCompleted:  {
@@ -78,7 +79,8 @@ Item {
             anchors.topMargin: 6
             itemToRefresh: history
 
-         }
+        }
+
         Frame {
             background: Rectangle{
                 color: "transparent"

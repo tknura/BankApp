@@ -17,6 +17,8 @@ public:
     }
 
     json SerializeToJson();
+
+    std::list<std::shared_ptr<Payment>>* GetList(){return &paymentList;}
 };
 
 #endif // HISTORY_H

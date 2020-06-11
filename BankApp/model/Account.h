@@ -27,6 +27,8 @@ public:
     Account(int p_supervisorId);
     static std::string GenerateNumber();
 
+    virtual History GetHistory() override {return history;}
+
 
     virtual void UpdateHistory(std::shared_ptr<Payment> p_payment)override;
     std::string GetNumber() const;
@@ -36,7 +38,7 @@ public:
     int GetSupervisorId() const;
     void SetSupervisorId(int value);
     virtual void AddFunds(double p_amount)override{balance+=p_amount;}
-    virtual json SerializeToJson();
+    virtual json SerializeToJson() override;
 
     virtual int GetType()override{return 0;}
 };

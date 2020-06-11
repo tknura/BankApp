@@ -68,9 +68,9 @@ Item {
             id: date
             anchors.centerIn: kwadrat
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 18
+            font.pixelSize: 16
             text:"00/00/0000"
-            color: "#259fc4"
+            color: "#ABB2B9"
         }
 
         Text {

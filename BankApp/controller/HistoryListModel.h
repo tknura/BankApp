@@ -1,6 +1,8 @@
 #ifndef HISTORYLISTMODEL_H
 #define HISTORYLISTMODEL_H
 
+#include "model/Bank.h"
+
 #include <QAbstractListModel>
 
 //#include "HistoryList.h"
@@ -9,7 +11,7 @@ struct HistoryItem
 {
     QString name;
     QString description;
-    QString amount;
+    double amount;
     QString date;
 };
 
@@ -19,7 +21,6 @@ class HistoryListModel : public QAbstractListModel
 
 public:
     explicit HistoryListModel(QObject *parent = 0);
-
     enum
     {
         NameRole = Qt::UserRole,
@@ -27,6 +28,9 @@ public:
         AmountRole,
         DateRole
     };
+
+    //method able to be called from QML
+    Q_INVOKABLE void update(const QString& accNum);
 
 
     // Basic functionality:
@@ -42,7 +46,7 @@ public:
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
-    bool AddItem(QString name = "default", QString description = "default", QString amount = "+00,00",QString date = "00/00/0000");
+    bool AddItem(QString name = "default", QString description = "default", double amount = 00.00,QString date = "00/00/0000");
 
 signals:
     void preItemAppended();
