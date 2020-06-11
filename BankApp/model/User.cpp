@@ -3,27 +3,41 @@
 #include "JsonManager.h"
 
 
-User::User(const LogInData &data) : LogInData(data) {}
+User::User(const LogInData &data) : LogInData(data) {
+    friendsList = std::list<std::shared_ptr<PaymentRetriever>>{};
+}
 
 User::~User() {}
 
-void User::OnLogIn() {
-    std::cerr << "User logged" << std::endl;
-    //loading data from json to maps and lists
+void User::LoadData()
+{
     JsonManager manager(id);
-    //manager.ParseData(friendsList);// Nie działa, nie wiem dlaczego. Gdy wywołuje w main działa poprawnie.
-    manager.ParseData(accountList,Bank::accountMap);
-    manager.ParseData(Bank::fundMap);
-    manager.ParseData(Bank::cardMap);
+
+     manager.ParseData(friendsList);
+     manager.ParseData(accountList,Bank::accountMap);
+     manager.ParseData(Bank::fundMap);
+     manager.ParseData(Bank::cardMap);
 }
 
-void User::OnLogOut() {
-    //saving data from maps nad lists
+void User::SaveData()
+{
     JsonManager manager(id);
-//    manager.SerializeData(friendsList);
+    manager.SerializeData(friendsList);
     manager.SerializeData(Bank::accountMap,Config::accountJSONPath);
     manager.SerializeData(Bank::fundMap,Config::fundJSONPath);
     manager.SerializeData(Bank::cardMap,Config::cardJSONPath);
+}
+
+void User::OnLogIn() {
+    std::cerr << "User logged" << std::endl;
+    LoadData();
+
+}
+
+void User::OnLogOut() {
+    std::cerr << "User logged out" << std::endl;
+    SaveData();
+
 
 
 }

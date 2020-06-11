@@ -13,8 +13,8 @@
 class Authorization
 {
 public:
-    static bool VerifyUser(const LogInData &data);
-    static bool LogInAttempt(const LogInData &data);
+    static bool VerifyUser(LogInData &data);
+    static bool LogInAttempt(LogInData &data);
     static LogInData proccesedData(const std::string &line);
 };
 

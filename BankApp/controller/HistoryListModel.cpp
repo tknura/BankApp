@@ -17,7 +17,7 @@ HistoryListModel::HistoryListModel(QObject *parent)
 
 void HistoryListModel::update(const QString &accNum)
 {
-
+    std::cerr<<"69dupa69";
     History tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
     auto p = tmp.GetList();
     for(const auto element : *p)

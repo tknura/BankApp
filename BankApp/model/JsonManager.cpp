@@ -24,7 +24,7 @@ void JsonManager::ParseData(listP & p_list)
 
         std::shared_ptr<PaymentRetriever> p {nullptr};
 
-        for (const auto& person: friendsFile[userID]["items"])//tu jest błąd powinno być friends data
+        for (const auto& person: friendsFile[userID]["items"])
         {
             using str = std::string;
 

@@ -7,6 +7,7 @@
 #include "LogInData.h"
 #include <list>
 #include <string>
+#include "JsonManager.h"
 
 using std::list;
 using std::string;
@@ -24,6 +25,8 @@ public:
     User(const LogInData& data);
     ~User() override;
     list<string>* GetAccountList(){return &accountList;}
+    void LoadData();//creates JsonManager instance and invokes its ParseData methods
+    void SaveData();//creates JsonManager instance and invokes its SerializeData methods
     /*
      Metoda zakłada, że w gui upewniono się, że przelew miedzy danymi kontami jest dozwolony.
      Metoda nierozróznia przelewu własnego od normalnego.

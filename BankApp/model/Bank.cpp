@@ -1,4 +1,5 @@
 #include "Bank.h"
+#include "JsonManager.h"
 
 list<std::string> Bank::accountNumList = list<std::string>();
 list<std::string> Bank::fundNumList = list<std::string>();
@@ -18,6 +19,7 @@ void Bank::LogIn(std::shared_ptr<IUser> data) {
     if(data){
         currentlyLoggedUser = data;
         currentlyLoggedUser->OnLogIn();
+       // std::dynamic_pointer_cast<User> (currentlyLoggedUser)->load();
     }
 }
 

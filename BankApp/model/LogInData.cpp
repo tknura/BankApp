@@ -1,14 +1,19 @@
 #include "LogInData.h"
+#include "JsonManager.h"
+#include "PaymentRetriever.h"
+#include <list>
 
 const std::regex LogInData::loginReg = std::regex(".*");//work in progress
 const std::regex LogInData::passwordReg = std::regex("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
 const std::regex LogInData::emailReg = std::regex("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
 
 LogInData::LogInData()
-    : id(-1), login(""), password(""), email("") {}
+    : id(-1), login(""), password(""), email("") {
+}
 
 LogInData::LogInData(int p_id, std::string p_login, std::string p_password, std::string p_email)
-    : id(p_id), login(p_login), password(p_password), email(p_email) {}
+    : id(p_id), login(p_login), password(p_password), email(p_email) {
+}
 
 LogInData::LogInData(std::string p_login, std::string p_password, std::string p_email)
     : id(-1), login(p_login), password(p_password), email(p_email) {}

@@ -5,7 +5,7 @@ import HistoryList 1.0
 import components 1.0
 
 Item {
-    property var historyList: HistoryList
+   // property var historyList: HistoryList
     objectName: "history"
     id: history
     visible: true
@@ -15,7 +15,6 @@ Item {
 
     onRefresh: {
         console.log(accNumber);
-
     }
 
     Component.onCompleted:  {
@@ -23,6 +22,10 @@ Item {
         accountsList.addButton("Family", "4321 4321 4321 4321", "999,99", "PLN", false);
         accountsList.addButton("Currency", "1234 1234 1234 1234", "999,99", "PLN", true);
     }
+
+    HistoryListModel {
+                    id:histmodel
+                    }
 
     Rectangle {
         id: background
@@ -92,13 +95,13 @@ Item {
             anchors.left: accountsList.left
             anchors.right: accountsList.right
             anchors.bottom: background.bottom
+
             ListView {
                 clip: true
                 implicitHeight: 300
                 width: parent.width
                 anchors.fill: parent
-
-                model: HistoryListModel {}
+                model: histmodel
 
                 delegate: RowLayout {
                     width: parent.width
@@ -109,11 +112,17 @@ Item {
                         namedate: model.date
                    }
 
+            Button{
+                width: 20
+                height: 20
+                text: "REFRESH"
+                anchors.centerIn: parent
+                onClicked: histmodel.update("1234567890")
+            }
 
                 }
 
             }
-
         }
     }
 

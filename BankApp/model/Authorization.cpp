@@ -4,7 +4,7 @@
  * Method which return true if LogInData passed as an argument
  * match existing LogInData in proper file
  */
-bool Authorization::VerifyUser(const LogInData &data) {
+bool Authorization::VerifyUser(LogInData &data) {
     std::fstream file;
     file.open(Config::logInDataPath, std::ios::in);
     if(file.is_open()){
@@ -17,6 +17,7 @@ bool Authorization::VerifyUser(const LogInData &data) {
                     if(logInDataFromLine.GetPassword() == data.GetPassword() &&
                         (logInDataFromLine.GetEmail() == data.GetEmail()
                          || logInDataFromLine.GetLogin() == data.GetLogin())) {
+                            data.SetID(logInDataFromLine.GetID());
                             file.close();
                             return true;
                     }
@@ -38,7 +39,7 @@ bool Authorization::VerifyUser(const LogInData &data) {
  * Method which call FindData and depending on its results call
  * LogIn function in Bank class
  */
-bool Authorization::LogInAttempt(const LogInData &data) {
+bool Authorization::LogInAttempt(LogInData &data) {
     if(data.GetLogin() == "admin" && data.GetPassword() == "admin"){
         Bank::LogIn(std::make_shared<Admin>(data));
         return true;
