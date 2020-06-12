@@ -6,7 +6,12 @@ import QtGraphicalEffects 1.12
 Item {
     id: element
     height: 180
-    property var itemToRefresh
+    property string checkedAccNumber
+    signal refresh(string accNumber)
+
+    onRefresh: {
+        checkedAccNumber = accNumber
+    }
 
     function addButton(p_accTypText, p_accNumberText, p_accAmountText, p_accCurencyText,
                        p_isDisabled) {
@@ -21,7 +26,7 @@ Item {
                                             accCurrencyText: p_accCurencyText,
                                             isDisabled: p_isDisabled,
                                             buttongroup: accountButtons,
-                                            itemToRefresh: itemToRefresh
+                                            itemToRefresh: element
                                         });
     }
 

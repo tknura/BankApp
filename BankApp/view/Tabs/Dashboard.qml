@@ -91,7 +91,9 @@ Item {
             anchors.leftMargin: 70
             anchors.top: accounts.bottom
             anchors.topMargin: 6
-            itemToRefresh: dashboard
+            onCheckedAccNumberChanged: {
+                console.log(checkedAccNumber);
+            }
         }
 
         PushButton {

@@ -12,11 +12,6 @@ Item {
     visible: true
     width: 700
     height: 700
-    signal refresh(string accNumber)
-
-    onRefresh: {
-        console.log(accNumber);
-    }
 
     Component.onCompleted:  {
         accountsList.addButton("Regular", "1234 1234 1234 1234", "999,99", "PLN", false);
@@ -81,8 +76,10 @@ Item {
             anchors.leftMargin: 70
             anchors.top: desc.bottom
             anchors.topMargin: 6
-            itemToRefresh: history
-
+            //itemToRefresh: history
+            onCheckedAccNumberChanged: {
+                console.log(checkedAccNumber);
+            }
         }
         Button{//ten przycisk jest do wywalenia, w przypadku kliknięcia zmiany konta ma sie uruchamiać funkcja clear i update
             id: dest

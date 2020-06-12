@@ -15,6 +15,7 @@ Item {
     property color shadowNormal: "#a2a2a2"
     property color shadowChecked: "#259fc4"
     property var buttongroup: null;
+    property var itemToRefresh
 
     function enable() {
         button.state = "base";
@@ -55,7 +56,9 @@ Item {
         }
         indicator: null
         onClicked: {
-            itemToRefresh.refresh(accNumberText);
+            if(checked) {
+                itemToRefresh.refresh(accNumberText);
+            }
         }
 
         states: [
