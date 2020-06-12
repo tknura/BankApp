@@ -1,36 +1,17 @@
 #include "Account.h"
 #include "Bank.h"
 
-//Account::Account(const Account&)
-//{
 
-//}
-//Account& Account::operator=(const Account&)
-//{
-
-//}
-//Account::Account(Account&&)
-//{
-
-//}
-//Account& Account::operator=(Account&&)
-//{
-
-//}
-//Account::~Account()
-//{
-
-//}
 Account::Account(History p_history, std::string p_number, double p_balance, int p_supervisorId)
     :history(p_history),number(p_number), balance(p_balance), supervisorId(p_supervisorId)
 {
-    std::cerr<<"utworzono obiekt account\n";
+    std::cerr<<"Account object created\n";
 }
 
 Account::Account(std::string p_number, double p_balance, int p_supervisorId)
     :number(p_number), balance(p_balance), supervisorId(p_supervisorId)
 {
-    std::cerr<<"utworzono obiekt account\n";
+    std::cerr<<"Account object created\n";
 }
 
 Account::Account(std::string p_number, int p_supervisorId)

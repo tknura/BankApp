@@ -123,7 +123,6 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
 void JsonManager::ParseData(multiMapCard &p_map)
 {
     std::ifstream f(Config::cardJSONPath);
-    std::cerr<<Config::cardJSONPath<<"sranie";
 
     if(f.is_open())
     {
@@ -218,7 +217,6 @@ void JsonManager::SerializeData(listP& p_list)
         s+= j.dump();
         s+= ",";
     }
-    //std::cout<<s<<"\n";
     s.pop_back();
     s+= "]";
     std::cout<<s<<"\n";

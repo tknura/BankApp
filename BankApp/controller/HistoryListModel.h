@@ -31,6 +31,7 @@ public:
 
     //method able to be called from QML
     Q_INVOKABLE void update(const QString& accNum);
+    Q_INVOKABLE void clear();
 
 
     // Basic functionality:
@@ -51,6 +52,9 @@ public:
 signals:
     void preItemAppended();
     void postItemAppended();
+
+    void preItemRemoved(int index);
+    void postItemRemoved();
 
 private:
     QList<HistoryItem> mList;

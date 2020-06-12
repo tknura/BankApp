@@ -12,7 +12,7 @@ using str = std::string;
 class Payment //: IValidator
 {
 public:
-    Payment();
+    Payment(){std::cerr<<"Payment object created\n";}
     //~Payment() override;
     double amount;
     str title;
@@ -21,7 +21,7 @@ public:
     //bool IsValid() override;
 
     Payment(double p_amount, str p_title, str p_date, str p_name, str p_accNum, str p_address)
-        :amount(p_amount),title(p_title), date(p_date), retriever(p_name,p_accNum,p_address){std::cerr<<"Payment utworzony";}
+        :amount(p_amount),title(p_title), date(p_date), retriever(p_name,p_accNum,p_address){std::cerr<<"Payment object created\n";}
 
     str GetAccNumber(){return retriever.GetAccNumer();}
     double GetAmount(){return amount;} 

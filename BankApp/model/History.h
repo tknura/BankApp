@@ -18,7 +18,9 @@ public:
 
     json SerializeToJson();
 
-    std::list<std::shared_ptr<Payment>>* GetList(){return &paymentList;}
+    int GetSize(){return paymentList.size();}
+
+    std::list<std::shared_ptr<Payment>> GetList(){return paymentList;}
 };
 
 #endif // HISTORY_H

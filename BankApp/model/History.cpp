@@ -2,7 +2,7 @@
 
 History::History()
 {
-
+    std::cerr<<"History object created\n";
 }
 
 json History::SerializeToJson()

@@ -13,9 +13,9 @@ private:
 public:
     ChildAccount() = delete ;
     ChildAccount(History p_history, std::string p_number, double p_balance, int p_supervisorId, double p_dailyTransactionLimit, int p_childId)
-        :Account(p_history,p_number, p_balance, p_supervisorId), dailyTransactionLimit(p_dailyTransactionLimit), childId(p_childId){std::cerr<<"utworzono obiekt ChildAccount\n";}
+        :Account(p_history,p_number, p_balance, p_supervisorId), dailyTransactionLimit(p_dailyTransactionLimit), childId(p_childId){std::cerr<<"ChildAccount object created\n";}
     ChildAccount(std::string p_number, double p_balance, int p_supervisorId, double p_dailyTransactionLimit, int p_childId)
-        :Account(p_number, p_balance, p_supervisorId), dailyTransactionLimit(p_dailyTransactionLimit), childId(p_childId){std::cerr<<"utworzono obiekt ChildAccount\n";}
+        :Account(p_number, p_balance, p_supervisorId), dailyTransactionLimit(p_dailyTransactionLimit), childId(p_childId){std::cerr<<"ChildAccount object created\n";}
 
     json SerializeToJson() override;
 

@@ -14,7 +14,7 @@ public:
     virtual int GetType() = 0;
     virtual double GetBalance() const = 0;
     virtual void SetBalance(double ) = 0;
-    virtual History GetHistory() = 0;
+    virtual History* GetHistory() = 0;
     virtual json SerializeToJson() = 0;
 };
 

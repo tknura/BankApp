@@ -27,7 +27,7 @@ public:
     Account(int p_supervisorId);
     static std::string GenerateNumber();
 
-    virtual History GetHistory() override {return history;}
+    virtual History* GetHistory() override {return &history;}
 
 
     virtual void UpdateHistory(std::shared_ptr<Payment> p_payment)override;

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import HistoryList 1.0
 import components 1.0
+import QtQml.Models 2.2
 
 Item {
    // property var historyList: HistoryList
@@ -83,6 +84,21 @@ Item {
             itemToRefresh: history
 
         }
+        Button{//ten przycisk jest do wywalenia, w przypadku kliknięcia zmiany konta ma sie uruchamiać funkcja clear i update
+            id: dest
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            width: 100
+            height: 100
+            text: "Refresh"
+
+            onClicked:{
+                histmodel.clear()
+                histmodel.update("55533333")
+            }
+
+        }
+
 
         Frame {
             background: Rectangle{
@@ -112,13 +128,6 @@ Item {
                         namedate: model.date
                    }
 
-            Button{
-                width: 20
-                height: 20
-                text: "REFRESH"
-                anchors.centerIn: parent
-                onClicked: histmodel.update("1234567890")
-            }
 
                 }
 

@@ -1,6 +1,7 @@
 #include "HistoryListModel.h"
 #include "model/Account.h"
 #include "model/History.h"
+#include "model/Bank.h"
 
 
 #include <iostream>
@@ -8,31 +9,47 @@
 HistoryListModel::HistoryListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    std::cerr<<"dupa1";
-
-    AddItem(QStringLiteral("Stanisław Czembor"),QStringLiteral("Lidl"),44.88,"05/03/2020");
-
-
+    auto p = std::dynamic_pointer_cast<User>(Bank::currentlyLoggedUser)->GetAccountList();
+    update(QString::fromStdString(p->front()));
 }
 
 void HistoryListModel::update(const QString &accNum)
 {
-    std::cerr<<"69dupa69";
-    History tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
-    auto p = tmp.GetList();
-    for(const auto element : *p)
+    beginResetModel();
+
+    History* tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
+    auto p = tmp->GetList();
+    for(const auto element : p)
     {
         AddItem(element->GetName(),element->GetDescription(),20,element->GetDate());
     }
-    std::cerr<<"jestem w update";
-    //AddItem(QStringLiteral("marlenka"),QStringLiteral("Lidl"),QStringLiteral("+44,88"));
+
+    endResetModel();
+}
+
+void HistoryListModel::clear()
+{
+    beginResetModel();
+
+    for (int j = 0; j< 5; j++)
+    {
+        for(int i = 0; i< mList.size(); ++i)
+        {
+            preItemRemoved(i);
+
+            mList.removeAt(i);
+
+            postItemRemoved();
+        }
+    }
+
+    endResetModel();
 }
 
 int HistoryListModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
-    std::cerr<<"dupa";
     return mList.count();
 }
 
@@ -53,13 +70,14 @@ QVariant HistoryListModel::data(const QModelIndex &index, int role) const
         return QVariant(item.description);
     case AmountRole:
         return QVariant(item.amount);
+    case DateRole:
+        return QVariant(item.date);
     }
     return QVariant();
 }
 
 bool HistoryListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    std::cerr<<"danedane";
     if(mList.empty())
         return false;
 

@@ -13,7 +13,7 @@ public:
   //  CreditCard(std::string p_accountNumber, std::string p_number, int p_ccv, double p_transactionLimit, double p_maxCredit, std::string p_billingDate,std::string p_type)
      //   :Card(p_accountNumber, p_number, p_ccv, p_transactionLimit,p_type), maxCredit(p_maxCredit), billingDate(p_billingDate){std::cerr<<"utworzono obiekt CreditCard\n";}
     CreditCard(std::string p_accountNumber, std::string p_number, int p_ccv, double p_transactionLimit, double p_maxCredit, std::string p_billingDate)
-        :Card(p_accountNumber, p_number, p_ccv, p_transactionLimit), maxCredit(p_maxCredit), billingDate(p_billingDate){std::cerr<<"utworzono obiekt CreditCard\n";}
+        :Card(p_accountNumber, p_number, p_ccv, p_transactionLimit), maxCredit(p_maxCredit), billingDate(p_billingDate){std::cerr<<"CreditCard object created\n";}
 
     json SerializeToJson() override;
     int GetType() override{return 1;}
