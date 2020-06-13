@@ -11,8 +11,8 @@ void FundAdditionController::Connections() {
                      this, SLOT(HandleInvestmentAdd(QString, QString, QString, QString, QString)));
     QObject::connect(rootObject, SIGNAL(addSavings(QString, QString, QString, QString, QString, QString, QString)),
                      this, SLOT(HandleSavingsAdd(QString, QString, QString, QString, QString, QString, QString)));
-    QObject::connect(rootObject, SIGNAL(addSavings(QString, QString, QString, QString, QString, QString, QString, QString)),
-                     this, SLOT(HandleSavingsAdd(QString, QString, QString, QString, QString, QString, QString, QString)));
+    QObject::connect(rootObject, SIGNAL(addRetirement(QString, QString, QString, QString, QString, QString, QString)),
+                     this, SLOT(HandleRetirementAdd(QString, QString, QString, QString, QString, QString, QString)));
 }
 
 FundAdditionController::FundAdditionController(QQmlApplicationEngine *p_engine) {
@@ -63,7 +63,7 @@ void FundAdditionController::HandleSavingsAdd(QString p_usrId, QString p_minAmou
 }
 
 void FundAdditionController::HandleRetirementAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
-                                                 QString p_balance, QString p_fee, QString p_monthlyIn,
+                                                 QString p_fee, QString p_balance, QString p_monthlyIn,
                                                  QString p_retired) {
     int userId = AdminScreenController::GetIDFromUserString(p_usrId.toStdString());
     double minAmount = AdminScreenController::GetMoneyFromString(p_minAmount.toStdString());
