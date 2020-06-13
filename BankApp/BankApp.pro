@@ -15,12 +15,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         controller/AccountAdditionController.cpp \
+        controller/AccountButtonModel.cpp \
         controller/AdminScreenController.cpp \
         controller/CardAdditionController.cpp \
         controller/FundAdditionController.cpp \
         controller/HistoryListModel.cpp \
         controller/LogInScreenController.cpp \
         controller/MainController.cpp \
+        controller/PaymentTabController.cpp \
         controller/UserAdditionController.cpp \
         controller/UserScreenController.cpp \
         main.cpp \
@@ -66,6 +68,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     controller/AccountAdditionController.h \
+    controller/AccountButtonModel.h \
     controller/AdminScreenController.h \
     controller/CardAdditionController.h \
     controller/FundAdditionController.h \
@@ -73,6 +76,7 @@ HEADERS += \
     controller/IController.h \
     controller/LogInScreenController.h \
     controller/MainController.h \
+    controller/PaymentTabController.h \
     controller/UserAdditionController.h \
     controller/UserScreenController.h \
     model/Account.h \

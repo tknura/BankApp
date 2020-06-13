@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.12
 
 Item {
     id: element
+    objectName: "accountButtonList"
     height: 180
     property string checkedAccNumber
     signal refresh(string accNumber)
@@ -28,6 +29,12 @@ Item {
                                             buttongroup: accountButtons,
                                             itemToRefresh: element
                                         });
+    }
+
+    function clear () {
+        for(var i = 0; i < inputs.children.length; ++i) {
+           inputs.children[i].destroy(0);
+        }
     }
 
     ScrollView {

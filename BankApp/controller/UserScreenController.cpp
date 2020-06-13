@@ -3,11 +3,6 @@
 
 
 void UserScreenController::Initialize() {
-
-//    HistoryList historyList;
-//    p_engine->rootContext()->setContextProperty(QStringLiteral("historyList"), &historyList);
-   // rootObject->findChild<QObject*>("history")->setProperty("historylist",QVariant::fromValue(&historyList));
-
 }
 
 void UserScreenController::Connections() {
@@ -15,6 +10,21 @@ void UserScreenController::Connections() {
 }
 
 UserScreenController::UserScreenController(QQmlApplicationEngine *p_engine) {
-    this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("adminScreen");
+    this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("userScreen");
+    this->pmntTabControler = new PaymentTabController(p_engine);
+
     Initialize();
+    Connections();
+}
+
+UserScreenController::~UserScreenController() {
+    delete pmntTabControler;
+}
+
+QStringList UserScreenController::usrAccounts() {
+    QStringList str;
+    for(auto& s : *Bank::GetLoggedUser<User>()->GetAccountList()){
+        str.append(QString::fromStdString(s));
+    }
+    return str;
 }

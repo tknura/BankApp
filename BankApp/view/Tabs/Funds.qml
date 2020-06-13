@@ -48,6 +48,20 @@ Item {
             font.pixelSize: 18
             font.family: "Rubik"
         }
+
+        Text {
+            id: comingsoon
+            x: 70
+            y: 154
+            width: 562
+            height: 509
+            color: "#4c26282a"
+            text: qsTr("Comming soon")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 30
+            font.family: "Rubik"
+        }
     }
 
 

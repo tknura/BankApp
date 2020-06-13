@@ -20,8 +20,8 @@ Item {
     }
 
     HistoryListModel {
-                    id:histmodel
-                    }
+        id:histmodel
+    }
 
     Rectangle {
         id: background
@@ -68,7 +68,6 @@ Item {
         }
         AccountButtonList {
             id: accountsList
-            objectName: "accountsList"
             height: 160
             anchors.right: parent.right
             anchors.rightMargin: 48
