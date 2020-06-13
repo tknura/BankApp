@@ -21,7 +21,7 @@ void HistoryListModel::update(const QString &accNum)
     auto p = tmp->GetList();
     for(const auto element : p)
     {
-        AddItem(element->GetName(),element->GetDescription(),20,element->GetDate());
+        AddItem(element->GetName(),element->GetDescription(),element->GetAmount(),element->GetDate());
     }
 
     endResetModel();

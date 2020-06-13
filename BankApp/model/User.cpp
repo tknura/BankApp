@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "User.h"
 #include "Bank.h"
 #include "JsonManager.h"
@@ -41,12 +43,29 @@ void User::OnLogOut() {
 
 
 }
-void User::MakePayment(str& p_OutAccNum, double p_amount, str& p_title, str& p_date, str& p_name, str& p_InAccNum, str& p_address)
+
+bool User::IsUserAccount(std::string &p_accNum)
 {
-    auto pPayment = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,p_InAccNum,p_address);
+    auto it = std::find(accountList.begin(),accountList.end(),p_accNum);
+    if(it != accountList.end())
+    {
+        return true;//is present
+    }
+    else
+    {
+        return false;//is not present
+    }
+
+}
+void User::MakePayment(str& p_OutAccNum, double p_amount, str& p_title, str& p_date, str& p_name, str& p_InAccNum, str& p_address)
+{   
+    bool isIncoming {!IsUserAccount(p_OutAccNum)};
+
+    auto pPayment = std::make_shared<Payment>(-p_amount,p_title,p_date,p_name,p_InAccNum,p_address, isIncoming);
     if(Bank::UpdateOutputAccount(p_OutAccNum,pPayment))
     {
-        Bank::UpdateInputAccount(p_InAccNum,p_amount);
+        auto pPayment = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,"","", true);
+        Bank::UpdateInputAccount(p_InAccNum,pPayment);
 
     }
     else

@@ -49,7 +49,7 @@ public://wydaje mi się, że wszystkie mapy i listy powinny być private
     }
     //search, update, getter methods for bank
     static bool UpdateOutputAccount(std::string &p_accNum, std::shared_ptr<Payment> p_payment);//Checks whether the funds are sufficinet if so updateds the balance. Throws and exceptions in case insufficient of funds.
-    static void UpdateInputAccount(std::string &p_accNum, double p_amount);
+    static void UpdateInputAccount(std::string &p_accNum, std::shared_ptr<Payment> p_payment);
 
 
 };

@@ -121,8 +121,10 @@ Item {
                     HistoryBar {
                         nametext: model.name
                         namegoods: model.description
-                        nameamount: model.amount
+                        nameamount: (model.amount<0?"":"+") + model.amount
                         namedate: model.date
+                        coloramount: model.amount<0?"#FF0000":"#259fc4"
+                        currencycolor: model.amount<0?"#FF0000":"#259fc4"
                    }
 
 
