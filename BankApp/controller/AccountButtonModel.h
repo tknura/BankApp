@@ -3,11 +3,11 @@
 #include <QAbstractListModel>
 
 struct AccountButtonInfo {
-    QString typeText;
-    QString accNum;
-    QString amountText;
-    QString currText;
-    bool isDisabled;
+    QString type;
+    QString number;
+    QString amount;
+    QString currrency;
+    bool disabled;
 };
 
 class AccountButtonModel : public QAbstractListModel
@@ -43,7 +43,8 @@ public:
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
-    bool AddItem(QString name = "default", QString description = "default", double amount = 00.00,QString date = "00/00/0000");
+    bool AddItem(QString type = "Personal", QString number = "0000000000000000",
+                 QString amount = "00.00", QString curr = "PLN", bool disabled = false);
 
 signals:
     void preItemAppended();

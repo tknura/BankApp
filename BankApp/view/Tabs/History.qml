@@ -13,12 +13,6 @@ Item {
     width: 700
     height: 700
 
-    Component.onCompleted:  {
-        accountsList.addButton("Regular", "1234 1234 1234 1234", "999,99", "PLN", false);
-        accountsList.addButton("Family", "4321 4321 4321 4321", "999,99", "PLN", false);
-        accountsList.addButton("Currency", "1234 1234 1234 1234", "999,99", "PLN", true);
-    }
-
     HistoryListModel {
         id:histmodel
     }
