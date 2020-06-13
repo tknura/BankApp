@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "IController.h"
+#include "PaymentTabController.h"
 #include "model/Admin.h"
 
 class UserScreenController : QObject, IController
@@ -10,17 +11,14 @@ class UserScreenController : QObject, IController
     Q_OBJECT
 
 private:
-    QObject *rootObject;
-    QObject *dashboardTab;
-    QObject *paymentsTab;
-    QObject *fundsTab;
-    QObject *historyTab;
-
+    PaymentTabController *pmntTabControler;
+    QObject* rootObject;
 public:
     void Initialize() override;
     void Connections() override;
     UserScreenController(QQmlApplicationEngine* p_engine);
-    ~UserScreenController() override {}
+    ~UserScreenController() override;
+    static QStringList usrAccounts();
 };
 
 #endif // USERSCREENCONTROLLER_H

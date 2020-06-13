@@ -13,15 +13,9 @@ Item {
     width: 700
     height: 700
 
-    Component.onCompleted:  {
-        accountsList.addButton("Regular", "1234 1234 1234 1234", "999,99", "PLN", false);
-        accountsList.addButton("Family", "4321 4321 4321 4321", "999,99", "PLN", false);
-        accountsList.addButton("Currency", "1234 1234 1234 1234", "999,99", "PLN", true);
-    }
-
     HistoryListModel {
-                    id:histmodel
-                    }
+        id:histmodel
+    }
 
     Rectangle {
         id: background
@@ -68,7 +62,6 @@ Item {
         }
         AccountButtonList {
             id: accountsList
-            objectName: "accountsList"
             height: 160
             anchors.right: parent.right
             anchors.rightMargin: 48

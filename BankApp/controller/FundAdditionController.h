@@ -26,8 +26,8 @@ public slots:
                              QString p_balance, QString p_fee);
     void HandleSavingsAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
                           QString p_balance, QString p_fee, QString p_startDate, QString p_endDate);
-    void HandleRetirementAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
-                             QString p_balance, QString p_fee, QString p_monthlyIn,
+    void HandleRetirementAdd(QString p_usrId, QString p_minAmount, QString p_maxRate, QString p_fee,
+                             QString p_balance, QString p_monthlyIn,
                              QString p_retired);
 };
 

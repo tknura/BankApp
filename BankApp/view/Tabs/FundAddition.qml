@@ -17,7 +17,7 @@ Item {
     signal addSavings(string userId, string minAmount, string maxRate, string fee, string balance,
                       string startDate, string endDate);
     signal addRetirement(string userId, string minAmount, string maxRate, string fee, string balance,
-                         string monthlyIn, string monthlyOut, string isRetired);
+                         string monthlyIn/*, string monthlyOut*/, string isRetired);
 
     function addFund(type){
         if(minAmountInput.inputText.length !== 0 && maxRateInput.inputText.length !== 0
@@ -38,9 +38,8 @@ Item {
             case "retirement":
                 if(dynamicInputs.children[0].inputText.length !== 0) {
                     addRetirement(ownerCombo.currentOption, minAmountInput.inputText,
-                                  maxRateInput.inputText, maxRateInput.inputText, feeInput.inputText,
-                                  balanceInput.inputText, dynamicInputs.children[0].inputText,
-                                  dynamicInputs.children[1].currentOption);
+                                  maxRateInput.inputText, feeInput.inputText, balanceInput.inputText,
+                                  dynamicInputs.children[0].inputText, dynamicInputs.children[1].currentOption);
                 }
                 break;
             }
@@ -81,6 +80,7 @@ Item {
             }
         }
     }
+
     Rectangle {
         id: background
         color: "#eeeeee"
@@ -256,7 +256,7 @@ Item {
         anchors.bottomMargin: 18
         anchors.leftMargin: 500
         onClicked: {
-            clearInputs();
+            addFund(fundTypeCombo.currentOption);
         }
     }
 }
