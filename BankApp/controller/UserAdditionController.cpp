@@ -16,7 +16,7 @@ UserAdditionController::UserAdditionController(QQmlApplicationEngine *p_engine) 
 }
 
 void UserAdditionController::HandleUserAddition(QString login, QString password, QString mail) {
-    if(std::dynamic_pointer_cast<Admin>(Bank::currentlyLoggedUser)->CreateUser(
+    if(Bank::GetLoggedUser<Admin>()->CreateUser(
             login.toStdString(), password.toStdString(), mail.toStdString())){
         QMetaObject::invokeMethod(rootObject, "success");
     }

@@ -9,7 +9,7 @@
 HistoryListModel::HistoryListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    auto p = std::dynamic_pointer_cast<User>(Bank::currentlyLoggedUser)->GetAccountList();
+    auto p = Bank::GetLoggedUser<User>()->GetAccountList();
     update(QString::fromStdString(p->front()));
 }
 

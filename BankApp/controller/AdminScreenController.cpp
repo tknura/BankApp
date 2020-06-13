@@ -1,6 +1,6 @@
 #include "AdminScreenController.h"
 
-std::shared_ptr<Admin> AdminScreenController::admin = std::dynamic_pointer_cast<Admin>(Bank::currentlyLoggedUser);
+std::shared_ptr<Admin> AdminScreenController::admin = Bank::GetLoggedUser<Admin>();
 
 void AdminScreenController::Initialize() { }
 
