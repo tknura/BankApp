@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import components 1.0
+import HistoryList 1.0
 
 Item {
     id: dashboard
@@ -11,6 +12,10 @@ Item {
     signal refresh(string accNumber)
 
     onRefresh: {
+    }
+
+    HistoryListModel {
+        id:histmodel
     }
 
     Rectangle {
@@ -85,6 +90,8 @@ Item {
             anchors.topMargin: 0
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
+                histmodel.clear();
+                histmodel.update(checkedAccNumber);
             }
         }
 
@@ -103,7 +110,7 @@ Item {
             id: historyTitle
             width: 247
             height: 57
-            text: qsTr("Today")
+            text: qsTr("Latest")
             anchors.top: parent.top
             anchors.topMargin: 472
             anchors.left: parent.left
@@ -112,6 +119,34 @@ Item {
             font.pixelSize: 30
             font.family: "Rubik"
             font.weight: Font.Medium
+        }
+        Frame {
+            background: Rectangle{
+                color: "transparent"
+                border.color: "transparent"
+            }
+            anchors.top: historyTitle.bottom
+            anchors.left: accountsList.left
+            anchors.right: accountsList.right
+            anchors.bottom: background.bottom
+
+            ListView {
+                clip: true
+                implicitHeight: 300
+                anchors.fill: parent
+                model: histmodel
+
+                delegate: HistoryBar {
+                    width: parent.width
+                    visible: index >= 0 && index <= 1
+                    nametext: model.name
+                    namegoods: model.description
+                    nameamount: (model.amount < 0 ? "" : " +") + model.amount
+                    namedate: model.date
+                    coloramount: model.amount < 0 ? "#FF0000" : "#259fc4"
+                    currencycolor: model.amount < 0 ? "#FF0000" : "#259fc4"
+               }
+            }
         }
     }
 }

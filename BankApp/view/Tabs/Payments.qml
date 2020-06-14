@@ -10,6 +10,7 @@ Item {
     width: 700
     height: 700
 
+
     property date currentDate: new Date()
     property alias accountsList : accountsList
     property var userAccNumbersModel
