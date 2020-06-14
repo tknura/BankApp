@@ -19,6 +19,7 @@ bool Authorization::VerifyUser(LogInData &data) {
                          || logInDataFromLine.GetLogin() == data.GetLogin())) {
                             data.SetID(logInDataFromLine.GetID());
                             file.close();
+                            //std::cerr<<"\nid w authorization:"<<data.GetID();
                             return true;
                     }
                 }

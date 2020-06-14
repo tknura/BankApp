@@ -50,10 +50,6 @@ void Account::SetBalance(double value)
     balance = value;
 }
 
-int Account::GetSupervisorId() const
-{
-    return supervisorId;
-}
 
 void Account::SetSupervisorId(int value)
 {

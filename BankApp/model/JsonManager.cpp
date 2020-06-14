@@ -112,7 +112,10 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
                 }
                 p = std::make_shared<FamillyAccount>(tmpHistory,number,balance,supervisorId,memberIdList);
             }
-            p_accountList.push_back(number);//list with keys to the hash table
+            if(supervisorId == userID)
+            {
+                p_accountList.push_back(number);//list with keys to the hash table
+            }
             p_accountMap.insert({number,p});
         }
     }

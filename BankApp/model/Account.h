@@ -35,7 +35,7 @@ public:
     void SetNumber(const std::string &value);
     virtual double GetBalance() const override;
     virtual void SetBalance(double value) override;
-    int GetSupervisorId() const;
+    int GetSupervisorId()override {return supervisorId;}
     void SetSupervisorId(int value);
     virtual void AddFunds(double p_amount)override{balance+=p_amount;}
     virtual json SerializeToJson() override;

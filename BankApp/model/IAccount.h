@@ -16,6 +16,7 @@ public:
     virtual void SetBalance(double ) = 0;
     virtual History* GetHistory() = 0;
     virtual json SerializeToJson() = 0;
+    virtual int GetSupervisorId() = 0;
 };
 
 
