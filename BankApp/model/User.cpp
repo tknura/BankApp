@@ -57,7 +57,7 @@ bool User::IsUserAccount(std::string &p_accNum)
     }
 
 }
-void User::MakePayment(str& p_OutAccNum, double p_amount, str& p_title, str& p_date, str& p_name, str& p_InAccNum, str& p_address)
+void User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date, str p_name, str p_InAccNum, str p_address)
 {   
     bool isIncoming {!IsUserAccount(p_OutAccNum)};
 

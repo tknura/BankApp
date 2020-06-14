@@ -16,8 +16,10 @@ public:
     void Connections() override;
     ~PaymentTabController() override {}
     PaymentTabController(QQmlApplicationEngine* p_engine);
-signals:
 
+public slots:
+    void handleMakePayment(QString outNum, QString amount, QString title, QString date,
+                           QString name, QString inNum, QString adress);
 };
 
 #endif // PAYMENTTABCONTROLLER_H
