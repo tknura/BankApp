@@ -9,9 +9,13 @@ Item {
     width: 700
     height: 700
 
-    signal refresh(string accNumber)
+    signal refresh()
 
     onRefresh: {
+        histmodel.clear();
+        histmodel.update(accountsList.checkedAccNumber);
+        accountsList.model.clear();
+        accountsList.model.update();
     }
 
     HistoryListModel {
@@ -90,8 +94,7 @@ Item {
             anchors.topMargin: 0
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
-                histmodel.clear();
-                histmodel.update(checkedAccNumber);
+                refresh();
             }
         }
 

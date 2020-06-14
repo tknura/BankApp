@@ -12,6 +12,14 @@ Item {
     width: 700
     height: 700
 
+    signal refresh()
+    onRefresh: {
+        histmodel.clear();
+        histmodel.update(accountsList.checkedAccNumber);
+        accountsList.model.clear();
+        accountsList.model.update();
+    }
+
     HistoryListModel {
         id:histmodel
     }
@@ -72,8 +80,7 @@ Item {
 
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
-                histmodel.clear();
-                histmodel.update(checkedAccNumber);
+                refresh();
             }
         }
 

@@ -18,6 +18,11 @@ Item {
 
     signal makePayment(string outAccNum, string amount, string title, string date,
                        string name, string inAccNum, string adresss)
+    signal refresh()
+    onRefresh: {
+        accountsList.model.clear();
+        accountsList.model.update();
+    }
 
     Component.onCompleted: {
         addInputs(paymentTypes[0]);
@@ -58,6 +63,7 @@ Item {
         popup.message = "Successfully made a payment";
         popup.open();
         clearInputs();
+        refresh();
     }
 
     function fail() {

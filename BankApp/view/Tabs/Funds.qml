@@ -8,6 +8,11 @@ Item {
     width: 700
     height: 700
 
+    signal refresh()
+    onRefresh: {
+
+    }
+
     Rectangle {
         id: background
         color: "#eeeeee"
