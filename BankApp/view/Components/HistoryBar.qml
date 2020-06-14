@@ -41,7 +41,6 @@ Item {
             anchors.leftMargin: 20
             font.weight: Font.Medium
             font.family: "Rubik"
-            verticalAlignment: Text.bottom
             font.pixelSize: 15
         }
         Text {
@@ -56,7 +55,6 @@ Item {
             anchors.leftMargin: 20
             font.weight: Font.Medium
             font.family: "Rubik"
-            verticalAlignment: Text.bottom
             font.pixelSize: 13
 
             
