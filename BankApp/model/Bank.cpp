@@ -76,11 +76,12 @@ bool Bank::UpdateOutputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_
         return false;
     }
 }
-void Bank::UpdateInputAccount(std::string &p_accNum, double p_amount)
+void Bank::UpdateInputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_payment)
 {
     if(accountMap[p_accNum])//transfer to an account in the same bank
     {
-        accountMap[p_accNum]->AddFunds(p_amount);
+        accountMap[p_accNum]->AddFunds(p_payment->GetAmount());
+        accountMap[p_accNum]->UpdateHistory(p_payment);
         std::cerr<<"internal transfer";
     }
     else//transfer to an account located in diffrent bank

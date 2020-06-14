@@ -64,10 +64,11 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
             str number {account["number"]};
             int supervisorId {account["supervisorId"]};
             double balance  {account["balance"]};
-            //--------loading history--------
+            //----loading history----
             double h_amount{};
             str h_title{};
             str h_date{};
+            bool h_incoming{};
             //===payment retriever===
             str hp_name{};
             str hp_accNumber{};
@@ -82,10 +83,10 @@ void JsonManager::ParseData(listAcc& p_accountList, unorderedMapAcc& p_accountMa
                 hp_name = history["name"];
                 hp_accNumber = history["accNumber"];
                 hp_address = history["address"];
-                t = std::make_shared<Payment>(h_amount,h_title, h_date, hp_name, hp_accNumber, hp_address);
+                t = std::make_shared<Payment>(h_amount,h_title, h_date, hp_name, hp_accNumber, hp_address, h_incoming);
                 tmpHistory.AddNode(t);
             }
-            //-------------------------------
+            //-----------------------
             if(type == 0)
             {
                 p = std::make_shared<Account>(tmpHistory,number,balance,supervisorId);

@@ -35,6 +35,7 @@ public:
     void AddFriend(PaymentRetriever);
     void OnLogIn() override;
     void OnLogOut() override;
+    bool IsUserAccount(std::string& p_accNum);
 };
 
 #endif // USER_H

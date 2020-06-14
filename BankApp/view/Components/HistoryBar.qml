@@ -14,7 +14,8 @@ Item {
     property alias namegoods: goods.text
     property alias nameamount: amount.text
     property alias namedate: date.text
-
+    property alias coloramount: amount.color
+    property alias currencycolor: currencyLabel.color
     
  
     
@@ -69,7 +70,7 @@ Item {
             anchors.centerIn: kwadrat
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: 16
-            text:"00/00/0000"
+            text:"0000-00-00"
             color: "#ABB2B9"
         }
 
