@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+ #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
@@ -7,6 +7,7 @@
 #include "controller/UserScreenController.h"
 #include "controller/AdminScreenController.h"
 #include "controller/HistoryListModel.h"
+#include "controller/AccountButtonModel.h"
 
 #include "model/Bank.h"
 #include "model/Test.h"
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<HistoryListModel>("HistoryList",1,0,"HistoryListModel");
+    qmlRegisterType<AccountButtonModel>("AccountButtonModel",1,0,"AccountButtonModel");
 
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:/");
