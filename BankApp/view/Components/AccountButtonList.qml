@@ -10,19 +10,15 @@ Item {
     objectName: "accountButtonList"
     height: 200
     property string checkedAccNumber
+    property alias model: list.model
     signal refresh(string accNumber)
 
     onRefresh: {
         checkedAccNumber = accNumber
     }
 
-    function clear () {
-        for(var i = 0; i < inputs.children.length; ++i) {
-           inputs.children[i].destroy(0);
-        }
-    }
-
     ListView {
+        id: list
         clip: true
         implicitHeight: 300
         width: parent.width
@@ -44,6 +40,9 @@ Item {
            itemToRefresh: element
            buttongroup: accountButtons
        }
+        Component.onCompleted: {
+            list.contentItem.children[0].checked = true;
+        }
     }
 
     ButtonGroup { id: accountButtons }
