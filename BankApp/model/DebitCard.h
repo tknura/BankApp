@@ -14,7 +14,7 @@ public:
     DebitCard(std::string p_accountNumber, std::string p_number, int p_ccv, double p_transactionLimit, double p_maxDebt)
         :Card(p_accountNumber, p_number, p_ccv, p_transactionLimit), maxDebt(p_maxDebt){std::cerr<<"DebitCard object created\n";}
     json SerializeToJson() override;
-    int GetType() override{return 0;}
+    CardType GetType() override{return CardType::DEBIT;}
 
 };
 

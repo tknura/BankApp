@@ -1,8 +1,7 @@
 #ifndef CARDTYPE_H
 #define CARDTYPE_H
 
-#include "model/CreditCard.h"
-#include "model/DebitCard.h"
+#include <string>
 #include <list>
 
 using std::string;
@@ -20,7 +19,7 @@ public:
     CardType() = default;
     CardType(Value p_value) : value(p_value) {}
     operator Value() const { return value; }
-    operator bool() = delete;
+   // operator bool() = delete;
     bool operator==(CardType cT) const { return value == cT.value; }
     bool operator!=(CardType cT) const { return value != cT.value; }
     string ToString() {

@@ -1,8 +1,7 @@
 #ifndef FUNDTYPES_H
 #define FUNDTYPES_H
 
-#include "model/RetirementFund.h"
-#include "model/SavingsFund.h"
+#include <string>
 #include <list>
 
 using std::string;
@@ -20,7 +19,7 @@ public:
     FundType() = default;
     FundType(Value p_value) : value(p_value) {}
     operator Value() const { return value; }
-    operator bool() = delete;
+    //operator bool() = delete;
     bool operator==(FundType fT) const { return value == fT.value; }
     bool operator!=(FundType fT) const { return value != fT.value; }
     string ToString() {
@@ -32,7 +31,7 @@ public:
     }
 
     static list<FundType> GetAllTypesList() {
-        return { FundType::INVESTMENT, FundType::SAVINGS, FundType::RETIREMENT};
+        return { /*FundType::INVESTMENT,*/ FundType::SAVINGS, FundType::RETIREMENT};
     }
 
     static list<string> GetAllTypesStringList() {

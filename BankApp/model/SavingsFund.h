@@ -23,7 +23,7 @@ public:
 
     json SerializeToJson() override;
 
-    int GetType()override {return 0;}
+    FundType GetType()override {return FundType::SAVINGS;}
 
 
 };

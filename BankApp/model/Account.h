@@ -10,7 +10,6 @@
 #include "Card.h"
 #include "IAccount.h"
 #include "json.hpp"
-//#include "enums/AccountType.h"
 
 using json = nlohmann::json;
 
@@ -41,7 +40,7 @@ public:
     virtual void AddFunds(double p_amount)override{balance+=p_amount;}
     virtual json SerializeToJson() override;
 
-    virtual int GetType()override{return 0;}
+    virtual AccountType GetType() override {return AccountType::PERSONAL;}
 };
 
 #endif // ACCOUNT_H

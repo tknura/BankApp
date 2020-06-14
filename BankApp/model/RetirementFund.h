@@ -20,7 +20,7 @@ public:
     void CalculateRetirement();
 
     json SerializeToJson() override;
-    int GetType()override{return 1;}
+    FundType GetType()override{return FundType::RETIREMENT;}
 };
 
 

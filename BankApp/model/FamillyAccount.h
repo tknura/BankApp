@@ -17,7 +17,7 @@ public:
         :Account(p_number, p_balance, p_supervisorId), memberIdList(p_memberIdList){std::cerr<<"FamillyAccount  object created\n";}
     json SerializeToJson() override;
 
-    int GetType()override {return 4;}
+    AccountType GetType()override {return AccountType::FAMILY;}
 
 };
 

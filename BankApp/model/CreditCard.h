@@ -16,7 +16,7 @@ public:
         :Card(p_accountNumber, p_number, p_ccv, p_transactionLimit), maxCredit(p_maxCredit), billingDate(p_billingDate){std::cerr<<"CreditCard object created\n";}
 
     json SerializeToJson() override;
-    int GetType() override{return 1;}
+    CardType GetType() override{return CardType::CREDIT;}
 
 };
 

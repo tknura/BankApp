@@ -1,9 +1,8 @@
 #ifndef ACCOUNTTYPE_H
 #define ACCOUNTTYPE_H
 
-#include "model/ChildAccount.h"
-#include "model/FamillyAccount.h"
-#include "model/SavingsAccount.h"
+#include <string>
+#include <list>
 
 using std::string;
 using std::list;
@@ -23,9 +22,10 @@ public:
     AccountType() = default;
     AccountType(Value p_value) : value(p_value) {}
     operator Value() const { return value; }
-    operator bool() = delete;
+//    operator bool() = delete;
     bool operator==(AccountType aT) const { return value == aT.value; }
     bool operator!=(AccountType aT) const { return value != aT.value; }
+    operator int() const { return value; }
     string ToString() {
         switch (value) {
             case PERSONAL: return "personal";
