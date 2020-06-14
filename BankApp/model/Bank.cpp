@@ -19,7 +19,6 @@ void Bank::LogIn(std::shared_ptr<IUser> data) {
     if(data){
         currentlyLoggedUser = data;
         currentlyLoggedUser->OnLogIn();
-       // std::dynamic_pointer_cast<User> (currentlyLoggedUser)->load();
     }
 }
 

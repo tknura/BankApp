@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <memory>
 
 #include "User.h"
 #include "Bank.h"
@@ -72,6 +73,13 @@ void User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date
     {
         std::cerr<<"Insufficient funds";
     }
+}
+
+void User::AddFriend(std::string p_name, std::string p_accNumber, std::string p_address)
+{
+    auto p = std::make_shared<PaymentRetriever>(p_name,p_accNumber,p_address);
+    friendsList.push_back(p);
+    std::cerr<<"\nFriend added to list";
 }
 
 //User::~User() {}

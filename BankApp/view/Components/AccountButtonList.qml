@@ -12,11 +12,10 @@ Item {
     property string checkedAccNumber
     property alias model: list.model
     signal refresh(string accNumber)
-
+    visible: true
     onRefresh: {
         checkedAccNumber = accNumber
     }
-
     ListView {
         id: list
         clip: true
@@ -30,6 +29,7 @@ Item {
         orientation: ListView.Horizontal
         anchors.fill: parent
         model: AccountButtonModel {}
+        ScrollBar.horizontal : ScrollBar {}
 
         delegate: AccountButton {
            y: 10
