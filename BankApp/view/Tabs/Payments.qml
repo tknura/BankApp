@@ -61,7 +61,7 @@ Item {
     }
 
     function fail() {
-        popup.message = "Incorect data passed, can't make a payment";
+        popup.message = "Insufficient funds";
         popup.open();
     }
 
@@ -83,7 +83,7 @@ Item {
     InfoPopup {
         id: popup
         anchors.centerIn: parent
-        message: "Card added successfully to an account"
+        message: "Insufficient funds"
     }
 
     ScrollView {
@@ -236,7 +236,8 @@ Item {
         onClicked: {
             if(paymentTypeCombo.currentOption == "internal"){
                 makePayment(accountsList.checkedAccNumber, amount.inputText, titleInput.inputText,
-                            currentDate.toLocaleDateString(Qt.locale(),"yyyy-MM-dd"), "", dynamicInputs.children[0].inputText, "");
+                            currentDate.toLocaleDateString(Qt.locale(),"yyyy-MM-dd"), "Internal payment",
+                            dynamicInputs.children[0].currentOption, "");
             }
             else {
                 makePayment(accountsList.checkedAccNumber, amount.inputText, titleInput.inputText,
