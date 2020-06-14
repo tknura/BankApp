@@ -2,9 +2,6 @@
 #define ADMIN_H
 
 #include "LogInData.h"
-#include "enums/AccountType.h"
-#include "enums/CardType.h"
-#include "enums/FundType.h"
 #include "Authorization.h"
 #include <fstream>
 
@@ -37,7 +34,7 @@ public:
     bool AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
                  double maxDebt);
 
-    bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance);
+  //  bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance);
     bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
                  bool isRetired, double monthlyIn);
     bool AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,

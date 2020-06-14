@@ -1,4 +1,12 @@
 #include "Admin.h"
+#include "ChildAccount.h"
+#include "FamillyAccount.h"
+#include "SavingsAccount.h"
+#include "Card.h"
+#include "CreditCard.h"
+#include "DebitCard.h"
+#include "RetirementFund.h"
+#include "SavingsFund.h"
 
 int Admin::idProvider = 0;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
@@ -91,13 +99,13 @@ bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, doub
     return AddCardToMap(std::make_shared<Card>(newCard));
 }
 
-/*
- * Basic fund with ownerID, minimal amount, maximal rate, fee and balance
- */
-bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance) {
-    Fund newFund(minAmount, maxRate, fee, balance, ownerID);
-    return AddFundToMap(std::make_shared<Fund>(newFund));
-}
+///*
+// * Basic fund with ownerID, minimal amount, maximal rate, fee and balance
+// */
+//bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance) {
+//    Fund newFund(minAmount, maxRate, fee, balance, ownerID);
+//    return AddFundToMap(std::make_shared<Fund>(newFund));
+//}
 
 /*
  * Retirement fund with monthly in amount and is person retired informations

@@ -2,7 +2,7 @@
 #define FUND_H
 
 #include <iostream>
-
+#include "enums/FundType.h"
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -23,7 +23,7 @@ public:
     virtual std::ostream& serialize(std::ostream&ss)const;
     virtual json SerializeToJson();
 
-    virtual int GetType(){return 2;}
+    virtual FundType GetType() {}
 
     int GetOwnerId() const;
     void SetOwnerId(int value);
