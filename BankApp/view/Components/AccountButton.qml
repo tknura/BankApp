@@ -7,14 +7,15 @@ Item {
     width: 250
     height: 150
 
+    property alias checked: button.checked
     property bool isDisabled: false
-    property string accAmountText: qsTr("9999,99")
-    property string accCurrencyText: qsTr("PLN")
-    property string accNumberText: qsTr("0000 1111 2222 3333")
-    property string accTypeText: qsTr("Account Type")
+    property alias accAmountText: accAmount.text
+    property alias accCurrencyText: accCurrency.text
+    property alias accNumberText: accNumber.text
+    property alias accTypeText: accType.text
     property color shadowNormal: "#a2a2a2"
     property color shadowChecked: "#259fc4"
-    property var buttongroup: null;
+    property var buttongroup: null
     property var itemToRefresh
 
     function enable() {
@@ -55,7 +56,7 @@ Item {
             anchors.fill: parent
         }
         indicator: null
-        onClicked: {
+        onCheckedChanged: {
             if(checked) {
                 itemToRefresh.refresh(accNumberText);
             }
@@ -82,11 +83,8 @@ Item {
 
         Row {
             id: row
+            x: 49
             height: 47
-            anchors.right: parent.right
-            anchors.rightMargin: 50
-            anchors.left: parent.left
-            anchors.leftMargin: 51
             anchors.top: parent.top
             anchors.topMargin: 67
             layoutDirection: Qt.LeftToRight
@@ -97,7 +95,7 @@ Item {
                 width: 78
                 height: 44
                 color: "#259fc4"
-                text: accAmountText
+                text: qsTr("9999,99")
                 font.weight: Font.Normal
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
@@ -109,7 +107,7 @@ Item {
                 id: accCurrency
                 width: 54
                 height: 45
-                text: accCurrencyText
+                text: qsTr("PLN")
                 color: accAmount.color
                 font.weight: Font.Bold
                 verticalAlignment: Text.AlignVCenter
@@ -125,7 +123,7 @@ Item {
             y: 31
             height: 16
             color: "#9b9b9b"
-            text: accNumberText
+            text: qsTr("0000111122223333")
             horizontalAlignment: Text.AlignHCenter
             anchors.top: parent.top
             anchors.topMargin: 45
@@ -142,7 +140,7 @@ Item {
             y: 5
             height: 26
             color: "#393e46"
-            text: accTypeText
+            text: qsTr("Account Type")
             font.weight: Font.Medium
             verticalAlignment: Text.AlignVCenter
             anchors.top: parent.top
@@ -175,6 +173,7 @@ Item {
                 color: "#ffffff"
                 anchors.fill: parent
                 radius: background.radius
+                opacity: 0.9
             }
 
             Text {
