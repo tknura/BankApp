@@ -25,6 +25,7 @@ public:
     User(const LogInData& data);
     ~User() override;
     list<string>* GetAccountList(){return &accountList;}
+    std::list<std::shared_ptr<PaymentRetriever>>* GetFriendsList(){return &friendsList;}
     void LoadData();//creates JsonManager instance and invokes its ParseData methods
     void SaveData();//creates JsonManager instance and invokes its SerializeData methods
     /*

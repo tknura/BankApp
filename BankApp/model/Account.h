@@ -40,7 +40,7 @@ public:
     virtual void AddFunds(double p_amount)override{balance+=p_amount;}
     virtual json SerializeToJson() override;
 
-    virtual AccountType GetType() override {return AccountType::PERSONAL;}
+    virtual int GetType() override {return 0;}
 };
 
 #endif // ACCOUNT_H

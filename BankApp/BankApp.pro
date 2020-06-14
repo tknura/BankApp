@@ -18,6 +18,7 @@ SOURCES += \
         controller/AccountButtonModel.cpp \
         controller/AdminScreenController.cpp \
         controller/CardAdditionController.cpp \
+        controller/FriendsListModel.cpp \
         controller/FundAdditionController.cpp \
         controller/HistoryListModel.cpp \
         controller/LogInScreenController.cpp \
@@ -71,6 +72,7 @@ HEADERS += \
     controller/AccountButtonModel.h \
     controller/AdminScreenController.h \
     controller/CardAdditionController.h \
+    controller/FriendsListModel.h \
     controller/FundAdditionController.h \
     controller/HistoryListModel.h \
     controller/IController.h \

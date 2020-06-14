@@ -8,6 +8,7 @@
 #include "controller/AdminScreenController.h"
 #include "controller/HistoryListModel.h"
 #include "controller/AccountButtonModel.h"
+#include "controller/FriendsListModel.h"
 
 #include "model/Bank.h"
 #include "model/Test.h"
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
 {
     Bank::Start();
     Test::Run();
-    std::unordered_map<std::string,std::shared_ptr<IAccount>> test{};
+//  std::unordered_map<std::string,std::shared_ptr<IAccount>> test{};
 //    std::list<std::string> test1{};
 //    JsonManager manager{1};
 //    manager.ParseData(test1,test);
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<HistoryListModel>("HistoryList",1,0,"HistoryListModel");
     qmlRegisterType<AccountButtonModel>("AccountButtonModel",1,0,"AccountButtonModel");
+    qmlRegisterType<FriendsListModel>("FriendsList",1,0,"FriendsListModel");
 
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:/");

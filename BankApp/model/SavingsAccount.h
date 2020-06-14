@@ -15,7 +15,7 @@ public:
         :Account(p_number, p_balance, p_supervisorId), interest(p_interest){std::cerr<<"SavingsAccount object created\n";}
     json SerializeToJson() override;
 
-    AccountType GetType()override {return AccountType::SAVINGS;}
+    int GetType()override {return 1;}
 
 };
 

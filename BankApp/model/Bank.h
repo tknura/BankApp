@@ -18,7 +18,7 @@ class Bank
 private:
     static std::shared_ptr<IUser> currentlyLoggedUser;
 
-public://wydaje mi się, że wszystkie mapy i listy powinny być private
+public:
     static list<std::string> accountNumList;
     static list<std::string> fundNumList;
 

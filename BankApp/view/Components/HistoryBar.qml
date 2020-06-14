@@ -75,6 +75,7 @@ Item {
                 right: kwadrat.right; rightMargin: 25
             }
             verticalAlignment: Text.AlignVCenter
+            font.weight: Font.Bold
             color: "#259fc4"
             text: qsTr("PLN")
             font.pixelSize: 18

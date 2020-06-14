@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQml 2.2
 import components 1.0
 import QtQuick.Controls 2.13
@@ -108,6 +108,7 @@ Item {
                 id: paymentTypeCombo
                 titleText: "Type"
                 objectName: "paymentTypeCombo"
+
                 height: 80
                 width: parent.width
                 onOptionChanged: {
@@ -116,7 +117,6 @@ Item {
                 }
                 model: paymentTypes
             }
-
             StyledInput {
                 id: titleInput
                 titleText: "Title"

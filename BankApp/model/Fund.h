@@ -23,7 +23,7 @@ public:
     virtual std::ostream& serialize(std::ostream&ss)const;
     virtual json SerializeToJson();
 
-    virtual FundType GetType() {}
+    virtual int GetType(){return 2;};
 
     int GetOwnerId() const;
     void SetOwnerId(int value);

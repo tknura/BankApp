@@ -19,7 +19,7 @@ public:
 
     json SerializeToJson() override;
 
-    AccountType GetType()override {return AccountType::CHILD;}
+    int GetType()override {return 2;}
 };
 
 #endif // CHILDACCOUNT_H
