@@ -15,7 +15,7 @@ void AccountButtonModel::update() {
         auto acc = Bank::accountMap.find(it->data());
         //type = acc->second->GetType();
         AddItem("Personal",QString::fromStdString(it->data()),
-                QString::fromStdString(std::to_string(acc->second->GetBalance())));
+                acc->second->GetBalance());
     }
     endResetModel();
 }
@@ -94,7 +94,7 @@ QHash<int, QByteArray> AccountButtonModel::roleNames() const {
     return names;
 }
 
-bool AccountButtonModel::AddItem(QString type, QString number, QString amount,
+bool AccountButtonModel::AddItem(QString type, QString number, double amount,
                                  QString curr, bool disabled) {
     emit preItemAppended();
     mList.append({type, number, amount, curr, disabled});

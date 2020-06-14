@@ -81,21 +81,18 @@ Item {
             }
         ]
 
-        Row {
-            id: row
-            x: 49
-            height: 47
-            anchors.top: parent.top
-            anchors.topMargin: 67
-            layoutDirection: Qt.LeftToRight
-            spacing: 5
 
             Text {
                 id: accAmount
-                width: 78
                 height: 44
+                anchors.top: parent.top
+                anchors.topMargin: 67
+                //anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+
                 color: "#259fc4"
                 text: qsTr("9999,99")
+                anchors.horizontalCenterOffset: -23
                 font.weight: Font.Normal
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
@@ -105,9 +102,14 @@ Item {
 
             Text {
                 id: accCurrency
-                width: 54
-                height: 45
+                height: 44
+                anchors.top: accAmount.top
+                anchors.bottom: accAmount.bottom
+                anchors.left: accAmount.right
                 text: qsTr("PLN")
+                anchors.bottomMargin: 0
+                anchors.leftMargin: 1
+                anchors.topMargin: 0
                 color: accAmount.color
                 font.weight: Font.Bold
                 verticalAlignment: Text.AlignVCenter
@@ -115,7 +117,7 @@ Item {
                 font.pixelSize: accAmount.font.pixelSize
                 font.family: "Rubik"
             }
-        }
+       //}
 
         Text {
             id: accNumber

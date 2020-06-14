@@ -5,7 +5,7 @@
 struct AccountButtonInfo {
     QString type;
     QString number;
-    QString amount;
+    double amount;
     QString currrency;
     bool disabled;
 };
@@ -44,7 +44,7 @@ public:
     virtual QHash<int, QByteArray> roleNames() const override;
 
     bool AddItem(QString type = "Personal", QString number = "0000000000000000",
-                 QString amount = "00.00", QString curr = "PLN", bool disabled = false);
+                 double amount = 00.00, QString curr = "PLN", bool disabled = false);
 
 signals:
     void preItemAppended();

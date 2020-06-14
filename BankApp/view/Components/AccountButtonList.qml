@@ -36,7 +36,7 @@ Item {
            accTypeText: model.type
            accCurrencyText: model.currency
            accNumberText: model.number
-           accAmountText: model.amount
+           accAmountText: model.amount.toFixed(2)
            itemToRefresh: element
            buttongroup: accountButtons
        }
