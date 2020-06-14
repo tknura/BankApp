@@ -65,9 +65,11 @@ bool Bank::UpdateOutputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_
 {
 
     auto accountBalance = accountMap[p_accNum]->GetBalance();
-    if(accountBalance >=p_payment->GetAmount())
+    if(accountBalance >=-p_payment->GetAmount())
     {
-        accountMap[p_accNum]->SetBalance(accountBalance-p_payment->GetAmount());
+        std::cerr<<"\namount to transfer"<<p_payment->GetAmount();
+        accountMap[p_accNum]->SetBalance(accountBalance+p_payment->GetAmount());
+        std::cerr<<"\nbalance after transfer"<<accountMap[p_accNum]->GetBalance();
         accountMap[p_accNum]->UpdateHistory(p_payment);
         return true;
     }
@@ -78,6 +80,7 @@ bool Bank::UpdateOutputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_
 }
 void Bank::UpdateInputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_payment)
 {
+    std::cerr<<"\nInput acc number:"<<p_accNum;
     if(accountMap[p_accNum])//transfer to an account in the same bank
     {
         accountMap[p_accNum]->AddFunds(p_payment->GetAmount());

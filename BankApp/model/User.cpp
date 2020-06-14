@@ -70,7 +70,7 @@ void User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date
     }
     else
     {
-        throw std::runtime_error("Insufficient funds");
+        std::cerr<<"Insufficient funds";
     }
 }
 
