@@ -3,7 +3,7 @@
 
 
 Account::Account(History p_history, std::string p_number, double p_balance, int p_supervisorId)
-    :history(p_history),number(p_number), balance(p_balance), supervisorId(p_supervisorId)
+    :number(p_number), balance(p_balance), supervisorId(p_supervisorId), history(p_history)
 {
     std::cerr<<"Account object created\n";
 }

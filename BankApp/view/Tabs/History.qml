@@ -6,7 +6,6 @@ import components 1.0
 import QtQml.Models 2.2
 
 Item {
-   // property var historyList: HistoryList
     objectName: "history"
     id: history
     visible: true
@@ -77,19 +76,6 @@ Item {
                 histmodel.update(checkedAccNumber);
             }
         }
-//        Button { //ten przycisk jest do wywalenia, w przypadku kliknięcia zmiany konta ma sie uruchamiać funkcja clear i update
-//            id: dest
-//            anchors.bottom: parent.bottom
-//            anchors.right: parent.right
-//            width: 100
-//            height: 100
-//            text: "Refresh"
-
-//            onClicked:{
-//                histmodel.clear()
-//                histmodel.update("55533333")
-//            }
-//        }
 
 
         Frame {

@@ -4,6 +4,7 @@
 #include "Card.h"
 #include "Payment.h"
 #include "History.h"
+#include "enums/AccountType.h"
 
 class IAccount
 {
