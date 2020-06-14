@@ -11,9 +11,21 @@ Item {
     height: 200
     property string checkedAccNumber
     property alias model: list.model
-    signal refresh(string accNumber)
+    signal updateNum(string accNumber)
+
+    function reload(){
+       var tmp = checkedAccNumber
+       model.clear();
+       model.update();
+        for(var child in list.contentItem.children) {
+            if(list.contentItem.children[child].accNumberText == tmp) {
+                list.contentItem.children[child].checked = true;
+            }
+        }
+    }
+
     visible: true
-    onRefresh: {
+    onUpdateNum: {
         checkedAccNumber = accNumber
     }
     ListView {
@@ -25,6 +37,7 @@ Item {
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
         anchors.topMargin: 0
+        leftMargin: 10
         spacing: 10
         orientation: ListView.Horizontal
         anchors.fill: parent

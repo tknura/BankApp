@@ -16,8 +16,7 @@ Item {
     onRefresh: {
         histmodel.clear();
         histmodel.update(accountsList.checkedAccNumber);
-        accountsList.model.clear();
-        accountsList.model.update();
+        accountsList.reload();
     }
 
     HistoryListModel {
@@ -80,7 +79,8 @@ Item {
 
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
-                refresh();
+                histmodel.clear();
+                histmodel.update(accountsList.checkedAccNumber);
             }
         }
 

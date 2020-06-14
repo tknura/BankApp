@@ -58,7 +58,7 @@ Item {
         indicator: null
         onCheckedChanged: {
             if(checked) {
-                itemToRefresh.refresh(accNumberText);
+                itemToRefresh.updateNum(accNumberText);
             }
         }
 

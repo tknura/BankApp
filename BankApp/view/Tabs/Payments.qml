@@ -20,8 +20,7 @@ Item {
                        string name, string inAccNum, string adresss)
     signal refresh()
     onRefresh: {
-        accountsList.model.clear();
-        accountsList.model.update();
+        accountsList.reload();
     }
 
     Component.onCompleted: {
@@ -251,7 +250,7 @@ Item {
                             dynamicInputs.children[2].inputText, dynamicInputs.children[1].inputText);
                 //i + 1 when friends will be added
             }
-
+            accountsList.reload();
         }
     }
 }

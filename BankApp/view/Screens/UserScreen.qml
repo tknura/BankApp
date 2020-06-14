@@ -108,9 +108,9 @@ Item {
         onLogOut: {
             logOut();
         }
-//        onTabChanged: {
-//            tab.refresh();
-//        }
+        onTabChanged: {
+            tab.refresh();
+        }
     }
 
 }

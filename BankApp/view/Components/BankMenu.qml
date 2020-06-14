@@ -16,7 +16,7 @@ Item {
     property var contentArray
 
     signal logOut();
-    signal tabChanged();
+    signal tabChanged(var tab);
 
     Rectangle {
         id: background
