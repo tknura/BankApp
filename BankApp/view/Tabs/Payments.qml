@@ -18,6 +18,10 @@ Item {
 
     signal makePayment(string outAccNum, string amount, string title, string date,
                        string name, string inAccNum, string adresss)
+    signal refresh()
+    onRefresh: {
+        accountsList.reload();
+    }
 
     Component.onCompleted: {
         addInputs(paymentTypes[0]);
@@ -58,6 +62,7 @@ Item {
         popup.message = "Successfully made a payment";
         popup.open();
         clearInputs();
+        refresh();
     }
 
     function fail() {
@@ -245,7 +250,7 @@ Item {
                             dynamicInputs.children[2].inputText, dynamicInputs.children[1].inputText);
                 //i + 1 when friends will be added
             }
-
+            accountsList.reload();
         }
     }
 }

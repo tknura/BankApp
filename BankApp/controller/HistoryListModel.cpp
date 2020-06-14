@@ -15,16 +15,18 @@ HistoryListModel::HistoryListModel(QObject *parent)
 
 void HistoryListModel::update(const QString &accNum)
 {
-    beginResetModel();
+    if(!accNum.isEmpty()){
+        beginResetModel();
+        std::cerr << accNum.toStdString();
+        History* tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
+        auto p = tmp->GetList();
+        for(const auto element : p)
+        {
+            AddItem(element->GetName(),element->GetDescription(),element->GetAmount(),element->GetDate());
+        }
 
-    History* tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
-    auto p = tmp->GetList();
-    for(const auto element : p)
-    {
-        AddItem(element->GetName(),element->GetDescription(),element->GetAmount(),element->GetDate());
+        endResetModel();
     }
-
-    endResetModel();
 }
 
 void HistoryListModel::clear()

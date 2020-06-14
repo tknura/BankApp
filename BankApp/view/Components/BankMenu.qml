@@ -16,6 +16,7 @@ Item {
     property var contentArray
 
     signal logOut();
+    signal tabChanged(var tab);
 
     Rectangle {
         id: background
@@ -56,6 +57,7 @@ Item {
                         onClicked: {
                             listView.currentIndex = index;
                             screenStack.replace(contentArray[index]);
+                            tabChanged(contentArray[index]);
                         }
                     }
 

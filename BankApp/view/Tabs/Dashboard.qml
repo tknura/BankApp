@@ -9,9 +9,12 @@ Item {
     width: 700
     height: 700
 
-    signal refresh(string accNumber)
+    signal refresh()
 
     onRefresh: {
+        histmodel.clear();
+        histmodel.update(accountsList.checkedAccNumber);
+        accountsList.reload();
     }
 
     HistoryListModel {
@@ -81,7 +84,7 @@ Item {
 
         AccountButtonList {
             id: accountsList
-            height: 191
+            height: 174
             anchors.right: parent.right
             anchors.rightMargin: 48
             anchors.left: parent.left
@@ -91,7 +94,7 @@ Item {
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
                 histmodel.clear();
-                histmodel.update(checkedAccNumber);
+                histmodel.update(accountsList.checkedAccNumber);
             }
         }
 
@@ -100,10 +103,10 @@ Item {
             width: 161
             height: 35
             text: qsTr("Make Payment")
-            anchors.top: parent.top
-            anchors.topMargin: 431
+            anchors.top: accountsList.bottom
+            anchors.topMargin: 6
             anchors.left: parent.left
-            anchors.leftMargin: 70          
+            anchors.leftMargin: 70
         }
 
         Text {
@@ -112,7 +115,7 @@ Item {
             height: 57
             text: qsTr("Latest")
             anchors.top: parent.top
-            anchors.topMargin: 472
+            anchors.topMargin: 455
             anchors.left: parent.left
             anchors.leftMargin: 70
             verticalAlignment: Text.AlignVCenter
