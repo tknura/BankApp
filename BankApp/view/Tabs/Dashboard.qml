@@ -131,10 +131,12 @@ Item {
             anchors.bottom: background.bottom
 
             ListView {
+
                 clip: true
                 implicitHeight: 300
                 anchors.fill: parent
                 model: histmodel
+                interactive: false
 
                 delegate: HistoryBar {
                     width: parent.width

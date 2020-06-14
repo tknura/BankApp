@@ -93,6 +93,7 @@ Item {
                 implicitHeight: 300
                 anchors.fill: parent
                 model: histmodel
+                ScrollBar.vertical: ScrollBar { }
 
                 delegate: HistoryBar {
                     width: parent.width
