@@ -60,34 +60,36 @@ Item {
             font.pixelSize: 18
             font.family: "Rubik"
         }
+
         AccountButtonList {
             id: accountsList
-            height: 160
+            height: 168
             anchors.right: parent.right
             anchors.rightMargin: 48
             anchors.left: parent.left
             anchors.leftMargin: 70
             anchors.top: desc.bottom
             anchors.topMargin: 6
-            //itemToRefresh: history
+
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
+                histmodel.clear();
+                histmodel.update(checkedAccNumber);
             }
         }
-        Button{//ten przycisk jest do wywalenia, w przypadku kliknięcia zmiany konta ma sie uruchamiać funkcja clear i update
-            id: dest
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            width: 100
-            height: 100
-            text: "Refresh"
+//        Button { //ten przycisk jest do wywalenia, w przypadku kliknięcia zmiany konta ma sie uruchamiać funkcja clear i update
+//            id: dest
+//            anchors.bottom: parent.bottom
+//            anchors.right: parent.right
+//            width: 100
+//            height: 100
+//            text: "Refresh"
 
-            onClicked:{
-                histmodel.clear()
-                histmodel.update("55533333")
-            }
-
-        }
+//            onClicked:{
+//                histmodel.clear()
+//                histmodel.update("55533333")
+//            }
+//        }
 
 
         Frame {
@@ -95,8 +97,6 @@ Item {
                 color: "transparent"
                 border.color: "transparent"
             }
-
-            width: parent.width
             anchors.top: accountsList.bottom
             anchors.left: accountsList.left
             anchors.right: accountsList.right
@@ -105,24 +105,18 @@ Item {
             ListView {
                 clip: true
                 implicitHeight: 300
-                width: parent.width
                 anchors.fill: parent
                 model: histmodel
 
-                delegate: RowLayout {
+                delegate: HistoryBar {
                     width: parent.width
-                    HistoryBar {
-                        nametext: model.name
-                        namegoods: model.description
-                        nameamount: (model.amount<0?"":"+") + model.amount
-                        namedate: model.date
-                        coloramount: model.amount<0?"#FF0000":"#259fc4"
-                        currencycolor: model.amount<0?"#FF0000":"#259fc4"
-                   }
-
-
-                }
-
+                    nametext: model.name
+                    namegoods: model.description
+                    nameamount: (model.amount < 0 ? "" : " +") + model.amount
+                    namedate: model.date
+                    coloramount: model.amount < 0 ? "#FF0000" : "#259fc4"
+                    currencycolor: model.amount < 0 ? "#FF0000" : "#259fc4"
+               }
             }
         }
     }

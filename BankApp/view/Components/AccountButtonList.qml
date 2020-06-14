@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.3
 Item {
     id: element
     objectName: "accountButtonList"
-    height: 180
+    height: 200
     property string checkedAccNumber
     signal refresh(string accNumber)
 
@@ -16,55 +16,34 @@ Item {
         checkedAccNumber = accNumber
     }
 
-//    function addButton(p_accTypText, p_accNumberText, p_accAmountText, p_accCurencyText,
-//                       p_isDisabled) {
-//        var component;
-//        var sprite;
-//        component = Qt.createComponent("AccountButton.qml");
-//        sprite = component.createObject(row,
-//                                        {
-//                                            accTypeText: p_accTypText,
-//                                            accNumberText: p_accNumberText,
-//                                            accAmountText: p_accAmountText,
-//                                            accCurrencyText: p_accCurencyText,
-//                                            isDisabled: p_isDisabled,
-//                                            buttongroup: accountButtons,
-//                                            itemToRefresh: element
-//                                        });
-//    }
-
     function clear () {
         for(var i = 0; i < inputs.children.length; ++i) {
            inputs.children[i].destroy(0);
         }
     }
 
-    Frame {
+    ListView {
+        clip: true
+        implicitHeight: 300
+        width: parent.width
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
+        spacing: 10
+        orientation: ListView.Horizontal
         anchors.fill: parent
-        background: Rectangle{
-            color: "transparent"
-            border.color: "transparent"
-        }
+        model: AccountButtonModel {}
 
-        ListView {
-            clip: true
-            implicitHeight: 300
-            width: parent.width
-            orientation: ListView.Horizontal
-            anchors.fill: parent
-            model: AccountButtonModel {}
-
-            delegate: ColumnLayout {
-                AccountButton {
-                    accTypeText: model.type
-                    accCurrencyText: model.currency
-                    accNumberText: model.number
-                    accAmountText: model.amount
-                    itemToRefresh: element
-                    buttongroup: accountButtons
-               }
-            }
-        }
+        delegate: AccountButton {
+           y: 10
+           accTypeText: model.type
+           accCurrencyText: model.currency
+           accNumberText: model.number
+           accAmountText: model.amount
+           itemToRefresh: element
+           buttongroup: accountButtons
+       }
     }
 
     ButtonGroup { id: accountButtons }

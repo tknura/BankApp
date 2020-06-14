@@ -88,8 +88,8 @@ Item {
     ScrollView {
         id: scrollView
         rightPadding: 10
-        anchors.top: parent.top
-        anchors.topMargin: 314
+        anchors.top: accountsList.bottom
+        anchors.topMargin: 6
         anchors.left: parent.left
         anchors.leftMargin: 63
         anchors.bottom: parent.bottom
@@ -176,7 +176,7 @@ Item {
     AccountButtonList {
         id: accountsList
         y: 148
-        height: 160
+        height: 166
         anchors.right: parent.right
         anchors.rightMargin: 63
         anchors.left: parent.left
@@ -186,28 +186,6 @@ Item {
         }
     }
 
-
-    Rectangle {
-        id: accountsListMaskLeft
-        y: accountsList.y
-        height: accountsList.height
-        color: background.color
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.right: accountsList.left
-        anchors.rightMargin: 0
-    }
-
-    Rectangle {
-        id: accountsListMaskRight
-        y: 154
-        height: accountsList.height
-        color: background.color
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: accountsList.right
-        anchors.leftMargin: 0
-    }
 
 
     Text {
@@ -257,11 +235,11 @@ Item {
         onClicked: {
             if(paymentTypeCombo.currentOption == "internal"){
                 makePayment(accountsList.checkedAccNumber, amount.inputText, titleInput.inputText,
-                            currentDate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy"), "", dynamicInputs.children[0].inputText, "");
+                            currentDate.toLocaleDateString(Qt.locale(),"yyyy-MM-dd"), "", dynamicInputs.children[0].inputText, "");
             }
             else {
                 makePayment(accountsList.checkedAccNumber, amount.inputText, titleInput.inputText,
-                            currentDate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy"), dynamicInputs.children[0].inputText,
+                            currentDate.toLocaleDateString(Qt.locale(),"yyyy-MM-dd"), dynamicInputs.children[0].inputText,
                             dynamicInputs.children[2].inputText, dynamicInputs.children[1].inputText);
                 //i + 1 when friends will be added
             }

@@ -76,13 +76,13 @@ Item {
 
         AccountButtonList {
             id: accountsList
-            height: 160
+            height: 191
             anchors.right: parent.right
             anchors.rightMargin: 48
             anchors.left: parent.left
             anchors.leftMargin: 70
             anchors.top: accounts.bottom
-            anchors.topMargin: 6
+            anchors.topMargin: 0
             onCheckedAccNumberChanged: {
                 console.log(checkedAccNumber);
             }
@@ -94,7 +94,7 @@ Item {
             height: 35
             text: qsTr("Make Payment")
             anchors.top: parent.top
-            anchors.topMargin: 406
+            anchors.topMargin: 431
             anchors.left: parent.left
             anchors.leftMargin: 70          
         }
@@ -105,7 +105,7 @@ Item {
             height: 57
             text: qsTr("Today")
             anchors.top: parent.top
-            anchors.topMargin: 455
+            anchors.topMargin: 472
             anchors.left: parent.left
             anchors.leftMargin: 70
             verticalAlignment: Text.AlignVCenter

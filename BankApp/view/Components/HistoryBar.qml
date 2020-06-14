@@ -5,10 +5,8 @@ Item {
     id: historyBar
     objectName: "historyBar"
     visible: true
-    width: parent
+    width: 500
     height: 60
-    anchors.left: parent.left
-    anchors.right: parent.right
 
     property alias nametext: name.text
     property alias namegoods: goods.text
@@ -16,8 +14,6 @@ Item {
     property alias namedate: date.text
     property alias coloramount: amount.color
     property alias currencycolor: currencyLabel.color
-    
- 
     
     Rectangle {
         id: kwadrat
@@ -93,7 +89,6 @@ Item {
 
             }
             color: "#259fc4"
-             
             text: "+00,00"
             font.pixelSize: 18
             verticalAlignment: Text.AlignVCenter
