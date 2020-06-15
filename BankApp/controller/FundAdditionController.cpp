@@ -1,4 +1,4 @@
-#include "FundAdditionController.h"
+﻿#include "FundAdditionController.h"
 #include "AdminScreenController.h"
 
 void FundAdditionController::Initialize() {
@@ -50,10 +50,10 @@ QStringList FundAdditionController::FundTypes() {
 void FundAdditionController::HandleSavingsAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
                                               QString p_balance, QString p_fee, QString p_startDate, QString p_endDate) {
     int userId = StringParser::GetIDFromUserString(p_usrId.toStdString());
-    double minAmount = StringParser::GetMoneyFromString(p_minAmount.toStdString());
-    double maxRate = StringParser::GetPercentageFromString(p_maxRate.toStdString());
-    double fee = StringParser::GetPercentageFromString(p_fee.toStdString());
-    double balance = StringParser::GetMoneyFromString(p_balance.toStdString());
+    double minAmount = p_minAmount.toDouble();
+    double maxRate = p_maxRate.toDouble();
+    double fee = p_fee.toDouble();
+    double balance = p_balance.toDouble();
     if(AdminScreenController::admin->AddFund(userId, minAmount, maxRate, fee, balance,
                                               p_startDate.toStdString(), p_endDate.toStdString())){
         QMetaObject::invokeMethod(rootObject, "success");
@@ -67,11 +67,11 @@ void FundAdditionController::HandleRetirementAdd(QString p_usrId, QString p_minA
                                                  QString p_fee, QString p_balance, QString p_monthlyIn,
                                                  QString p_retired) {
     int userId = StringParser::GetIDFromUserString(p_usrId.toStdString());
-    double minAmount = StringParser::GetMoneyFromString(p_minAmount.toStdString());
-    double maxRate = StringParser::GetPercentageFromString(p_maxRate.toStdString());
-    double fee = StringParser::GetPercentageFromString(p_fee.toStdString());
-    double balance = StringParser::GetMoneyFromString(p_balance.toStdString());
-    double monthlyIn = StringParser::GetMoneyFromString(p_monthlyIn.toStdString());
+    double minAmount = p_minAmount.toDouble();
+    double maxRate = p_maxRate.toDouble();
+    double fee = p_fee.toDouble();
+    double balance = p_balance.toDouble();
+    double monthlyIn = p_monthlyIn.toDouble();
     bool isRetired = (p_retired == "Yes") ? true : false;
     if(AdminScreenController::admin->AddFund(userId, minAmount, maxRate, fee, balance,isRetired,
                                               monthlyIn)){

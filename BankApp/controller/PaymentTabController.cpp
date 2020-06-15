@@ -1,6 +1,7 @@
-#include "PaymentTabController.h"
+﻿#include "PaymentTabController.h"
 #include "UserScreenController.h"
 #include "AdminScreenController.h"
+#include <iostream>
 
 void PaymentTabController::Initialize() {
     rootObject->setProperty("userAccNumbersModel", QVariant::fromValue(UserScreenController::usrAccounts()));
@@ -22,7 +23,8 @@ PaymentTabController::PaymentTabController(QQmlApplicationEngine *p_engine) {
 
 void PaymentTabController::handleMakePayment(QString outNum, QString amount, QString title, QString date,
                                              QString name, QString inNum, QString adress) {
-    double damount = StringParser::GetMoneyFromString(amount.toStdString());
+    std::cerr<<amount.toStdString()<<"\n";
+    double damount = amount.toDouble();
     if(Bank::GetLoggedUser<User>()->MakePayment(outNum.toStdString(), damount, title.toStdString(), date.toStdString(),
                                                  name.toStdString(), inNum.toStdString(), adress.toStdString())) {
         QMetaObject::invokeMethod(rootObject, "paymentSuccess");

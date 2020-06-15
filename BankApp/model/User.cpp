@@ -56,23 +56,17 @@ bool User::IsUserAccount(std::string &p_accNum)
 bool User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date, str p_name, str p_InAccNum, str p_address)
 {
     auto pPaymentOut = std::make_shared<Payment>(-p_amount,p_title,p_date,p_name,p_InAccNum,p_address, false);
-    std::cerr<<"\np_amount"<<p_amount;
-    std::cerr<<"\np_title"<<p_title;
-    std::cerr<<"\np_date"<<p_date;
-    std::cerr<<"\np_InAccNum"<<p_InAccNum;
-    std::cerr<<"\np_address"<<p_address;
-    std::cerr<<"\np_aoutputAcc"<<p_OutAccNum;
     if(Bank::UpdateOutputAccount(p_OutAccNum,pPaymentOut))
     {
         if(Bank::accountMap[p_InAccNum])
         {
             auto pPaymentIn = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,"","", true);
             Bank::UpdateInputAccount(p_InAccNum,pPaymentIn);
-            std::cerr<<"\ninternal transfer w make";
+            std::cerr<<"\ninternal transfer";
         }
         else
         {
-            std::cerr<<"\nexternal transfer w make";
+            std::cerr<<"\nexternal transfer";
         }
 
         return true;

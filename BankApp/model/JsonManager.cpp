@@ -1,4 +1,4 @@
-#include "JsonManager.h"
+﻿#include "JsonManager.h"
 #include "Config.h"
 #include "SavingsFund.h"
 #include "RetirementFund.h"

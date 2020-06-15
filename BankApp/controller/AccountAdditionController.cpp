@@ -1,4 +1,4 @@
-#include "AccountAdditionController.h"
+﻿#include "AccountAdditionController.h"
 #include "AdminScreenController.h"
 
 void AccountAdditionController::Initialize() {
@@ -39,7 +39,7 @@ QStringList AccountAdditionController::AccTypes() {
 
 void AccountAdditionController::HandlePersonalAccAdd(QString num, QString user, QString balance) {
     int id = StringParser::GetIDFromUserString(user.toStdString());
-    double dbalance = StringParser::GetMoneyFromString(balance.toStdString());
+    double dbalance = balance.toDouble();
 
     if(AdminScreenController::admin->AddAccount(id, num.toStdString(), dbalance)){
         QMetaObject::invokeMethod(rootObject, "success");
@@ -52,9 +52,8 @@ void AccountAdditionController::HandlePersonalAccAdd(QString num, QString user, 
 void AccountAdditionController::HandleSavingsAccAdd(QString num, QString user, QString balance,
                                                     QString interest) {
     int id = StringParser::GetIDFromUserString(user.toStdString());
-    double dinterest = StringParser::GetPercentageFromString(interest.toStdString());
-    double dbalance = StringParser::GetMoneyFromString(balance.toStdString());
-
+    double dinterest = interest.toDouble();
+    double dbalance = balance.toDouble();
     if(AdminScreenController::admin->AddAccount(id, num.toStdString(), dbalance, dinterest)) {
         QMetaObject::invokeMethod(rootObject, "success");
     }
@@ -65,8 +64,8 @@ void AccountAdditionController::HandleSavingsAccAdd(QString num, QString user, Q
 void AccountAdditionController::HandleChildAccAdd(QString num, QString user, QString balance,
                                                   QString dailyLim, QString parent) {
     int userId = StringParser::GetIDFromUserString(user.toStdString());
-    double dbalance = StringParser::GetMoneyFromString(balance.toStdString());
-    double ddailyLim = StringParser::GetMoneyFromString(dailyLim.toStdString());
+    double dbalance = balance.toDouble();
+    double ddailyLim = dailyLim.toDouble();
     int parentId = StringParser::GetIDFromUserString(parent.toStdString());
 
     if(AdminScreenController::admin->AddAccount(parentId, userId, num.toStdString(), dbalance, ddailyLim)) {
