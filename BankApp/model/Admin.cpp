@@ -1,4 +1,4 @@
-#include "Admin.h"
+﻿#include "Admin.h"
 #include "ChildAccount.h"
 #include "FamillyAccount.h"
 #include "SavingsAccount.h"
@@ -173,7 +173,7 @@ std::list<std::string> Admin::GetAccStringList() {
 
 void Admin::FillUserMap() {
     std::fstream file;
-    file.open(Config::logInDataPath, std::ios::in | std::ios::app);
+    file.open(Config::logInDataPath, std::ios::in);
     if(file.is_open()){
         file.exceptions( std::fstream::badbit );
         try {
