@@ -9,7 +9,7 @@
 #include "SavingsFund.h"
 #include "Encryptor.h"
 
-int Admin::idProvider = 1;
+int Admin::idProvider = 0;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}
@@ -23,7 +23,7 @@ Admin::~Admin() {
  *  Method which creates user and adds him to user map
  */
 bool Admin::CreateUser(std::string p_login, std::string p_password, std::string p_email) {
-    LogInData data(idProvider++, p_login, p_password, p_email);
+    LogInData data(++idProvider, p_login, p_password, p_email);
     if(data.IsValid()) {
         if(!FindExistingUser(data)){
             usersMap.insert({data.GetID(), data});
