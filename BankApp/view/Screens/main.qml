@@ -27,6 +27,11 @@ Window {
     FontLoader { id: rubikBold; source: "/resources/fonts/Rubik-Bold.ttf" }
 
     StackView {
+        function reset() {
+            loginScreen.clear();
+            stackView.replace(loginScreen);
+        }
+
         id: stackView
         anchors.fill: parent
         initialItem: loginScreen
