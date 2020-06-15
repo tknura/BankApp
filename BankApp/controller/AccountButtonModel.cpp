@@ -9,12 +9,12 @@ AccountButtonModel::AccountButtonModel(QObject *parent)
 
 void AccountButtonModel::update() {
     beginResetModel();
-    std::string type = "", num, balance, currency, isDisabled;
+    std::string num, balance, currency;
     for(auto it = Bank::GetLoggedUser<User>()->GetAccountList()->begin();
          it != Bank::GetLoggedUser<User>()->GetAccountList()->end(); ++it){
         auto acc = Bank::accountMap.find(it->data());
-        //type = acc->second->GetType();
-        AddItem("Personal",QString::fromStdString(it->data()),
+        AccountType type(acc->second->GetType());
+        AddItem(QString::fromStdString(type.ToString()),QString::fromStdString(it->data()),
                 acc->second->GetBalance());
     }
     endResetModel();

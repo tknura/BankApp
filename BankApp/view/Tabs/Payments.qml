@@ -214,6 +214,7 @@ Item {
         anchors.rightMargin: 63
         anchors.left: parent.left
         anchors.leftMargin: 63
+        savingsAccDisabled: true
         onCheckedAccNumberChanged: {
         }
     }
