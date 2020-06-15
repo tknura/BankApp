@@ -17,7 +17,9 @@ Item {
     property var paymentTypes: ["external", "internal"]
 
     signal makePayment(string outAccNum, string amount, string title, string date,
-                       string name, string inAccNum, string adresss)
+                       string name, string inAccNum, string adress)
+    signal addFriend(string name, string address, string accNum)
+
     signal refresh()
     onRefresh: {
         accountsList.reload();
@@ -39,11 +41,12 @@ Item {
     }
 
     function addInternalInputs() {
+        friendsList.visible = false;
         dynamicInputs.addCombo("Transfer to", userAccNumbersModel);
     }
 
     function addExternalInputs() {
-        //friendslist
+        friendsList.visible = true;
         dynamicInputs.addTextInput("First & Last Name", "John Smith");
         dynamicInputs.addTextInput("Adress", "Road 21/37, 22-330 City");
         dynamicInputs.addTextInput("Account number", "", "9999999999999999;0");
@@ -58,15 +61,27 @@ Item {
         }
     }
 
-    function success() {
+    function paymentSuccess() {
         popup.message = "Successfully made a payment";
         popup.open();
         clearInputs();
         refresh();
     }
 
-    function fail() {
+    function paymentFail() {
         popup.message = "Insufficient funds";
+        popup.open();
+    }
+
+    function friendSuccess() {
+        popup.message = "Successfully added a friend";
+        popup.open();
+        clearInputs();
+        refresh();
+    }
+
+    function friendFail() {
+        popup.message = "Invalid data, try again";
         popup.open();
     }
 
@@ -129,6 +144,18 @@ Item {
                 height: 80
                 objectName: "titleInput"
                 width: parent.width
+            }
+
+            FriendsList {
+                id: friendsList
+                visible: false
+                width: parent.width
+                onButtonPressed: {
+                    dynamicInputs.children[0].inputText = friendName;
+                    dynamicInputs.children[1].inputText = address;
+                    dynamicInputs.children[2].inputText = accNum;
+                    console.log(accNum);
+                }
             }
 
             DynamicInputs {
@@ -247,18 +274,42 @@ Item {
             else {
                 makePayment(accountsList.checkedAccNumber, amount.inputText, titleInput.inputText,
                             currentDate.toLocaleDateString(Qt.locale(),"yyyy-MM-dd"), dynamicInputs.children[0].inputText,
-                            dynamicInputs.children[2].inputText, dynamicInputs.children[1].inputText);
-                //i + 1 when friends will be added
+                            dynamicInputs.children[1].inputText, dynamicInputs.children[2].inputText);
             }
             accountsList.reload();
         }
     }
+
+    PushButton {
+        id: addFriendButton
+        y: 642
+        width: 224
+        height: 40
+        text: qsTr("Add this retriever to friends list")
+        anchors.left: parent.left
+        font.family: "Rubik"
+        objectName: "makePaymentButton"
+        anchors.leftMargin: 63
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 18
+        display: AbstractButton.TextOnly
+        onClicked: {
+            if(dynamicInputs.children[0].inputText.lenght !== 0) {
+                addFriend(dynamicInputs.children[0].inputText, dynamicInputs.children[1].inputText,
+                          dynamicInputs.children[2].inputText)
+            }
+            else {
+                friendFail();
+            }
+            console.log(dynamicInputs.children[2].inputText)
+            friendsList.reload();
+        }
+    }
 }
-
-
 
 /*##^##
 Designer {
-    D{i:9;anchors_width:221;anchors_x:9}D{i:12;anchors_width:221;anchors_x:9}
+    D{i:9;anchors_width:221;anchors_x:9}D{i:10;anchors_width:221;anchors_x:9}D{i:12;anchors_width:221;anchors_x:9}
+D{i:13;anchors_width:221;anchors_x:9}D{i:16;anchors_x:63}
 }
 ##^##*/

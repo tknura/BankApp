@@ -28,7 +28,7 @@ public:
     };
 
     //method able to be called from QML
-    Q_INVOKABLE void update(const std::list<std::shared_ptr<PaymentRetriever>>* p);
+    Q_INVOKABLE void update();
     Q_INVOKABLE void clear();
 
 

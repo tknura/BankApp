@@ -54,6 +54,12 @@ Column {
                                         });
     }
 
+    function addFriendsList() {
+        var component;
+        var sprite;
+        component = Qt.createComponent("qrc:/components/FriendsList.qml");
+        sprite = component.createObject(root, { width: root.width });
+    }
     function remove() {
         for(var i = 0; i < root.children.length; ++i) {
             root.children[i].destroy(0);

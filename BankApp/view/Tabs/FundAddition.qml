@@ -46,6 +46,10 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        addInputs(fundTypeCombo.currentOption);
+    }
+
     function addInputs(type){
         switch(type){
         case "investment":

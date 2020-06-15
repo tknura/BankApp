@@ -20,6 +20,7 @@ public:
 public slots:
     void handleMakePayment(QString outNum, QString amount, QString title, QString date,
                            QString name, QString inNum, QString adress);
+    void handleFriendAddition(QString name, QString address, QString accNum);
 };
 
 #endif // PAYMENTTABCONTROLLER_H

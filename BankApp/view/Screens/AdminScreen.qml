@@ -92,22 +92,22 @@ Item {
         id: menuModel
         ListElement {
             buttonText: "Users"
-            buttonIcon: "qrc:/resources/icons/wallet-solid.png"
+            buttonIcon: "qrc:/resources/icons/user-solid.png"
         }
 
         ListElement {
             buttonText: "Accounts"
-            buttonIcon: "qrc:/resources/icons/money-check-alt-solid.png"
+            buttonIcon: "qrc:/resources/icons/piggy-bank-solid.png"
         }
 
         ListElement {
             buttonText: "Cards"
-            buttonIcon: "qrc:/resources/icons/piggy-bank-solid.png"
+            buttonIcon: "qrc:/resources/icons/credit-card-solid.png"
          }
 
         ListElement {
             buttonText: "Funds"
-            buttonIcon: "qrc:/resources/icons/history-solid.png"
+            buttonIcon: "qrc:/resources/icons/money-check-alt-solid.png"
         }
     }
 

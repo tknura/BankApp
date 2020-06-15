@@ -22,6 +22,7 @@ Item {
 
     signal newAccNumber();
 
+
     function addAccount(type) {
         if(accNumberInput.inputText.length !== 0 && balanceInput.inputText.length !== 0){
             switch(type){
@@ -74,6 +75,10 @@ Item {
     function fail() {
         popup.message = "Incorect data passed, can't add account to user";
         popup.open();
+    }
+
+    Component.onCompleted: {
+        addInputs(accTypeCombo.currentOption);
     }
 
     function addInputs(type){

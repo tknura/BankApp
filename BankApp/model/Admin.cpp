@@ -128,6 +128,13 @@ bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, d
 void Admin::OnLogIn() {
     std::cerr << "Admin logged" << std::endl;
     FillUserMap();
+
+    //only for tests
+    JsonManager manager(0);
+    std::list<std::string> empty{};
+    manager.ParseData(empty,Bank::accountMap);
+    manager.ParseData(Bank::fundMap);
+    manager.ParseData(Bank::cardMap);
 }
 
 void Admin::OnLogOut() {
@@ -145,7 +152,7 @@ std::list<std::string> Admin::GetUsersStringList() {
 std::list<std::string> Admin::GetAccStringList() {
     std::list<std::string> result;
     for(auto it = Bank::accountMap.begin(); it != Bank::accountMap.end(); ++it){
-        result.push_back(it->first);
+        result.push_back(it->first.data());
     }
     return result;
 }

@@ -46,6 +46,7 @@ SOURCES += \
         model/RetirementFund.cpp \
         model/SavingsAccount.cpp \
         model/SavingsFund.cpp \
+        model/StringParser.cpp \
         model/Test.cpp \
         model/User.cpp
 
@@ -100,6 +101,7 @@ HEADERS += \
     model/LogInData.h \
     model/Payment.h \
     model/PaymentRetriever.h \
+    model/StringParser.h \
     model/Test.h \
     model/RetirementFund.h \
     model/SavingsAccount.h \

@@ -58,7 +58,7 @@ bool User::IsUserAccount(std::string &p_accNum)
     }
 
 }
-void User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date, str p_name, str p_InAccNum, str p_address)
+bool User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date, str p_name, str p_InAccNum, str p_address)
 {   
     bool isIncoming {!IsUserAccount(p_OutAccNum)};
 
@@ -67,19 +67,21 @@ void User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date
     {
         auto pPayment = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,"","", true);
         Bank::UpdateInputAccount(p_InAccNum,pPayment);
-
+        return true;
     }
     else
     {
         std::cerr<<"Insufficient funds";
+        return false;
     }
 }
 
-void User::AddFriend(std::string p_name, std::string p_accNumber, std::string p_address)
+bool User::AddFriend(std::string p_name, std::string p_accNumber, std::string p_address)
 {
     auto p = std::make_shared<PaymentRetriever>(p_name,p_accNumber,p_address);
     friendsList.push_back(p);
     std::cerr<<"\nFriend added to list";
+    return true;
 }
 
 //User::~User() {}

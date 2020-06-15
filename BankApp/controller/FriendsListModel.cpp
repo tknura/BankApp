@@ -3,14 +3,14 @@
 
 FriendsListModel::FriendsListModel(QObject *parent) : QAbstractListModel(parent)
 {
-    auto p = Bank::GetLoggedUser<User>()->GetFriendsList();
-    update(p);
+    update();
 }
 
-void FriendsListModel::update(const std::list<std::shared_ptr<PaymentRetriever>>* p)
+void FriendsListModel::update()
 {
     beginResetModel();
-    for(const auto element : *p)
+    auto p = Bank::GetLoggedUser<User>()->GetFriendsList();
+    for(const auto &element : *p)
     {
         AddItem(QString::fromStdString(element->GetName()),
                 QString::fromStdString(element->GetAccNumer()),

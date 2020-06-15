@@ -10,9 +10,9 @@ Item {
     height: 80
 
     property string titleText: "Title"
-    property alias backgroundColor: rectangle.color
+    //property alias backgroundColor: rectangle.color
     property alias model: list.model
-    property variant resultList
+    property list<Text> resultList
 
     function clear() {
         for(var child in list.contentItem.children) {
@@ -20,7 +20,7 @@ Item {
         }
     }
 
-    function result() {
+    function updateResult() {
         for(var child in list.contentItem.children) {
             if(child.checked){
                 resultList.push(child.text);
@@ -28,8 +28,15 @@ Item {
         }
     }
 
+    function clearResult() {
+        for(var item in resultList) {
+            resultList.pop();
+        }
+    }
+
     ListView {
         id: list
+        clip: true
         anchors.top: parent.top
         anchors.topMargin: 31
         anchors.bottom: parent.bottom
@@ -54,21 +61,30 @@ Item {
                             anchors.leftMargin: 0
                             width: dlgt.width
                    }
+                   onCheckedChanged: {
+                       if(checked){
+                            resultList.push(modelData);
+                       }
+                       else {
+                            clearResult();
+                            updateResult();
+                       }
+                   }
         }
     }
 
-    Rectangle {
-        id: rectangle
-        color: "#ffffff"
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.bottom: list.top
-        anchors.bottomMargin: 0
-    }
+//    Rectangle {
+//        id: rectangle
+//        color: "#ffffff"
+//        anchors.top: parent.top
+//        anchors.topMargin: 0
+//        anchors.right: parent.right
+//        anchors.rightMargin: 0
+//        anchors.left: parent.left
+//        anchors.leftMargin: 0
+//        anchors.bottom: list.top
+//        anchors.bottomMargin: 0
+//    }
 
     Text {
         id: title
@@ -89,6 +105,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:1;anchors_height:49;anchors_width:640;anchors_x:0;anchors_y:31}D{i:5;anchors_height:31;anchors_width:640}
+    D{i:1;anchors_height:49;anchors_width:640;anchors_x:0;anchors_y:31}
 }
 ##^##*/

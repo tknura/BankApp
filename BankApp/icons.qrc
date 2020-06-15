@@ -18,5 +18,7 @@
         <file>resources/icons/paper-plane-solid.png</file>
         <file>resources/icons/piggy-bank-solid.png</file>
         <file>resources/icons/wallet-solid.png</file>
+        <file>resources/icons/user-solid.png</file>
+        <file>resources/icons/user-solid.svg</file>
     </qresource>
 </RCC>

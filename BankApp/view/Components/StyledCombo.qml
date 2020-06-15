@@ -18,6 +18,11 @@ Item {
 
     signal optionChanged(string optName)
 
+    onModelChanged:  {
+        currentOption = comboBox.displayText;
+        optionChanged(comboBox.displayText);
+    }
+
     Text {
         id: title
         width: 99

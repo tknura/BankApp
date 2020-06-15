@@ -44,6 +44,10 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        addInputs(cardTypeCombo.currentOption);
+    }
+
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {
             if(inputs.children[i].objectName === "styledInput") {

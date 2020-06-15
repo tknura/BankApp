@@ -12,9 +12,9 @@ class CardType
 public:
     enum Value : uint8_t
     {
+        PRE_PAID,
         DEBIT,
-        CREDIT,
-        PRE_PAID
+        CREDIT
     };
     CardType() = default;
     CardType(Value p_value) : value(p_value) {}
@@ -24,14 +24,14 @@ public:
     bool operator!=(CardType cT) const { return value != cT.value; }
     string ToString() {
         switch (value) {
-        case DEBIT: return "debit";
-        case CREDIT: return "credit";
         case PRE_PAID: return "pre-paid";
+        case DEBIT: return "debit";
+        case CREDIT: return "credit";        
         }
     }
 
     static list<CardType> GetAllTypesList() {
-        return { CardType::DEBIT, CardType::CREDIT, CardType::PRE_PAID };
+        return { CardType::PRE_PAID, CardType::CREDIT, CardType::DEBIT };
     }
 
     static list<string> GetAllTypesStringList() {
