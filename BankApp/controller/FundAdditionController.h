@@ -3,6 +3,7 @@
 
 #include <QString>
 #include "IController.h"
+#include "../model/StringParser.h"
 #include "../model/enums/FundType.h"
 #include "../model/Admin.h"
 

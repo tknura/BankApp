@@ -27,9 +27,6 @@ public:
     ~AdminScreenController() override;
     static QStringList UserList();
     static QStringList AccList();
-    static int GetIDFromUserString(std::string str);
-    static double GetPercentageFromString(std::string str);
-    static double GetMoneyFromString(std::string str);
 
     static std::shared_ptr<Admin> admin;
 };

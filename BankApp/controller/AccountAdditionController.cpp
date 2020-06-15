@@ -37,8 +37,8 @@ QStringList AccountAdditionController::AccTypes() {
 }
 
 void AccountAdditionController::HandlePersonalAccAdd(QString num, QString user, QString balance) {
-    int id = AdminScreenController::GetIDFromUserString(user.toStdString());
-    double dbalance = AdminScreenController::GetMoneyFromString(balance.toStdString());
+    int id = StringParser::GetIDFromUserString(user.toStdString());
+    double dbalance = StringParser::GetMoneyFromString(balance.toStdString());
 
     if(AdminScreenController::admin->AddAccount(id, num.toStdString(), dbalance)){
         QMetaObject::invokeMethod(rootObject, "success");
@@ -50,9 +50,9 @@ void AccountAdditionController::HandlePersonalAccAdd(QString num, QString user, 
 
 void AccountAdditionController::HandleSavingsAccAdd(QString num, QString user, QString balance,
                                                     QString interest) {
-    int id = AdminScreenController::GetIDFromUserString(user.toStdString());
-    double dinterest = AdminScreenController::GetPercentageFromString(interest.toStdString());
-    double dbalance = AdminScreenController::GetMoneyFromString(balance.toStdString());
+    int id = StringParser::GetIDFromUserString(user.toStdString());
+    double dinterest = StringParser::GetPercentageFromString(interest.toStdString());
+    double dbalance = StringParser::GetMoneyFromString(balance.toStdString());
 
     if(AdminScreenController::admin->AddAccount(id, num.toStdString(), dbalance, dinterest)) {
         QMetaObject::invokeMethod(rootObject, "success");
@@ -63,10 +63,10 @@ void AccountAdditionController::HandleSavingsAccAdd(QString num, QString user, Q
 }
 void AccountAdditionController::HandleChildAccAdd(QString num, QString user, QString balance,
                                                   QString dailyLim, QString parent) {
-    int userId = AdminScreenController::GetIDFromUserString(user.toStdString());
-    double dbalance = AdminScreenController::GetMoneyFromString(balance.toStdString());
-    double ddailyLim = AdminScreenController::GetMoneyFromString(dailyLim.toStdString());
-    int parentId = AdminScreenController::GetIDFromUserString(parent.toStdString());
+    int userId = StringParser::GetIDFromUserString(user.toStdString());
+    double dbalance = StringParser::GetMoneyFromString(balance.toStdString());
+    double ddailyLim = StringParser::GetMoneyFromString(dailyLim.toStdString());
+    int parentId = StringParser::GetIDFromUserString(parent.toStdString());
 
     if(AdminScreenController::admin->AddAccount(parentId, userId, num.toStdString(), dbalance, ddailyLim)) {
         QMetaObject::invokeMethod(rootObject, "success");

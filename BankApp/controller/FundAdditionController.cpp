@@ -7,8 +7,8 @@ void FundAdditionController::Initialize() {
 }
 
 void FundAdditionController::Connections() {
-    QObject::connect(rootObject, SIGNAL(addInvestment(QString, QString, QString, QString, QString)),
-                     this, SLOT(HandleInvestmentAdd(QString, QString, QString, QString, QString)));
+//    QObject::connect(rootObject, SIGNAL(addInvestment(QString, QString, QString, QString, QString)),
+//                     this, SLOT(HandleInvestmentAdd(QString, QString, QString, QString, QString)));
     QObject::connect(rootObject, SIGNAL(addSavings(QString, QString, QString, QString, QString, QString, QString)),
                      this, SLOT(HandleSavingsAdd(QString, QString, QString, QString, QString, QString, QString)));
     QObject::connect(rootObject, SIGNAL(addRetirement(QString, QString, QString, QString, QString, QString, QString)),
@@ -48,11 +48,11 @@ QStringList FundAdditionController::FundTypes() {
 
 void FundAdditionController::HandleSavingsAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
                                               QString p_balance, QString p_fee, QString p_startDate, QString p_endDate) {
-    int userId = AdminScreenController::GetIDFromUserString(p_usrId.toStdString());
-    double minAmount = AdminScreenController::GetMoneyFromString(p_minAmount.toStdString());
-    double maxRate = AdminScreenController::GetPercentageFromString(p_maxRate.toStdString());
-    double fee = AdminScreenController::GetPercentageFromString(p_fee.toStdString());
-    double balance = AdminScreenController::GetMoneyFromString(p_balance.toStdString());
+    int userId = StringParser::GetIDFromUserString(p_usrId.toStdString());
+    double minAmount = StringParser::GetMoneyFromString(p_minAmount.toStdString());
+    double maxRate = StringParser::GetPercentageFromString(p_maxRate.toStdString());
+    double fee = StringParser::GetPercentageFromString(p_fee.toStdString());
+    double balance = StringParser::GetMoneyFromString(p_balance.toStdString());
     if(AdminScreenController::admin->AddFund(userId, minAmount, maxRate, fee, balance,
                                               p_startDate.toStdString(), p_endDate.toStdString())){
         QMetaObject::invokeMethod(rootObject, "success");
@@ -65,12 +65,12 @@ void FundAdditionController::HandleSavingsAdd(QString p_usrId, QString p_minAmou
 void FundAdditionController::HandleRetirementAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
                                                  QString p_fee, QString p_balance, QString p_monthlyIn,
                                                  QString p_retired) {
-    int userId = AdminScreenController::GetIDFromUserString(p_usrId.toStdString());
-    double minAmount = AdminScreenController::GetMoneyFromString(p_minAmount.toStdString());
-    double maxRate = AdminScreenController::GetPercentageFromString(p_maxRate.toStdString());
-    double fee = AdminScreenController::GetPercentageFromString(p_fee.toStdString());
-    double balance = AdminScreenController::GetMoneyFromString(p_balance.toStdString());
-    double monthlyIn = AdminScreenController::GetMoneyFromString(p_monthlyIn.toStdString());
+    int userId = StringParser::GetIDFromUserString(p_usrId.toStdString());
+    double minAmount = StringParser::GetMoneyFromString(p_minAmount.toStdString());
+    double maxRate = StringParser::GetPercentageFromString(p_maxRate.toStdString());
+    double fee = StringParser::GetPercentageFromString(p_fee.toStdString());
+    double balance = StringParser::GetMoneyFromString(p_balance.toStdString());
+    double monthlyIn = StringParser::GetMoneyFromString(p_monthlyIn.toStdString());
     bool isRetired = (p_retired == "Yes") ? true : false;
     if(AdminScreenController::admin->AddFund(userId, minAmount, maxRate, fee, balance,isRetired,
                                               monthlyIn)){
