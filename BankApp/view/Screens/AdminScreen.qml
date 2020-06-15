@@ -10,8 +10,12 @@ Item {
     visible: true
     width: parent.width
     height: parent.height
+    property var mainStack
 
     signal logOut()
+    onLogOut: {
+        mainStack.reset();
+    }
 
     StackView {
         id: contentStack

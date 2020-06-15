@@ -42,7 +42,6 @@ bool Authorization::VerifyUser(LogInData &data) {
  * LogIn function in Bank class
  */
 bool Authorization::LogInAttempt(LogInData &data) {
-    std:: cerr << "login: " << data.GetLogin() << " password: " << data.GetPassword();
     if(data.GetLogin() == "admin" && data.GetPassword() == "admin"){
         Bank::LogIn(std::make_shared<Admin>(data));
         return true;

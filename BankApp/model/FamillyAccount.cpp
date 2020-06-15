@@ -2,7 +2,7 @@
 
 json FamillyAccount::SerializeToJson()
 {
-    json j {Account::SerializeToJson()};
+    json j (Account::SerializeToJson());
 
     j["memberIdList"] = memberIdList;
 

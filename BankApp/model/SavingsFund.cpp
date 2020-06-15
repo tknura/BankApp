@@ -11,7 +11,7 @@ std::ostream& SavingsFund::serialize(std::ostream&ss) const
 
 json SavingsFund::SerializeToJson()
 {
-    json j{Fund::SerializeToJson()};
+    json j(Fund::SerializeToJson());
 
     j["startDate"] = startDate;
     j["endDate"] = endDate;

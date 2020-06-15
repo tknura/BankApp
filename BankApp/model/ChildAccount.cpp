@@ -3,7 +3,7 @@
 
 json ChildAccount::SerializeToJson()
 {
-    json j {Account::SerializeToJson()};
+    json j (Account::SerializeToJson());
 
     j["childId"] = childId;
     j["dailyTransactionLimit"] = dailyTransactionLimit;

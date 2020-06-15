@@ -63,7 +63,6 @@ void Account::UpdateHistory(std::shared_ptr<Payment> p_payment)
 json Account::SerializeToJson()
 {
     json j{};
-    //std::cerr<<"\nnumber"<<number<<"\nsupervisorId"<<supervisorId<<"\nbalance"<<balance;
     j["history"] = history.SerializeToJson();
     j["number"] = number;
     j["supervisorId"] = supervisorId;

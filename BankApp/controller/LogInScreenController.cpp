@@ -8,7 +8,6 @@ void LogInScreenController::HandleProceedButton() {
         if(Authorization::LogInAttempt(attempt)) {
             QMetaObject::invokeMethod(rootObject, "loggingPassed");
             if(Bank::isUserLogged()){
-
                 LoadUserScreen();
             }
             else if(Bank::isAdminLogged()) {

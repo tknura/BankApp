@@ -87,7 +87,6 @@ bool HistoryListModel::setData(const QModelIndex &index, const QVariant &value, 
     HistoryItem item = mList.at(index.row());
 
     if (data(index, role) != value) {
-        // FIXME: Implement me!
         emit dataChanged(index, index, QVector<int>() << role);
         return true;
     }
@@ -99,7 +98,7 @@ Qt::ItemFlags HistoryListModel::flags(const QModelIndex &index) const
     if (!index.isValid())
         return Qt::NoItemFlags;
 
-    return Qt::ItemIsEditable; // FIXME: Implement me!
+    return Qt::ItemIsEditable;
 }
 
 bool HistoryListModel::AddItem(QString name, QString description, double amount, QString date)

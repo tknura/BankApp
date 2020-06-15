@@ -17,16 +17,8 @@
 int main(int argc, char *argv[])
 {
     Bank::Start();
-    Test::Run();
-//  std::unordered_map<std::string,std::shared_ptr<IAccount>> test{};
-//    std::list<std::string> test1{};
-//    JsonManager manager{1};
-//    manager.ParseData(test1,test);
-//    manager.SerializeData(test,Config::accountJSONPath);
-//    return 0;
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<HistoryListModel>("HistoryList",1,0,"HistoryListModel");

@@ -56,8 +56,8 @@ void JsonManager::SerializeData(T &p_map, std::string p_dir)
     std::string s{"[{\"items\":["};
     for(auto it = p_map.begin(); it != p_map.end(); ++it)
     {
-         json j =(*(it->second)).SerializeToJson();
-         j["type"] =it->second->GetType();
+         json j = (it->second)->SerializeToJson();
+         j["type"] = it->second->GetType();
          s += j.dump();
          s += ",";
     }
