@@ -78,7 +78,6 @@ Item {
             anchors.topMargin: 6
 
             onCheckedAccNumberChanged: {
-                console.log(checkedAccNumber);
                 histmodel.clear();
                 histmodel.update(accountsList.checkedAccNumber);
             }

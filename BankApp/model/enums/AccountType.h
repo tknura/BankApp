@@ -21,11 +21,12 @@ public:
     };
     AccountType() = default;
     AccountType(Value p_value) : value(p_value) {}
+    AccountType(int p_value) { value = static_cast<Value>(p_value); }
     operator Value() const { return value; }
+    operator int() const { return value; }
 //    operator bool() = delete;
     bool operator==(AccountType aT) const { return value == aT.value; }
     bool operator!=(AccountType aT) const { return value != aT.value; }
-    operator int() const { return value; }
     string ToString() {
         switch (value) {
             case PERSONAL: return "personal";

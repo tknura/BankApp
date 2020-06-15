@@ -32,6 +32,7 @@ public slots:
                          QString p_transLim, QString p_maxCredit, QString p_billingDate);
     void HandleDebitAdd(QString p_num, QString p_ccv, QString p_accNum,
                         QString p_transLim, QString p_maxDebt);
+    void HandleTabRefresh();
 };
 
 #endif // CARDADDITIONCONTROLLER_H

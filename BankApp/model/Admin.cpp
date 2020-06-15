@@ -22,7 +22,7 @@ Admin::~Admin() {
  *  Method which creates user and adds him to user map
  */
 bool Admin::CreateUser(std::string p_login, std::string p_password, std::string p_email) {
-    LogInData data(idProvider++, p_login, p_password, p_email);
+    LogInData data(++idProvider, p_login, p_password, p_email);
     if(data.IsValid()) {
         if(!FindExistingUser(data)){
             usersMap.insert({data.GetID(), data});

@@ -106,7 +106,7 @@ Item {
         screenStack: contentStack
         contentArray: [dashboard, payments, funds, history]
         onLogOut: {
-            logOut();
+            root.logOut();
         }
         onTabChanged: {
             tab.refresh();

@@ -30,6 +30,7 @@ public slots:
     void HandleRetirementAdd(QString p_usrId, QString p_minAmount, QString p_maxRate, QString p_fee,
                              QString p_balance, QString p_monthlyIn,
                              QString p_retired);
+    void HandleTabRefresh();
 };
 
 #endif // FUNDADDITIONCONTROLLER_H

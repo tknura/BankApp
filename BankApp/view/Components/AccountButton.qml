@@ -26,7 +26,7 @@ Item {
         button.state = "disabled";
     }
 
-    Component.onCompleted: {
+    onIsDisabledChanged: {
         if(isDisabled){
             disable();
         }
@@ -144,6 +144,7 @@ Item {
             color: "#393e46"
             text: qsTr("Account Type")
             font.weight: Font.Medium
+            font.capitalization: Font.Capitalize
             verticalAlignment: Text.AlignVCenter
             anchors.top: parent.top
             anchors.topMargin: 19

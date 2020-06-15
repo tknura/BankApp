@@ -10,6 +10,7 @@ Item {
     objectName: "accountButtonList"
     height: 200
     property string checkedAccNumber
+    property bool savingsAccDisabled: false
     property alias model: list.model
     signal updateNum(string accNumber)
 
@@ -25,9 +26,11 @@ Item {
     }
 
     visible: true
+
     onUpdateNum: {
         checkedAccNumber = accNumber
     }
+
     ListView {
         id: list
         clip: true
@@ -52,6 +55,7 @@ Item {
            accAmountText: model.amount.toFixed(2)
            itemToRefresh: element
            buttongroup: accountButtons
+           isDisabled: savingsAccDisabled ? (model.type == "savings") ? true : false : false
        }
         Component.onCompleted: {
             list.contentItem.children[0].checked = true;

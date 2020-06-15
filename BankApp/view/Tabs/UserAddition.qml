@@ -10,6 +10,7 @@ Item {
     height: 700
 
     signal userAddition(string login, string password, string mail)
+    signal refresh()
 
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {

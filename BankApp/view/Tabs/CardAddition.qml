@@ -13,6 +13,8 @@ Item {
     property var cardsModel
     property var accountsModel
 
+    signal refresh()
+
     signal newCcvNumber();
     signal newCardNumber();
 

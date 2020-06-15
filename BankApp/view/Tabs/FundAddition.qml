@@ -13,6 +13,7 @@ Item {
     property var usersModel
     property var boolModel: ["Yes", "No"]
 
+    signal refresh()
     signal addInvestment(string userId, string minAmount, string maxRate, string fee, string balance);
     signal addSavings(string userId, string minAmount, string maxRate, string fee, string balance,
                       string startDate, string endDate);
