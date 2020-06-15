@@ -53,7 +53,7 @@ bool Admin::AddAccount(int ownerID, std::string number, double balance) {
 bool Admin::AddAccount(int supervisorID, int childID, std::string number, double balance,
                        double dailyTransactionLimit) {
     ChildAccount newAcc(number, balance, supervisorID, dailyTransactionLimit, childID);
-    return AddAccountToMap(std::make_shared<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<ChildAccount>(newAcc));
 }
 
 /*
@@ -62,7 +62,7 @@ bool Admin::AddAccount(int supervisorID, int childID, std::string number, double
 bool Admin::AddAccount(int supervisorID, std::string number, double balance,
                           std::list<int> memberIdList) {
     FamillyAccount newAcc(number, balance, supervisorID, memberIdList);
-    return AddAccountToMap(std::make_shared<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<FamillyAccount>(newAcc));
 }
 
 /*
@@ -70,7 +70,7 @@ bool Admin::AddAccount(int supervisorID, std::string number, double balance,
  */
 bool Admin::AddAccount(int ownerID, std::string number, double balance, double interest) {
     SavingsAccount newAcc(number, balance, ownerID, interest);
-    return AddAccountToMap(std::make_shared<Account>(newAcc));
+    return AddAccountToMap(std::make_shared<SavingsAccount>(newAcc));
 }
 
 /*
@@ -87,7 +87,7 @@ bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, doub
 bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
                     double maxCredit, std::string billingDate) {
     CreditCard newCard(accountNumber, number, ccv, transactionLimit, maxCredit, billingDate);
-    return AddCardToMap(std::make_shared<Card>(newCard));
+    return AddCardToMap(std::make_shared<CreditCard>(newCard));
 }
 
 /*
@@ -96,7 +96,7 @@ bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, doub
 bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, double transactionLimit,
                     double maxDebt) {
     DebitCard newCard(accountNumber, number, ccv, transactionLimit, maxDebt);
-    return AddCardToMap(std::make_shared<Card>(newCard));
+    return AddCardToMap(std::make_shared<DebitCard>(newCard));
 }
 
 ///*
@@ -113,7 +113,7 @@ bool Admin::AddCard(std::string accountNumber, std::string number, int ccv, doub
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
                     bool isRetired, double monthlyIn) {
     RetirementFund newFund(minAmount, maxRate, fee, balance, isRetired, monthlyIn, ownerID);
-    return AddFundToMap(std::make_shared<Fund>(newFund));
+    return AddFundToMap(std::make_shared<RetirementFund>(newFund));
 }
 
 /*
@@ -122,7 +122,7 @@ bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, d
 bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, double balance,
                     std::string startDate, std::string endDate) {
     SavingsFund newFund(minAmount, maxRate, fee, balance, startDate, endDate, ownerID);
-    return AddFundToMap(std::make_shared<Fund>(newFund));
+    return AddFundToMap(std::make_shared<SavingsFund>(newFund));
 }
 
 void Admin::OnLogIn() {
