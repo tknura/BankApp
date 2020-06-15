@@ -294,7 +294,7 @@ Item {
         anchors.bottomMargin: 18
         display: AbstractButton.TextOnly
         onClicked: {
-            if(dynamicInputs.children[0].inputText.lenght !== 0) {
+            if(dynamicInputs.children[0].inputText.length !== 0) {
                 addFriend(dynamicInputs.children[0].inputText, dynamicInputs.children[1].inputText,
                           dynamicInputs.children[2].inputText)
             }
