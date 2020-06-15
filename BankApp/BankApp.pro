@@ -36,6 +36,7 @@ SOURCES += \
         model/ChildAccount.cpp \
         model/CreditCard.cpp \
         model/DebitCard.cpp \
+        model/Encryptor.cpp \
         model/FamillyAccount.cpp \
         model/Fund.cpp \
         model/History.cpp \
@@ -91,6 +92,7 @@ HEADERS += \
     model/ChildAccount.h \
     model/CreditCard.h \
     model/DebitCard.h \
+    model/Encryptor.h \
     model/FamillyAccount.h \
     model/Fund.h \
     model/History.h \

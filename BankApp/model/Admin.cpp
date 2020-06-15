@@ -7,6 +7,7 @@
 #include "DebitCard.h"
 #include "RetirementFund.h"
 #include "SavingsFund.h"
+#include "Encryptor.h"
 
 int Admin::idProvider = 0;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
@@ -165,7 +166,7 @@ void Admin::FillUserMap() {
         try {
             std::string line;
             while(std::getline(file, line)){
-                LogInData logInDataFromLine = Authorization::proccesedData(line);
+                LogInData logInDataFromLine = std::get<0>(Authorization::proccesedData(line));
                 usersMap.insert(std::make_pair(logInDataFromLine.GetID(), logInDataFromLine));
                 idProvider = logInDataFromLine.GetID();
             }
@@ -187,7 +188,10 @@ void Admin::SaveUserMap() {
         file.exceptions( std::fstream::badbit );
         try {
             for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it){
-                file  << it->second;
+                std::string salt = "";
+                std::string password = it->second.GetPassword();
+                it->second.SetPassword(Encryptor::encode(password, salt));
+                file  << it->second << " " << salt << std::endl;
             }
         }
         catch (std::fstream::failure & ex) {

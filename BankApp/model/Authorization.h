@@ -9,13 +9,14 @@
 #include <algorithm>
 #include <iterator>
 #include <memory>
+#include <tuple>
 
 class Authorization
 {
 public:
     static bool VerifyUser(LogInData &data);
     static bool LogInAttempt(LogInData &data);
-    static LogInData proccesedData(const std::string &line);
+    static std::tuple<LogInData, std::string> proccesedData(const std::string &line);
 };
 
 #endif // AUTHORIZATION_H
