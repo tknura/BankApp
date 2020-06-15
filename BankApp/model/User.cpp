@@ -6,7 +6,7 @@
 #include "JsonManager.h"
 
 
-User::User(const LogInData &data) : LogInData(data) {
+User::User(const LogInData &data) : LogInData(data), manager(data.GetID()) {
     friendsList = std::list<std::shared_ptr<PaymentRetriever>>{};
 }
 
@@ -14,8 +14,6 @@ User::~User() {}
 
 void User::LoadData()
 {
-    JsonManager manager(id);
-
      manager.ParseData(friendsList);
      manager.ParseData(accountList,Bank::accountMap);
      manager.ParseData(Bank::fundMap);
@@ -24,7 +22,6 @@ void User::LoadData()
 
 void User::SaveData()
 {
-    JsonManager manager(id);
     manager.SerializeData(friendsList);
     manager.SerializeData(Bank::accountMap,Config::accountJSONPath);
     manager.SerializeData(Bank::fundMap,Config::fundJSONPath);
@@ -57,14 +54,27 @@ bool User::IsUserAccount(std::string &p_accNum)
 
 }
 bool User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date, str p_name, str p_InAccNum, str p_address)
-{   
-    bool isIncoming {!IsUserAccount(p_OutAccNum)};
-
-    auto pPayment = std::make_shared<Payment>(-p_amount,p_title,p_date,p_name,p_InAccNum,p_address, isIncoming);
-    if(Bank::UpdateOutputAccount(p_OutAccNum,pPayment))
+{
+    auto pPaymentOut = std::make_shared<Payment>(-p_amount,p_title,p_date,p_name,p_InAccNum,p_address, false);
+    std::cerr<<"\np_amount"<<p_amount;
+    std::cerr<<"\np_title"<<p_title;
+    std::cerr<<"\np_date"<<p_date;
+    std::cerr<<"\np_InAccNum"<<p_InAccNum;
+    std::cerr<<"\np_address"<<p_address;
+    std::cerr<<"\np_aoutputAcc"<<p_OutAccNum;
+    if(Bank::UpdateOutputAccount(p_OutAccNum,pPaymentOut))
     {
-        auto pPayment = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,"","", true);
-        Bank::UpdateInputAccount(p_InAccNum,pPayment);
+        if(Bank::accountMap[p_InAccNum])
+        {
+            auto pPaymentIn = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,"","", true);
+            Bank::UpdateInputAccount(p_InAccNum,pPaymentIn);
+            std::cerr<<"\ninternal transfer w make";
+        }
+        else
+        {
+            std::cerr<<"\nexternal transfer w make";
+        }
+
         return true;
     }
     else

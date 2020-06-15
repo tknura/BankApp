@@ -9,14 +9,13 @@
 #include "SavingsFund.h"
 #include "Encryptor.h"
 
-int Admin::idProvider = 0;
+int Admin::idProvider = 1;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
-Admin::Admin(const LogInData &data) : LogInData(data) {}
+Admin::Admin(const LogInData &data) : LogInData(data), manager(0) {}
 
 Admin::~Admin() {
     //to do delete
-    OnLogOut();
 }
 
 /*
@@ -142,7 +141,6 @@ void Admin::OnLogOut() {
 
 void Admin::LoadData()
 {
-     JsonManager manager(0);
      std::list<std::string> p{};
      manager.ParseData(p,Bank::accountMap);
      manager.ParseData(Bank::fundMap);
@@ -152,7 +150,6 @@ void Admin::LoadData()
 
 void Admin::SaveData()
 {
-     JsonManager manager(0);
      manager.SerializeData(Bank::accountMap,Config::accountJSONPath);
      manager.SerializeData(Bank::fundMap,Config::fundJSONPath);
      manager.SerializeData(Bank::cardMap,Config::cardJSONPath);

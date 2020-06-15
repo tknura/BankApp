@@ -57,11 +57,13 @@ void Account::SetSupervisorId(int value)
 }
 void Account::UpdateHistory(std::shared_ptr<Payment> p_payment)
 {
+    std::cerr<<"info o historii"<<p_payment->GetName().toStdString()<<" "<<p_payment->GetAmount();
     history.AddNode(p_payment);
 }
 json Account::SerializeToJson()
 {
     json j{};
+    std::cerr<<"\nnumber"<<number<<"\nsupervisorId"<<supervisorId<<"\nbalance"<<balance;
     j["history"] = history.SerializeToJson();
     j["number"] = number;
     j["supervisorId"] = supervisorId;

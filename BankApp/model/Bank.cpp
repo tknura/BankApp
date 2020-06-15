@@ -84,11 +84,11 @@ void Bank::UpdateInputAccount(std::string &p_accNum,std::shared_ptr<Payment> p_p
     {
         accountMap[p_accNum]->AddFunds(p_payment->GetAmount());
         accountMap[p_accNum]->UpdateHistory(p_payment);
-        std::cerr<<"internal transfer";
+        std::cerr<<"internal transfer w input";
     }
     else//transfer to an account located in diffrent bank
     {
-        std::cerr<<"external transfer";
+        std::cerr<<"external transfer w input";
     }
 
 

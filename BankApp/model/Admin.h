@@ -18,6 +18,7 @@ private:
     bool AddAccountToMap(std::shared_ptr<Account> acc);
     bool AddCardToMap(std::shared_ptr<Card> card);
     bool AddFundToMap(std::shared_ptr<Fund> fund);
+    JsonManager manager;
 public:
     Admin(const LogInData &data);
     ~Admin() override;
