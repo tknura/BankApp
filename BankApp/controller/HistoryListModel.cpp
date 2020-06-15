@@ -17,7 +17,6 @@ void HistoryListModel::update(const QString &accNum)
 {
     if(!accNum.isEmpty()){
         beginResetModel();
-        std::cerr << accNum.toStdString();
         History* tmp = Bank::accountMap[accNum.toStdString()]->GetHistory();
         auto p = tmp->GetList();
         for(const auto element : p)

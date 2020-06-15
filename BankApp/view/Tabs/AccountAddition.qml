@@ -13,6 +13,7 @@ Item {
 
     property var usersModel
 
+    signal refresh()
     signal addPersonalAcc(string number, string user, string balance);
     signal addSavingsAcc(string number, string user, string balance, string interest);
     signal addChildAcc(string number, string user, string balance, string dailyLimit, string parent);

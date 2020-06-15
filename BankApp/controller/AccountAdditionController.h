@@ -31,6 +31,7 @@ public slots:
     //TODO
     void HandleFamilyAccAdd(QString num, QString user, QString balance);
     void HandleReroll();
+    void HandleTabRefresh();
 };
 
 #endif // ACCOUNTADDITIONCONTROLLER_H

@@ -9,6 +9,7 @@ void AccountAdditionController::Initialize() {
 
 void AccountAdditionController::Connections() {
     QObject::connect(rootObject, SIGNAL(newAccNumber()), this, SLOT(HandleReroll()));
+    QObject::connect(rootObject, SIGNAL(refresh()), this, SLOT(HandleTabRefresh()));
     QObject::connect(rootObject, SIGNAL(addPersonalAcc(QString, QString, QString)),
                      this, SLOT(HandlePersonalAccAdd(QString, QString, QString)));
     QObject::connect(rootObject, SIGNAL(addSavingsAcc(QString, QString, QString, QString)),
@@ -83,4 +84,9 @@ void AccountAdditionController::HandleFamilyAccAdd(QString num, QString user, QS
 
 void AccountAdditionController::HandleReroll() {
     accNumberInput->setProperty("inputText", QString::fromStdString(Account::GenerateNumber()));
+}
+
+void AccountAdditionController::HandleTabRefresh() {
+    typeCombo->setProperty("model", QVariant::fromValue(AccTypes()));
+    rootObject->setProperty("usersModel", QVariant::fromValue(AdminScreenController::UserList()));
 }

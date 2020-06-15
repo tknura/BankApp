@@ -7,6 +7,7 @@ void FundAdditionController::Initialize() {
 }
 
 void FundAdditionController::Connections() {
+     QObject::connect(rootObject, SIGNAL(refresh()), this, SLOT(HandleTabRefresh()));
 //    QObject::connect(rootObject, SIGNAL(addInvestment(QString, QString, QString, QString, QString)),
 //                     this, SLOT(HandleInvestmentAdd(QString, QString, QString, QString, QString)));
     QObject::connect(rootObject, SIGNAL(addSavings(QString, QString, QString, QString, QString, QString, QString)),
@@ -79,4 +80,9 @@ void FundAdditionController::HandleRetirementAdd(QString p_usrId, QString p_minA
     else {
         QMetaObject::invokeMethod(rootObject, "fail");
     }
+}
+
+void FundAdditionController::HandleTabRefresh() {
+    typeCombo->setProperty("model", QVariant::fromValue(FundTypes()));
+    rootObject->setProperty("usersModel", QVariant::fromValue(AdminScreenController::UserList()));
 }

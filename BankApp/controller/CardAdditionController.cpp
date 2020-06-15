@@ -10,6 +10,7 @@ void CardAdditionController::Initialize() {
 }
 
 void CardAdditionController::Connections() {
+    QObject::connect(rootObject, SIGNAL(refresh()), this, SLOT(HandleTabRefresh()));
     QObject::connect(rootObject, SIGNAL(newCardNumber()), this, SLOT(HandleCardReroll()));
     QObject::connect(rootObject, SIGNAL(newCcvNumber()), this, SLOT(HandleCcvReroll()));
     QObject::connect(rootObject, SIGNAL(addPrePaid(QString, QString, QString, QString)),
@@ -83,4 +84,9 @@ void CardAdditionController::HandleDebitAdd(QString p_num, QString p_ccv, QStrin
     else {
         QMetaObject::invokeMethod(rootObject, "fail");
     }
+}
+
+void CardAdditionController::HandleTabRefresh() {
+    rootObject->setProperty("accountsModel", QVariant::fromValue(AdminScreenController::AccList()));
+    typeCombo->setProperty("model", QVariant::fromValue(CardTypes()));
 }

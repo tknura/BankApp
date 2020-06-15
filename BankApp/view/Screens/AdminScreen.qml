@@ -84,7 +84,10 @@ Item {
         screenStack: contentStack
         contentArray: [userAddition, accountAddition, cardAddition, fundAddition]
         onLogOut: {
-            logOut();
+            root.logOut();
+        }
+        onTabChanged: {
+            tab.refresh();
         }
     }
 

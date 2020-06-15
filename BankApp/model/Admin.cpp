@@ -9,7 +9,7 @@
 #include "SavingsFund.h"
 #include "Encryptor.h"
 
-int Admin::idProvider = 0;
+int Admin::idProvider = 1;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data) {}

@@ -215,7 +215,6 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 63
         onCheckedAccNumberChanged: {
-            console.log(checkedAccNumber);
         }
     }
 
