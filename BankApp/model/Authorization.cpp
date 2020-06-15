@@ -1,5 +1,5 @@
 #include "Authorization.h"
-
+#include "Encryptor.h"
 /*
  * Method which return true if LogInData passed as an argument
  * match existing LogInData in proper file
@@ -12,9 +12,10 @@ bool Authorization::VerifyUser(LogInData &data) {
         try {
             std::string line;
             while(std::getline(file, line)){
-                LogInData logInDataFromLine = proccesedData(line);
+                LogInData logInDataFromLine = std::get<0>(proccesedData(line));
+                std::string salt = std::get<1>(proccesedData(line));
                 if(data.GetID() < 0) {
-                    if(logInDataFromLine.GetPassword() == data.GetPassword() &&
+                    if(logInDataFromLine.GetPassword() == Encryptor::constEncode(data.GetPassword(), salt) &&
                         (logInDataFromLine.GetEmail() == data.GetEmail()
                          || logInDataFromLine.GetLogin() == data.GetLogin())) {
                             data.SetID(logInDataFromLine.GetID());
@@ -41,6 +42,7 @@ bool Authorization::VerifyUser(LogInData &data) {
  * LogIn function in Bank class
  */
 bool Authorization::LogInAttempt(LogInData &data) {
+    std:: cerr << "login: " << data.GetLogin() << " password: " << data.GetPassword();
     if(data.GetLogin() == "admin" && data.GetPassword() == "admin"){
         Bank::LogIn(std::make_shared<Admin>(data));
         return true;
@@ -59,14 +61,14 @@ bool Authorization::LogInAttempt(LogInData &data) {
  * logInData file with following format:
  * <id> <login> <password> <email>
  */
-LogInData Authorization::proccesedData(const std::string &line) {
+std::tuple<LogInData, std::string> Authorization::proccesedData(const std::string &line) {
     std::istringstream iss(line);
     std::vector<std::string> tokens;
     std::copy(std::istream_iterator<string>(iss), std::istream_iterator<string>(),
               std::back_inserter(tokens));
-    if(tokens.size() == 4) {
+    if(tokens.size() == 5) {
         LogInData result(std::stoi(tokens[0]), tokens[1], tokens[2], tokens[3]);
-        return result;
+        return std::make_tuple(result, tokens[4]);
     }
-    return LogInData();
+    return std::make_tuple(LogInData(), "");
 }

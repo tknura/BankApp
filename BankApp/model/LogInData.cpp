@@ -90,6 +90,6 @@ bool LogInData::operator>(const LogInData &data) const {
 
 std::ostream& operator<<(std::ostream &output, const LogInData &data) {
     output  << data.GetID() << " " << data.GetLogin()
-         << " " << data.GetPassword() << " " << data.GetEmail() << std::endl ;
+         << " " << data.GetPassword() << " " << data.GetEmail();
     return output;
 }

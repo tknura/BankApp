@@ -274,7 +274,7 @@ Item {
             else {
                 makePayment(accountsList.checkedAccNumber, amount.inputText, titleInput.inputText,
                             currentDate.toLocaleDateString(Qt.locale(),"yyyy-MM-dd"), dynamicInputs.children[0].inputText,
-                            dynamicInputs.children[1].inputText, dynamicInputs.children[2].inputText);
+                            dynamicInputs.children[2].inputText, dynamicInputs.children[1].inputText);
             }
             accountsList.reload();
         }
