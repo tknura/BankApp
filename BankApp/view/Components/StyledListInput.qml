@@ -73,18 +73,6 @@ Item {
         }
     }
 
-//    Rectangle {
-//        id: rectangle
-//        color: "#ffffff"
-//        anchors.top: parent.top
-//        anchors.topMargin: 0
-//        anchors.right: parent.right
-//        anchors.rightMargin: 0
-//        anchors.left: parent.left
-//        anchors.leftMargin: 0
-//        anchors.bottom: list.top
-//        anchors.bottomMargin: 0
-//    }
 
     Text {
         id: title
@@ -103,8 +91,3 @@ Item {
     }
 }
 
-/*##^##
-Designer {
-    D{i:1;anchors_height:49;anchors_width:640;anchors_x:0;anchors_y:31}
-}
-##^##*/

@@ -5,8 +5,9 @@
 void UserScreenController::Initialize() {
 }
 
-void UserScreenController::Connections() {
-
+void UserScreenController::Connections()
+{
+    QObject::connect(rootObject,SIGNAL(logOut()),this,SLOT(HandleLogOutButton()));
 }
 
 UserScreenController::UserScreenController(QQmlApplicationEngine *p_engine) {
@@ -27,4 +28,9 @@ QStringList UserScreenController::usrAccounts() {
         str.append(QString::fromStdString(s));
     }
     return str;
+}
+
+void UserScreenController::HandleLogOutButton()
+{
+    Bank::GetLoggedUser<User>()->OnLogOut();
 }

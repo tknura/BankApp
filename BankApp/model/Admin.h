@@ -42,6 +42,11 @@ public:
 
     void OnLogIn() override;
     void OnLogOut() override;
+
+    void LoadData();//creates JsonManager instance and invokes its ParseData methods
+    void SaveData();//creates JsonManager instance and invokes its SerializeData methods
+
+
     static std::list<std::string> GetUsersStringList();
     static std::list<std::string> GetAccStringList();
 //    bool IsValid() override;

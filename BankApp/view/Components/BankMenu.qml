@@ -187,7 +187,9 @@ Item {
             display: AbstractButton.TextOnly
 
             background: Rectangle {
-                color: "transparent"
+                anchors.fill: parent
+                color: logOutButton.pressed ? "#EEEEEE" : logOutButton.hovered ? "#F7F7F7" : "#ffffff"
+                radius: 25
             }
 
             contentItem: Text {
@@ -201,16 +203,10 @@ Item {
             }
 
             onClicked: {
-                logOut();
+                root.logOut();
             }
         }
     }
 }
 
 
-
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/

@@ -126,19 +126,35 @@ bool Admin::AddFund(int ownerID, double minAmount, double maxRate, double fee, d
 }
 
 void Admin::OnLogIn() {
-    std::cerr << "Admin logged" << std::endl;
+    std::cerr << "\nAdmin logged";
     FillUserMap();
-
-    //only for tests
-    JsonManager manager(0);
-    std::list<std::string> empty{};
-    manager.ParseData(empty,Bank::accountMap);
-    manager.ParseData(Bank::fundMap);
-    manager.ParseData(Bank::cardMap);
+    LoadData();
+    std::cerr<<"\nData loaded";
 }
 
 void Admin::OnLogOut() {
+    std::cerr<<"\nAdmin logged out";
     SaveUserMap();
+    SaveData();
+    std::cerr<<"\nData saved";
+}
+
+void Admin::LoadData()
+{
+     JsonManager manager(0);
+     std::list<std::string> p{};
+     manager.ParseData(p,Bank::accountMap);
+     manager.ParseData(Bank::fundMap);
+     manager.ParseData(Bank::cardMap);
+
+}
+
+void Admin::SaveData()
+{
+     JsonManager manager(0);
+     manager.SerializeData(Bank::accountMap,Config::accountJSONPath);
+     manager.SerializeData(Bank::fundMap,Config::fundJSONPath);
+     manager.SerializeData(Bank::cardMap,Config::cardJSONPath);
 }
 
 std::list<std::string> Admin::GetUsersStringList() {

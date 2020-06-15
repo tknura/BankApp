@@ -4,7 +4,10 @@ std::shared_ptr<Admin> AdminScreenController::admin = Bank::GetLoggedUser<Admin>
 
 void AdminScreenController::Initialize() { }
 
-void AdminScreenController::Connections() { }
+void AdminScreenController::Connections()
+{
+    QObject::connect(rootObject,SIGNAL(logOut()),this,SLOT(HandleLogOutButton()));
+}
 
 AdminScreenController::AdminScreenController(QQmlApplicationEngine *p_engine) {
     this->rootObject = p_engine->rootObjects().first()->findChild<QObject*>("adminScreen");
@@ -39,4 +42,9 @@ QStringList AdminScreenController::AccList() {
         str.append(QString::fromStdString(s));
     }
     return str;
+}
+
+void AdminScreenController::HandleLogOutButton()
+{
+    Bank::GetLoggedUser<Admin>()->OnLogOut();
 }

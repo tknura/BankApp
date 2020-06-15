@@ -19,6 +19,8 @@ public:
     UserScreenController(QQmlApplicationEngine* p_engine);
     ~UserScreenController() override;
     static QStringList usrAccounts();
+public slots:
+    void HandleLogOutButton();
 };
 
 #endif // USERSCREENCONTROLLER_H

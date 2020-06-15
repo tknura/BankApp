@@ -38,8 +38,4 @@ Item {
         anchors.topMargin: 29
     }
 }
-/*##^##
-Designer {
-    D{i:1;anchors_height:480;anchors_width:640}
-}
-##^##*/
+

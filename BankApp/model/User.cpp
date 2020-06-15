@@ -34,15 +34,13 @@ void User::SaveData()
 void User::OnLogIn() {
     std::cerr << "User logged" << std::endl;
     LoadData();
-
+    std::cerr<<"\nData loaded";
 }
 
 void User::OnLogOut() {
     std::cerr << "User logged out" << std::endl;
     SaveData();
-
-
-
+    std::cerr<<"\nData saved";
 }
 
 bool User::IsUserAccount(std::string &p_accNum)
