@@ -20,7 +20,7 @@ Item {
         height: parent.height
         placeholder: "0.00"
         validator: RegExpValidator {
-                regExp: /([+-]?[0-9]+(\.[0-9]{2})?)/
+                regExp: /([+]?[0-9]+(\.[0-9]{2})?)/
             }
         inputLeftPadding: 50
     }
