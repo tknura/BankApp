@@ -1,4 +1,4 @@
-#include <algorithm>
+﻿#include <algorithm>
 #include <memory>
 
 #include "User.h"
@@ -58,7 +58,7 @@ bool User::MakePayment(str p_OutAccNum, double p_amount, str p_title, str p_date
     auto pPaymentOut = std::make_shared<Payment>(-p_amount,p_title,p_date,p_name,p_InAccNum,p_address, false);
     if(Bank::UpdateOutputAccount(p_OutAccNum,pPaymentOut))
     {
-        if(Bank::accountMap[p_InAccNum])
+        if(Bank::accountMap.find(p_InAccNum)!=Bank::accountMap.end())
         {
             auto pPaymentIn = std::make_shared<Payment>(p_amount,p_title,p_date,p_name,"","", true);
             Bank::UpdateInputAccount(p_InAccNum,pPaymentIn);

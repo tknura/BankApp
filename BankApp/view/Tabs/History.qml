@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import HistoryList 1.0
@@ -105,7 +105,7 @@ Item {
                     width: parent.width
                     nametext: model.name
                     namegoods: model.description
-                    nameamount: (model.amount < 0 ? "" : " +") + model.amount
+                    nameamount: (model.amount < 0 ? "" : " +") + model.amount.toFixed(2)
                     namedate: model.date
                     coloramount: model.amount < 0 ? "#FF0000" : "#259fc4"
                     currencycolor: model.amount < 0 ? "#FF0000" : "#259fc4"
