@@ -22,6 +22,10 @@ Item {
         currentOption = comboBox.displayText;
         optionChanged(comboBox.displayText);
     }
+    Component.onCompleted: {
+        currentOption = comboBox.displayText;
+        optionChanged(comboBox.displayText);
+    }
 
     Text {
         id: title

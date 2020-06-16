@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
             }
         }, Qt::QueuedConnection);
 
-
     engine.load(url);
     MainController msc(&engine);
+    QObject::connect(&app, SIGNAL(aboutToQuit()), &msc, SLOT(HandleLogOutButton()));
     return app.exec();
 }

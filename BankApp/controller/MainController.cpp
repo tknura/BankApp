@@ -2,7 +2,14 @@
 
 void MainController::Initialize() { }
 
-void MainController::Connections() { }
+void MainController::Connections() {
+    QObject::connect(rootObject,SIGNAL(logOut()),this,SLOT(MainController::HandleLogOutButton()));
+}
+
+void MainController::HandleLogOutButton() {
+    Bank::GetLoggedUser<IUser>()->OnLogOut();
+    QCoreApplication::exit();
+}
 
 MainController::MainController(QQmlApplicationEngine *p_engine) {
     this->rootObject = p_engine->rootObjects().first();

@@ -46,7 +46,7 @@ Item {
     }
 
     function addExternalInputs() {
-        friendsList.visible = true;
+        friendsList.show();
         dynamicInputs.addTextInput("First & Last Name", "John Smith");
         dynamicInputs.addTextInput("Adress", "Road 21/37, 22-330 City");
         dynamicInputs.addTextInput("Account number", "", "9999999999999999;0");
@@ -54,10 +54,7 @@ Item {
 
     function clearInputs() {
         for(var i = 0; i < inputs.children.length; ++i) {
-            if(inputs.children[i].objectName === "styledInput"
-                    || inputs.children[i].objectName === "styledCombo") {
-                inputs.children[i].clear();
-            }
+            inputs.children[i].clear();
         }
     }
 
@@ -154,7 +151,6 @@ Item {
                     dynamicInputs.children[0].inputText = friendName;
                     dynamicInputs.children[1].inputText = address;
                     dynamicInputs.children[2].inputText = accNum;
-                    console.log(accNum);
                 }
             }
 

@@ -49,8 +49,8 @@ void CardAdditionController::HandleCcvReroll() {
 
 void CardAdditionController::HandlePrePaidAdd(QString p_num, QString p_ccv, QString p_accNum,
                                               QString p_transLim) {
-    int ccv = std::stoi(p_ccv.toStdString());
-    double transLim = StringParser::GetMoneyFromString(p_transLim.toStdString());
+    int ccv = p_ccv.toInt();
+    double transLim = p_transLim.toDouble();
     if(AdminScreenController::admin->AddCard(p_accNum.toStdString(), p_num.toStdString(), ccv, transLim)) {
         QMetaObject::invokeMethod(rootObject, "success");
     }
@@ -61,9 +61,9 @@ void CardAdditionController::HandlePrePaidAdd(QString p_num, QString p_ccv, QStr
 
 void CardAdditionController::HandleCreditAdd(QString p_num, QString p_ccv, QString p_accNum,
                                              QString p_transLim, QString p_maxCredit, QString p_billingDate) {
-    int ccv = std::stoi(p_ccv.toStdString());
-    double transLim = StringParser::GetMoneyFromString(p_transLim.toStdString());
-        double maxCredit = StringParser::GetMoneyFromString(p_maxCredit.toStdString());
+    int ccv = p_ccv.toInt();
+    double transLim = p_transLim.toDouble();
+    double maxCredit = p_maxCredit.toDouble();
     if(AdminScreenController::admin->AddCard(p_accNum.toStdString(), p_num.toStdString(), ccv, transLim,
                                                   maxCredit, p_billingDate.toStdString())) {
         QMetaObject::invokeMethod(rootObject, "success");
@@ -75,9 +75,9 @@ void CardAdditionController::HandleCreditAdd(QString p_num, QString p_ccv, QStri
 
 void CardAdditionController::HandleDebitAdd(QString p_num, QString p_ccv, QString p_accNum,
                                             QString p_transLim, QString p_maxDebt) {
-    int ccv = std::stoi(p_ccv.toStdString());
-    double transLim = StringParser::GetMoneyFromString(p_transLim.toStdString());
-    double maxDebt = StringParser::GetMoneyFromString(p_maxDebt.toStdString());
+    int ccv = p_ccv.toInt();
+    double transLim = p_transLim.toDouble();
+    double maxDebt = p_maxDebt.toDouble();
     if(AdminScreenController::admin->AddCard(p_accNum.toStdString(), p_num.toStdString(), ccv, transLim, maxDebt)) {
         QMetaObject::invokeMethod(rootObject, "success");
     }

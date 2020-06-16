@@ -32,24 +32,9 @@ QStringList FundAdditionController::FundTypes() {
     return str;
 }
 
-//void FundAdditionController::HandleInvestmentAdd(QString p_usrId, QString p_minAmount, QString p_balance,
-//                                                 QString p_maxRate, QString p_fee) {
-//    int userId = AdminScreenController::GetIDFromUserString(p_usrId.toStdString());
-//    double minAmount = AdminScreenController::GetMoneyFromString(p_minAmount.toStdString());
-//    double maxRate = AdminScreenController::GetPercentageFromString(p_maxRate.toStdString());
-//    double fee = AdminScreenController::GetPercentageFromString(p_fee.toStdString());
-//    double balance = AdminScreenController::GetMoneyFromString(p_balance.toStdString());
-//    if(AdminScreenController::admin->AddFund(userId, minAmount, maxRate, fee, balance)){
-//        QMetaObject::invokeMethod(rootObject, "success");
-//    }
-//    else {
-//        QMetaObject::invokeMethod(rootObject, "fail");
-//    }
-//}
-
 void FundAdditionController::HandleSavingsAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
                                               QString p_balance, QString p_fee, QString p_startDate, QString p_endDate) {
-    int userId = StringParser::GetIDFromUserString(p_usrId.toStdString());
+    int userId = p_usrId.toInt();
     double minAmount = p_minAmount.toDouble();
     double maxRate = p_maxRate.toDouble();
     double fee = p_fee.toDouble();
@@ -66,7 +51,7 @@ void FundAdditionController::HandleSavingsAdd(QString p_usrId, QString p_minAmou
 void FundAdditionController::HandleRetirementAdd(QString p_usrId, QString p_minAmount, QString p_maxRate,
                                                  QString p_fee, QString p_balance, QString p_monthlyIn,
                                                  QString p_retired) {
-    int userId = StringParser::GetIDFromUserString(p_usrId.toStdString());
+    int userId = p_usrId.toInt();
     double minAmount = p_minAmount.toDouble();
     double maxRate = p_maxRate.toDouble();
     double fee = p_fee.toDouble();
