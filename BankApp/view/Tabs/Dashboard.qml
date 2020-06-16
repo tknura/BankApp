@@ -10,6 +10,7 @@ Item {
     height: 700
 
     signal refresh()
+    signal forceChangeTab(var tab)
 
     onRefresh: {
         histmodel.clear();
@@ -73,7 +74,7 @@ Item {
             height: 57
             text: qsTr("Accounts")
             anchors.top: parent.top
-            anchors.topMargin: 177
+            anchors.topMargin: 156
             anchors.left: parent.left
             anchors.leftMargin: 70
             font.weight: Font.Medium
@@ -106,6 +107,9 @@ Item {
             anchors.topMargin: 6
             anchors.left: parent.left
             anchors.leftMargin: 70
+            onClicked: {
+                forceChangeTab("Payments");
+            }
         }
 
         Text {
@@ -114,7 +118,7 @@ Item {
             height: 57
             text: qsTr("Latest")
             anchors.top: parent.top
-            anchors.topMargin: 455
+            anchors.topMargin: 434
             anchors.left: parent.left
             anchors.leftMargin: 70
             verticalAlignment: Text.AlignVCenter
@@ -123,6 +127,9 @@ Item {
             font.weight: Font.Medium
         }
         Frame {
+            id: hist
+            height: 150
+            padding: 0
             background: Rectangle{
                 color: "transparent"
                 border.color: "transparent"
@@ -149,10 +156,31 @@ Item {
                     namedate: model.date
                     coloramount: model.amount < 0 ? "#FF0000" : "#259fc4"
                     currencycolor: model.amount < 0 ? "#FF0000" : "#259fc4"
-               }
+                }
+            }
+        }
+
+        PushButton {
+            id: historyButton
+            x: 491
+            width: 161
+            height: 35
+            text: qsTr("View full history")
+            anchors.top: historyTitle.bottom
+            anchors.topMargin: 161
+            anchors.right: parent.right
+            anchors.rightMargin: 48
+            onClicked: {
+                forceChangeTab("History");
             }
         }
     }
 }
 
 
+
+/*##^##
+Designer {
+    D{i:13;anchors_y:652}
+}
+##^##*/

@@ -3,7 +3,7 @@
 
 json DebitCard::SerializeToJson()
 {
-    json j{Card::SerializeToJson()};
+    json j(Card::SerializeToJson());
 
     j["maxDebt"] = maxDebt;
 

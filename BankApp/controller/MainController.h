@@ -20,6 +20,8 @@ public:
     void Initialize() override;
     void Connections() override;
     QObject* GetRootObject();
+public slots:
+    void HandleLogOutButton();
 };
 
 #endif // MAINCONTROLLER_H

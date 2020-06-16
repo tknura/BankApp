@@ -53,25 +53,27 @@ public:
 template <class T>
 void JsonManager::SerializeData(T &p_map, std::string p_dir)
 {
-    std::string s{"[{\"items\":["};
-    for(auto it = p_map.begin(); it != p_map.end(); ++it)
-    {
-         json j =(*(it->second)).SerializeToJson();
-         j["type"] =it->second->GetType();
-         s += j.dump();
-         s += ",";
-    }
-    s.pop_back();
-    s += "]}]";
+    if(!p_map.empty()) {
+        std::string s{"[{\"items\":["};
+        for(auto it = p_map.begin(); it != p_map.end(); ++it)
+        {
+            json j = (it->second)->SerializeToJson();
+            j["type"] = it->second->GetType();
+            s += j.dump();
+            s += ",";
+        }
+        s.pop_back();
+        s += "]}]";
 
-    std::ofstream f(p_dir);
-    if(f.is_open())
-    {
-        f<<s;
-    }
-    else
-    {
-        throw std::runtime_error("Could not open file");
+        std::ofstream f(p_dir);
+        if(f.is_open())
+        {
+            f<<s;
+        }
+        else
+        {
+            throw std::runtime_error("Could not open file");
+        }
     }
 }
 

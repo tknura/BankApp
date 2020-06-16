@@ -10,7 +10,7 @@ std::ostream& RetirementFund::serialize(std::ostream&ss) const
 
 json RetirementFund::SerializeToJson()
 {
-    json j{Fund::SerializeToJson()};
+    json j(Fund::SerializeToJson());
 
     j["isRetired"] = isRetired;
     j["monthlyTransferIn"] = monthlyIn;

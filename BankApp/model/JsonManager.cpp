@@ -214,26 +214,28 @@ void JsonManager::ParseData(multiMapFund &p_map)
 }
 void JsonManager::SerializeData(listP& p_list)
 {
-    std::string s{"["};
-    for(auto it = p_list.begin(); it!=p_list.end(); ++it)
-    {
-        json j = (*it)->SerializeToJson();
-        s+= j.dump();
-        s+= ",";
-    }
-    s.pop_back();
-    s+= "]";
-    std::cout<<s<<"\n";
-    json j2 = json::parse(s);
-    friendsFile[userID]["items"] = j2;
-    std::ofstream f(Config::friendsJSONPath);
-    if(f.is_open())
-    {
-        f<<friendsFile;
-    }
-    else
-    {
-        throw std::runtime_error("Could not open file");
+    if(!p_list.empty()) {
+        std::string s{"["};
+        for(auto it = p_list.begin(); it!=p_list.end(); ++it)
+        {
+            json j = (*it)->SerializeToJson();
+            s+= j.dump();
+            s+= ",";
+        }
+        s.pop_back();
+        s+= "]";
+        std::cout<<s<<"\n";
+        json j2 = json::parse(s);
+        friendsFile[userID]["items"] = j2;
+        std::ofstream f(Config::friendsJSONPath);
+        if(f.is_open())
+        {
+            f<<friendsFile;
+        }
+        else
+        {
+            throw std::runtime_error("Could not open file");
+        }
     }
 }
 

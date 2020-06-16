@@ -9,8 +9,7 @@ std::multimap<int,std::shared_ptr<Fund>> Bank::fundMap {};
 std::multimap<std::string,std::shared_ptr<Card>> Bank::cardMap {};
 
 std::shared_ptr<IUser> Bank::currentlyLoggedUser = nullptr;
-std::random_device Bank::rd = std::random_device();
-std::mt19937 Bank::mt = std::mt19937(rd());
+std::mt19937 Bank::mt = std::mt19937(time(0));
 
 /*
  * Method which create user object from passed data

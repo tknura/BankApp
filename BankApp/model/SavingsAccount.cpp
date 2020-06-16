@@ -3,7 +3,7 @@
 
 json SavingsAccount::SerializeToJson()
 {
-    json j {Account::SerializeToJson()};
+    json j (Account::SerializeToJson());
 
     j["interest"] = interest;
 

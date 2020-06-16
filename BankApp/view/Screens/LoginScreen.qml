@@ -12,6 +12,11 @@ Rectangle {
 
     property var screenParent;
 
+    function clear() {
+        passwordInput.clear();
+        loginInput.clear();
+    }
+
     function loggingPassed() {
         loginDataBoxes.state = "NORMAL"
     }
@@ -22,12 +27,12 @@ Rectangle {
 
     function loadUserScreen() {
         screenParent.replace(["qrc:/screens/UserScreen.qml",
-                              {width: loginScreen.width, height: loginScreen.height}])
+                              {width: loginScreen.width, height: loginScreen.height, mainStack: screenParent}])
     }
 
     function loadAdminScreen() {
         screenParent.replace(["qrc:/screens/AdminScreen.qml",
-                             {width: loginScreen.width, height: loginScreen.height}])
+                             {width: loginScreen.width, height: loginScreen.height, mainStack: screenParent}])
     }
 
     signal inputValues(string login, string password)
@@ -91,8 +96,7 @@ Rectangle {
             text: qsTr("Invalid login/password")
             font.pixelSize: 12
         }
-
-        }
+    }
 
     Text {
         id: title

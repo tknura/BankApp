@@ -18,8 +18,18 @@ Item {
         friendsmodel.update();
     }
 
+    function show() {
+        if(list.contentItem.children.length > 0) {
+            visible = true;
+        }
+    }
+
     FriendsListModel{
         id:friendsmodel
+    }
+
+    Component.onCompleted: {
+        show();
     }
 
     Text {

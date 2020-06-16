@@ -31,7 +31,6 @@ public:
     static std::shared_ptr<Admin> admin;
 public slots:
     void HandleLogOutButton();
-
 };
 
 #endif // ADMINSCREENCONTROLLER_H

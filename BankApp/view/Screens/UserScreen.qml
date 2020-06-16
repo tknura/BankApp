@@ -10,8 +10,12 @@ Item {
     visible: true
     width: parent.width
     height: parent.height
+    property var mainStack
 
     signal logOut()
+    onLogOut: {
+        mainStack.reset();
+    }
 
     StackView {
         id: contentStack
@@ -46,6 +50,9 @@ Item {
             height: contentStack.height
             visible: false
             width: contentStack.width
+            onForceChangeTab: {
+                menu.changeTab(tab);
+            }
         }
 
         Funds {
