@@ -16,7 +16,7 @@ class Authorization
 public:
     static bool VerifyUser(LogInData &data);
     static bool LogInAttempt(LogInData &data);
-    static std::tuple<LogInData, std::string> proccesedData(const std::string &line);
+    static LogInData proccesedData(const std::string &line);
 };
 
 #endif // AUTHORIZATION_H

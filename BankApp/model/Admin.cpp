@@ -9,22 +9,25 @@
 #include "SavingsFund.h"
 #include "Encryptor.h"
 
-int Admin::idProvider = 1;
+int Admin::idProvider = 0;
 std::map<int, LogInData> Admin::usersMap = std::map<int, LogInData>();
 
 Admin::Admin(const LogInData &data) : LogInData(data), manager(0) {}
 
-Admin::~Admin() {
-    //to do delete
-}
+Admin::~Admin() {}
 
 /*
  *  Method which creates user and adds him to user map
  */
 bool Admin::CreateUser(std::string p_login, std::string p_password, std::string p_email) {
-    LogInData data(++idProvider, p_login, p_password, p_email);
+    LogInData data(++idProvider, p_login, p_password, p_email, "");
     if(data.IsValid()) {
         if(!FindExistingUser(data)){
+            password = data.GetPassword();
+            salt = data.GetSalt();
+            Encryptor::encode(password, salt);
+            data.SetPassword(password);
+            data.SetSalt(salt);
             usersMap.insert({data.GetID(), data});
             std::cerr << "User " << data.GetLogin() << " created" << std::endl;
         }
@@ -179,7 +182,7 @@ void Admin::FillUserMap() {
         try {
             std::string line;
             while(std::getline(file, line)){
-                LogInData logInDataFromLine = std::get<0>(Authorization::proccesedData(line));
+                LogInData logInDataFromLine = Authorization::proccesedData(line);
                 usersMap.insert(std::make_pair(logInDataFromLine.GetID(), logInDataFromLine));
                 idProvider = logInDataFromLine.GetID();
             }
@@ -201,10 +204,7 @@ void Admin::SaveUserMap() {
         file.exceptions( std::fstream::badbit );
         try {
             for(map<int, LogInData>::iterator it = usersMap.begin(); it != usersMap.end(); ++it){
-                std::string salt = "";
-                std::string password = it->second.GetPassword();
-                it->second.SetPassword(Encryptor::encode(password, salt));
-                file  << it->second << " " << salt << std::endl;
+                file  << it->second << std::endl;
             }
         }
         catch (std::fstream::failure & ex) {

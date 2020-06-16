@@ -17,6 +17,7 @@ protected:
     string login;
     string password;
     string email;
+    string salt;
 
 private:
     //Non empty character, letters and numbers only
@@ -28,8 +29,8 @@ private:
 
 public:
     LogInData();
-    LogInData(int p_id, string p_login, string p_password, string p_email);
-    LogInData(string p_login, string p_password, string p_email);
+    LogInData(int p_id, string p_login, string p_password, string p_email, string p_salt);
+    LogInData(string p_login, string p_password, string p_email, string p_salt);
     LogInData(const LogInData& data);
     ~LogInData() override;
 
@@ -42,6 +43,8 @@ public:
     void SetPassword(const string &value);
     string GetEmail() const;
     void SetEmail(const string &value);
+    string GetSalt() const;
+    void SetSalt(const string &value);
     //---------------------------------------
 
     bool IsValid() override;

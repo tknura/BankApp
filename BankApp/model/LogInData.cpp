@@ -8,18 +8,18 @@ const std::regex LogInData::passwordReg = std::regex("(?=^.{8,}$)((?=.*\\d)|(?=.
 const std::regex LogInData::emailReg = std::regex("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
 
 LogInData::LogInData()
-    : id(-1), login(""), password(""), email("") {
+    : id(-1), login(""), password(""), email(""), salt("") {
 }
 
-LogInData::LogInData(int p_id, std::string p_login, std::string p_password, std::string p_email)
-    : id(p_id), login(p_login), password(p_password), email(p_email) {
+LogInData::LogInData(int p_id, string p_login, string p_password, string p_email, string p_salt)
+    : id(p_id), login(p_login), password(p_password), email(p_email), salt(p_salt) {
 }
 
-LogInData::LogInData(std::string p_login, std::string p_password, std::string p_email)
-    : id(-1), login(p_login), password(p_password), email(p_email) {}
+LogInData::LogInData(string p_login, string p_password, string p_email, string p_salt)
+    : id(-1), login(p_login), password(p_password), email(p_email), salt(p_salt) {}
 
 LogInData::LogInData(const LogInData &data)
-    : id(data.GetID()), login(data.GetLogin()), password(data.GetPassword()), email(data.GetEmail()) {}
+    : id(data.GetID()), login(data.GetLogin()), password(data.GetPassword()), email(data.GetEmail()), salt(data.GetSalt()) {}
 
 LogInData::~LogInData() {}
 int LogInData::GetID() const {
@@ -58,6 +58,14 @@ string LogInData::GetEmail() const {
 void LogInData::SetEmail(const string &value) {
     email = value;
 }
+
+std::string LogInData::GetSalt() const {
+    return salt;
+}
+
+void LogInData::SetSalt(const std::string &value) {
+    salt = value;
+}
 //------------------------------------------------------------------------
 
 bool LogInData::IsValid() {
@@ -89,7 +97,7 @@ bool LogInData::operator>(const LogInData &data) const {
 }
 
 std::ostream& operator<<(std::ostream &output, const LogInData &data) {
-    output  << data.GetID() << " " << data.GetLogin()
-         << " " << data.GetPassword() << " " << data.GetEmail();
+    output  << data.GetID() << " " << data.GetLogin() << " " <<
+        data.GetPassword() << " " << data.GetEmail() << " " << data.GetSalt();
     return output;
 }

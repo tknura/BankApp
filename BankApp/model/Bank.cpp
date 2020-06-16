@@ -23,6 +23,7 @@ void Bank::LogIn(std::shared_ptr<IUser> data) {
 
 void Bank::LogOut() {
     currentlyLoggedUser->OnLogOut();
+    currentlyLoggedUser.reset();
 }
 
 

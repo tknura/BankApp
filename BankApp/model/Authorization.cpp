@@ -7,20 +7,22 @@
 bool Authorization::VerifyUser(LogInData &data) {
     std::fstream file;
     file.open(Config::logInDataPath, std::ios::in);
+    std::cerr << " 1 ";
     if(file.is_open()){
         file.exceptions( std::fstream::badbit );
         try {
+            std::cerr << " 2 ";
             std::string line;
             while(std::getline(file, line)){
-                LogInData logInDataFromLine = std::get<0>(proccesedData(line));
-                std::string salt = std::get<1>(proccesedData(line));
+                LogInData logInDataFromLine = proccesedData(line);
+                std::cerr << std::endl << data.GetID() << " " << logInDataFromLine.GetID() << " " << logInDataFromLine.GetLogin();
                 if(data.GetID() < 0) {
-                    if(logInDataFromLine.GetPassword() == Encryptor::constEncode(data.GetPassword(), salt) &&
+                    std::cerr << logInDataFromLine.GetPassword() << std::endl << std::endl << Encryptor::constEncode(data.GetPassword(), logInDataFromLine.GetSalt());
+                    if(logInDataFromLine.GetPassword() == Encryptor::constEncode(data.GetPassword(), logInDataFromLine.GetSalt()) &&
                         (logInDataFromLine.GetEmail() == data.GetEmail()
                          || logInDataFromLine.GetLogin() == data.GetLogin())) {
                             data.SetID(logInDataFromLine.GetID());
                             file.close();
-                            //std::cerr<<"\nid w authorization:"<<data.GetID();
                             return true;
                     }
                 }
@@ -60,14 +62,14 @@ bool Authorization::LogInAttempt(LogInData &data) {
  * logInData file with following format:
  * <id> <login> <password> <email>
  */
-std::tuple<LogInData, std::string> Authorization::proccesedData(const std::string &line) {
+LogInData Authorization::proccesedData(const std::string &line) {
     std::istringstream iss(line);
     std::vector<std::string> tokens;
     std::copy(std::istream_iterator<string>(iss), std::istream_iterator<string>(),
               std::back_inserter(tokens));
     if(tokens.size() == 5) {
-        LogInData result(std::stoi(tokens[0]), tokens[1], tokens[2], tokens[3]);
-        return std::make_tuple(result, tokens[4]);
+        LogInData result(std::stoi(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4]);
+        return result;
     }
-    return std::make_tuple(LogInData(), "");
+    return LogInData();
 }

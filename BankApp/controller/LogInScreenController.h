@@ -34,6 +34,6 @@ public:
 
 public slots:
     void HandleProceedButton();
-    void LoadAttemt(QString, QString);
+    void LoadAttempt(QString, QString);
 };
 #endif // LOGINSCENECONTROLLER_H

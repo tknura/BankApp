@@ -13,6 +13,7 @@ void LogInScreenController::HandleProceedButton() {
             else if(Bank::isAdminLogged()) {
                 LoadAdminScreen();
             }
+            attempt = LogInData();
         }
         else {
             QMetaObject::invokeMethod(rootObject, "loggingFailed");
@@ -20,7 +21,7 @@ void LogInScreenController::HandleProceedButton() {
     }
 }
 
-void LogInScreenController::LoadAttemt(QString login, QString password) {
+void LogInScreenController::LoadAttempt(QString login, QString password) {
     attempt.SetLogin(login.toStdString());
     attempt.SetPassword(password.toStdString());
 }
@@ -47,7 +48,7 @@ LogInScreenController::LogInScreenController(QQmlApplicationEngine *p_engine) {
 void LogInScreenController::Connections() {
     QObject::connect(proceedButton, SIGNAL(clicked()), this, SLOT(HandleProceedButton()));
     QObject::connect(rootObject, SIGNAL(inputValues(QString, QString)),
-                     this, SLOT(LoadAttemt(QString, QString)));
+                     this, SLOT(LoadAttempt(QString, QString)));
 }
 
 LogInScreenController::~LogInScreenController() {
