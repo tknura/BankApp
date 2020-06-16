@@ -212,6 +212,7 @@ void JsonManager::ParseData(multiMapFund &p_map)
         throw std::runtime_error("Could not open the fundData.json file");
     }
 }
+
 void JsonManager::SerializeData(listP& p_list)
 {
     if(!p_list.empty()) {

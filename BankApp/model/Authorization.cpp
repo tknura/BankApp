@@ -7,15 +7,12 @@
 bool Authorization::VerifyUser(LogInData &data) {
     std::fstream file;
     file.open(Config::logInDataPath, std::ios::in);
-    std::cerr << " 1 ";
     if(file.is_open()){
         file.exceptions( std::fstream::badbit );
         try {
-            std::cerr << " 2 ";
             std::string line;
             while(std::getline(file, line)){
                 LogInData logInDataFromLine = proccesedData(line);
-                std::cerr << std::endl << data.GetID() << " " << logInDataFromLine.GetID() << " " << logInDataFromLine.GetLogin();
                 if(data.GetID() < 0) {
                     std::cerr << logInDataFromLine.GetPassword() << std::endl << std::endl << Encryptor::constEncode(data.GetPassword(), logInDataFromLine.GetSalt());
                     if(logInDataFromLine.GetPassword() == Encryptor::constEncode(data.GetPassword(), logInDataFromLine.GetSalt()) &&

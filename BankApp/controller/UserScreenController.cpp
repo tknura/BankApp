@@ -32,5 +32,5 @@ QStringList UserScreenController::usrAccounts() {
 
 void UserScreenController::HandleLogOutButton()
 {
-    Bank::GetLoggedUser<User>()->OnLogOut();
+    Bank::LogOut();
 }

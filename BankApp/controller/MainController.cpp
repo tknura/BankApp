@@ -7,7 +7,7 @@ void MainController::Connections() {
 }
 
 void MainController::HandleLogOutButton() {
-    Bank::GetLoggedUser<IUser>()->OnLogOut();
+    Bank::LogOut();
     QCoreApplication::exit();
 }
 

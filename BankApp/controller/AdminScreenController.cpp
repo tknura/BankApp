@@ -46,5 +46,5 @@ QStringList AdminScreenController::AccList() {
 
 void AdminScreenController::HandleLogOutButton()
 {
-    Bank::GetLoggedUser<Admin>()->OnLogOut();
+    Bank::LogOut();
 }
