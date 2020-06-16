@@ -26,8 +26,7 @@ public:
     static std::unordered_map<std::string,std::shared_ptr<IAccount>> accountMap;
     static std::multimap<std::string,std::shared_ptr<Card>> cardMap;
 
-    //variables used for generating random numbers
-    static std::random_device rd;
+    //variable used for generating random numbers
     static std::mt19937 mt;
 
     static bool isAdminLogged();
