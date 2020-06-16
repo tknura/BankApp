@@ -50,6 +50,9 @@ Item {
             height: contentStack.height
             visible: false
             width: contentStack.width
+            onForceChangeTab: {
+                menu.changeTab(tab);
+            }
         }
 
         Funds {

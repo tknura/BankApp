@@ -119,6 +119,7 @@ Item {
         Column {
             id: inputs
             width: scrollView.width
+            height: scrollView.height
             spacing: 15
 
             StyledCombo {
@@ -186,6 +187,7 @@ Item {
         anchors.bottomMargin: 0
     }
 
+
     Rectangle {
         id: scrollViewMaskBottom
         x: 0
@@ -204,12 +206,13 @@ Item {
 
     AccountButtonList {
         id: accountsList
-        y: 148
         height: 166
+        anchors.top: accounts.bottom
+        anchors.topMargin: 3
         anchors.right: parent.right
-        anchors.rightMargin: 63
+        anchors.rightMargin: 56
         anchors.left: parent.left
-        anchors.leftMargin: 63
+        anchors.leftMargin: 70
         savingsAccDisabled: true
         onCheckedAccNumberChanged: {
         }
@@ -227,6 +230,23 @@ Item {
         text: qsTr("Make a new payment")
         font.pixelSize: 18
         font.family: "Rubik"
+    }
+
+    Text {
+        id: accounts
+        x: 70
+        y: 156
+        width: 247
+        height: 57
+        text: qsTr("Accounts")
+        font.weight: Font.Medium
+        anchors.topMargin: 156
+        anchors.leftMargin: 70
+        anchors.top: parent.top
+        anchors.left: parent.left
+        font.family: "Rubik"
+        font.pixelSize: 30
+        verticalAlignment: Text.AlignVCenter
     }
 
     Text {
@@ -301,11 +321,12 @@ Item {
             friendsList.reload();
         }
     }
+
 }
 
 /*##^##
 Designer {
-    D{i:9;anchors_width:221;anchors_x:9}D{i:10;anchors_width:221;anchors_x:9}D{i:12;anchors_width:221;anchors_x:9}
-D{i:13;anchors_width:221;anchors_x:9}D{i:16;anchors_x:63}
+    D{i:9;anchors_width:221;anchors_x:9}D{i:10;anchors_width:221;anchors_x:9}D{i:12;anchors_width:221;anchors_x:9;anchors_y:216}
+D{i:13;anchors_width:221;anchors_x:9}D{i:17;anchors_x:63}
 }
 ##^##*/

@@ -18,6 +18,16 @@ Item {
     signal logOut();
     signal tabChanged(var tab);
 
+    function changeTab(tabName){
+        for(var child in listView.contentItem.children) {
+            if(listView.contentItem.children[child].buttonText == tabName){
+                listView.currentIndex = listView.contentItem.children[child].index;
+                screenStack.replace(contentArray[listView.contentItem.children[child].index]);
+                tabChanged(contentArray[listView.contentItem.children[child].index]);
+            }
+        }
+    }
+
     Rectangle {
         id: background
         color: "#ffffff"
@@ -79,6 +89,7 @@ Item {
                     }
 
                     Text {
+                        id: displayText
                         font.weight: Font.Medium
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
