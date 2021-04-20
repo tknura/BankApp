@@ -14,6 +14,6 @@
 
 
 
-### Autorzy Projektu: </br>
+### Authors: </br>
 * [Stanisław Czembor](https://github.com/sczembor)</br>
 * [Tomasz Knura](https://github.com/tknura)</br>
